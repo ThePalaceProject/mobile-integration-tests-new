@@ -1,0 +1,70 @@
+{
+  "platformName": "ios",
+  "isRemote": true,
+  "remoteConnectionUrl": "https://hub-cloud.browserstack.com/wd/hub",
+  "screensLocation": "screens",
+  "driverSettings": {
+    "android": {
+      "deviceKey": "SamsungGalaxyS22Ultra_12",
+      "capabilities": {
+        "platformName": "Android",
+        "app": "bs://8259155ec95e39b2859a3d35fcdde3d9b89eb49d",
+        "noReset": "true",
+        "browserstack.networkLogs": true,
+        "automationName": "UiAutomator2",
+        "browserstack.appium_version": "1.21.0",
+        "browserstack.user": "ekaterinaastapki_h1rWaF",
+        "browserstack.key": "QK8fWdsbb7npgX3TgbxP",
+        "deviceOrientation": "portrait",
+        "adbExecTimeout": 10000
+      }
+    },
+    "ios": {
+      "deviceKey": "iPhone13ProMax_15",
+      "capabilities": {
+        "platformName": "iOS",
+        "app": "bs://0dcbe0da7cad9ea13b7f5e247bf7e592e369165f",
+        "noReset": "true",
+        "browserstack.appium_version": "1.21.0",
+        "browserstack.user": "ekaterinaastapki_h1rWaF",
+        "browserstack.key": "QK8fWdsbb7npgX3TgbxP",
+        "browserstack.networkLogs": true,
+        "automationName": "XCUITest",
+        "deviceOrientation": "portrait",
+        "locale": "ru_RU",
+        "bundleId": ""
+      }
+    }
+  },
+  "localServiceSettings": {
+    "arguments": {
+      "--allow-insecure": "chromedriver_autodownload"
+    },
+    "capabilities": {
+    }
+  },
+  "timeouts": {
+    "timeoutImplicit": 0,
+    "timeoutCondition": 20,
+    "timeoutPollingInterval": 300,
+    "timeoutCommand": 120
+  },
+  "retry": {
+    "number": 2,
+    "pollingInterval": 300
+  },
+  "logger": {
+    "language": "en"
+  },
+  "elementCache": {
+    "isEnabled": false
+  },
+  "touchActions": {
+    "swipe": {
+      "duration": 1,
+      "retries": 5,
+      "verticalOffset": 0.3,
+      "horizontalOffset": 0.5
+    }
+  }
+}
