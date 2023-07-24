@@ -4,19 +4,19 @@ import com.google.inject.Inject;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import screens.BooksScreen;
+import screens.MyBooksScreen;
 import screens.menubar.MenuBar;
 import screens.menubar.MenuBarScreen;
 
 public class BooksSteps {
 
     private final MenuBarScreen menuBarScreen;
-    private final BooksScreen booksScreen;
+    private final MyBooksScreen myBooksScreen;
 
     @Inject
     public BooksSteps() {
         menuBarScreen = new MenuBarScreen();
-        booksScreen = new BooksScreen();
+        myBooksScreen = new MyBooksScreen();
     }
 
     @When("Open Books")
@@ -26,6 +26,6 @@ public class BooksSteps {
 
     @Then("Books screen is opened")
     public void isBooksScreenOpened() {
-        Assert.assertTrue("My Books screen is not opened!", booksScreen.isScreenOpened());
+        Assert.assertTrue("My Books screen is not opened!", myBooksScreen.isScreenOpened());
     }
 }

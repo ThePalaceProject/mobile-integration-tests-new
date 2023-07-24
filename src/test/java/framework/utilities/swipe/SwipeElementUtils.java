@@ -3,6 +3,8 @@ package framework.utilities.swipe;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
+import io.appium.java_client.MobileElement;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 public class SwipeElementUtils {
@@ -17,13 +19,13 @@ public class SwipeElementUtils {
 //        element.getTouchActions().swipe(new Point(upperLeft.x, upperLeft.y + dimensions.height / 2));
 //    }
 //
-//    public static void swipeElementDown(IElement element) {
-//        MobileElement mobileElement = element.getElement();
-//        Point upperLeft = mobileElement.getLocation();
-//        Dimension dimensions = mobileElement.getSize();
-//        Point center = mobileElement.getCenter();
-//        element.getTouchActions().swipe(new Point(upperLeft.x + dimensions.width / 2, center.getY() + dimensions.height / 2));
-//    }
+    public static void swipeElementDown(IElement element) {
+        MobileElement mobileElement = element.getElement();
+        Point upperLeft = mobileElement.getLocation();
+        Dimension dimensions = mobileElement.getSize();
+        Point center = mobileElement.getCenter();
+        element.getTouchActions().swipe(new Point(upperLeft.x + dimensions.width / 2, center.getY() + dimensions.height / 2));
+    }
 //
 //    public static void swipeElementUp(IElement element) {
 //        MobileElement mobileElement = element.getElement();
@@ -76,13 +78,13 @@ public class SwipeElementUtils {
 //        AqualityServices.getTouchActions().swipe(direction.getFrom(), direction.getTo());
 //    }
 
-//    public static void swipeByCoordinatesOfWindow() {
-//        double x = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.5;
-//        double fromY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.8;
-//        double toY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.15;
-//        AqualityServices.getTouchActions().swipe(new Point((int) x, (int) fromY), new Point((int) x, (int) toY));
-//    }
-//
+    public static void swipeDown() {
+        double x = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.5;
+        double fromY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.8;
+        double toY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.15;
+        AqualityServices.getTouchActions().swipe(new Point((int) x, (int) fromY), new Point((int) x, (int) toY));
+    }
+
     public static void swipeUp() {
         double x = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.5;
         double fromY = 260;

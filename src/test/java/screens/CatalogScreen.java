@@ -3,6 +3,7 @@ package screens;
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
@@ -31,6 +32,9 @@ public class CatalogScreen extends Screen {
     private final ILabel lblCategoryName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[contains(@resource-id,\"feedLaneTitle\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeOther[1]/XCUIElementTypeButton[1]"))), "Category name label");
+    private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button -> getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath(String.format("//android.widget.RadioGroup[contains(@resource-id, \"feedHeaderTabs\")]/android.widget.RadioButton[@text=\"%s\"]", button))),
+            new IosLocator(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)))), String.format("%s type of sorting", button)));
 
     private static final String LIBRARY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
     private static final String CATEGORY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]/parent::android.widget.LinearLayout/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
@@ -41,6 +45,7 @@ public class CatalogScreen extends Screen {
     private static final String MORE_BUTTON_LOCATOR_ANDROID = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String SECTION_TITLE_ANDROID = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";
+    private static final String CATALOG_TAB_LOCATOR_ANDROID = "//android.widget.RadioButton[@text=\"%s\"]";
 
     private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1]";
     private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
@@ -50,6 +55,7 @@ public class CatalogScreen extends Screen {
     private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"More...\"]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "//XCUIElementTypeTable/XCUIElementTypeButton[%d]";
     private static final String SECTION_TITLE_IOS = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     public CatalogScreen() {
@@ -157,6 +163,27 @@ public class CatalogScreen extends Screen {
                 new IosLocator(By.xpath(CATEGORY_LOCATOR_IOS))));
     }
 
+    public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
+        IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
+        return btnNameOfBookType.getText();
+    }
+
+    public boolean isSectionWithBookTypeOpen(String typeSection) {
+        IButton btnSectionType = btnBookNameTypeSection.createBtn(typeSection);
+
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            return btnSectionType.getAttribute(Attributes.VALUE).equals("1");
+        } else {
+            return btnSectionType.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString());
+        }
+    }
+
+    public void switchToCatalogTab(String catalogTab) {
+        getElementFactory().getButton(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(CATALOG_TAB_LOCATOR_ANDROID, catalogTab))),
+                new IosLocator(By.xpath(String.format(CATALOG_TAB_LOCATOR_IOS, catalogTab)))), catalogTab).click();
+        }
+
     private List<String> getValuesFromListOfLabels(By locator) {
         return getElements(locator)
                 .stream()
@@ -175,5 +202,10 @@ public class CatalogScreen extends Screen {
         return getElementFactory().getButton(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CURRENT_CATEGORY_LOCATOR_ANDROID, categoryName))),
                 new IosLocator(By.xpath(String.format(CURRENT_CATEGORY_LOCATOR_IOS, categoryName)))), categoryName);
+    }
+
+    @FunctionalInterface
+    interface GetNameOfBookTypeBtb {
+        IButton createBtn(String button);
     }
 }

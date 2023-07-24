@@ -8,13 +8,13 @@
       "deviceKey": "SamsungGalaxyS22Ultra_12",
       "capabilities": {
         "platformName": "Android",
-        "app": "bs://8259155ec95e39b2859a3d35fcdde3d9b89eb49d",
+        "app": "",
         "noReset": "true",
         "browserstack.networkLogs": true,
         "automationName": "UiAutomator2",
         "browserstack.appium_version": "1.21.0",
-        "browserstack.user": "ekaterinaastapki_h1rWaF",
-        "browserstack.key": "QK8fWdsbb7npgX3TgbxP",
+        "browserstack.user": "",
+        "browserstack.key": "",
         "deviceOrientation": "portrait",
         "adbExecTimeout": 10000
       }
@@ -23,11 +23,11 @@
       "deviceKey": "iPhone13ProMax_15",
       "capabilities": {
         "platformName": "iOS",
-        "app": "bs://0dcbe0da7cad9ea13b7f5e247bf7e592e369165f",
+        "app": "",
         "noReset": "true",
         "browserstack.appium_version": "1.21.0",
-        "browserstack.user": "ekaterinaastapki_h1rWaF",
-        "browserstack.key": "QK8fWdsbb7npgX3TgbxP",
+        "browserstack.user": "",
+        "browserstack.key": "",
         "browserstack.networkLogs": true,
         "automationName": "XCUITest",
         "deviceOrientation": "portrait",

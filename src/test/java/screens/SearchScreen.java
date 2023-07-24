@@ -19,6 +19,7 @@ public class SearchScreen extends Screen {
     private final IButton btnClearSearch = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id,\"search_close_btn\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"clear.button.text\"]"))), "Clear search field button");
+    private final IButton btnBackIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button ios");
     private final IButton btnDeleteIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
     private final IButton btnSearchIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Search\"]"), "Search button on iOS");
     private final IButton btnK = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"k\"]"), "K button");
@@ -73,5 +74,18 @@ public class SearchScreen extends Screen {
 
     public boolean isSearchLineDisplayed() {
         return txbSearch.state().waitForDisplayed();
+    }
+
+    public void closeSearchScreen() {
+        ActionProcessorUtils.doForAndroid(() -> {
+            btnClearSearch.click();
+            if (txbSearch.state().isDisplayed())
+                btnClearSearch.click();
+        });
+        ActionProcessorUtils.doForIos(btnBackIos::click);
+    }
+
+    public String getTextFromBackButton() {
+        return btnBackIos.getText();
     }
 }

@@ -1,10 +1,11 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
-import constants.localization.sortoptions.SortByKeys;
+import constants.localization.catalog.BookActionButtonNames;
+import enums.localization.sortoptions.AvailabilityKeys;
+import enums.localization.sortoptions.SortByKeys;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,8 @@ import screens.*;
 import screens.menubar.MenuBar;
 import screens.menubar.MenuBarScreen;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -127,9 +130,6 @@ public class CatalogSteps {
 
     @Then("Books are sorted by Author by default on subcategory screen in {string}")
     public void isSortedByDefaultInPalace(String libraryName) {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting(libraryName));
-        }
         Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting(libraryName));
     }
 
@@ -151,8 +151,103 @@ public class CatalogSteps {
 
     @Then("Books are sorted by Author ascending")
     public void checkBooksAreSortedByAuthorAscending() {
-//        List<String> list = subcategoryScreen.getAuthorsInfo();
-//        List<String> listOfSurnames = getSurnames(list);
-//        Assert.assertEquals("Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")), getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())), listOfSurnames);
+        List<String> list = subcategoryScreen.getAuthorsInfo();
+        List<String> listOfSurnames = getSurnames(list);
+        Assert.assertEquals("Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")), getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())), listOfSurnames);
+    }
+
+    @Then("Books are sorted by Title ascending")
+    public void booksAreSortedByTitleAscending() {
+        List<String> list = subcategoryScreen.getTitlesInfo();
+        Assert.assertEquals("Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")), list.stream().sorted().collect(Collectors.toList()), list);
+    }
+
+    @When("Save list of books as {string}")
+    public void saveListOfBooks(String booksInfoKey) {
+        context.add(booksInfoKey, subcategoryScreen.getBooksInfo());
+    }
+
+    @Then("List of books on subcategory screen is not equal to list of books saved as {string}")
+    public void checkListOfBooksOnSubcategoryScreenIsNotEqualToListOfSavedBooks(String booksNamesListKey) {
+        List<String> expectedList = context.get(booksNamesListKey);
+        Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), expectedList, subcategoryScreen.getBooksInfo());
+    }
+
+    @Then("There are types {string}, {string} and {string} of books on catalog book screen:")
+    public void checkTypesOfBook(String type1, String type2, String type3) {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(catalogScreen.getTheNameOfBookTypeBtn(type1)).as("There is no " + type1 + " book type section ").isEqualTo(type1);
+        softAssertions.assertThat(catalogScreen.getTheNameOfBookTypeBtn(type2)).as("There is no " + type2 + " book type section ").isEqualTo(type2);
+        softAssertions.assertThat(catalogScreen.getTheNameOfBookTypeBtn(type3)).as("There is no " + type3 + " book type section ").isEqualTo(type3);
+    }
+
+    @Then("Section with books of {string} type is opened on catalog book screen")
+    public void isSectionIsOpened(String type) {
+        Assert.assertTrue("Section with books " + type + " type are not opened", catalogScreen.isSectionWithBookTypeOpen(type));
+    }
+
+    @When("Switch to {string} catalog tab")
+    public void switchToCatalogTab(String catalogTab) {
+        catalogScreen.switchToCatalogTab(catalogTab);
+        catalogScreen.state().waitForDisplayed();
+    }
+
+    @Then("The book availability is ALL by default on Subcategory screen")
+    public void isAvailabilityByDefault() {
+        Assert.assertEquals("Book availability is not by default", "All", subcategoryScreen.getAvailability());
+    }
+
+    @Then("There are availability by {string}, {string} and {string} on Subcategory screen")
+    public void checkTypeOfAvailability(String type1, String type2, String type3) {
+        sortOptionsScreen.openAvailability();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
+        softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
+        softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type3)).as("There is no sorting type by " + type3).isEqualTo(type3);
+        softAssertions.assertAll();
+    }
+
+    @When("Change books visibility to show {}")
+    public void checkThatActionButtonTextEqualToExpected(AvailabilityKeys availabilityKeys) {
+        sortOptionsScreen.openAvailability();
+        sortOptionsScreen.changeAvailabilityTo(availabilityKeys);
+    }
+
+    @Then("All books can be loaned or downloaded")
+    public void checkAllBooksCanBeLoanedOrDownloaded() {
+        Assert.assertTrue("Not all present books can be loaned or downloaded", subcategoryScreen.getAllButtonsNames()
+                .stream()
+                .allMatch(x -> x.equals(BookActionButtonNames.GET_BUTTON_NAME) || x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
+    }
+
+    @Then("All books can be downloaded")
+    public void checkAllBooksCanBeDownloaded() {
+        Assert.assertTrue("Not all present books can be downloaded", subcategoryScreen.getAllButtonsNames()
+                .stream()
+                .allMatch(x -> x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
+    }
+
+    @When("Collections is Everything by default on subcategory screen")
+    public void isCollectionsByDefault() {
+        Assert.assertEquals("Collection type is not by default", "Everything", subcategoryScreen.getCollectionName());
+    }
+
+    @Then("There are collection type by {string} and {string} on subcategory screen")
+    public void checkTypeOfCollection(String type1, String type2) {
+        sortOptionsScreen.openCollection();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
+        softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
+        softAssertions.assertAll();
+    }
+
+    private List<String> getSurnames(List<String> list) {
+        List<String> listOfSurnames = new ArrayList<>();
+        for (String authorName : list) {
+            String[] separatedName = authorName.split("\\s");
+            List<String> sortedNames = Arrays.stream(separatedName).sorted().collect(Collectors.toList());
+            listOfSurnames.add(sortedNames.get(0));
+        }
+        return listOfSurnames;
     }
 }

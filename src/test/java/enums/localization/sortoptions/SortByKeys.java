@@ -1,4 +1,4 @@
-package constants.localization.sortoptions;
+package enums.localization.sortoptions;
 
 import constants.localization.providers.AbstractILocalizationProvider;
 import constants.localization.providers.LocalizationProviderFactory;
@@ -17,7 +17,7 @@ public enum SortByKeys implements LocalizedValue {
     RECENTLY_ADDED("recently_added");
 
     private static final AbstractILocalizationProvider localizationProvider =
-            LocalizationProviderFactory.getProvider("facetedSearch.FacetSortByKeys");
+            LocalizationProviderFactory.getProvider("sortoptions.SortByKeys");
 
     private final String key;
 
