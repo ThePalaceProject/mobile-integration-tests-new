@@ -93,12 +93,12 @@ public class CredentialsSteps {
         String barcode = credentials.getBarcode();
         String pin = credentials.getPin();
         APIUtil.enterBookAfterOpeningAccount(credentials);
-        if (context.get(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY) == null) {
+        if (context.get(ScenarioContextKey.LIST_OF_CREDENTIALS_KEY) == null) {
             Map<String, String> hashMap = new HashMap<>();
-            context.add(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY, hashMap);
+            context.add(ScenarioContextKey.LIST_OF_CREDENTIALS_KEY, hashMap);
         }
-        Map<String, String> map = context.get(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY);
+        Map<String, String> map = context.get(ScenarioContextKey.LIST_OF_CREDENTIALS_KEY);
         map.put(barcode, pin);
-        context.add(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY, map);
+        context.add(ScenarioContextKey.LIST_OF_CREDENTIALS_KEY, map);
     }
 }
