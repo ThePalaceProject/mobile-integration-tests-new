@@ -1,0 +1,62 @@
+{
+  "iPhone13ProMax_15": {
+    "capabilities": {
+      "deviceName": "iPhone 13 Pro Max",
+      "platformVersion": "15"
+    }
+  },
+  "iPhone14_16": {
+    "capabilities": {
+      "deviceName": "iPhone 14",
+      "platformVersion": "16"
+    }
+  },
+  "iPhone12Mini_14": {
+    "capabilities": {
+      "deviceName": "iPhone 12 Mini",
+      "platformVersion": "14"
+    }
+  },
+  "iPadPro2021_14": {
+    "capabilities": {
+      "deviceName": "iPad Pro 12.9 2021",
+      "platformVersion": "14"
+    }
+  },
+  "SamsungGalaxyS8Plus_9": {
+    "capabilities": {
+      "deviceName": "Samsung Galaxy S8 Plus",
+      "platformVersion": "9.0"
+    }
+  },
+  "SamsungGalaxyTabS8_12": {
+    "capabilities": {
+      "deviceName": "Samsung Galaxy Tab S8",
+      "platformVersion": "12.0"
+    }
+  },
+  "SamsungGalaxyS21Ultra_11": {
+    "capabilities": {
+      "deviceName": "Samsung Galaxy S21 Ultra",
+      "platformVersion": "11.0"
+    }
+  },
+  "SamsungGalaxyS22Ultra_12": {
+    "capabilities": {
+      "deviceName": "Samsung Galaxy S22 Ultra",
+      "platformVersion": "12.0"
+    }
+  },
+  "SamsungGalaxyS20Ultra_10": {
+    "capabilities": {
+      "deviceName": "Samsung Galaxy S20 Ultra",
+      "platformVersion": "10.0"
+    }
+  },
+  "GooglePixel6Pro_13": {
+    "capabilities": {
+      "deviceName": "Google Pixel 6 Pro",
+      "platformVersion": "13.0"
+    }
+  }
+}

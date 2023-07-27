@@ -1,0 +1,97 @@
+# This workflow will build a test Java + JUnit + Appium + BrowserStack project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Test Run
+run-name: ${{github.event.inputs.device_name_and_version}}
+
+on:
+
+  workflow_dispatch:
+    inputs:
+      test_tag:
+        description: 'Tags to run'
+        required: true
+        default: '@example_tag'
+      bs_app_link:
+        description: 'app_url of uploaded to BS link'
+        required: true
+        default: 'bs://0b0718a5fc1dc8444a6f437e2790299b731e38ef'
+      build_name:
+        description: 'build name of given application'
+        required: true
+        default: 'palace-debug'
+      platform_name:
+        description: 'Platform name'
+        required: true
+        default: 'android'
+      device_name_and_version:
+        description: 'device name and version for autotests'
+        required: true
+        default: 'SamsungGalaxyS22Ultra_12'
+
+jobs:
+  job:
+    name: "${{github.event.inputs.device_name_and_version}}"
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+
+      - name: Run tests
+        run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.token=${{secrets.TRACKING_API_TOKEN}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}}'"
+        continue-on-error: true
+
+      - name: Generate Allure Report
+        uses: AEkaterina/action-allure-report@v0.1.1
+        if: success() || failure()
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report/
+        if: success() || failure()
+
+      - name: Get Allure history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report action from marketplace
+        uses: PavanMudigonda/allure-html-reporter-github-pages@v1.0
+        if: always()
+        id: allure-report
+        with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          WORKFLOW_ID: maven.yml
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+          keep_files: true
+
+      - name: Post the link to the report
+        if: always()
+        uses: Sibz/github-status-action@v1
+        with:
+          authToken: ${{secrets.PERSONAL_TOKEN}}
+          context: 'Test report'
+          state: 'success'
+          sha: ${{ github.event.pull_request.head.sha || github.sha }}
+          target_url: https://PavanMudigonda.github.io/allure-html-reporter-github-pages/${{ github.run_number }}

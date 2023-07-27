@@ -1,0 +1,37 @@
+package screens;
+
+import aquality.appium.mobile.elements.interfaces.IButton;
+import aquality.appium.mobile.elements.interfaces.ILabel;
+import aquality.appium.mobile.screens.Screen;
+import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
+import framework.utilities.LocatorUtils;
+import models.AndroidLocator;
+import models.IosLocator;
+import org.openqa.selenium.By;
+
+public class AlertScreen extends  Screen{
+
+    private static final String UNIQUE_ELEMENT_LOCATOR_IOS = "//XCUIElementTypeAlert";
+    private static final String ACTION_BUTTON_LOCATOR_IOS = UNIQUE_ELEMENT_LOCATOR_IOS + "//XCUIElementTypeButton[@name=\"%s\"]";
+
+    private final ILabel lblAlertMessage = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath(UNIQUE_ELEMENT_LOCATOR_IOS + "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))), "Alert message");
+
+    public AlertScreen() {
+        super(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath("")),
+                new IosLocator(By.xpath("//XCUIElementTypeAlert"))), "Alert screen");
+    }
+
+    public void waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {
+        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_LOCATOR_IOS, actionButtonNamesAlertKeys.getDefaultLocalizedValue())), String.format("%s ActionButtonAlert", actionButtonNamesAlertKeys.getDefaultLocalizedValue()));
+        if(actionButton.state().waitForDisplayed()){
+            actionButton.click();
+        }
+    }
+
+    public String getTextFromAlertHeader() {
+        return lblAlertMessage.getText();
+    }
+}
