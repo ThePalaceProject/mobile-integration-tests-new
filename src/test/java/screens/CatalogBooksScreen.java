@@ -1,5 +1,6 @@
 package screens;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -9,6 +10,7 @@ import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.LocatorUtils;
 import framework.utilities.PlatformUtils;
 import models.AndroidLocator;
+import models.CatalogBookModel;
 import models.IosLocator;
 import org.openqa.selenium.By;
 
@@ -27,10 +29,12 @@ public class CatalogBooksScreen extends Screen {
     private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout/android.widget.Button[@text=\"%s\"]";
     private static final String BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
     private static final String BOOK_NAME_LOCATOR_ANDROID = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
+    private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_ANDROID = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
 
     private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
     private static final String BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
     private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
 
     public CatalogBooksScreen() {
         super(LocatorUtils.getLocator(
@@ -63,6 +67,40 @@ public class CatalogBooksScreen extends Screen {
         return getBooksName();
     }
 
+    public String getNameOfFirstBook() {
+        return lblNameOfFirstBook.getText();
+    }
+
+    public boolean isNoResults() {
+        return lblNoResults.state().waitForDisplayed();
+    }
+
+    public CatalogBookModel openBookAndGetBookInfo(BookType bookType, String bookName, ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String bookNameForLocator = bookName;
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && BookType.AUDIOBOOK == bookType) {
+            bookNameForLocator = bookNameForLocator + ". Audiobook.";
+        }
+
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
+        ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID, bookNameForLocator, actionButtonString))),
+                new IosLocator(By.xpath(String.format(BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_IOS, bookNameForLocator, actionButtonString)))), bookName);
+        ILabel lblAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_ANDROID, bookNameForLocator, actionButtonString))),
+                new IosLocator(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_IOS, bookNameForLocator, actionButtonString)))), "Author");
+        String author;
+        if (!lblAuthor.state().isDisplayed()) {
+            author = null;
+        } else {
+            author = lblAuthor.getText();
+        }
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(bookName)
+                .setAuthor(author);
+        lblBookName.click();
+        return bookInfo;
+    }
+
     private List<String> getBooksName() {
         List<ILabel> lblBooks = getElementFactory().findElements(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(BOOK_NAME_LOCATOR_ANDROID)),
@@ -71,13 +109,5 @@ public class CatalogBooksScreen extends Screen {
         List<String> booksName = new ArrayList<>();
         lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
         return booksName;
-    }
-
-    public String getNameOfFirstBook() {
-        return lblNameOfFirstBook.getText();
-    }
-
-    public boolean isNoResults() {
-        return lblNoResults.state().waitForDisplayed();
     }
 }

@@ -108,7 +108,7 @@ Feature: Catalog Navigation module
 #    Then Subcategory name is "Banned Books"
 #    And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
-  @lyrasis
+  @palace
   Scenario Outline: Check of tabs at the top of the screen in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -129,7 +129,7 @@ Feature: Catalog Navigation module
       | type1 | type2  | type3      |
       | All   | eBooks | Audiobooks |
 
-  @lyrasis
+  @palace
   Scenario: Check of the titles of books sections in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -159,7 +159,7 @@ Feature: Catalog Navigation module
 #    When Tap Back button on Subcategory screen
 #    Then Catalog screen is opened
 
-  @lyrasis
+  @palace
   Scenario Outline: Check of books sorting in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -203,7 +203,7 @@ Feature: Catalog Navigation module
 #    Then Subcategory name is 'Baker & Taylor Axis360 Test'
 #      And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
-  @lyrasis
+  @palace
   Scenario Outline: Check of books availability in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -223,7 +223,7 @@ Feature: Catalog Navigation module
       | type1 | type2         | type3         |
       | All   | Available now | Yours to keep |
 
-  @lyrasis
+  @palace
   Scenario: Check all types of availability
     When Close tutorial screen
     Then Welcome screen is opened
@@ -243,7 +243,7 @@ Feature: Catalog Navigation module
     When Change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier2 @exclude_android
+  @palace @exclude_android
   Scenario Outline: Check of books collections
     When Close tutorial screen
     Then Welcome screen is opened

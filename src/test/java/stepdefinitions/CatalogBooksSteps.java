@@ -5,6 +5,8 @@ import enums.BookType;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import models.CatalogBookModel;
 import org.junit.Assert;
 import screens.CatalogBooksScreen;
 
@@ -41,5 +43,12 @@ public class CatalogBooksSteps {
     @Then("There is no results on Catalog books screen")
     public void isNoResults(){
         Assert.assertTrue("Results are not empty!", catalogBooksScreen.isNoResults());
+    }
+
+    @When("Open {} book with {} action button and {string} bookName on Catalog books screen and save book as {string}")
+    public void openBookAndSaveBookInfo(BookType bookType, ActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
+        String bookName = context.get(bookNameKey);
+        CatalogBookModel bookInfo = catalogBooksScreen.openBookAndGetBookInfo(bookType, bookName, actionButtonKey);
+        context.add(bookInfoKey, bookInfo);
     }
 }

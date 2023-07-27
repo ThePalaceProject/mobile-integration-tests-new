@@ -7,7 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import screens.AddLibraryScreen;
-import screens.CatalogScreen;
 import screens.LibrariesScreen;
 import screens.SettingsScreen;
 import screens.menubar.MenuBar;
@@ -22,7 +21,6 @@ public class AccountSteps {
     private final MenuBarScreen menuBarScreen;
     private final SettingsScreen settingsScreen;
     private final LibrariesScreen librariesScreen;
-    private final CatalogScreen catalogScreen;
     private final ScenarioContext context;
 
     @Inject
@@ -32,7 +30,6 @@ public class AccountSteps {
         menuBarScreen = new MenuBarScreen();
         settingsScreen = new SettingsScreen();
         librariesScreen = new LibrariesScreen();
-        catalogScreen = new CatalogScreen();
     }
 
     @Then("Add library screen is opened")
