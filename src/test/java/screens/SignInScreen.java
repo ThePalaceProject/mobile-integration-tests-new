@@ -65,10 +65,6 @@ public class SignInScreen extends Screen {
         txbLibraryCard.clearAndType(libCard);
     }
 
-    public void tapSignInBtn() {
-        btnSignIn.click();
-    }
-
     public void deleteSomeDataInLibCard() {
         ActionProcessorUtils.doForAndroid(() -> KeyboardUtils.pressKey(AndroidKey.DEL));
         ActionProcessorUtils.doForIos(btnDeleteIos::click);

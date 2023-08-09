@@ -101,6 +101,14 @@ public class CatalogBooksScreen extends Screen {
         return bookInfo;
     }
 
+    public void openBook(ActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
+        String actionButton = actionButtonKey.getDefaultLocalizedValue();
+        ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID, bookName, actionButton))),
+                new IosLocator(By.xpath(String.format(BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_IOS, bookName, actionButton)))), "Book");
+        lblBookName.click();
+    }
+
     private List<String> getBooksName() {
         List<ILabel> lblBooks = getElementFactory().findElements(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(BOOK_NAME_LOCATOR_ANDROID)),
@@ -109,5 +117,33 @@ public class CatalogBooksScreen extends Screen {
         List<String> booksName = new ArrayList<>();
         lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
         return booksName;
+    }
+
+    public CatalogBookModel clickActionButtonAndGetBookInfo(BookType bookType, String bookName, ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+//        String bookNameForLocator = bookName;
+//        if (BookType.AUDIOBOOK == bookType) {
+//            bookNameForLocator = bookNameForLocator + ". Audiobook.";
+//        }
+//        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
+//        String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
+//        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
+//        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
+//        String author;
+//        if (!lblAuthor.state().isDisplayed()) {
+//            author = null;
+//        } else {
+//            author = lblAuthor.getText();
+//        }
+        CatalogBookModel bookInfo = new CatalogBookModel();
+//                .setTitle(bookName)
+//                .setAuthor(author);
+//        actionButton.click();
+//        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+//                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+//                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+//            String bookNameForConditionalWait = bookNameForLocator;
+//            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookNameForConditionalWait), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+//        }
+        return bookInfo;
     }
 }

@@ -40,7 +40,7 @@ public class SearchSteps {
         searchScreen.applySearch();
     }
 
-    @When("Type book {string} and save it as {string}")
+    @When("Type text {string} and save it as {string}")
     public void typeBook(String bookName, String bookNameKey) {
         context.add(bookNameKey, bookName);
         Assert.assertTrue("Search modal is not present!", searchScreen.isSearchScreenOpened());
@@ -57,7 +57,7 @@ public class SearchSteps {
         Assert.assertTrue("Search field is not empty!", searchScreen.isSearchFieldEmpty());
     }
 
-    @When("Type word {} and save as {string} on Catalog books screen")
+    @When("Search for word {} and save as {string} on Catalog books screen")
     public void typeWord(String word, String wordKey) {
         context.add(wordKey, word);
         Assert.assertTrue("Search modal is not present!", searchScreen.isSearchScreenOpened());
@@ -71,7 +71,7 @@ public class SearchSteps {
         Assert.assertTrue(String.format("Search field does not contain %s!", expectedText), actualText.contains(expectedText));
     }
 
-    @Then("Placeholder contains newWord {string} text in search field")
+    @Then("Placeholder contains word {string} text in search field")
     public void checkNewTextInSearchField(String textKey) {
         String actualText = searchScreen.getTextFromSearchField();
         String expectedText = context.get(textKey);
@@ -105,5 +105,10 @@ public class SearchSteps {
         softAssertions.assertThat(searchScreen.isSearchLineDisplayed()).as("Search field is not displayed!").isTrue();
         softAssertions.assertThat(searchScreen.getTextFromSearchField()).as("Book name is not displayed!").isEqualTo(context.get(bookNameKey));
         softAssertions.assertAll();
+    }
+
+    @Then("The search field is displayed")
+    public void isSearchFieldDisplayed() {
+        Assert.assertTrue("Search field is not displayed!", searchScreen.isSearchLineDisplayed());
     }
 }

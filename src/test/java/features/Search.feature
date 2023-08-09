@@ -41,29 +41,6 @@ Feature: Search module
       |$!                                   |
 
   @palace
-  Scenario: Find a book in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "Palace Bookshelf" on Add library screen
-      And Open search modal
-      And Search for 'El gato negro' and save bookName as 'bookNameInfo'
-    Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
-
-  @palace
-  Scenario: Delete a book from search bar in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "Palace Bookshelf" on Add library screen
-      And Open search modal
-      And Type book 'El gato negro' and save it as 'bookNameInfo'
-      And Clear search field on Catalog books screen
-    Then Search field is empty on Catalog books screen
-
-  @palace
   Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -71,7 +48,7 @@ Feature: Search module
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
       And Open search modal
-      And Type word <word> and save as 'info' on Catalog books screen
+      And Search for word <word> and save as 'info' on Catalog books screen
     Then Books contain word 'info' on Catalog books screen
 
     Scenarios:
@@ -87,7 +64,7 @@ Feature: Search module
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
       And Open search modal
-      And Type word <word> and save as 'info' on Catalog books screen
+      And Search for word <word> and save as 'info' on Catalog books screen
     Then The first book has 'info' bookName on Catalog books screen
 
     Scenarios:
@@ -104,7 +81,7 @@ Feature: Search module
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
       And Open search modal
-      And Type word <data> and save as 'info' on Catalog books screen
+      And Search for word <data> and save as 'info' on Catalog books screen
     Then There is no results on Catalog books screen
 
     Scenarios:
@@ -133,9 +110,9 @@ Feature: Search module
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
       And Open search modal
-      And Type book "Book" and save it as 'word'
+      And Type text "Book" and save it as 'word'
       And Edit data by adding characters in search field and save it as 'newWord'
-    Then Placeholder contains newWord 'newWord' text in search field
+    Then Placeholder contains word 'newWord' text in search field
 
   @palace
   Scenario: Check of empty field in LYRASIS Reads
@@ -159,29 +136,6 @@ Feature: Search module
     Then The search field is displayed and contains 'BookNameInfo' book
 
   @palace
-  Scenario: Find a book in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-      And Open search modal
-      And Search for 'Silk Road' and save bookName as 'bookNameInfo'
-    Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
-
-  @palace
-  Scenario: Delete a book from search bar in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-      And Open search modal
-      And Type book 'Silk Road' and save it as 'bookNameInfo'
-      And Clear search field on Catalog books screen
-    Then Search field is empty on Catalog books screen
-
-  @palace
   Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -189,7 +143,7 @@ Feature: Search module
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
       And Open search modal
-      And Type word <word> and save as 'info' on Catalog books screen
+      And Search for word <word> and save as 'info' on Catalog books screen
     Then Books contain word 'info' on Catalog books screen
 
     Scenarios:
@@ -206,7 +160,7 @@ Feature: Search module
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
       And Open search modal
-      And Type word <word> and save as 'info' on Catalog books screen
+      And Search for word <word> and save as 'info' on Catalog books screen
     Then The first book has 'info' bookName on Catalog books screen
 
     Scenarios:
@@ -223,7 +177,7 @@ Feature: Search module
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
       And Open search modal
-      And Type word <data> and save as 'info' on Catalog books screen
+      And Search for word <data> and save as 'info' on Catalog books screen
     Then There is no results on Catalog books screen
 
     Scenarios:

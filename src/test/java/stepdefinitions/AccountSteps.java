@@ -1,11 +1,16 @@
 package stepdefinitions;
 
+import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.keysforcontext.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
+import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import screens.AccountScreen;
 import screens.AddLibraryScreen;
 import screens.LibrariesScreen;
 import screens.SettingsScreen;
@@ -21,6 +26,7 @@ public class AccountSteps {
     private final MenuBarScreen menuBarScreen;
     private final SettingsScreen settingsScreen;
     private final LibrariesScreen librariesScreen;
+    private final AccountScreen accountScreen;
     private final ScenarioContext context;
 
     @Inject
@@ -30,6 +36,7 @@ public class AccountSteps {
         menuBarScreen = new MenuBarScreen();
         settingsScreen = new SettingsScreen();
         librariesScreen = new LibrariesScreen();
+        accountScreen = new AccountScreen();
     }
 
     @Then("Add library screen is opened")
@@ -96,6 +103,35 @@ public class AccountSteps {
         if(libraryName.equalsIgnoreCase("LYRASIS Reads")){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
+    }
+
+    @Then("Library {string} is opened on Account screen")
+    public void isLibraryOpened(String libraryName) {
+        Assert.assertTrue(String.format("Library %s is not opened!", libraryName), accountScreen.isLibraryOpened(libraryName));
+    }
+
+    @Then("All fields and links are displayed on Account screen")
+    public void checkAllFieldsAndLinks() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(accountScreen.isLibraryCardFieldDisplayed()).as("Library card text box is not displayed!").isTrue();
+        softAssertions.assertThat(accountScreen.isPasswordFieldDisplayed()).as("Password text box is not displayed!").isTrue();
+        softAssertions.assertThat(accountScreen.isSignInBtnDisplayed()).as("Sign in button is not displayed!").isTrue();
+        softAssertions.assertThat(accountScreen.isForgotPasswordMessageDisplayed()).as("Forgot password label is not displayed!").isTrue();
+        softAssertions.assertThat(accountScreen.isLicenseAgreementLinkDisplayed()).as("License agreement link is not displayed!").isTrue();
+        softAssertions.assertAll();
+    }
+
+    @When("Open Content Licenses on Account screen")
+    public void openAccountLicenses() {
+        if(AqualityServices.getApplication().getPlatformName()== PlatformName.ANDROID) {
+            SwipeElementUtils.swipeDown();
+        }
+        accountScreen.openContentLicenses();
+    }
+
+    @Then("Content Licenses screen is opened")
+    public void isContentLicensesOpened() {
+        Assert.assertTrue("Content Licenses is not opened", accountScreen.isContentLicOpened());
     }
 
     private void saveLibraryInContext(String key, String libraryName) {

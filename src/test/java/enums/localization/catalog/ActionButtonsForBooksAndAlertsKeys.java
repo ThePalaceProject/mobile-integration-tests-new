@@ -24,7 +24,8 @@ public enum ActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     OK("ok"),
     VIEW_SAMPLE("view_sample"),
     PLAY_SAMPLE("play_sample"),
-    ALLOW("allow");
+    ALLOW("allow"),
+    DO_NOT_ALLOW("do_not_allow");
 
     private static final AbstractILocalizationProvider localizationProvider =
             LocalizationProviderFactory.getProvider("catalog.actionButtonsForBooksAndAlerts");

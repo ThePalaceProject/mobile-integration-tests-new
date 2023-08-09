@@ -36,7 +36,6 @@ public class CatalogScreen extends Screen {
             new AndroidLocator(By.xpath(String.format("//android.widget.RadioGroup[contains(@resource-id, \"feedHeaderTabs\")]/android.widget.RadioButton[@text=\"%s\"]", button))),
             new IosLocator(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)))), String.format("%s type of sorting", button)));
 
-    private static final String LIBRARY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
     private static final String CATEGORY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]/parent::android.widget.LinearLayout/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
     private static final String CATEGORY_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_ANDROID = "/android.widget.LinearLayout";
@@ -66,14 +65,6 @@ public class CatalogScreen extends Screen {
 
     public boolean isCatalogScreenOpened() {
         return lblCatalog.state().waitForDisplayed();
-    }
-
-    public boolean isLibraryPresent(String libraryName) {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            return getElementFactory().getLabel(By.xpath(String.format(LIBRARY_NAME_LOCATOR_ANDROID, libraryName)), "Library name label").state().waitForDisplayed();
-        } else {
-            return getElementFactory().getLabel(By.id(libraryName), "Library name label").state().isExist();
-        }
     }
 
     public Set<String> getListOfBooksNameInFirstCategory() {
@@ -130,8 +121,20 @@ public class CatalogScreen extends Screen {
         return new HashSet<>(currentBooksNames);
     }
 
+    public boolean areCategoryNamesDisplayed() {
+        AqualityServices.getConditionalWait().waitFor(() -> getElements(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(CATEGORY_LOCATOR_ANDROID)),
+                new IosLocator(By.xpath(CATEGORY_LOCATOR_IOS)))).size() > COUNT_OF_CATEGORIES_TO_WAIT_FOR);
+        List<String> currentBooksNames = geListOfCategoriesNames();
+        return currentBooksNames.size() > 0;
+    }
+
     public boolean isMoreBtnPresent() {
         List<IButton> buttons = getMoreBtn();
+
+        System.out.println(buttons.size());
+        buttons.forEach(button -> button.getText());
+
         return buttons.stream().allMatch(button -> button.state().waitForDisplayed());
     }
 
@@ -142,6 +145,9 @@ public class CatalogScreen extends Screen {
                 new AndroidLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID, randomNumber))),
                 new IosLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS, randomNumber)))), "Book section name").getText();
         buttons.get(randomNumber - 1).click();
+
+        System.out.println(sectionName);
+
         return sectionName;
     }
 

@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
+import aquality.appium.mobile.elements.interfaces.ILink;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.Screen;
 import enums.localization.account.AccountScreenSignInStatus;
@@ -40,11 +41,31 @@ public class AccountScreen extends Screen {
     private final IButton btnSignInAction = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id(BTN_SIGN_IN_ID_ANDROID)),
             new IosLocator(By.xpath(""))), "Log ... action");
+    private final IButton btnApproveSignOut = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Sign out\"]"))),"Sign in approve");
+    private final IButton btnLogInError = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.id("accountLoginButtonErrorDetails")),
+            new IosLocator(By.xpath(""))), "Error info");
+    private final ILabel lblForgotPassword = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.id("resetPasswordLabel")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Forgot your password\")]"))), "Forgot your password label");
+    private final ILink lnkLicenseAgreement = getElementFactory().getLink(LocatorUtils.getLocator(
+            new AndroidLocator(By.id("accountEULA")),
+            new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, \"License Agreement\")]"))), "License agreement link");
+    private final IButton btnContentLicenses = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Content Licenses\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[7]/XCUIElementTypeStaticText"))), "Content licenses button");
+    private final ILabel lblLibrariesAndPalaces = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"Libraries are palaces\")]")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Libraries are palaces\")]"))), "Libraries and palaces label");
 
     private static final String BTN_SIGN_IN_ID_ANDROID = "authBasicLogin";
     private static final String SIGN_IN_BTN_LOCATOR_ANDROID = "//*[contains(@resource-id,\"" + BTN_SIGN_IN_ID_ANDROID + "\") and @text=\"%1$s\"]";
+    private static final String LIBRARY_NAME_LOCATOR_ANDROID = "accountCellTitle";
 
     private static final String SIGN_IN_BTN_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%1$s\"]\n";
+    private static final String LIBRARY_NAME_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 
     public AccountScreen() {
         super(LocatorUtils.getLocator(
@@ -86,5 +107,68 @@ public class AccountScreen extends Screen {
 
     private String getLoginButtonText() {
         return btnSignInAction.state().waitForDisplayed() ? btnSignInAction.getText() : "";
+    }
+
+    public boolean isLogoutRequired() {
+        return btnSignOut.state().isDisplayed();
+    }
+
+    public String getTextFromCardTxb() {
+        return txbCard.getText();
+    }
+
+    public String getTextFromPinTxb() {
+        return txbPassword.getText();
+    }
+
+    public void tapSignOut() {
+        btnSignOut.click();
+    }
+
+    public void tapApproveSignOut() {
+        btnApproveSignOut.click();
+    }
+
+    public String getTextFromSignInButton() {
+        return btnSignIn.getText();
+    }
+
+    public boolean isLogOutErrorDisplayed() {
+        return btnLogInError.state().waitForDisplayed();
+    }
+
+    public boolean isLibraryOpened(String libraryName) {
+        ILabel library = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.id(LIBRARY_NAME_LOCATOR_ANDROID)),
+                new IosLocator(By.xpath(String.format(LIBRARY_NAME_LOCATOR_IOS, libraryName)))), "Library label");
+        return library.state().waitForDisplayed();
+    }
+
+    public boolean isLibraryCardFieldDisplayed() {
+        return txbCard.state().waitForDisplayed();
+    }
+
+    public boolean isPasswordFieldDisplayed() {
+        return txbPassword.state().waitForDisplayed();
+    }
+
+    public boolean isSignInBtnDisplayed() {
+        return btnSignIn.state().waitForDisplayed();
+    }
+
+    public boolean isForgotPasswordMessageDisplayed() {
+        return lblForgotPassword.state().waitForDisplayed();
+    }
+
+    public boolean isLicenseAgreementLinkDisplayed() {
+        return lnkLicenseAgreement.state().waitForDisplayed();
+    }
+
+    public void openContentLicenses() {
+        btnContentLicenses.click();
+    }
+
+    public boolean isContentLicOpened() {
+        return lblLibrariesAndPalaces.state().waitForDisplayed();
     }
 }
