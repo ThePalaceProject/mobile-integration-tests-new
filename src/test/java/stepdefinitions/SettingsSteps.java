@@ -28,4 +28,14 @@ public class SettingsSteps {
     public void isSettingsScreenOpened() {
         Assert.assertTrue("Settings screen is not opened!", settingsScreen.isScreenOpened());
     }
+
+    @When("Open Libraries on Settings screen")
+    public void openLibraries() {
+        settingsScreen.openLibraries();
+    }
+
+    @When("Open {string} library on Setting screen")
+    public void openLibrary(String libraryName) {
+        settingsScreen.openLibrary(libraryName);
+    }
 }

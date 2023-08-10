@@ -47,16 +47,6 @@ jobs:
         run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}}'"
         continue-on-error: true
 
-      - name: Generate Allure Report
-        uses: AEkaterina/action-allure-report@v0.1.1
-        if: success() || failure()
-      - name: Upload report
-        uses: actions/upload-artifact@v3
-        with:
-          name: allure-report
-          path: allure-report/
-        if: success() || failure()
-
       - name: Get Allure history
         uses: actions/checkout@v3
         if: always()
@@ -66,13 +56,11 @@ jobs:
           path: gh-pages
 
       - name: Allure Report action from marketplace
-        uses: PavanMudigonda/allure-html-reporter-github-pages@v1.0
+        uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
         with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          WORKFLOW_ID: maven.yml
-          allure_results: allure-results
+          allure_results: target/allure-results
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
@@ -85,13 +73,3 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
           keep_files: true
-
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.PERSONAL_TOKEN}}
-          context: 'Test report'
-          state: 'success'
-          sha: ${{ github.event.pull_request.head.sha || github.sha }}
-          target_url: https://PavanMudigonda.github.io/allure-html-reporter-github-pages/${{ github.run_number }}

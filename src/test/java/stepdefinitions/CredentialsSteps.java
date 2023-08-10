@@ -65,6 +65,11 @@ public class CredentialsSteps {
         }
     }
 
+    @When("Save library {string} for log out")
+    public void saveLibraryNameForLogOut(String libraryName) {
+        saveLibraryForLogOut(libraryName);
+    }
+
     @Then("Login is performed successfully")
     public void checkLoginIsPerformedSuccessfully() {
         Assert.assertTrue("Sign in is not completed",  accountScreen.isSignInSuccessful() || catalogScreen.state().isDisplayed());

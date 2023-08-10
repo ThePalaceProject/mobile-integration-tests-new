@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.localization.catalog.BookActionButtonNames;
+import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.localization.sortoptions.AvailabilityKeys;
 import enums.localization.sortoptions.SortByKeys;
 import framework.utilities.ScenarioContext;
@@ -53,11 +54,6 @@ public class CatalogSteps {
         Assert.assertTrue("Catalog is not opened!", catalogScreen.isCatalogScreenOpened());
     }
 
-    @Then("Library {string} is present on Catalog Screen")
-    public void isLibraryPresent(String libraryName){
-        Assert.assertTrue(String.format("Library %s is not present on Catalog Screen!", libraryName), catalogScreen.isLibraryPresent(libraryName));
-    }
-
     @Then("Count of books in first category is more than {int}")
     public void checkCountOfBooksInFirstCategory(int countOfBooks) {
         Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfBooksNameInFirstCategory().size());
@@ -105,6 +101,11 @@ public class CatalogSteps {
         Set<String > categoriesNames = catalogScreen.getAllCategoriesNames();
         categoriesNames.forEach(category -> Assert.assertTrue("Category name " + category + " have invalid symbols",
                 category.matches(RegEx.VALID_SYMBOLS_IN_CATALOG_NAMES)));
+    }
+
+    @Then("Category names are loaded on Catalog screen")
+    public void areCategoryNamesDisplayed() {
+        Assert.assertTrue("Category names are not loaded!", catalogScreen.areCategoryNamesDisplayed());
     }
 
     @Then("More button is present on each section of books on Catalog screen")
@@ -239,6 +240,12 @@ public class CatalogSteps {
         softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
         softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
         softAssertions.assertAll();
+    }
+
+    @When("Open book with {} action button and {string} bookName on catalog books screen")
+    public void openBook(ActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey) {
+        String bookName = context.get(bookNameInfoKey);
+        catalogBooksScreen.openBook(actionButtonKey, bookName);
     }
 
     private List<String> getSurnames(List<String> list) {

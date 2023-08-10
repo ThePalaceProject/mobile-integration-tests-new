@@ -17,6 +17,9 @@ public class AlertScreen extends  Screen{
     private final ILabel lblAlertMessage = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath(UNIQUE_ELEMENT_LOCATOR_IOS + "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))), "Alert message");
+    private final ILabel lblNotificationAlert = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath("//XCUIElementTypeAlert[contains(@name, \"Send You Notifications\")]"))), "Alert to allow notifications");
 
     public AlertScreen() {
         super(LocatorUtils.getLocator(
@@ -25,7 +28,7 @@ public class AlertScreen extends  Screen{
     }
 
     public void waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {
-        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_LOCATOR_IOS, actionButtonNamesAlertKeys.getDefaultLocalizedValue())), String.format("%s ActionButtonAlert", actionButtonNamesAlertKeys.getDefaultLocalizedValue()));
+        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_LOCATOR_IOS, actionButtonNamesAlertKeys.getDefaultLocalizedValue())), String.format("%s Action button alert", actionButtonNamesAlertKeys.getDefaultLocalizedValue()));
         if(actionButton.state().waitForDisplayed()){
             actionButton.click();
         }
@@ -33,5 +36,14 @@ public class AlertScreen extends  Screen{
 
     public String getTextFromAlertHeader() {
         return lblAlertMessage.getText();
+    }
+
+    public boolean isNotificationAlertDisplayed() {
+        return lblNotificationAlert.state().waitForDisplayed();
+    }
+
+    public String getTextFromAlertButton(ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_LOCATOR_IOS, actionButtonKey.getDefaultLocalizedValue())), String.format("%s button alert", actionButtonKey.getDefaultLocalizedValue()));
+        return actionButton.getText();
     }
 }

@@ -1,5 +1,7 @@
 package stepdefinitions;
 
+import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.BookType;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
@@ -8,17 +10,20 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.CatalogBookModel;
 import org.junit.Assert;
+import screens.AlertScreen;
 import screens.CatalogBooksScreen;
 
 public class CatalogBooksSteps {
 
-    CatalogBooksScreen catalogBooksScreen;
+    private final CatalogBooksScreen catalogBooksScreen;
+    private final AlertScreen alertScreen;
     private final ScenarioContext context;
 
     @Inject
     public CatalogBooksSteps(ScenarioContext context) {
         this.context = context;
         catalogBooksScreen = new CatalogBooksScreen();
+        alertScreen = new AlertScreen();
     }
 
     @Then("{} book with {} action button and {string} bookName is displayed on Catalog books screen")
@@ -50,5 +55,28 @@ public class CatalogBooksSteps {
         String bookName = context.get(bookNameKey);
         CatalogBookModel bookInfo = catalogBooksScreen.openBookAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
+    }
+
+    @When("Click {} action button on {} book with {string} bookName on Catalog books screen and save book as {string}")
+    public void clickActionButtonAndSaveBookInfo(ActionButtonsForBooksAndAlertsKeys actionButtonKey, BookType bookType, String bookNameKey, String bookInfoKey) {
+        String bookName = context.get(bookNameKey);
+        CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonAndGetBookInfo(bookType, bookName, actionButtonKey);
+        context.add(bookInfoKey, bookInfo);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            if (actionButtonKey == ActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.REMOVE) {
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            } else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
+        }
+    }
+
+    @Then("{} book with {} action button and {string} bookInfo is present on Catalog books screen")
+    public void isBookPresent(BookType bookType, ActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        CatalogBookModel bookInfo = context.get(bookInfoKey);
+        String bookName = bookInfo.getTitle();
+        Assert.assertTrue(String.format("'%s' book with specific action button is not present on catalog books screen", bookName),
+                catalogBooksScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
     }
 }

@@ -12,6 +12,8 @@ import screens.TutorialScreen;
 import screens.WelcomeScreen;
 import screens.menubar.MenuBarScreen;
 
+import java.time.Duration;
+
 
 public class ApplicationSteps {
     private final TutorialScreen tutorialScreen;
@@ -87,4 +89,16 @@ public class ApplicationSteps {
         softAssertions.assertThat(menuBarScreen.getTypeOfTab(tab3)).as("There is no " + tab3 + " tab").isEqualTo(tab3);
     }
 
+    @When("Wait for {int} seconds")
+    public void waitSeveralSeconds(Integer secondsCount) {
+        if (secondsCount > 10) {
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
+            AqualityServices.getApplication().getDriver().getContext();
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
+            AqualityServices.getApplication().getDriver().getContext();
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
+        } else {
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
+        }
+    }
 }

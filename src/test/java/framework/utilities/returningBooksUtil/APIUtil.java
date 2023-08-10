@@ -16,6 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class APIUtil {
     private static final PropertyUtils propertyUtils = new PropertyUtils("src/test/resources/apiConfig.properties");
 
+    public static void returnBooks(Credentials credentials) {
+        String authHeader = getAuthHeader(credentials);
+        AqualityServices.getLogger().info("There are books on the account for returning: ");
+        ArrayList<String> booksForReturning = getListOfBooksInAccount(authHeader);
+        AqualityServices.getLogger().info("Count of books on the account for returning: " + booksForReturning.size());
+        sendRequestsForReturningBooks(authHeader, booksForReturning);
+    }
+
     public static void enterBookAfterOpeningAccount(Credentials credentials) {
         AqualityServices.getLogger().info("Count of books on the account after opening account: " + enterBooks(credentials));
     }
@@ -25,6 +33,31 @@ public class APIUtil {
         AqualityServices.getLogger().info("There are books on the account: ");
         ArrayList<String> listOfBooks = getListOfBooksInAccount(authHeader);
         return listOfBooks.size();
+    }
+
+    public static void enterBooksAfterReturningBooks(Credentials credentials) {
+        AqualityServices.getLogger().info("Count of books on the account after returning books: " + enterBooks(credentials));
+    }
+
+    private static void sendRequestsForReturningBooks(String authHeader, ArrayList<String> booksForReturning) {
+        OkHttpClient client = makeHttpClient();
+        ReturnBooksAPIMethods getBooksAPIMethods = new Retrofit
+                .Builder()
+                .baseUrl(propertyUtils.getProperty("base_url"))
+                .client(client)
+                .build()
+                .create(ReturnBooksAPIMethods.class);
+
+        if (booksForReturning.size() != 0) {
+            for (String bookUrl : booksForReturning) {
+                String path = bookUrl.replace(propertyUtils.getProperty("base_url"), "");
+                try {
+                    getBooksAPIMethods.returnBooks(authHeader, path).execute();
+                } catch (IOException e) {
+                    AqualityServices.getLogger().error(e + e.getMessage());
+                }
+            }
+        }
     }
 
     private static String getAuthHeader(Credentials credentials) {

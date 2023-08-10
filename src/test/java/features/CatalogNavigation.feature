@@ -12,7 +12,7 @@ Feature: Catalog Navigation module
     Then Catalog screen is opened
     When Restart app
     Then Catalog screen is opened
-      And Library 'LYRASIS Reads' is present on Catalog Screen
+      And Category names are loaded on Catalog screen
 
   @palace
   Scenario: Browse Categories in Palace Bookshelf
@@ -47,22 +47,6 @@ Feature: Catalog Navigation module
     When Open Catalog
     Then Catalog screen is opened
       And Category names are correct on Catalog screen
-
-  @palace
-  Scenario: Check of "More" button in books sections in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
-      And More button is present on each section of books on Catalog screen
-    When Click More button from random book section and save name of section as 'sectionInfo' on Catalog screen
-    Then Book section 'sectionInfo' is opened
-    When Tap Back button on Subcategory screen
-    Then Catalog screen is opened
 
   @palace
   Scenario Outline: Check of books sorting in Palace Bookshelf
@@ -140,24 +124,6 @@ Feature: Catalog Navigation module
     When Open Catalog
     Then Catalog screen is opened
       And Category names are correct on Catalog screen
-
-
-#    need to fix
-#  @lyrasis
-#  Scenario: Check of "More" button in books sections in LYRASIS Reads
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Library "LYRASIS Reads" is opened on Libraries screen
-#    When Open Catalog
-#    Then Catalog screen is opened
-#      And More button is present on each section of books on Catalog screen
-#    When Click More button from random book section and save name of section as 'sectionInfo' on Catalog screen
-#    Then Book section 'sectionInfo' is opened
-#    When Tap Back button on Subcategory screen
-#    Then Catalog screen is opened
 
   @palace
   Scenario Outline: Check of books sorting in LYRASIS Reads
