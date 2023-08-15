@@ -58,11 +58,11 @@ jobs:
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
-#        id: allure-report
+        id: allure-report
         with:
           allure_results: allure-results
-#          gh_pages: gh-pages
-#          allure_report: allure-report
+          gh_pages: gh-pages
+          allure_report: allure-report
           allure_history: allure-history
           keep_reports: 5
 
@@ -73,4 +73,4 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
-#          keep_files: true
+          keep_files: true
