@@ -82,5 +82,5 @@ jobs:
           authToken: ${{secrets.PERSONAL_TOKEN}}
           context: 'Test report'
           state: 'success'
-          sha: ${{ github.event.pull_request.head.sha }}
-          target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
+          sha: ${{ github.event.pull_request.head.sha || github.sha }}
+          target_url: https://PavanMudigonda.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
