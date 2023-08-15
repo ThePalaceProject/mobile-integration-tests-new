@@ -3,10 +3,12 @@ package screens;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
+import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.Screen;
 import enums.BookType;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
+import enums.timeouts.BooksTimeouts;
 import framework.utilities.LocatorUtils;
 import framework.utilities.PlatformUtils;
 import models.AndroidLocator;
@@ -14,6 +16,7 @@ import models.CatalogBookModel;
 import models.IosLocator;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +33,13 @@ public class CatalogBooksScreen extends Screen {
     private static final String BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
     private static final String BOOK_NAME_LOCATOR_ANDROID = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_ANDROID = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
+    private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.ProgressBar";
 
     private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
     private static final String BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
     private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+    private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeProgressIndicator";
 
     public CatalogBooksScreen() {
         super(LocatorUtils.getLocator(
@@ -120,30 +125,41 @@ public class CatalogBooksScreen extends Screen {
     }
 
     public CatalogBookModel clickActionButtonAndGetBookInfo(BookType bookType, String bookName, ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-//        String bookNameForLocator = bookName;
-//        if (BookType.AUDIOBOOK == bookType) {
-//            bookNameForLocator = bookNameForLocator + ". Audiobook.";
-//        }
-//        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
-//        String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
-//        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
-//        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
-//        String author;
-//        if (!lblAuthor.state().isDisplayed()) {
-//            author = null;
-//        } else {
-//            author = lblAuthor.getText();
-//        }
-        CatalogBookModel bookInfo = new CatalogBookModel();
-//                .setTitle(bookName)
-//                .setAuthor(author);
-//        actionButton.click();
-//        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
-//                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
-//                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
-//            String bookNameForConditionalWait = bookNameForLocator;
-//            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookNameForConditionalWait), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-//        }
+        String bookNameForLocator = bookName;
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && BookType.AUDIOBOOK == bookType) {
+            bookNameForLocator = bookNameForLocator + ". Audiobook.";
+        }
+
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
+        IButton actionButton = getElementFactory().getButton(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID, bookNameForLocator, actionButtonString))),
+                new IosLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS, bookNameForLocator, actionButtonString)))), "Action button");
+
+        ILabel lblAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_ANDROID, bookNameForLocator, actionButtonString))),
+                new IosLocator(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_IOS, bookNameForLocator, actionButtonString)))), "Author label");
+        String author;
+        if (!lblAuthor.state().isDisplayed()) {
+            author = null;
+        } else {
+            author = lblAuthor.getText();
+        }
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(bookName)
+                .setAuthor(author);
+        actionButton.click();
+        if (actionButtonKey == ActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.REMOVE
+                || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.RETURN
+                || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            String bookNameForConditionalWait = bookNameForLocator;
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookNameForConditionalWait), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
         return bookInfo;
+    }
+
+    public boolean isProgressBarDisplayed(String bookName) {
+        return getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC_ANDROID, bookName))),
+                new IosLocator(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC_IOS, bookName)))), "Progress bar").state().isDisplayed();
     }
 }
