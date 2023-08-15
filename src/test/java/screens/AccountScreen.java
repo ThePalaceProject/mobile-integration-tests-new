@@ -55,7 +55,7 @@ public class AccountScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, \"License Agreement\")]"))), "License agreement link");
     private final IButton btnContentLicenses = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Content Licenses\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[7]/XCUIElementTypeStaticText"))), "Content licenses button");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Content Licenses\"]"))), "Content licenses button");
     private final ILabel lblLibrariesAndPalaces = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"Libraries are palaces\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Libraries are palaces\")]"))), "Libraries and palaces label");

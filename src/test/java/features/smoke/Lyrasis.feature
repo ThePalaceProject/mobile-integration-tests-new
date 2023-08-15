@@ -167,7 +167,7 @@ Feature: Smoke tests in LYRASIS Reads library
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for "Lemon" and save bookName as 'bookNameInfo'
+      And Search for "Renaissance Futurities" and save bookName as 'bookNameInfo'
       And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
       And Click GET action button on Book details screen
     Then Sing in screen is opened
@@ -187,7 +187,7 @@ Feature: Smoke tests in LYRASIS Reads library
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
-      And Search for "Fahrenheit 451." and save bookName as 'bookNameInfo'
+      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
       And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click RESERVE action button without closing alert on Book details screen
     Then There is an alert to allow notifications
@@ -207,11 +207,11 @@ Feature: Smoke tests in LYRASIS Reads library
       Then Login is performed successfully
       When Open Catalog
         And Open search modal
-        And Search for "Fahrenheit 451." and save bookName as 'bookNameInfo'
+        And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
         And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
         And Click RESERVE action button without closing alert on Book details screen
       Then There is an alert to allow notifications
-      When Tap DO_NOT_ALLOW button on the alert
+      When Tap Don't Allow button on the alert
       Then Alert to allow notification is not displayed
         And Check that book contains REMOVE action button on Book details screen
 
@@ -227,7 +227,7 @@ Feature: Smoke tests in LYRASIS Reads library
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -251,7 +251,7 @@ Feature: Smoke tests in LYRASIS Reads library
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -289,3 +289,34 @@ Feature: Smoke tests in LYRASIS Reads library
       And Open 'LYRASIS Reads' library on Setting screen
       And Open Content Licenses on Account screen
     Then Content Licenses screen is opened
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Pages: Perform check of swiping left
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
+    When Enter credentials for 'LYRASIS Reads' library
+    Then Login is performed successfully
+    When Open Catalog
+      And Open search modal
+      And Search for "Educational Visions" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Swipe to the next page from 7 to 10 times on Reader epub screen
+      And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Go to next page on Reader epub screen
+    Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Tap on right book corner on epub reader screen
+    Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Click on left book corner on epub reader screen
+    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Go to previous page on reader epub screen
+    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen

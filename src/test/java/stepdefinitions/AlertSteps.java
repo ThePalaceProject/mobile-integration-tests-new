@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import io.cucumber.java.en.Then;
@@ -20,6 +21,11 @@ public class AlertSteps {
     @When("Tap {} button on the alert")
     public void tapActionButton(ActionButtonsForBooksAndAlertsKeys actionButtons) {
         alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtons);
+    }
+
+    @When("Tap Don't Allow button on the alert")
+    public void tapDoNotAllow() {
+        AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
     }
 
     @Then("There is an alert to allow notifications")
