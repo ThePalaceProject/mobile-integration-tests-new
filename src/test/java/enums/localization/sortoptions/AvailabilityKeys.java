@@ -15,7 +15,7 @@ public enum AvailabilityKeys implements LocalizedValue {
     YOURS_TO_KEEP("yours_to_keep");
 
     private static final AbstractILocalizationProvider localizationProvider =
-            LocalizationProviderFactory.getProvider("sortoptions.AvailabilityKeys");
+            LocalizationProviderFactory.getProvider("sortoptions.availabilityKeys");
 
     private final String key;
 

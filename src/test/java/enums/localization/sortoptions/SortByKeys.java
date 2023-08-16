@@ -17,7 +17,7 @@ public enum SortByKeys implements LocalizedValue {
     RECENTLY_ADDED("recently_added");
 
     private static final AbstractILocalizationProvider localizationProvider =
-            LocalizationProviderFactory.getProvider("sortoptions.SortByKeys");
+            LocalizationProviderFactory.getProvider("sortoptions.sortByKeys");
 
     private final String key;
 

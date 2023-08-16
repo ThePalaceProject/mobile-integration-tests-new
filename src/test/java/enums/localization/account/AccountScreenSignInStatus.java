@@ -15,7 +15,7 @@ public enum AccountScreenSignInStatus implements LocalizedValue {
     SIGN_OUT("sign_out");
 
     private static final AbstractILocalizationProvider localizationProvider =
-            LocalizationProviderFactory.getProvider("account.AccountScreenSignInStatus");
+            LocalizationProviderFactory.getProvider("account.accountScreenSignInStatus");
 
     private final String key;
 
