@@ -12,7 +12,7 @@ Feature: Smoke tests in LYRASIS Reads library
     Then Catalog screen is opened
       And Category names are loaded on Catalog screen
 
-  @smoke
+  @test
   Scenario: Search: Perform check that the text field appears after clicking "Search" icon
     When Close tutorial screen
     Then Welcome screen is opened
@@ -157,6 +157,7 @@ Feature: Smoke tests in LYRASIS Reads library
     Then Sing in screen is opened
       And All fields and links are displayed on Sign in screen
 
+#    test
   @smoke @logout @returnBooks
   Scenario: Book detail view: Get: Log in: Perform check of logging in
     When Close tutorial screen
@@ -290,8 +291,9 @@ Feature: Smoke tests in LYRASIS Reads library
       And Open Content Licenses on Account screen
     Then Content Licenses screen is opened
 
+#   from here
   @smoke @logout @returnBooks
-  Scenario: Read ebooks: Pages: Perform check of swiping left
+  Scenario: Read ebooks: Pages: Perform check of reader navigating (swiping left and right)
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
@@ -320,3 +322,71 @@ Feature: Smoke tests in LYRASIS Reads library
     When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Go to previous page on reader epub screen
     Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Table of contents: Perform check of navigation
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
+    When Enter credentials for 'LYRASIS Reads' library
+    Then Login is performed successfully
+    When Open Catalog
+      And Open search modal
+      And Search for "The High 5 Habit" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Open TOC epub screen
+    Then TOC screen is opened
+    When Switch to bookmarks on toc epub screen
+    Then Bookmark epub screen is opened
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Table of contents: Contents: Perform check of Contents navigation
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
+    When Enter credentials for 'LYRASIS Reads' library
+    Then Login is performed successfully
+    When Open Catalog
+      And Open search modal
+      And Search for "Quicksand" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Open TOC epub screen
+      And Open random chapter of epub and save it as 'chapterName' from toc epub screen
+    Then Chapter 'chapterName' is opened on epub reader screen
+
+  @smoke @logout @returnBooks @exclude_android
+  Scenario:  IOS: Read pdfs: Pages: Perform check of reader navigating (swiping left and right)
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
+    When Enter credentials for 'LYRASIS Reads' library
+    Then Login is performed successfully
+    When Open Catalog
+      And Open search modal
+      And Search for "Race Cars" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then Reader pdf screen is opened
+    When Save page number as 'pageInfo' on pdf reader screen
+      And Go to next page on reader pdf screen
+    Then Page number increased by 1 from 'pageInfo' on pdf reader screen
+    When Save page number as 'pageInfo2' on pdf reader screen
+      And Go to previous page on reader pdf screen
+    Then Page number decreased by 1 from 'pageInfo2' on pdf reader screen
