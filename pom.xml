@@ -41,6 +41,10 @@
                     <parallel>methods</parallel>
                     <threadCount>3</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -Dallure.results.directory=target/allure-results
+                    </argLine>
                 </configuration>
             </plugin>
         </plugins>
@@ -144,6 +148,13 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-maven</artifactId>
             <version>LATEST</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.16.0</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
