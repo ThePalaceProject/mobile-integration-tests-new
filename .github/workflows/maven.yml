@@ -48,13 +48,18 @@ jobs:
         continue-on-error: true
 
       - name: Generate Allure Report
-        run: mvn allure:report
-
-      - name: Archive Allure Report
-        uses: actions/upload-artifact@v2
+        uses: simple-elf/allure-report-action@v1
         with:
-          name: allure-report
-          path: target/site/allure-maven-plugin
+          allure-command: generate
+          allure-results: target/allure-results
+          allure-report-version: 2.15.0
+          output-directory: allure-report
+
+      - name: Publish Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
 
 #      - name: Publish Report to gh-pages
 #        uses: peaceiris/actions-gh-pages@v3
