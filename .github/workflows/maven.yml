@@ -70,7 +70,6 @@ jobs:
       - name: Debug Workflow
         run: |
           ls -R allure-results
-          pwd
 
 #      - name: Generate Allure Report
 #        uses: AEkaterina/action-allure-report@v0.1.1
