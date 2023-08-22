@@ -69,7 +69,7 @@ jobs:
 
       - name: Debug Workflow
         run: |
-          ls -R target
+          ls -R allure-results
           pwd
 
 #      - name: Generate Allure Report
