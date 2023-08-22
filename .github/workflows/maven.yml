@@ -53,8 +53,13 @@ jobs:
       - name: Publish Report to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/allure-results
+
+      - name: Debug Workflow
+        run: |
+          ls -R target
+          pwd
 
 #      - name: Generate Allure Report
 #        uses: AEkaterina/action-allure-report@v0.1.1
