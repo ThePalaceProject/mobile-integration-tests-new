@@ -48,50 +48,59 @@ jobs:
         continue-on-error: true
 
       - name: Generate Allure Report
-        uses: AEkaterina/action-allure-report@v0.1.1
-        if: success() || failure()
-      - name: Upload report
-        uses: actions/upload-artifact@v3
-        with:
-          name: allure-report
-          path: allure-report/
-        if: success() || failure()
+        run: mvn allure:report
 
-      - name: Get Allure history
-        uses: actions/checkout@v3
-        if: always()
-        continue-on-error: true
+      - name: Publish Report to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ref: gh-pages
-          path: gh-pages
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_dir: ./target/site/allure-maven-plugin
 
-      - name: Allure Report action from marketplace
-        uses: PavanMudigonda/allure-html-reporter-github-pages@v1.0
-        if: always()
-        id: allure-report
-        with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          WORKFLOW_ID: maven.yml
-          allure_results: ./
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
-
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
-          keep_files: true
-
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.PERSONAL_TOKEN}}
-          context: 'Test report'
-          state: 'success'
-          sha: ${{ github.event.pull_request.head.sha || github.sha }}
-          target_url: https://PavanMudigonda.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
+#      - name: Generate Allure Report
+#        uses: AEkaterina/action-allure-report@v0.1.1
+#        if: success() || failure()
+#      - name: Upload report
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: allure-report
+#          path: allure-report/
+#        if: success() || failure()
+#
+#      - name: Get Allure history
+#        uses: actions/checkout@v3
+#        if: always()
+#        continue-on-error: true
+#        with:
+#          ref: gh-pages
+#          path: gh-pages
+#
+#      - name: Allure Report action from marketplace
+#        uses: PavanMudigonda/allure-html-reporter-github-pages@v1.0
+#        if: always()
+#        id: allure-report
+#        with:
+#          token: ${{ secrets.PERSONAL_TOKEN }}
+#          WORKFLOW_ID: maven.yml
+#          allure_results: allure-results
+#          gh_pages: gh-pages
+#          allure_report: allure-report
+#          allure_history: allure-history
+#
+#      - name: Deploy report to Github Pages
+#        if: always()
+#        uses: peaceiris/actions-gh-pages@v2
+#        env:
+#          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+#          PUBLISH_BRANCH: gh-pages
+#          PUBLISH_DIR: allure-history
+#          keep_files: true
+#
+#      - name: Post the link to the report
+#        if: always()
+#        uses: Sibz/github-status-action@v1
+#        with:
+#          authToken: ${{secrets.PERSONAL_TOKEN}}
+#          context: 'Test report'
+#          state: 'success'
+#          sha: ${{ github.event.pull_request.head.sha || github.sha }}
+#          target_url: https://PavanMudigonda.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
