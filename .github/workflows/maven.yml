@@ -50,11 +50,17 @@ jobs:
       - name: Generate Allure Report
         run: mvn allure:report
 
-      - name: Publish Report to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Archive Allure Report
+        uses: actions/upload-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target/site/allure-maven-plugin
+          name: allure-report
+          path: target/site/allure-maven-plugin
+
+#      - name: Publish Report to gh-pages
+#        uses: peaceiris/actions-gh-pages@v3
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          publish_dir: target/site/allure-maven-plugin
 
       - name: Debug Workflow
         run: |
