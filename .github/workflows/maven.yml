@@ -54,7 +54,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./target/site/allure-maven-plugin
+          publish_dir: ./target/allure-results
 
 #      - name: Generate Allure Report
 #        uses: AEkaterina/action-allure-report@v0.1.1
