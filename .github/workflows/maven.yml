@@ -93,3 +93,8 @@ jobs:
           state: 'success'
           sha: ${{ github.event.pull_request.head.sha || github.sha }}
           target_url: https://PavanMudigonda.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
+
+      - name: Debug Workflow
+        run: |
+          ls -R target
+          pwd
