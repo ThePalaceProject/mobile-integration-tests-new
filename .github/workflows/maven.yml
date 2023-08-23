@@ -96,5 +96,5 @@ jobs:
 
       - name: Debug Workflow
         run: |
-          ls -R target
+          ls -R build
           pwd
