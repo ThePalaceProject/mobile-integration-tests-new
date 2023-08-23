@@ -11,7 +11,9 @@ import framework.utilities.ScenarioContext;
 import framework.utilities.returningBooksUtil.APIUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
 import screens.AlertScreen;
 import screens.SignInScreen;
 
@@ -62,14 +64,19 @@ public class SignInSteps {
         }
     }
 
-    @Then("There is a placeholder Library Card in the Library Card field on Sign in screen")
-    public void isPlaceholderInLibCardDisplayed() {
-//        Assert.assertEquals("A placeholder Library Card is not displayed", "Library Card", signInScreen.getTextFromLibraryCard());
+    @Then("Activate sync bookmarks on Sign in screen")
+    public void activateSyncBookmarks() {
+        signInScreen.activateSyncBookmarks();
     }
 
     @Then("There is a placeholder {string} in the Password field on Sign in screen")
-    public void isPlaceholderInPasswordDisplayed(String placholderName) {
-//        Assert.assertEquals("A placeholder " + placholderName + " is not displayed", placholderName, signInScreen.getTextFromPassword());
+    public void isPlaceholderInPasswordDisplayed(String placeholderName) {
+        Assert.assertEquals("A placeholder " + placeholderName + " is not displayed", placeholderName, signInScreen.getTextFromPassword());
+    }
+
+    @Then("There is a placeholder Library Card in the Library Card field on Sign in screen")
+    public void isPlaceholderInLibCardDisplayed() {
+        Assert.assertEquals("A placeholder Library Card is not displayed", "Library Card", signInScreen.getTextFromLibraryCard());
     }
 
     @When("Enter a valid Password for {string} library on Sign in screen")
@@ -81,8 +88,8 @@ public class SignInSteps {
 
     @Then("Sign in button is disabled on Sign in screen")
     public void isSignInButtonDisabled() {
-//        signInScreen.tapSignInBtn();
-//        Assert.assertFalse("Sign in screen not displayed", signInScreen.state().waitForNotDisplayed());
+        signInScreen.tapSignIn();
+        Assert.assertFalse("Sign in screen not displayed", signInScreen.state().waitForNotDisplayed());
     }
 
     @When("Enter a valid Library card {string} on Sign in screen")
@@ -92,29 +99,29 @@ public class SignInSteps {
 
     @When("Enter a Library card with {int} numbers and save it as {string} on Sign in screen")
     public void enterLibCardAndSave(int libraryCardLength, String libraryCardKey) {
-//        String libraryCard = RandomStringUtils.randomNumeric(libraryCardLength);
-//        signInScreen.enterLibraryCard(libraryCard);
-//        context.add(libraryCardKey, libraryCard);
-    }
-
-    @When("Enter a Library card with {int} latin letters and save it as {string} on Sign in screen")
-    public void enterLatinLettersInLibCard(int cardLength, String libraryCardKey) {
-//        String libraryCard = RandomStringUtils.randomAlphabetic(cardLength);
-//        signInScreen.enterLibraryCard(libraryCard);
-//        context.add(libraryCardKey, libraryCard);
+        String libraryCard = RandomStringUtils.randomNumeric(libraryCardLength);
+        signInScreen.enterLibraryCard(libraryCard);
+        context.add(libraryCardKey, libraryCard);
     }
 
     @When("Edit data by adding {string} in Library card field and save it as {string} on sign in screen")
     public void editLibraryCard(String addedData, String newLibCardKey) {
-//        signInScreen.deleteSomeDataInLibCard();
-//        signInScreen.deleteSomeDataInLibCard();
-//        signInScreen.setTextInLibCard(addedData);
-//        context.add(newLibCardKey, signInScreen.getTextFromLibraryCard());
+        signInScreen.deleteSomeDataInLibCard();
+        signInScreen.deleteSomeDataInLibCard();
+        signInScreen.setTextInLibCard(addedData);
+        context.add(newLibCardKey, signInScreen.getTextFromLibraryCard());
     }
 
     @Then("There is a placeholder {string} in the Library Card field on Sign in screen")
     public void isNewPlaceholderDisplayed(String placeholderKey) {
-//        Assert.assertEquals("New placeholder is not displayed", context.get(placeholderKey), signInScreen.getTextFromLibraryCard());
+        Assert.assertEquals("New placeholder is not displayed", context.get(placeholderKey), signInScreen.getTextFromLibraryCard());
+    }
+
+    @When("Enter a Library card with {int} latin letters and save it as {string} on Sign in screen")
+    public void enterLatinLettersInLibCard(int cardLength, String libraryCardKey) {
+        String libraryCard = RandomStringUtils.randomAlphabetic(cardLength);
+        signInScreen.enterLibraryCard(libraryCard);
+        context.add(libraryCardKey, libraryCard);
     }
 
     @When("Tap the Sign in button on Sign in screen")
@@ -124,11 +131,11 @@ public class SignInSteps {
 
     @Then("There is an alert {string} on Sign in screen")
     public void isAlertInvalidCredDisplayed(String alertMessage) {
-//        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-//            Assert.assertEquals("Alert \"" + alertMessage + "\" is not displayed", alertMessage, alertScreen.getTextFromAlertHeader());
-//        } else {
-//            Assert.assertTrue("There is nor error message \"Invalid credentials\". Actual - " + signInScreen.getErrorMessage(), signInScreen.getErrorMessage().contains(alertMessage));
-//        }
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Assert.assertEquals("Alert \"" + alertMessage + "\" is not displayed", alertMessage, alertScreen.getTextFromAlertHeader());
+        } else {
+            Assert.assertTrue("There is nor error message \"Invalid credentials\". Actual - " + signInScreen.getErrorMessage(), signInScreen.getErrorMessage().contains(alertMessage));
+        }
     }
 
     private void storeCredentials(Credentials credentials) {

@@ -101,4 +101,17 @@ public class EpubReaderSteps {
         Assert.assertTrue(String.format("Page number or chapterName is not correct (actualPageNumber - %d, expectedPageNumber - %d), (actualChapterName-%s, expectedChapterName-%s)", actualPageNumber, expectedPageNumber, actualChapterName, expectedChapterName), expectedPageNumber == actualPageNumber ||
                 (actualPageNumber == 1 && !actualChapterName.equalsIgnoreCase(expectedChapterName)));
     }
+
+    @When("Open TOC epub screen")
+    public void openTocEpubScreen() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
+    }
+
+    @Then("Chapter {string} is opened on epub reader screen")
+    public void isChapterOpened(String chapterNameKey) {
+        String expectedChapterName = context.get(chapterNameKey);
+        Assert.assertEquals("Chapter name is not correct. ExpectedChapterName-" + expectedChapterName.toLowerCase() + ", ActualChapterName-"
+                + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase(), expectedChapterName.toLowerCase());
+    }
 }

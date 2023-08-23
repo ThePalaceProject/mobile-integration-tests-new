@@ -121,4 +121,8 @@ public class ReaderEpubScreen extends Screen {
             action.tap(PointOption.point(0, lblPage.getElement().getCenter().y)).perform();
         });
     }
+
+    public NavigationBarScreen getNavigationBarEpubScreen() {
+        return navigationBarScreen;
+    }
 }

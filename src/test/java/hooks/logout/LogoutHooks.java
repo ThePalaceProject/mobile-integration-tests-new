@@ -6,6 +6,7 @@ import enums.keysforcontext.ContextLibrariesKeys;
 import enums.localization.account.AccountScreenSignInStatus;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.timeouts.AuthorizationTimeouts;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.After;
 import screens.AccountScreen;
@@ -55,22 +56,30 @@ public class LogoutHooks {
                 final String cardTextBeforeLogout = accountScreen.getTextFromCardTxb();
                 final String pinTextBeforeLogout = accountScreen.getTextFromPinTxb();
                 accountScreen.tapSignOut();
-                accountScreen.tapApproveSignOut();
 
-                if(accountScreen.isLogOutErrorDisplayed()) {
-                    accountScreen.tapSignOut();
-                }
+                ActionProcessorUtils.doForAndroid(() -> {
+                    do {
+                        if(accountScreen.isLogOutErrorDisplayed()) {
+                            accountScreen.tapSignOut();
+                        }
+                    } while (!accountScreen.getTextFromSignInButton().equals(AccountScreenSignInStatus.SIGN_IN.getDefaultLocalizedValue())
+                            && accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
+                            && accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout));
+                });
 
-                if(alertScreen.state().waitForDisplayed()){
-                    alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
-                }
-                AqualityServices.getConditionalWait().waitFor(() ->
-                                accountScreen.getTextFromSignInButton().equals(AccountScreenSignInStatus.SIGN_IN.getDefaultLocalizedValue())
-                                        && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
-                                        && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
-                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
-                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
-                        Collections.singletonList(NoSuchElementException.class));
+                ActionProcessorUtils.doForIos(() -> {
+                    accountScreen.tapApproveSignOut();
+                    if(alertScreen.state().waitForDisplayed()){
+                        alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
+                    }
+                    AqualityServices.getConditionalWait().waitFor(() ->
+                                    accountScreen.getTextFromSignInButton().equals(AccountScreenSignInStatus.SIGN_IN.getDefaultLocalizedValue())
+                                            && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
+                                            && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
+                            Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
+                            Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
+                            Collections.singletonList(NoSuchElementException.class));
+                });
             }
         }
     }

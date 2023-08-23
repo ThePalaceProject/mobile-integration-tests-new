@@ -10,10 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import screens.AccountScreen;
-import screens.AddLibraryScreen;
-import screens.LibrariesScreen;
-import screens.SettingsScreen;
+import screens.*;
 import screens.menubar.MenuBar;
 import screens.menubar.MenuBarScreen;
 
@@ -27,6 +24,8 @@ public class AccountSteps {
     private final SettingsScreen settingsScreen;
     private final LibrariesScreen librariesScreen;
     private final AccountScreen accountScreen;
+    private final CatalogScreen catalogScreen;
+    private final FindYourLibraryScreen findYourLibraryScreen;
     private final ScenarioContext context;
 
     @Inject
@@ -37,6 +36,8 @@ public class AccountSteps {
         settingsScreen = new SettingsScreen();
         librariesScreen = new LibrariesScreen();
         accountScreen = new AccountScreen();
+        catalogScreen = new CatalogScreen();
+        findYourLibraryScreen = new FindYourLibraryScreen();
     }
 
     @Then("Add library screen is opened")
@@ -132,6 +133,14 @@ public class AccountSteps {
     @Then("Content Licenses screen is opened")
     public void isContentLicensesOpened() {
         Assert.assertTrue("Content Licenses is not opened", accountScreen.isContentLicOpened());
+    }
+
+    @When("Add {string} account by the logo")
+    public void addAccountByTheLogo(String libraryName) {
+        catalogScreen.tapTheLogo();
+        findYourLibraryScreen.tapAddLibrary();
+        addLibraryScreen.addLibraryViaSearch(libraryName);
+        catalogScreen.state().waitForDisplayed();
     }
 
     private void saveLibraryInContext(String key, String libraryName) {

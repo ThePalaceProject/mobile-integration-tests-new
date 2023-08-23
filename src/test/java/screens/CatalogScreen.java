@@ -17,6 +17,7 @@ import framework.utilities.LocatorUtils;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.AndroidLocator;
 import models.IosLocator;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 
 import java.util.HashSet;
@@ -35,6 +36,9 @@ public class CatalogScreen extends Screen {
     private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button -> getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath(String.format("//android.widget.RadioGroup[contains(@resource-id, \"feedHeaderTabs\")]/android.widget.RadioButton[@text=\"%s\"]", button))),
             new IosLocator(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)))), String.format("%s type of sorting", button)));
+    private final IButton btnLogo = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"))), "Logo");
 
     private static final String CATEGORY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]/parent::android.widget.LinearLayout/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
     private static final String CATEGORY_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
@@ -51,7 +55,7 @@ public class CatalogScreen extends Screen {
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_IOS = "/XCUIElementTypeButton";
     private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton[@name]";
     private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
-    private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"More...\"]";
+    private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"More\")]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "//XCUIElementTypeTable/XCUIElementTypeButton[%d]";
     private static final String SECTION_TITLE_IOS = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
@@ -132,21 +136,29 @@ public class CatalogScreen extends Screen {
     public boolean isMoreBtnPresent() {
         List<IButton> buttons = getMoreBtn();
 
-        System.out.println(buttons.size());
-        buttons.forEach(button -> button.getText());
+        IButton btn = getElementFactory().getButton(By.xpath(MORE_BUTTON_LOCATOR_IOS), "sdfs");
+        System.out.println("exist: " + btn.state().isExist());
+        System.out.println("Enabled:" + btn.state().isEnabled());
+
+        System.out.println("step with assert:" + buttons.size());
 
         return buttons.stream().allMatch(button -> button.state().waitForDisplayed());
     }
 
     public String clickToMoreBtn() {
         List<IButton> buttons = getMoreBtn();
+
+        System.out.println("btn: " + buttons.size());
+
         int randomNumber = 1 + (int) (Math.random() * buttons.size());
         String sectionName = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID, randomNumber))),
                 new IosLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS, randomNumber)))), "Book section name").getText();
         buttons.get(randomNumber - 1).click();
 
-        System.out.println(sectionName);
+
+
+        System.out.println(StringUtils.substringAfter(sectionName, "More"));
 
         return sectionName;
     }
@@ -188,7 +200,11 @@ public class CatalogScreen extends Screen {
         getElementFactory().getButton(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CATALOG_TAB_LOCATOR_ANDROID, catalogTab))),
                 new IosLocator(By.xpath(String.format(CATALOG_TAB_LOCATOR_IOS, catalogTab)))), catalogTab).click();
-        }
+    }
+
+    public void tapTheLogo() {
+        btnLogo.click();
+    }
 
     private List<String> getValuesFromListOfLabels(By locator) {
         return getElements(locator)

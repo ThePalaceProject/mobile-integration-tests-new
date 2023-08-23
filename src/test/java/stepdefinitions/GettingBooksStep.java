@@ -2,10 +2,12 @@ package stepdefinitions;
 
 import constants.util.UtilConstants;
 import enums.BookType;
+import enums.localization.sortoptions.AvailabilityKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.apache.commons.lang3.StringUtils;
 import screens.CatalogScreen;
 import screens.SearchScreen;
+import screens.SortOptionsScreen;
 
 import java.util.List;
 import java.util.Random;
@@ -13,8 +15,10 @@ import java.util.Random;
 public class GettingBooksStep {
     private static final CatalogScreen catalogScreen = new CatalogScreen();
     private static final SearchScreen searchScreen = new SearchScreen();
+    private static final SortOptionsScreen sortOptionsScreen = new SortOptionsScreen();
 
-    public static String getBookFromSection(String bookType, String distributor, String availability) {
+    public static String getBookFromSection(String bookType, String distributor) {
+        searchScreen.closeSearchScreen();
         if(bookType.equalsIgnoreCase(UtilConstants.AUDIOBOOK)){
             catalogScreen.switchToCatalogTab("Audiobooks");
             catalogScreen.state().waitForDisplayed();
@@ -37,6 +41,9 @@ public class GettingBooksStep {
                 catalogScreen.openCategory(UtilConstants.PALACE_MARKETPLACE);
                 break;
         }
+
+        sortOptionsScreen.openAvailability();
+        sortOptionsScreen.changeAvailabilityTo(AvailabilityKeys.AVAILABLE_NOW);
 
         SwipeElementUtils.swipeDown();
         List<String> books = catalogScreen.getListOfBooksNames();

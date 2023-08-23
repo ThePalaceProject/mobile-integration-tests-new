@@ -8,8 +8,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import screens.SettingsScreen;
 import screens.TutorialScreen;
 import screens.WelcomeScreen;
+import screens.menubar.MenuBar;
 import screens.menubar.MenuBarScreen;
 
 import java.time.Duration;
@@ -19,12 +21,14 @@ public class ApplicationSteps {
     private final TutorialScreen tutorialScreen;
     private final WelcomeScreen welcomeScreen;
     private final MenuBarScreen menuBarScreen;
+    private final SettingsScreen settingsScreen;
 
     @Inject
     public ApplicationSteps() {
         tutorialScreen = new TutorialScreen();
         welcomeScreen = new WelcomeScreen();
         menuBarScreen = new MenuBarScreen();
+        settingsScreen = new SettingsScreen();
     }
 
     @When("Restart app")
@@ -100,5 +104,11 @@ public class ApplicationSteps {
         } else {
             AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
         }
+    }
+
+    @When("Turn on test mode")
+    public void turnOnTestMode() {
+        menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
+        settingsScreen.openTestMode();
     }
 }
