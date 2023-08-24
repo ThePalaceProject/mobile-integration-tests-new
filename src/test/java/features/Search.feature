@@ -188,7 +188,7 @@ Feature: Search module
       | @$                                    |
       | !                                     |
 
-  @smoke
+  @test
   Scenario: Search: Perform check that the text field appears after clicking "Search" icon
     When Close tutorial screen
     Then Welcome screen is opened
@@ -213,7 +213,7 @@ Feature: Search module
     And Type text "book" and save it as 'bookInfo'
     Then Placeholder contains word 'bookInfo' text in search field
 
-  @test
+  @smoke
   Scenario: Search: Perform check of finding a book in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
