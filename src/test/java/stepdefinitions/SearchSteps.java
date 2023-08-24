@@ -3,20 +3,24 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import screens.CatalogScreen;
-import screens.MainToolBarScreen;
-import screens.SearchScreen;
+import screens.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchSteps {
 
     private final MainToolBarScreen mainToolBarScreen;
     private final SearchScreen searchScreen;
     private final CatalogScreen catalogScreen;
+    private final SubcategoryScreen subcategoryScreen;
+    private final CatalogBooksScreen catalogBooksScreen;
     private final ScenarioContext context;
 
     @Inject
@@ -25,6 +29,8 @@ public class SearchSteps {
         mainToolBarScreen = new MainToolBarScreen();
         searchScreen = new SearchScreen();
         catalogScreen = new CatalogScreen();
+        subcategoryScreen = new SubcategoryScreen();
+        catalogBooksScreen = new CatalogBooksScreen();
     }
 
     @When("Open search modal")
@@ -110,5 +116,24 @@ public class SearchSteps {
     @Then("The search field is displayed")
     public void isSearchFieldDisplayed() {
         Assert.assertTrue("Search field is not displayed!", searchScreen.isSearchLineDisplayed());
+    }
+
+    @When("Search several books and save them in list as {string}:")
+    public void searchSeveralBooks(String listKey, List<String> listOfBooks) {
+        List<String> savedBooks = new ArrayList<>();
+        listOfBooks.forEach(book -> {
+            savedBooks.add(book);
+            searchScreen.setSearchedText(book);
+            searchScreen.applySearch();
+            Assert.assertTrue(String.format("Search results page for value '%s' is not present", book), subcategoryScreen.state().waitForDisplayed());
+            catalogBooksScreen.clickActionButton(ActionButtonsForBooksAndAlertsKeys.GET, book);
+            searchScreen.clearSearchField();
+        });
+        context.add(listKey, savedBooks);
+    }
+
+    @When("Return back from search modal")
+    public void returnBack() {
+        searchScreen.closeSearchScreen();
     }
 }

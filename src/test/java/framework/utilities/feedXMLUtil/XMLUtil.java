@@ -192,14 +192,20 @@ public class XMLUtil {
         }
         if (!Objects.requireNonNull(hashMap).containsKey(distributor.toLowerCase())) {
             AqualityServices.getLogger().info("There are not any type books in the link for distributor: " + distributor);
-//            throw new RuntimeException("There are not any type books for distributor: " + distributor);
-            return GettingBooksStep.getBookFromSection(bookType, distributor, availabilityType);
+            if (availabilityType.equalsIgnoreCase(UtilConstants.AVAILABLE)) {
+                return GettingBooksStep.getBookFromSection(bookType, distributor);
+            } else {
+                throw new RuntimeException("There are not any type books for distributor: " + distributor);
+            }
         }
 
         if (hashMap.get(distributor.toLowerCase()).size() == 0) {
             AqualityServices.getLogger().info("Count of  " + availabilityType + " books == 0 in the link for distributor: " + distributor);
-            return GettingBooksStep.getBookFromSection(bookType, distributor, availabilityType);
-//            throw new RuntimeException("Count of  " + availabilityType + " books == 0 for distributor: " + distributor);
+            if (availabilityType.equalsIgnoreCase(UtilConstants.AVAILABLE)) {
+                return GettingBooksStep.getBookFromSection(bookType, distributor);
+            } else {
+                throw new RuntimeException("Count of  " + availabilityType + " books == 0 for distributor: " + distributor);
+            }
         }
 
         String bookName = hashMap.get(distributor.toLowerCase()).get(RandomUtils.nextInt(0, hashMap.get(distributor.toLowerCase()).size())).getBookName();

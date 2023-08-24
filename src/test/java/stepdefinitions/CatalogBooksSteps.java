@@ -79,4 +79,10 @@ public class CatalogBooksSteps {
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on catalog books screen", bookName),
                 catalogBooksScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
     }
+
+    @Then("Check that book {string} contains {} action button on catalog book screen")
+    public void isBookContainBtn(String bookNameKey, final ActionButtonsForBooksAndAlertsKeys key) {
+        String bookName = context.get(bookNameKey);
+        Assert.assertTrue("Button " + key + " is not displayed", catalogBooksScreen.isActionButtonDisplayed(bookName, key));
+    }
 }

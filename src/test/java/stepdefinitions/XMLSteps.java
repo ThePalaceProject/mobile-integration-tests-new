@@ -6,6 +6,7 @@ import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.GettingBookUtil;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import screens.MainToolBarScreen;
 import screens.SearchScreen;
 import screens.SubcategoryScreen;
 
@@ -16,11 +17,13 @@ public class XMLSteps {
     private final ScenarioContext context;
     private final SubcategoryScreen subcategoryScreen;
     private final SearchScreen searchScreen;
+    private final MainToolBarScreen mainToolBarScreen;
 
     @Inject
     public XMLSteps(ScenarioContext context) {
         subcategoryScreen = new SubcategoryScreen();
         searchScreen = new SearchScreen();
+        mainToolBarScreen = new MainToolBarScreen();
         this.context = context;
     }
 
@@ -63,6 +66,8 @@ public class XMLSteps {
     public void searchFor(String availabilityType, String distributor, String bookType, String bookNameInfoKey) {
         String bookName = getRandomBookNameWithoutBadSymbols(availabilityType, distributor, bookType);
         AqualityServices.getLogger().info("randomBookName: " + bookName);
+        if(!searchScreen.isSearchScreenOpened())
+            mainToolBarScreen.openSearchModal();
         context.add(bookNameInfoKey, bookName);
         Assert.assertTrue("Search modal is not present!", searchScreen.state().waitForDisplayed());
         searchScreen.setSearchedText(bookName);

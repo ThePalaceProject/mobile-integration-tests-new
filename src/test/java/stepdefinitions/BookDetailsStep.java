@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import constants.RegEx;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
+import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.CatalogBookModel;
@@ -79,5 +80,76 @@ public class BookDetailsStep {
     public void checkThatBookContainsActionButton(final ActionButtonsForBooksAndAlertsKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isActionButtonDisplayed(key);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen!", key.getDefaultLocalizedValue()), isButtonPresent);
+    }
+
+    @Then("Book format in Information section is displayed on Book details screen")
+    public void isBookFormatDisplayed() {
+        Assert.assertTrue("Book format is not displayed", bookDetailsScreen.isBookFormatInfoExist());
+    }
+
+    @Then("Book format in Information section is {string} on Book details screen")
+    public void isBookFormatCorrect(String bookFormat) {
+        Assert.assertEquals("Book format is not correct", bookFormat, bookDetailsScreen.getBookFormatInfo());
+    }
+
+    @Then("Description is not empty on Book details screen")
+    public void isDescriptionNotEmpty() {
+        Assert.assertTrue("Description section is empty", bookDetailsScreen.isDescriptionNotEmpty());
+    }
+
+    @Then("Button More in Description is available on Book details screen")
+    public void moreBtnIsAvailable() {
+        Assert.assertTrue("More button is not available", bookDetailsScreen.isMoreBtnInDescriptionAvailable());
+    }
+
+    @Then("Publisher and Categories in Information section are displayed on book details screen")
+    public void isInformationSectionFull() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+            SwipeElementUtils.swipeDown();
+        }
+
+        softAssertions.assertThat(bookDetailsScreen.isPublisherInfoExist()).as("Publisher field is not displayed").isTrue();
+        softAssertions.assertThat(bookDetailsScreen.isCategoryInfoExist()).as("Categories field is not displayed").isTrue();
+        softAssertions.assertAll();
+    }
+
+    @Then("Publisher and Categories in Information section are correct on book details screen")
+    public void isInformationSectionIsCorrect() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+            SwipeElementUtils.swipeDown();
+        }
+
+        String publisher = bookDetailsScreen.getPublisherInfo();
+        softAssertions.assertThat(publisher.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Publisher field has invalid symbols").isTrue();
+        String categories = bookDetailsScreen.getCategoryInfo();
+        softAssertions.assertThat(categories.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Category field has invalid symbols").isTrue();
+        softAssertions.assertAll();
+    }
+
+    @Then("Distributor is equal to {string} on book details screen")
+    public void isDistributorCorrect(String distributor) {
+        String distributorFromScreen = bookDetailsScreen.getDistributorInfo();
+        Assert.assertEquals("Distributor is not correct", distributor.toLowerCase(), distributorFromScreen.toLowerCase());
+    }
+
+    @Then("Related books section is displayed on book details screen")
+    public void isRelatedBooksExists() {
+        String authorName = bookDetailsScreen.getBookInfo().getAuthor();
+        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+            SwipeElementUtils.swipeDown();
+        }
+        Assert.assertTrue("Related books section is not displayed", bookDetailsScreen.isRelatedBooksExists(authorName));
+    }
+
+    @Then("There is a list of related books on book details screen")
+    public void listOfBooksIsDisplayed() {
+        Assert.assertTrue("List of related books is empty", bookDetailsScreen.isListOfBooksDisplayed());
+    }
+
+    @Then("More button in related books section is available on book details screen")
+    public void isMoreBtnInRelatedBooksAvailable() {
+        Assert.assertTrue("More button in related books section is not available", bookDetailsScreen.isMoreBtnAvailableInRelatedBooks());
     }
 }

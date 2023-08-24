@@ -2,6 +2,7 @@ package screens;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.ElementType;
+import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.IElementFactory;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -26,6 +27,9 @@ public class ReservationsScreen extends Screen {
     private final ILabel lblNoBooks = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("feedEmptyText")),
             new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText"))), "No books label");
+    private final IButton btnSort = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button")),
+            new IosLocator(By.xpath(""))), "Sorting button");
 
     private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
@@ -95,6 +99,14 @@ public class ReservationsScreen extends Screen {
 
     public String getTextFromInformationLbl() {
         return lblNoBooks.getText();
+    }
+
+    public String getNameOfSorting() {
+        return btnSort.getText();
+    }
+
+    public void sortBy() {
+        btnSort.click();
     }
 
     private ILabel getBookNameLabelFromListOfBooks(By bookNameLoc) {

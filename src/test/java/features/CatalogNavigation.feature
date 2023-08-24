@@ -228,3 +228,40 @@ Feature: Catalog Navigation module
     Scenarios:
       | type1      | type2         |
       | Everything | Popular Books |
+
+#    More button is not available
+#  @smoke
+#  Scenario: Catalog navigation: "More" button: Perform check of the button in Palace Bookshelf
+#    When Close tutorial screen
+#    Then Welcome screen is opened
+#    When Close welcome screen
+#    Then Add library screen is opened
+#    When Add library "Palace Bookshelf" on Add library screen
+#    Then Library "Palace Bookshelf" is opened on Libraries screen
+#    When Open Catalog
+#    Then Catalog screen is opened
+#      And More button is present on each section of books on Catalog screen
+#    When Click More button from random book section and save name of section as 'sectionInfo' on Catalog screen
+#    Then Book section 'sectionInfo' is opened
+#    When Tap Back button on Subcategory screen
+#    Then Catalog screen is opened
+
+
+    #More button is not available
+#  @smoke
+#  Scenario: Catalog navigation: "More" button: Perform check of the button in LYRASIS Reads
+#    When Close tutorial screen
+#    Then Welcome screen is opened
+#    When Close welcome screen
+#    Then Add library screen is opened
+#    When Add library "LYRASIS Reads" on Add library screen
+#    Then Library "LYRASIS Reads" is opened on Libraries screen
+#    When Open Catalog
+#    Then Catalog screen is opened
+#    When Wait for 3 seconds
+#      Then More button is present on each section of books on Catalog screen
+#    When Wait for 3 seconds
+#    When Click More button from random book section and save name of section as 'sectionInfo' on Catalog screen
+#    Then Book section 'sectionInfo' is opened
+#    When Tap Back button on Subcategory screen
+#    Then Catalog screen is opened

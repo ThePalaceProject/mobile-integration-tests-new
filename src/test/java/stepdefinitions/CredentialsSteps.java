@@ -72,7 +72,7 @@ public class CredentialsSteps {
 
     @Then("Login is performed successfully")
     public void checkLoginIsPerformedSuccessfully() {
-        Assert.assertTrue("Sign in is not completed",  accountScreen.isSignInSuccessful() || catalogScreen.state().isDisplayed());
+        Assert.assertTrue("Sign in is not completed",  accountScreen.isSignInSuccessful());
     }
 
     private void openAccounts() {

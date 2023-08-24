@@ -1,9 +1,12 @@
 package screens;
 
 import aquality.appium.mobile.elements.interfaces.IButton;
+import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ILink;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.Screen;
+import constants.appattributes.AndroidAttributes;
+import constants.appattributes.IosAttributes;
 import framework.utilities.ActionProcessorUtils;
 import framework.utilities.KeyboardUtils;
 import framework.utilities.LocatorUtils;
@@ -25,6 +28,11 @@ public class SignInScreen extends Screen {
     private final ILink linkLicAgreement = getElementFactory().getLink(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"User License Agreement\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, \"User License Agreement\")]"))), "License Agreement link");
+    private final IButton btnSynBookmarks = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.id("accountSyncBookmarksCheck")),
+            new IosLocator(By.xpath("//XCUIElementTypeSwitch[@name=\"Sync Bookmarks\"]"))), "Sync bookmarks button");
+
+    private final ILabel lblErrorMessageAndroid = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id, \"accountLoginProgressText\")]"), "Error message");
     private final IButton btnDeleteIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
 
     public SignInScreen() {
@@ -76,5 +84,23 @@ public class SignInScreen extends Screen {
 
     public void tapSignIn() {
         btnSignIn.click();
+    }
+
+    public void activateSyncBookmarks() {
+        ActionProcessorUtils.doForAndroid(() -> {
+            if(btnSynBookmarks.getAttribute(AndroidAttributes.CHECKED).equals("false")) {
+                btnSynBookmarks.click();
+            }
+        });
+
+        ActionProcessorUtils.doForIos(() -> {
+            if(btnSynBookmarks.getAttribute(IosAttributes.VALUE).equals("0")) {
+                btnSynBookmarks.click();
+            }
+        });
+    }
+
+    public String getErrorMessage() {
+        return lblErrorMessageAndroid.getText();
     }
 }

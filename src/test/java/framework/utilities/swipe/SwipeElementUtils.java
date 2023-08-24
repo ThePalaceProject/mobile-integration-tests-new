@@ -12,13 +12,13 @@ public class SwipeElementUtils {
 
     }
 
-//    public static void swipeElementLeft(IElement element) {
-//        MobileElement mobileElement = element.getElement();
-//        Point upperLeft = mobileElement.getLocation();
-//        Dimension dimensions = mobileElement.getSize();
-//        element.getTouchActions().swipe(new Point(upperLeft.x, upperLeft.y + dimensions.height / 2));
-//    }
-//
+    public static void swipeElementLeft(IElement element) {
+        MobileElement mobileElement = element.getElement();
+        Point upperLeft = mobileElement.getLocation();
+        Dimension dimensions = mobileElement.getSize();
+        element.getTouchActions().swipe(new Point(upperLeft.x, upperLeft.y + dimensions.height / 2));
+    }
+
     public static void swipeElementDown(IElement element) {
         MobileElement mobileElement = element.getElement();
         Point upperLeft = mobileElement.getLocation();
