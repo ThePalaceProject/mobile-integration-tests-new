@@ -101,4 +101,9 @@ public class ReservationsSteps {
         softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(author)).as("There is no sorting by " + author).isEqualTo(author);
         softAssertions.assertAll();
     }
+
+    @Then("There are not books on Reservations screen")
+    public void areBooksNotPresent() {
+        Assert.assertTrue("Books are present on holds screen", reservationsScreen.isNoBooksMessagePresent());
+    }
 }

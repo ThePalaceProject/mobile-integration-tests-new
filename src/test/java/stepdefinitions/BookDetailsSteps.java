@@ -15,14 +15,13 @@ import org.junit.Assert;
 import screens.AlertScreen;
 import screens.BookDetailsScreen;
 
-public class BookDetailsStep {
-
+public class BookDetailsSteps {
     private final BookDetailsScreen bookDetailsScreen;
     private final AlertScreen alertScreen;
     private final ScenarioContext context;
 
     @Inject
-    public BookDetailsStep(ScenarioContext context) {
+    public BookDetailsSteps(ScenarioContext context) {
         this.context = context;
         bookDetailsScreen = new BookDetailsScreen();
         alertScreen = new AlertScreen();

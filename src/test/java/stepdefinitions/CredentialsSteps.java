@@ -75,6 +75,20 @@ public class CredentialsSteps {
         Assert.assertTrue("Sign in is not completed",  accountScreen.isSignInSuccessful());
     }
 
+    @When("Click the log out button on the account screen")
+    public void clickLogOut() {
+        accountScreen.tapSignOut();
+        accountScreen.tapApproveSignOut();
+        if(alertScreen.state().waitForDisplayed()){
+            alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
+        }
+    }
+
+    @Then("Logout is performed successfully")
+    public void isLogoutSuccessfully() {
+        Assert.assertTrue("Text on Login button is not changed to Log out on Account screen", accountScreen.isLogoutSuccessful());
+    }
+
     private void openAccounts() {
         menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
         menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);

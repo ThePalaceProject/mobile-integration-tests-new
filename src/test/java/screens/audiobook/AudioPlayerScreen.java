@@ -73,4 +73,10 @@ public class AudioPlayerScreen extends Screen {
             return DateUtils.getDuration(lblLeftTime.getAttribute(IosAttributes.VALUE));
         }
     }
+
+    public boolean isAudiobookNamePresent(String audiobookName) {
+        return getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR_ANDROID, audiobookName))),
+                new IosLocator(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR_IOS, audiobookName)))), "audiobook name").state().waitForDisplayed();
+    }
 }

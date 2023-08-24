@@ -11,7 +11,6 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.Screen;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.appattributes.AndroidAttributes;
 import constants.appattributes.IosAttributes;
 import framework.utilities.LocatorUtils;
 import framework.utilities.swipe.SwipeElementUtils;
@@ -43,22 +42,24 @@ public class CatalogScreen extends Screen {
     private static final String CATEGORY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]/parent::android.widget.LinearLayout/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
     private static final String CATEGORY_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_ANDROID = "/android.widget.LinearLayout";
-    private static final String BOOK_NAME_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"feedLaneCoversScroll\")]/android.widget.LinearLayout";
+    private static final String BOOK_NAME_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"feedWithoutGroupsList\")]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[1]";
     private static final String CURRENT_CATEGORY_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
     private static final String MORE_BUTTON_LOCATOR_ANDROID = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String SECTION_TITLE_ANDROID = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";
     private static final String CATALOG_TAB_LOCATOR_ANDROID = "//android.widget.RadioButton[@text=\"%s\"]";
+    private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_ANDROID = "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
 
     private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1]";
     private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_IOS = "/XCUIElementTypeButton";
-    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton[@name]";
+    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
     private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"More\")]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "//XCUIElementTypeTable/XCUIElementTypeButton[%d]";
     private static final String SECTION_TITLE_IOS = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
+    private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     public CatalogScreen() {
@@ -96,7 +97,7 @@ public class CatalogScreen extends Screen {
     public List<String> getListOfBooksNames() {
         if(AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
             List<ILabel> listOfBooks = getElementFactory().findElements(By.xpath(BOOK_NAME_LOCATOR_ANDROID), ElementType.LABEL);
-            return listOfBooks.stream().map(book -> book.getAttribute(AndroidAttributes.CONTENT_DESC)).collect(Collectors.toList());
+            return listOfBooks.stream().map(book -> book.getText()).collect(Collectors.toList());
         } else {
             state().waitForDisplayed();
             int countOfItems = getElements(By.xpath(BOOK_NAME_LOCATOR_IOS)).size();
@@ -204,6 +205,12 @@ public class CatalogScreen extends Screen {
 
     public void tapTheLogo() {
         btnLogo.click();
+    }
+
+    public void selectLibraryFromListOfAddedLibraries(String libraryName) {
+        getElementFactory().getButton(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN_ANDROID, libraryName))),
+                new IosLocator(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN_IOS, libraryName)))), "Menu").click();
     }
 
     private List<String> getValuesFromListOfLabels(By locator) {
