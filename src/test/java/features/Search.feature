@@ -225,7 +225,7 @@ Feature: Search module
     When Open search modal
       And Search 'available' book of distributor 'Biblioboard' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
 #      And Search for 'Silk Road' and save bookName as 'bookNameInfo'
-    Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
+    Then AUDIOBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
 
   @smoke
   Scenario: Search: Perform check of the Delete button in LYRASIS Reads

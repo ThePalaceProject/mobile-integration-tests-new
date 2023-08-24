@@ -248,6 +248,19 @@ public class CatalogSteps {
         catalogBooksScreen.openBook(actionButtonKey, bookName);
     }
 
+    @Then("Subcategory screen is opened")
+    public void checkSubcategoryScreenIsPresent() {
+        boolean isScreenPresent = subcategoryScreen.state().waitForDisplayed();
+        Assert.assertTrue("Subcategory screen is not present" , isScreenPresent);
+    }
+
+    @When("Switch to {string} from side menu")
+    public void openLibraryFromSideMenu(String libraryName) {
+        menuBarScreen.openBottomMenuTab(MenuBar.CATALOG);
+        mainToolBarScreen.chooseAnotherLibrary();
+        catalogScreen.selectLibraryFromListOfAddedLibraries(libraryName);
+    }
+
     private List<String> getSurnames(List<String> list) {
         List<String> listOfSurnames = new ArrayList<>();
         for (String authorName : list) {

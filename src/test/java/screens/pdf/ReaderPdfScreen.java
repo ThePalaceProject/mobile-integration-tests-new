@@ -27,6 +27,9 @@ public class ReaderPdfScreen extends Screen {
     private final ILabel lblPageNumber = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.EditText[@resource-id=\"pageNumber\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@value,\"/\")]"))), "Page number label");
+    private final ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.view.ViewGroup/android.widget.TextView")),
+            new IosLocator(By.xpath("//XCUIElementTypeToolbar/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[2]/XCUIElementTypeStaticText"))), "Book name");
 
     public ReaderPdfScreen() {
         super(LocatorUtils.getLocator(
@@ -57,15 +60,11 @@ public class ReaderPdfScreen extends Screen {
     }
 
     public void goToNextPage() {
-        ActionProcessorUtils.doForIos(() -> {
-            SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.RIGHT);
-        });
+        ActionProcessorUtils.doForIos(() -> SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.RIGHT));
     }
 
     public void goToPreviousPage() {
-        ActionProcessorUtils.doForIos(() -> {
-            SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.LEFT);
-        });
+        ActionProcessorUtils.doForIos(() -> SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.LEFT));
     }
 
     public NavigationBarPdfScreen getNavigationBarScreen() {
@@ -86,5 +85,14 @@ public class ReaderPdfScreen extends Screen {
 
     public void swipePageUp() {
         SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.UP);
+    }
+
+    public String getBookName() {
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            openNavigationBar();
+            return lblBookName.getAttribute(IosAttributes.NAME);
+        } else {
+            return lblBookName.getText();
+        }
     }
 }

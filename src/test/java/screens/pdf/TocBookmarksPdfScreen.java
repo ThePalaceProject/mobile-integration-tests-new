@@ -56,8 +56,6 @@ public class TocBookmarksPdfScreen extends Screen {
 
     public void returnToReaderPdfScreen() {
         ActionProcessorUtils.doForIos(btnResume::click);
-        ActionProcessorUtils.doForAndroid(() -> {
-            AqualityServices.getApplication().getDriver().navigate().back();
-        });
+        ActionProcessorUtils.doForAndroid(() -> AqualityServices.getApplication().getDriver().navigate().back());
     }
 }
