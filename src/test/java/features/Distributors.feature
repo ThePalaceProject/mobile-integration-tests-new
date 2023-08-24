@@ -63,32 +63,7 @@ Feature: Distributors
       | Palace Marketplace | EBOOK     | eBooks     | READ                  |
       | Palace Marketplace | AUDIOBOOK | Audiobooks | LISTEN                |
       | Biblioboard        | EBOOK     | eBooks     | READ                  |
-
-#    перенести в тест выше
-#  @logout @returnBooks @tier1
-#  Scenario: LYRASIS: Biblioboard audiobooks: Getting and returning books from Book Detail View
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Enter credentials for 'LYRASIS Reads' account
-#    Then Login is performed successfully
-#    When Open Catalog
-#    And Open search modal
-#    And Search for "Murder at the Columbarium" and save bookName as 'bookNameInfo'
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#    And Click GET action button on book details screen
-#    Then Check that book contains LISTEN action button on book details screen
-#    When Click RETURN action button on book details screen
-#    Then Check that book contains GET action button on book details screen
-#    When Click GET action button on book details screen
-#    Then Check that book contains LISTEN action button on book details screen
-#    When Click LISTEN action button on book details screen
-#    And Wait for 3 seconds
-#    Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
+      | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN                |
 
   @logout @returnBooks @tier2
   Scenario: Getting and returning a book from Book Detail View for Overdrive
@@ -201,26 +176,7 @@ Feature: Distributors
       | Axis 360           | EBOOK     | eBooks     |
       | Axis 360           | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
-
-#    перенести в выше
-#  @logout @returnBooks @tier1
-#  Scenario: LYRASIS: Biblioboard audiobooks: Check of canceling the downloading from book details view
-#    Given Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Enter credentials for 'LYRASIS Reads' account
-#    Then Login is performed successfully
-#    When Open Catalog
-#    And Open search modal
-#    And Search for "Let's Hear It For Beagles" and save bookName as 'bookNameInfo'
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#    And Click GET action button and cancel downloading by click CANCEL button on book detail screen
-#    Then Check that book contains DOWNLOAD action button on book details screen
-#    And Check that book contains RETURN action button on book details screen
+      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
   @logout @returnBooks @tier2
   Scenario: Check of canceling the downloading from book details view for Overdrive

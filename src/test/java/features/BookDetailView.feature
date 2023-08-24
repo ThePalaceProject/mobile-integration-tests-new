@@ -26,24 +26,7 @@ Feature: Book detail view screen
       | Palace Marketplace | EBOOK     | eBooks     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
-
-#    вернуть обратно в предыдущий тест
-#  @tier2
-#  Scenario: Biblioboard audiobook: Check of a book title and author in LYRASIS
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Open Catalog
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open 'BiblioBoard test' category
-#    And Swipe catalog of books down on catalog book screen
-#    And Open random book on catalog book screen and save book as 'bookInfo'
-#    Then Book 'bookInfo' is opened on book details screen
-#    And Book 'bookInfo' has correct title and author name on book details screen
-#    And The book cover is displayed on book details screen
+      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
   @tier2
   Scenario Outline: Check of a book format in LYRASIS Reads
@@ -68,26 +51,9 @@ Feature: Book detail view screen
       | Axis 360           | EBOOK     | eBooks     | eBook     |
       | Axis 360           | AUDIOBOOK | Audiobooks | Audiobook |
       | Palace Marketplace | EBOOK     | eBooks     | eBook     |
-      | Palace Marketplace | AUDIOBOOK | Audiobooks | AudiobooK |
+      | Palace Marketplace | AUDIOBOOK | Audiobooks | Audiobook |
       | Biblioboard        | EBOOK     | eBooks     | PDF       |
-
-#    вернуть в предыдущий тест
-#  @tier2
-#  Scenario: Biblioboard audiobook: Check of a book format in LYRASIS
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Open Catalog
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open 'BiblioBoard test' category
-#    And Swipe catalog of books down on catalog book screen
-#    And Open random book on catalog book screen and save book as 'bookInfo'
-#    Then Book 'bookInfo' is opened on book details screen
-#    And Book format in Information section is displayed on book details screen
-#    And Book format in Information section is 'Audiobook' on book details screen
+      | Biblioboard        | AUDIOBOOK | Audiobooks | Audiobook |
 
   @tier2
   Scenario Outline: Check of a "More..." button in Description section in LYRASIS Reads
@@ -115,25 +81,7 @@ Feature: Book detail view screen
       | Palace Marketplace | EBOOK     | eBooks     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
-
-#    перенести в предыдущий
-#  @tier2
-#  Scenario: Biblioboard audiobook: Check of a "More..." button in Description section in LYRASIS
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Open Catalog
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open 'BiblioBoard test' category
-#    And Swipe catalog of books down on catalog book screen
-#    And Swipe catalog of books down on catalog book screen
-#    And Open random book on catalog book screen and save book as 'bookInfo'
-#    Then Book 'bookInfo' is opened on book details screen
-#    And Description is not empty in book details screen
-#    And Button More in Description is available on book details screen
+      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
   @tier2
   Scenario Outline: Check fields in Information section in LYRASIS Reads
@@ -162,25 +110,7 @@ Feature: Book detail view screen
       | Palace Marketplace | EBOOK     | eBooks     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
-
-#    перенести в предыдущий
-#  @tier2
-#  Scenario: Biblioboard audiobook: Check fields in Information section in LYRASIS
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Open Catalog
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open 'BiblioBoard test' category
-#    And Swipe catalog of books down on catalog book screen
-#    And Open random book on catalog book screen and save book as 'bookInfo'
-#    Then Book 'bookInfo' is opened on book details screen
-#    And Publisher and Categories in Information section are displayed on book details screen
-#    And Publisher and Categories in Information section are correct on book details screen
-#    And Distributor is equal to 'Biblioboard' on book details screen
+      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
   @tier2
   Scenario Outline: Check related books section in LYRASIS
@@ -209,25 +139,7 @@ Feature: Book detail view screen
       | Palace Marketplace | EBOOK     | eBooks     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
-
-#    перенестив в выше
-#  @tier2
-#  Scenario: BiblioBoard audiobook: Check related books section in LYRASIS
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Open Catalog
-#    And Open search modal
-#    And Search for "Kate & Ruby" and save bookName as 'bookNameInfo'
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#    Then Book 'bookInfo' is opened on book details screen
-#    And Related books section is displayed on book details screen
-#    And There is a list of related books on book details screen
-#    And More button in related books section is available on book details screen
+      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
 #  sorting doesn't work correctly
 #  @tier1
@@ -599,3 +511,22 @@ Feature: Book detail view screen
     And Click GET action button on Book details screen
     Then Sing in screen is opened
     And All fields and links are displayed on Sign in screen
+
+    #    test
+  @smoke @logout @returnBooks
+  Scenario: Book detail view: Get: Log in: Perform check of logging in
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
+    When Open Catalog
+    And Open search modal
+    And Search for "Renaissance Futurities" and save bookName as 'bookNameInfo'
+    And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+    And Click GET action button on Book details screen
+    Then Sing in screen is opened
+    When Save library "LYRASIS Reads" for log out
+    And Enter valid credentials fot "LYRASIS Reads" library on Sign in screen
+    Then Check that book contains READ action button on Book details screen

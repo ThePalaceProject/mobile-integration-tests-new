@@ -192,31 +192,7 @@ Feature: My books module
       | Palace Marketplace | EBOOK     | eBooks     | READ       |
       | Palace Marketplace | AUDIOBOOK | Audiobooks | LISTEN     |
       | Biblioboard        | EBOOK     | eBooks     | READ       |
-
-#    перенести в тест выше
-#  @logout @returnBooks @tier1 @exclude_android
-#  Scenario: Alert: Biblioboard audiobooks: Check of Cancel button after Return button tapping
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Account "LYRASIS Reads" is present on Accounts screen
-#    When Enter credentials for 'LYRASIS Reads' account
-#    Then Login is performed successfully
-#    When Open Catalog
-#    And Open search modal
-#    And Search for "Magic's Daughter" and save bookName as 'bookNameInfo'
-#    And Switch to 'Audiobooks' catalog tab
-#    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#    And Click GET action button on book details screen
-#    And Open Books
-#    Then AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo is present on books screen
-#    When Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
-#    And Click RETURN button but cancel the action by clicking CANCEL button on the alert
-#    And Open Books
-#    Then AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo is present on books screen
-
+      | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN     |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check buttons under the book title in LYRASIS Reads
