@@ -7,6 +7,7 @@ import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.Screen;
+import com.google.common.collect.Ordering;
 import framework.utilities.ActionProcessorUtils;
 import framework.utilities.KeyboardUtils;
 import framework.utilities.LocatorUtils;
@@ -98,6 +99,12 @@ public class AddLibraryScreen extends Screen {
 
     public boolean isSearchResultEmpty() {
         return getLibrariesNames().isEmpty();
+    }
+
+    public boolean isSortingOfLibrariesCorrect() {
+        List<String > libraries = getLibrariesNames();
+        libraries.remove(0);
+        return Ordering.natural().isOrdered(libraries);
     }
 
     private IButton getLibraryButton(String libraryName) {

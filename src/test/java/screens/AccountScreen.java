@@ -59,6 +59,12 @@ public class AccountScreen extends Screen {
     private final ILabel lblLibrariesAndPalaces = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"Libraries are palaces\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Libraries are palaces\")]"))), "Libraries and palaces label");
+    private final ILabel lblCodeConduct = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Code of Conduct\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Code of Conduct\"]"))), "Code of Conduct");
+    private final IButton btnAdvanced = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Advanced\"]"))), "Advanced button");
 
     private static final String BTN_SIGN_IN_ID_ANDROID = "authBasicLogin";
     private static final String SIGN_IN_BTN_LOCATOR_ANDROID = "//*[contains(@resource-id,\"" + BTN_SIGN_IN_ID_ANDROID + "\") and @text=\"%1$s\"]";
@@ -66,6 +72,7 @@ public class AccountScreen extends Screen {
 
     private static final String SIGN_IN_BTN_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%1$s\"]\n";
     private static final String LIBRARY_NAME_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String BUTTON_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 
     public AccountScreen() {
         super(LocatorUtils.getLocator(
@@ -170,5 +177,29 @@ public class AccountScreen extends Screen {
 
     public boolean isContentLicOpened() {
         return lblLibrariesAndPalaces.state().waitForDisplayed();
+    }
+
+    public void openLicenseAgreement() {
+        lnkLicenseAgreement.click();
+    }
+
+    public boolean isLicenseAgreementOpened() {
+        return lblCodeConduct.state().waitForDisplayed();
+    }
+
+    public void openAdvanced() {
+        btnAdvanced.click();
+    }
+
+    public boolean isButtonDisplayed(String buttonName) {
+        return getElementFactory().getButton(By.xpath(String.format(BUTTON_LOCATOR_IOS, buttonName)), "Button " + buttonName).state().isDisplayed();
+    }
+
+    public void clickDelete(String button) {
+        getElementFactory().getButton(By.xpath(String.format(BUTTON_LOCATOR_IOS, button)), "Button " + button).click();
+    }
+
+    public boolean isLogoutSuccessful() {
+        return AqualityServices.getConditionalWait().waitFor(() -> btnSignIn.state().isDisplayed());
     }
 }

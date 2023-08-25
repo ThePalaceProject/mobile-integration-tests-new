@@ -85,4 +85,19 @@ public class CatalogBooksSteps {
         String bookName = context.get(bookNameKey);
         Assert.assertTrue("Button " + key + " is not displayed", catalogBooksScreen.isActionButtonDisplayed(bookName, key));
     }
+
+    @When("Click {} action button on the first {} book on catalog books screen and save book as {string}")
+    public void clickActionButtonOnTheFirstBookAndSaveBookInfo(ActionButtonsForBooksAndAlertsKeys actionButtonKey, BookType bookType, String bookInfoKey) {
+        CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonOnTheFirstBookAndGetBookInfo(bookType, actionButtonKey);
+        context.add(bookInfoKey, bookInfo);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            if (actionButtonKey == ActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.DELETE
+                    || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.REMOVE) {
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            } else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
+        }
+    }
 }
