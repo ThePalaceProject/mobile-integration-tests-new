@@ -1,6 +1,6 @@
 Feature: Search module
 
-  @palace
+  @allure
   Scenario: Find a library and delete it
     When Close tutorial screen
       And Close welcome screen

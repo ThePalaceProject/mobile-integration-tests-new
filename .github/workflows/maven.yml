@@ -66,10 +66,12 @@ jobs:
           path: gh-pages
 
       - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
+        uses: PavanMudigonda/allure-html-reporter-github-pages@v1.0
         if: always()
         id: allure-report
         with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          WORKFLOW_ID: maven.yml
           allure_results: allure-results
           gh_pages: gh-pages
           allure_report: allure-report
@@ -93,8 +95,3 @@ jobs:
           state: 'success'
           sha: ${{ github.event.pull_request.head.sha || github.sha }}
           target_url: https://PavanMudigonda.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
-
-      - name: Debug Workflow
-        run: |
-          ls -R build
-          pwd
