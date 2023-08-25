@@ -188,7 +188,7 @@ Feature: Search module
       | @$                                    |
       | !                                     |
 
-  @test
+  @palace
   Scenario: Search: Perform check that the text field appears after clicking "Search" icon
     When Close tutorial screen
     Then Welcome screen is opened
@@ -223,9 +223,8 @@ Feature: Search module
     Then Catalog screen is opened
       And Category names are loaded on Catalog screen
     When Open search modal
-      And Search 'available' book of distributor 'Biblioboard' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
-#      And Search for 'Silk Road' and save bookName as 'bookNameInfo'
-    Then AUDIOBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
+      And Search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+    Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
 
   @smoke
   Scenario: Search: Perform check of the Delete button in LYRASIS Reads
@@ -241,31 +240,29 @@ Feature: Search module
       And Clear search field on Catalog books screen
     Then Search field is empty on Catalog books screen
 
-    #    Palace Bookshelf
-#  @smoke
-#  Scenario: Search: Perform check of finding a book in Palace Bookshelf
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "Palace Bookshelf" on Add library screen
-#    Then Catalog screen is opened
-#      And Category names are loaded on Catalog screen
-#    When Open search modal
-#      And Search for 'El gato negro' and save bookName as 'bookNameInfo'
-#    Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
+  @smoke
+  Scenario: Search: Perform check of finding a book in Palace Bookshelf
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Catalog screen is opened
+      And Category names are loaded on Catalog screen
+    When Open search modal
+      And Search for 'El gato negro' and save bookName as 'bookNameInfo'
+    Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
 
-#    Palace Bookshelf
-#  @smoke
-#  Scenario: Search: Perform check of the Delete button in Palace Bookshelf
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "Palace Bookshelf" on Add library screen
-#    Then Catalog screen is opened
-#      And Category names are loaded on Catalog screen
-#    When Open search modal
-#      And Type text 'El gato negro' and save it as 'bookNameInfo'
-#      And Clear search field on Catalog books screen
-#    Then Search field is empty on Catalog books screen
+  @smoke
+  Scenario: Search: Perform check of the Delete button in Palace Bookshelf
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Catalog screen is opened
+      And Category names are loaded on Catalog screen
+    When Open search modal
+      And Type text 'El gato negro' and save it as 'bookNameInfo'
+      And Clear search field on Catalog books screen
+    Then Search field is empty on Catalog books screen

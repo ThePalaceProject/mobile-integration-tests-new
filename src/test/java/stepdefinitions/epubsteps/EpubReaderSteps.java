@@ -9,18 +9,21 @@ import models.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import screens.epub.ReaderEpubScreen;
+import screens.epub.TocEpubScreen;
 
 import java.util.stream.IntStream;
 
 public class EpubReaderSteps {
 
     private final ReaderEpubScreen readerEpubScreen;
+    private final TocEpubScreen tocEpubScreen;
     private final ScenarioContext context;
 
     @Inject
     public EpubReaderSteps(ScenarioContext context) {
         this.context = context;
         readerEpubScreen = new ReaderEpubScreen();
+        tocEpubScreen = new TocEpubScreen();
     }
 
     @Then("{string} book is present on epub reader screen")
@@ -113,5 +116,21 @@ public class EpubReaderSteps {
         String expectedChapterName = context.get(chapterNameKey);
         Assert.assertEquals("Chapter name is not correct. ExpectedChapterName-" + expectedChapterName.toLowerCase() + ", ActualChapterName-"
                 + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase(), expectedChapterName.toLowerCase());
+    }
+
+    @When("Close TOC epub screen")
+    public void tocEpubScreen() {
+        tocEpubScreen.returnToPreviousScreen();
+    }
+
+    @When("Return to previous screen from epub")
+    public void returnToPreviousScreen() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().returnToPreviousScreen();
+    }
+
+    @Then("Reader epub screen is opened")
+    public void isEpubReaderOpened() {
+        Assert.assertTrue("Book cover is not displayed", readerEpubScreen.isBookCoverDisplayed());
     }
 }

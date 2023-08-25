@@ -20,6 +20,9 @@ public class TocEpubScreen extends Screen {
     private final IButton btnFirstChapter = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.TextView[contains(@resource-id, \"chapterTitle\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeStaticText"))), "First chapter button");
+    private final IButton btnBack = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"))), "Back button");
 
     private static final String TOC_TAB_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
     private static final String CHAPTER_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id,\"chapterTitle\")]";
@@ -59,6 +62,10 @@ public class TocEpubScreen extends Screen {
                 new AndroidLocator(By.xpath(String.format(CHAPTER_BY_NAME_LOCATOR_ANDROID, chapter))),
                 new IosLocator(By.xpath(String.format(CHAPTER_BY_NAME_LOCATOR_IOS, chapter)))), chapter);
         lblChapter.click();
+    }
+
+    public void returnToPreviousScreen() {
+        btnBack.click();
     }
 
     private List<IElement> getChapters() {
