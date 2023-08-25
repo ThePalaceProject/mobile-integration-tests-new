@@ -166,6 +166,11 @@ public class BookDetailsScreen extends Screen {
         return btnMoreInRelatedBooks.state().isClickable();
     }
 
+    public void clickActionButtonForCancelTheAction(ActionButtonsForBooksAndAlertsKeys buttonKeys) {
+        IButton actionButton = getActionButton(buttonKeys);
+        actionButton.click();
+    }
+
     private IButton getActionButton(ActionButtonsForBooksAndAlertsKeys buttonKey) {
         String key = buttonKey.getDefaultLocalizedValue();
         return getElementFactory().getButton(LocatorUtils.getLocator(

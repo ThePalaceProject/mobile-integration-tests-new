@@ -152,4 +152,10 @@ public class BookDetailsStep {
     public void isMoreBtnInRelatedBooksAvailable() {
         Assert.assertTrue("More button in related books section is not available", bookDetailsScreen.isMoreBtnAvailableInRelatedBooks());
     }
+
+    @When("Click {} action button and cancel downloading by click {} button on book detail screen")
+    public void cancelBookDownloading(ActionButtonsForBooksAndAlertsKeys actionButtonKey, ActionButtonsForBooksAndAlertsKeys actionButtonCancel) {
+        bookDetailsScreen.clickActionButtonForCancelTheAction(actionButtonKey);
+        bookDetailsScreen.clickActionButtonForCancelTheAction(actionButtonCancel);
+    }
 }
