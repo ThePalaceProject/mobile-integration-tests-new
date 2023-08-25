@@ -174,4 +174,15 @@ public class CatalogBooksScreen extends Screen {
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookName), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
     }
+
+    public boolean isActionButtonDisplayed(String bookName, ActionButtonsForBooksAndAlertsKeys key) {
+        return getActionButton(bookName, key).state().waitForDisplayed();
+    }
+
+    private IButton getActionButton(String bookName, ActionButtonsForBooksAndAlertsKeys buttonKey) {
+        String key = buttonKey.getDefaultLocalizedValue();
+        return getElementFactory().getButton(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID, bookName, key))),
+                new IosLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS, bookName, key)))), key);
+    }
 }
