@@ -162,4 +162,16 @@ public class CatalogBooksScreen extends Screen {
                 new AndroidLocator(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC_ANDROID, bookName))),
                 new IosLocator(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC_IOS, bookName)))), "Progress bar").state().isDisplayed();
     }
+
+    public void clickActionButton(ActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
+        getElementFactory().getButton(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID, bookName, actionButtonString))),
+                new IosLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS, bookName, actionButtonString)))), "Action button").click();
+        if (actionButtonKey == ActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.REMOVE
+                || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.RETURN
+                || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookName), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
+    }
 }
