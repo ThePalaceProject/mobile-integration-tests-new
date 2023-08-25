@@ -83,6 +83,10 @@ public class CatalogBooksScreen extends Screen {
         return lblNameOfFirstBook.getText();
     }
 
+    public boolean isFirstBookInCatalogDisplayed() {
+        return lblNameOfFirstBook.state().waitForDisplayed();
+    }
+
     public boolean isNoResults() {
         return lblNoResults.state().waitForDisplayed();
     }

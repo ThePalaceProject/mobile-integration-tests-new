@@ -11,7 +11,7 @@ public class GettingBookUtil {
         xmlUtil.getDistributorsInfo();
     }
 
-    public static synchronized String getRandomBook(String availabilityType, String bookType, String distributor){
+    public static synchronized String getRandomBook(String availabilityType, String bookType, String distributor) {
         return xmlUtil.getRandomBook(availabilityType, bookType, distributor);
     }
 

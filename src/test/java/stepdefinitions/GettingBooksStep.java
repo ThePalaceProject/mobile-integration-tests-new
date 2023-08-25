@@ -1,10 +1,12 @@
 package stepdefinitions;
 
+import aquality.appium.mobile.application.AqualityServices;
 import constants.util.UtilConstants;
 import enums.BookType;
 import enums.localization.sortoptions.AvailabilityKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.apache.commons.lang3.StringUtils;
+import screens.CatalogBooksScreen;
 import screens.CatalogScreen;
 import screens.SearchScreen;
 import screens.SortOptionsScreen;
@@ -16,6 +18,7 @@ public class GettingBooksStep {
     private static final CatalogScreen catalogScreen = new CatalogScreen();
     private static final SearchScreen searchScreen = new SearchScreen();
     private static final SortOptionsScreen sortOptionsScreen = new SortOptionsScreen();
+    private static final CatalogBooksScreen catalogBooksScreen = new CatalogBooksScreen();
 
     public static String getBookFromSection(String bookType, String distributor) {
         searchScreen.closeSearchScreen();
@@ -44,6 +47,8 @@ public class GettingBooksStep {
 
         sortOptionsScreen.openAvailability();
         sortOptionsScreen.changeAvailabilityTo(AvailabilityKeys.AVAILABLE_NOW);
+
+        AqualityServices.getConditionalWait().waitFor(catalogBooksScreen::isFirstBookInCatalogDisplayed);
 
         SwipeElementUtils.swipeDown();
         List<String> books = catalogScreen.getListOfBooksNames();
