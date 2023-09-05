@@ -132,4 +132,18 @@ public class ReaderEpubScreen extends Screen {
     public boolean isBookCoverDisplayed() {
         return lblBookCover.state().waitForDisplayed();
     }
+
+    public void clickRightCorner() {
+        ActionProcessorUtils.doForIos(() -> {
+            TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+            action.tap(PointOption.point(lblPage.getElement().getSize().getWidth(), lblPage.getElement().getCenter().y)).perform();
+        });
+
+        ActionProcessorUtils.doForAndroid(() -> {
+            TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+            int height = lblPage.getElement().getSize().height;
+            int width = lblPage.getElement().getSize().width;
+            action.tap(PointOption.point(width - 10, height / 2)).perform();
+        });
+    }
 }

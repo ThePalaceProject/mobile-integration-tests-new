@@ -25,7 +25,7 @@ public class BookDetailsScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]//XCUIElementTypeStaticText[1]"))), "Book title label");
     private final ILabel lblBookAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("bookDetailAuthors")),
-            new IosLocator(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]//XCUIElementTypeStaticText[2]"))), "Book author label");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/preceding-sibling::XCUIElementTypeStaticText"))), "Book author label");
     private final ILabel lblBookCover = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id, \"bookDetailCoverImage\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeOther//XCUIElementTypeImage[1]"))), "Book cover");

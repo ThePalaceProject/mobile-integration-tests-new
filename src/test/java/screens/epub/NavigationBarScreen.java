@@ -16,6 +16,15 @@ public class NavigationBarScreen extends Screen {
     private final IButton btnTOC = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"))), "TOC button");
+    private final IButton btnAddBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[@content-desc=\"Create a bookmark for the current page\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"))), "Add Bookmark button");
+    private final IButton btnDeleteBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[@content-desc=\"Delete the bookmark for the current page\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"))), "Delete bookmark button");
+    private final IButton btnFontSettings = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Reader settings\"]"))), "Font settings");
 
     public NavigationBarScreen() {
         super(LocatorUtils.getLocator(
@@ -29,5 +38,21 @@ public class NavigationBarScreen extends Screen {
 
     public void returnToPreviousScreen() {
         btnBack.click();
+    }
+
+    public void tapAddBookmarkButton() {
+        btnAddBookmark.click();
+    }
+
+    public boolean isBookmarkDisplayed() {
+        return btnDeleteBookmark.state().isDisplayed();
+    }
+
+    public void tapDeleteBookmarkButton() {
+        btnDeleteBookmark.click();
+    }
+
+    public void tapFontSettingsButton() {
+        btnFontSettings.click();
     }
 }
