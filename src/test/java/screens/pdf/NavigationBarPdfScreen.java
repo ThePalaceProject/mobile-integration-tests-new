@@ -19,6 +19,9 @@ public class NavigationBarPdfScreen extends Screen {
             new AndroidLocator(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Back\"]"))), "Back button");
     private final IButton btnSettings = getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Settings\"]"), "Settings button");
+    private final IButton btnBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Bookmark\"]"))), "Bookmark button");
 
     public NavigationBarPdfScreen() {
         super(LocatorUtils.getLocator(
@@ -40,5 +43,10 @@ public class NavigationBarPdfScreen extends Screen {
 
     public void tapSettingsButton() {
         btnSettings.click();
+    }
+
+    public void tapBookmarkButton() {
+        btnBookmark.state().waitForDisplayed();
+        btnBookmark.click();
     }
 }

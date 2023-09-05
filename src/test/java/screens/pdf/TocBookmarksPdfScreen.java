@@ -13,6 +13,7 @@ public class TocBookmarksPdfScreen extends Screen {
 
     protected ChaptersPdfScreen chaptersPdfScreen;
     protected ThumbnailsPdfScreen thumbnailsPdfScreen;
+    protected BookmarksPdfScreen bookmarksPdfScreen;
 
     private final IButton btnThumbnails = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.RadioButton[@resource-id=\"viewThumbnail\"]")),
@@ -20,6 +21,9 @@ public class TocBookmarksPdfScreen extends Screen {
     private final IButton btnChapters = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.RadioButton[@resource-id=\"viewOutline\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"List\"]"))), "TOC with list of chapters button");
+    private final IButton btnBookmarks = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[3]"))), "Bookmarks button");
     private final IButton btnResume = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeOther//XCUIElementTypeButton[1]"), "Resume button");
 
     public TocBookmarksPdfScreen() {
@@ -28,6 +32,7 @@ public class TocBookmarksPdfScreen extends Screen {
                 new IosLocator(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"))), "Navigation bar with toc and bookmarks screen");
         chaptersPdfScreen = new ChaptersPdfScreen();
         thumbnailsPdfScreen = new ThumbnailsPdfScreen();
+        bookmarksPdfScreen = new BookmarksPdfScreen();
     }
 
     public boolean isThumbnailsButtonDisplayed() {
@@ -57,5 +62,21 @@ public class TocBookmarksPdfScreen extends Screen {
     public void returnToReaderPdfScreen() {
         ActionProcessorUtils.doForIos(btnResume::click);
         ActionProcessorUtils.doForAndroid(() -> AqualityServices.getApplication().getDriver().navigate().back());
+    }
+
+    public void tapBookmarksButton() {
+        btnBookmarks.click();
+    }
+
+    public BookmarksPdfScreen getBookmarksPdfScreen() {
+        return bookmarksPdfScreen;
+    }
+
+    public void tapResumeButton() {
+        btnResume.click();
+    }
+
+    public boolean isTocClosed() {
+        return btnThumbnails.state().waitForNotDisplayed();
     }
 }

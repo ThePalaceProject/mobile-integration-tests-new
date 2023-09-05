@@ -323,3 +323,52 @@ Feature: Audiobooks in LYRASIS Reads
       And Open toc audiobook screen
       And Open Bookmarks on toc audiobook screen
     Then Bookmark for the chapter 'chapterName' with the time 'chapterTime' is saved on Bookmarks screen
+
+  @smoke @logout @returnBooks
+  Scenario: Audiobooks: Perform check of Listen and Back button
+    Given Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
+    When Enter credentials for 'LYRASIS Reads' library
+    Then Login is performed successfully
+    When Activate sync bookmarks on Sign in screen
+      And Open Catalog
+      And Open search modal
+      And Search for "Down The Hatch" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click GET action button on Book details screen
+    Then Check that book contains LISTEN action button on Book details screen
+    When Click LISTEN action button on Book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Return to previous screen from audio player screen
+    Then Book 'bookInfo' is opened on book details screen
+
+  @smoke @logout @returnBooks
+  Scenario: Audiobooks: Perform check of Play button and Pause buttons
+    Given Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
+    When Enter credentials for 'LYRASIS Reads' library
+    Then Login is performed successfully
+    When Activate sync bookmarks on Sign in screen
+      And Open Catalog
+      And Open search modal
+      And Search for "Down The Hatch" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click GET action button on Book details screen
+    Then Check that book contains LISTEN action button on Book details screen
+    When Click LISTEN action button on Book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Tap play button on audio player screen
+    Then Pause button is present on audio player screen
+    When Tap pause button on audio player screen
+    Then Play button is present on audio player screen
+      And Book is not playing on audio player screen
