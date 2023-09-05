@@ -2,25 +2,33 @@ package stepdefinitions.epubsteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import enums.epub.TabsTocAndBookmarksEpub;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
+import screens.epub.FontAndBackgroundSettingsEpubScreen;
 import screens.epub.ReaderEpubScreen;
+import screens.epub.TocEpubScreen;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class EpubReaderSteps {
 
     private final ReaderEpubScreen readerEpubScreen;
+    private final TocEpubScreen tocEpubScreen;
+    private final FontAndBackgroundSettingsEpubScreen fontAndBackgroundSettingsEpubScreen;
     private final ScenarioContext context;
 
     @Inject
     public EpubReaderSteps(ScenarioContext context) {
         this.context = context;
         readerEpubScreen = new ReaderEpubScreen();
+        tocEpubScreen = new TocEpubScreen();
+        fontAndBackgroundSettingsEpubScreen = new FontAndBackgroundSettingsEpubScreen();
     }
 
     @Then("{string} book is present on epub reader screen")
@@ -113,5 +121,63 @@ public class EpubReaderSteps {
         String expectedChapterName = context.get(chapterNameKey);
         Assert.assertEquals("Chapter name is not correct. ExpectedChapterName-" + expectedChapterName.toLowerCase() + ", ActualChapterName-"
                 + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase(), expectedChapterName.toLowerCase());
+    }
+
+    @When("Close TOC epub screen")
+    public void tocEpubScreen() {
+        tocEpubScreen.returnToPreviousScreen();
+    }
+
+    @When("Return to previous screen from epub")
+    public void returnToPreviousScreen() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().returnToPreviousScreen();
+    }
+
+    @Then("Reader epub screen is opened")
+    public void isEpubReaderOpened() {
+        Assert.assertTrue("Book cover is not displayed", readerEpubScreen.isBookCoverDisplayed());
+    }
+
+    @When("Scroll page forward from {int} to {int} times")
+    public void swipePageForward(int minValue, int maxValue) {
+        int randomScrollsCount = RandomUtils.nextInt(minValue, maxValue);
+        AqualityServices.getLogger().info("Scrolling " + randomScrollsCount + " times on reader epub screen");
+        IntStream.range(0, randomScrollsCount).forEachOrdered(i -> readerEpubScreen.clickRightCorner());
+    }
+
+    @Then("Random chapter of epub can be opened from toc epub screen")
+    public void checkThatRandomChapterCanBeOpenedFromTocEpubScreen() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
+        tocEpubScreen.openTab(TabsTocAndBookmarksEpub.TOC);
+        List<String> chapters = tocEpubScreen.getTocEpubScreen().getListOfBookChapters();
+        String chapterName = chapters.get(RandomUtils.nextInt(1, chapters.size()));
+        tocEpubScreen.getTocEpubScreen().openChapter(chapterName);
+        Assert.assertEquals("Chapter name is not correct. ExpectedChapterName-" + chapterName.toLowerCase() + ", ActualChapterName-"
+                + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase(), chapterName.toLowerCase());
+    }
+
+    @Then("Toc epub screen is opened")
+    public void tocEpubScreenIsOpened() {
+        Assert.assertTrue("Toc epub screen is not opened", tocEpubScreen.getTocEpubScreen().state().waitForDisplayed());
+    }
+
+    @When("Open font and background settings epub screen")
+    public void openEpubSettings() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
+    }
+
+    @Then("Font and background settings epub screen is opened")
+    public void epubSettingsIsOpened() {
+        Assert.assertTrue("Font and background settings epub screen is not opened", fontAndBackgroundSettingsEpubScreen.state().waitForDisplayed());
+    }
+
+    @Then("PageNumber {string} is correct")
+    public void checkPageInfoPageInfoIsCorrect(String pageNumberKey) {
+        String expectedPageNumber = context.get(pageNumberKey);
+        String actualPageNumber = readerEpubScreen.getPageNumber();
+        Assert.assertTrue(String.format("PageNumber is not correct. ExpectedPageNumber-%1$s but actualPageNumber-%2$s", expectedPageNumber, actualPageNumber), AqualityServices.getConditionalWait().waitFor(() -> expectedPageNumber.equals(actualPageNumber)));
     }
 }

@@ -6,10 +6,9 @@ import enums.BookType;
 import enums.localization.sortoptions.AvailabilityKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.apache.commons.lang3.StringUtils;
-import screens.CatalogBooksScreen;
-import screens.CatalogScreen;
-import screens.SearchScreen;
-import screens.SortOptionsScreen;
+import screens.*;
+import screens.menubar.MenuBar;
+import screens.menubar.MenuBarScreen;
 
 import java.util.List;
 import java.util.Random;
@@ -19,6 +18,7 @@ public class GettingBooksStep {
     private static final SearchScreen searchScreen = new SearchScreen();
     private static final SortOptionsScreen sortOptionsScreen = new SortOptionsScreen();
     private static final CatalogBooksScreen catalogBooksScreen = new CatalogBooksScreen();
+    private static final MenuBarScreen menuBarScreen = new MenuBarScreen();
 
     public static String getBookFromSection(String bookType, String distributor) {
         searchScreen.closeSearchScreen();
@@ -40,8 +40,8 @@ public class GettingBooksStep {
             case UtilConstants.AXIS_360:
                 catalogScreen.openCategory(UtilConstants.AXIS_360_CATEGORY);
                 break;
-            case UtilConstants.PALACE_BOOKSHELF:
-                catalogScreen.openCategory(UtilConstants.PALACE_MARKETPLACE);
+            case UtilConstants.PALACE_MARKETPLACE:
+                catalogScreen.openCategory(UtilConstants.PALACE_MARKETPLACE_CATEGORY);
                 break;
         }
 
@@ -58,6 +58,8 @@ public class GettingBooksStep {
         if(bookType.equalsIgnoreCase(BookType.AUDIOBOOK.getBookType())) {
             bookName = StringUtils.substringBefore(bookName, ". Audiobook.");
         }
+
+        menuBarScreen.openBottomMenuTab(MenuBar.CATALOG);
         return bookName;
     }
 }

@@ -3,6 +3,7 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.timeouts.RestartAppTimeouts;
 import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
@@ -32,6 +33,7 @@ public class ApplicationSteps {
     private final CatalogScreen catalogScreen;
     private final FindYourLibraryScreen findYourLibraryScreen;
     private final AddLibraryScreen addLibraryScreen;
+    private final AlertScreen alertScreen;
 
     @Inject
     public ApplicationSteps(ScenarioContext context) {
@@ -45,6 +47,7 @@ public class ApplicationSteps {
         catalogScreen = new CatalogScreen();
         findYourLibraryScreen = new FindYourLibraryScreen();
         addLibraryScreen = new AddLibraryScreen();
+        alertScreen = new AlertScreen();
     }
 
     @When("Restart app")
@@ -66,6 +69,9 @@ public class ApplicationSteps {
 
     @When("Close tutorial screen")
     public void closeTutorialScreen() {
+        if(alertScreen.state().waitForDisplayed()) {
+            alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.ALLOW);
+        }
         tutorialScreen.closeTutorialScreen();
     }
 

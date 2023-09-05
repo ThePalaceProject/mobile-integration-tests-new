@@ -151,4 +151,27 @@ public class BookDetailsSteps {
     public void isMoreBtnInRelatedBooksAvailable() {
         Assert.assertTrue("More button in related books section is not available", bookDetailsScreen.isMoreBtnAvailableInRelatedBooks());
     }
+
+    @When("Click {} action button and cancel downloading by click {} button on book detail screen")
+    public void cancelBookDownloading(ActionButtonsForBooksAndAlertsKeys actionButtonKey, ActionButtonsForBooksAndAlertsKeys actionButtonCancel) {
+        bookDetailsScreen.clickActionButtonForCancelTheAction(actionButtonKey);
+        bookDetailsScreen.clickActionButtonForCancelTheAction(actionButtonCancel);
+    }
+
+    @When("Click {} button but cancel the action by clicking {} button on the alert")
+    public void cancelBookReturningAndRemoving(ActionButtonsForBooksAndAlertsKeys actionButtonKey, ActionButtonsForBooksAndAlertsKeys alertButtonCancel) {
+        bookDetailsScreen.clickActionButton(actionButtonKey);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            if (actionButtonKey == ActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.DELETE ||
+                    actionButtonKey == ActionButtonsForBooksAndAlertsKeys.REMOVE) {
+                alertScreen.waitAndPerformAlertActionIfDisplayed(alertButtonCancel);
+            }
+        }
+    }
+
+    @When("Click {} action button on book details screen and click {} action button on alert. Only for ios")
+    public void pressActionButtonAndAlertActionButtonOnBookDetailsScreen(ActionButtonsForBooksAndAlertsKeys actionBookButtonKey, ActionButtonsForBooksAndAlertsKeys actionAlertButtonKey) {
+        bookDetailsScreen.clickActionButton(actionBookButtonKey);
+        alertScreen.waitAndPerformAlertActionIfDisplayed(actionAlertButtonKey);
+    }
 }

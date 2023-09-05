@@ -46,11 +46,11 @@ Feature: Book detail view screen
       And Book format in Information section is '<format>' on Book details screen
     Scenarios:
       | distributor        | bookType  | tabName    | format    |
-      | Bibliotheca        | EBOOK     | eBooks     | eBook     |
+      | Bibliotheca        | EBOOK     | eBooks     | ePub     |
       | Bibliotheca        | AUDIOBOOK | Audiobooks | Audiobook |
-      | Axis 360           | EBOOK     | eBooks     | eBook     |
+      | Axis 360           | EBOOK     | eBooks     | ePub     |
       | Axis 360           | AUDIOBOOK | Audiobooks | Audiobook |
-      | Palace Marketplace | EBOOK     | eBooks     | eBook     |
+      | Palace Marketplace | EBOOK     | eBooks     | ePub     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks | Audiobook |
       | Biblioboard        | EBOOK     | eBooks     | PDF       |
       | Biblioboard        | AUDIOBOOK | Audiobooks | Audiobook |
@@ -512,7 +512,6 @@ Feature: Book detail view screen
     Then Sing in screen is opened
     And All fields and links are displayed on Sign in screen
 
-    #    test
   @smoke @logout @returnBooks
   Scenario: Book detail view: Get: Log in: Perform check of logging in
     When Close tutorial screen

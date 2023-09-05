@@ -34,6 +34,9 @@ public class ReaderEpubScreen extends Screen {
     private final ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"titleText\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))), "Book name label");
+    private final ILabel lblBookCover = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.view.View[@resource-id=\"titlepage\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeSlider"))), "Book cover");
 
     public ReaderEpubScreen() {
         super(LocatorUtils.getLocator(
@@ -124,5 +127,23 @@ public class ReaderEpubScreen extends Screen {
 
     public NavigationBarScreen getNavigationBarEpubScreen() {
         return navigationBarScreen;
+    }
+
+    public boolean isBookCoverDisplayed() {
+        return lblBookCover.state().waitForDisplayed();
+    }
+
+    public void clickRightCorner() {
+        ActionProcessorUtils.doForIos(() -> {
+            TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+            action.tap(PointOption.point(lblPage.getElement().getSize().getWidth(), lblPage.getElement().getCenter().y)).perform();
+        });
+
+        ActionProcessorUtils.doForAndroid(() -> {
+            TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+            int height = lblPage.getElement().getSize().height;
+            int width = lblPage.getElement().getSize().width;
+            action.tap(PointOption.point(width - 10, height / 2)).perform();
+        });
     }
 }
