@@ -113,13 +113,11 @@ public class BookmarksEpubScreen extends Screen {
 
     private LocalDateTime getExpectedLocalDateTimeIos(String stringExpectedDateTime) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("y-M-dd HH:m:s");
-        LocalDateTime expectedLocalDateTime = LocalDateTime.parse(deleteSomeCharactersForExpectedDateTime(stringExpectedDateTime), dateTimeFormatter);
-        return expectedLocalDateTime;
+        return LocalDateTime.parse(deleteSomeCharactersForExpectedDateTime(stringExpectedDateTime), dateTimeFormatter);
     }
 
     private String deleteSomeCharactersForExpectedDateTime(String stringExpectedDateTime) {
-        String expectedBookmarkDateTime = stringExpectedDateTime.split("\\+")[0].replace("T", " ");
-        return expectedBookmarkDateTime;
+        return stringExpectedDateTime.split("\\+")[0].replace("T", " ");
     }
 
     private List<ILabel> getListOfILableOfBookmarkTitles() {
@@ -128,8 +126,7 @@ public class BookmarksEpubScreen extends Screen {
 
     private LocalDateTime getActualLocalDateTime(String stringActualDateTime) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
-        LocalDateTime actualLocalDateTime = LocalDateTime.parse(deleteSomeCharactersForActualDateTime(stringActualDateTime), dateTimeFormatter);
-        return actualLocalDateTime;
+        return LocalDateTime.parse(deleteSomeCharactersForActualDateTime(stringActualDateTime), dateTimeFormatter);
     }
 
     private String deleteSomeCharactersForActualDateTime(String stringActualDateTime) {

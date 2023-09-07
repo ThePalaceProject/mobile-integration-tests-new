@@ -10,6 +10,7 @@ import framework.utilities.CoordinatesClickUtils;
 import framework.utilities.LocatorUtils;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
+import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import models.AndroidLocator;
 import models.IosLocator;
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +31,12 @@ public class ReaderPdfScreen extends Screen {
     private final ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup/android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeToolbar/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[2]/XCUIElementTypeStaticText"))), "Book name");
+    private final ILabel lblNumberOfPages = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[@resource-id=\"numPages\"]")),
+            new IosLocator(By.xpath(""))), "Last page number");
+    private final ILabel lblPageNumberSlider = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("")),
+            new IosLocator(By.xpath("//XCUIElementTypeOther[contains(@value,\"Page\")]"))), "lblPageNumberSlider");
 
     public ReaderPdfScreen() {
         super(LocatorUtils.getLocator(
@@ -93,6 +100,20 @@ public class ReaderPdfScreen extends Screen {
             return lblBookName.getAttribute(IosAttributes.NAME);
         } else {
             return lblBookName.getText();
+        }
+    }
+
+    public int getLastPageNumber() {
+        return Integer.parseInt(StringUtils.substringBetween(lblNumberOfPages.getText(), "of ", ")"));
+    }
+
+    public void slidePageSlider(EntireScreenDragDirection entireScreenDragDirection) {
+        openNavigationBar();
+        openNavigationBar();
+        if (entireScreenDragDirection == EntireScreenDragDirection.RIGHT) {
+            SwipeElementUtils.swipeThroughEntireElement(lblPageNumberSlider, EntireElementSwipeDirection.RIGHT);
+        } else {
+            SwipeElementUtils.swipeThroughEntireElement(lblPageNumberSlider, EntireElementSwipeDirection.LEFT);
         }
     }
 }
