@@ -69,7 +69,7 @@ public class ApplicationSteps {
 
     @When("Close tutorial screen")
     public void closeTutorialScreen() {
-        if(alertScreen.state().waitForDisplayed()) {
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.ALLOW);
         }
         tutorialScreen.closeTutorialScreen();

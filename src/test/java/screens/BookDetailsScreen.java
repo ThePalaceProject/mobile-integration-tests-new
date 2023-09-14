@@ -43,10 +43,10 @@ public class BookDetailsScreen extends Screen {
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Description\"]//following::android.widget.TextView[@text=\"More…\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText//following::XCUIElementTypeButton[@name=\"More...\"]"))), "More btn in Description section");
     private final ILabel lblPublisherInfo = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Publisher\")]/following::android.widget.TextView")),
+            new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[contains(@text,\"Publisher\")]/following::android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following::XCUIElementTypeStaticText"))), "Publisher label");
     private final ILabel lblCategories = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Categor\")]/following::android.widget.TextView")),
+            new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[contains(@text,\"Categor\")]/following::android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Categor\")]/following::XCUIElementTypeStaticText"))), "Categories label");
     private final ILabel lblDistributor = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Distributor\")]/following::android.widget.TextView")),
