@@ -13,6 +13,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cucumber.version>5.7.0</cucumber.version>
+        <allure.results.directory>target/allure-results</allure.results.directory>
     </properties>
 
     <build>
