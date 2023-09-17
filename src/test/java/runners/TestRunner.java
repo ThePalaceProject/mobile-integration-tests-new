@@ -15,10 +15,10 @@ import org.junit.runner.RunWith;
                 "hooks",
                 "stepdefinitions"
         },
-//        plugin = {
-//                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
-//        },
-        tags = "@run"
+        plugin = {
+                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
+        },
+        tags = "@allure"
 )
 
 public class TestRunner {
