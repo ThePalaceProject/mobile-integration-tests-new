@@ -14,6 +14,9 @@ public class AlertScreen extends  Screen{
     private static final String UNIQUE_ELEMENT_LOCATOR_IOS = "//XCUIElementTypeAlert";
     private static final String ACTION_BUTTON_LOCATOR_IOS = UNIQUE_ELEMENT_LOCATOR_IOS + "//XCUIElementTypeButton[@name=\"%s\"]";
 
+    private static final String UNIQUE_ELEMENT_LOCATOR_ANDROID = "//android.widget.LinearLayout[contains(@resource-id, \"grant_dialog\")]";
+    private static final String ACTION_BUTTON_LOCATOR_ANDROID = UNIQUE_ELEMENT_LOCATOR_ANDROID + "//android.widget.Button[@text=\"%s\"]";
+
     private final ILabel lblAlertMessage = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath(UNIQUE_ELEMENT_LOCATOR_IOS + "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))), "Alert message");
@@ -23,12 +26,14 @@ public class AlertScreen extends  Screen{
 
     public AlertScreen() {
         super(LocatorUtils.getLocator(
-                new AndroidLocator(By.xpath("")),
+                new AndroidLocator(By.xpath("//android.widget.LinearLayout[contains(@resource-id, \"grant_dialog\")]")),
                 new IosLocator(By.xpath("//XCUIElementTypeAlert"))), "Alert screen");
     }
 
     public void waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {
-        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_LOCATOR_IOS, actionButtonNamesAlertKeys.getDefaultLocalizedValue())), String.format("%s Action button alert", actionButtonNamesAlertKeys.getDefaultLocalizedValue()));
+        IButton actionButton = getElementFactory().getButton(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(ACTION_BUTTON_LOCATOR_ANDROID, actionButtonNamesAlertKeys.getDefaultLocalizedValue()))),
+                new IosLocator(By.xpath(String.format(ACTION_BUTTON_LOCATOR_IOS, actionButtonNamesAlertKeys.getDefaultLocalizedValue())))), String.format("%s Action button alert", actionButtonNamesAlertKeys.getDefaultLocalizedValue()));
         if(actionButton.state().waitForDisplayed()){
             actionButton.click();
         }
