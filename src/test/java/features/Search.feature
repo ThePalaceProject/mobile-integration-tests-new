@@ -102,7 +102,7 @@ Feature: Search module
       And Open search modal
     Then Placeholder contains "Search" text in search field
 
-  @palace
+  @report
   Scenario: Check the possibility of editing data in search field in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
