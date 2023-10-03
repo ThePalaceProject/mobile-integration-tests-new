@@ -69,6 +69,7 @@ public class ApplicationSteps {
 
     @When("Close tutorial screen")
     public void closeTutorialScreen() {
+        AqualityServices.getLogger().info("Closing tutorial screen");
         if(alertScreen.state().waitForDisplayed()) {
             alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.ALLOW);
         }
