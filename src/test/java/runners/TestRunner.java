@@ -12,13 +12,13 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = {"src/test/java/features/test"},
         glue = {
-                "hooks",
-                "stepdefinitions"
+                "src/test/java/hooks",
+                "src/test/java/stepdefinitions"
         },
 //        plugin = {
 //                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
 //        },
-        tags = "@kate"
+        tags = "@aquality"
 )
 
 public class TestRunner {
