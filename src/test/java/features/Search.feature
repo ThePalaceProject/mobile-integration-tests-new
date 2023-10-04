@@ -1,6 +1,6 @@
 Feature: Search module
 
-  @cucumber
+  @palace
   Scenario: Find a library and delete it
     When Close tutorial screen
       And Close welcome screen
@@ -102,7 +102,7 @@ Feature: Search module
       And Open search modal
     Then Placeholder contains "Search" text in search field
 
-  @report
+  @palace
   Scenario: Check the possibility of editing data in search field in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -114,7 +114,7 @@ Feature: Search module
       And Edit data by adding characters in search field and save it as 'newWord'
     Then Placeholder contains word 'newWord' text in search field
 
-  @palace
+  @report
   Scenario: Check of empty field in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened

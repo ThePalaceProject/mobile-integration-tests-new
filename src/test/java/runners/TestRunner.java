@@ -10,10 +10,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"src/test/java/features/test"},
+        features = {"src/test/java/features"},
         glue = {
-                "src/test/java/hooks",
-                "src/test/java/stepdefinitions"
+                "hooks",
+                "stepdefinitions"
         },
 //        plugin = {
 //                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
