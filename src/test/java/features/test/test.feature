@@ -1,7 +1,7 @@
 Feature: test for Aquality
 
   @aquality
-  Scenario: Check the possibility of editing data in search field in LYRASIS Reads
+  Scenario: Check the possibility of editing data in search field
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
