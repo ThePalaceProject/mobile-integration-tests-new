@@ -28,11 +28,11 @@
                 </configuration>
             </plugin>
 
-<!--            <plugin>-->
-<!--                <groupId>io.qameta.allure</groupId>-->
-<!--                <artifactId>allure-maven</artifactId>-->
-<!--                <version>2.10.0</version>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -43,27 +43,6 @@
                     <threadCount>3</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.6</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
-                            <jsonFiles>
-                                <param>**/*.json</param>
-                            </jsonFiles>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -127,11 +106,11 @@
             <version>${cucumber.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.qameta.allure</groupId>-->
-<!--            <artifactId>allure-cucumber5-jvm</artifactId>-->
-<!--            <version>2.13.2</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>2.13.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
