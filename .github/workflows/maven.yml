@@ -43,17 +43,20 @@ jobs:
           distribution: 'temurin'
           java-version: 11
 
-      - name: Install Allure
-        run: |
-          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.16.0/allure-commandline-2.16.0.zip
-          unzip allure-commandline-2.16.0.zip
-          sudo mv allure-2.16.0 /opt/allure
-          echo "export PATH=$PATH:/opt/allure/bin" >> $GITHUB_ENV
-          allure --version
-        if: runner.os == 'Linux'
+#      - name: Install Allure
+#        run: |
+#          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.16.0/allure-commandline-2.16.0.zip
+#          unzip allure-commandline-2.16.0.zip
+#          sudo mv allure-2.16.0 /opt/allure
+#          echo "export PATH=$PATH:/opt/allure/bin" >> $GITHUB_ENV
+#          allure --version
+#        if: runner.os == 'Linux'
 
       - name: Print PATH
         run: echo $PATH
+
+      - name: Verify Allure installation
+        run: /opt/allure/bin/allure --version
 
       - name: Check Allure binary presence
         run: ls -l /opt/allure/bin
@@ -70,7 +73,7 @@ jobs:
         if: success()
 
       - name: Generate Allure report
-        run: allure generate allure-results --clean -o allure-report
+        run: /opt/allure/bin/allure generate allure-results --clean -o allure-report
         working-directory: ${{ github.workspace }}
 
       - name: Upload Allure report artifacts
