@@ -46,9 +46,11 @@ jobs:
 
       - name: Install Allure
         run: |
-          sudo apt-add-repository ppa:qameta/allure
-          sudo apt-get update
-          sudo apt-get install allure
+          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.16.0/allure-commandline-2.16.0.zip
+          unzip allure-commandline-2.16.0.zip
+          sudo mv allure-2.16.0 /opt/allure
+          export PATH=$PATH:/opt/allure/bin
+          allure --version
         if: runner.os == 'Linux'
 
       - name: Run tests
