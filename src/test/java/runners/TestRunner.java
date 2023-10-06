@@ -15,9 +15,9 @@ import org.junit.runner.RunWith;
                 "hooks",
                 "stepdefinitions"
         },
-//        plugin = {
-//                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
-//        },
+        plugin = {
+                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
+        },
         tags = "@report"
 )
 
