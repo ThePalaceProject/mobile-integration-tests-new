@@ -43,24 +43,6 @@ jobs:
           distribution: 'temurin'
           java-version: 11
 
-#      - name: Install Allure
-#        run: |
-#          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.16.0/allure-commandline-2.16.0.zip
-#          unzip allure-commandline-2.16.0.zip
-#          sudo mv allure-2.16.0 /opt/allure
-#          echo "export PATH=$PATH:/opt/allure/bin" >> $GITHUB_ENV
-#          allure --version
-#        if: runner.os == 'Linux'
-
-#      - name: Print PATH
-#        run: echo $PATH
-
-#      - name: Verify Allure installation
-#        run: /opt/allure/bin/allure --version
-
-#      - name: Check Allure binary presence
-#        run: ls -l /opt/allure/bin
-
       - name: Run tests
         run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}}'"
         continue-on-error: true
@@ -79,62 +61,6 @@ jobs:
         with:
           name: allure-report
           path: target/site/allure-maven-plugin
-
-#      - name: Ensure Allure results directory exists
-#        run: mkdir -p allure-results
-
-#      - name: Copy Allure results
-#        run: cp -R target/allure-results allure-results/
-#        if: success()
-
-#      - name: Generate Allure report
-#        run: /opt/allure/bin/allure generate allure-results --clean -o allure-report
-#        working-directory: ${{ github.workspace }}
-
-#      - name: Upload Allure report artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: allure-report
-#          path: allure-report
-
-
-
-
-#      - name: Upload Report
-#        if: success()
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: cucumber-report
-#          path: target/cucumber-report
-
-#      - name: Complete Workflow
-#        if: always()
-#        run: echo "Workflow completed successfully"
-
-
-
-
-#      - name: Generate Cucumber JSON Report
-#        run: mvn exec:java -Dexec.mainClass="io.cucumber.core.cli.Main" -Dexec.args="--plugin json:target/cucumber-report.json src/test/java/features"
-#
-#      - name: Upload Cucumber JSON Report
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: cucumber-report
-#          path: target/cucumber-report.json
-
-
-
-#      - name: Generate Allure Report
-#        uses: AEkaterina/action-allure-report@v0.1.1
-#        if: success() || failure()
-#
-#      - name: Upload report
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: allure-report
-#          path: allure-report/
-#        if: success() || failure()
 
 #      - name: Get Allure history
 #        uses: actions/checkout@v3
@@ -161,11 +87,6 @@ jobs:
 #          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 #          PUBLISH_BRANCH: gh-pages
 #          PUBLISH_DIR: allure-history
-
-#      - name: Debug Workflow
-#        run: |
-#            ls -R allure-results
-#            pwd
 
 #      - name: Post the link to the report
 #        if: always()
