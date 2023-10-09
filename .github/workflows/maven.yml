@@ -74,11 +74,11 @@ jobs:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      - name: Archive and publish Allure Report
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Archive Allure Report
+        uses: actions/upload-artifact@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          folder: target/site/allure-maven-plugin
+          name: allure-report
+          path: target/site/allure-maven-plugin
 
 #      - name: Ensure Allure results directory exists
 #        run: mkdir -p allure-results
