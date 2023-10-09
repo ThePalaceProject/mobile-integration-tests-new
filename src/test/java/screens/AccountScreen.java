@@ -21,10 +21,10 @@ import java.time.Duration;
 public class AccountScreen extends Screen {
 
     private final ITextBox txbCard = getElementFactory().getTextBox(LocatorUtils.getLocator(
-            new AndroidLocator(By.id("authBasicUserField")),
+            new AndroidLocator(By.id("authBasicTokenUserField")),
             new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"))), "Library card text box");
     private final ITextBox txbPassword = getElementFactory().getTextBox(LocatorUtils.getLocator(
-            new AndroidLocator(By.id("authBasicPassField")),
+            new AndroidLocator(By.id("authBasicTokenPassField")),
             new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeSecureTextField"))), "Password text box");
     private final IButton btnSignIn = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath(String.format(SIGN_IN_BTN_LOCATOR_ANDROID, AccountScreenSignInStatus.SIGN_IN.getDefaultLocalizedValue()))),
@@ -66,7 +66,7 @@ public class AccountScreen extends Screen {
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Advanced\"]"))), "Advanced button");
 
-    private static final String BTN_SIGN_IN_ID_ANDROID = "authBasicLogin";
+    private static final String BTN_SIGN_IN_ID_ANDROID = "authBasicTokenLogin";
     private static final String SIGN_IN_BTN_LOCATOR_ANDROID = "//*[contains(@resource-id,\"" + BTN_SIGN_IN_ID_ANDROID + "\") and @text=\"%1$s\"]";
     private static final String LIBRARY_NAME_LOCATOR_ANDROID = "accountCellTitle";
 

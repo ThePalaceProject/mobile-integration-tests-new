@@ -1,6 +1,6 @@
 Feature: My books module
 
-  @tier2
+  @palace
   Scenario: Check of added books in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -40,7 +40,7 @@ Feature: My books module
     When Sort books by TITLE
     Then Books are sorted by Title ascending on books screen
 
-  @logout @returnBooks @trier1
+  @logout @returnBooks @run
   Scenario: Return book from My Books in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -63,7 +63,7 @@ Feature: My books module
       And Open Books
     Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @run
   Scenario: Get a book from Book Detail View and Return from Books in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -88,7 +88,7 @@ Feature: My books module
       And Wait for 10 seconds
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @run
   Scenario: Get a book from Subcategory List View and Return from Books in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -117,7 +117,7 @@ Feature: My books module
       And Wait for 7 seconds
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
-  @logout @returnBooks @tier1 @exclude_android
+  @logout @returnBooks @run @exclude_android
   Scenario: Get a book from Subcategory List View and Return from Subcategory List View in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened

@@ -14,7 +14,8 @@ public class AlertScreen extends  Screen{
     private static final String UNIQUE_ELEMENT_LOCATOR_IOS = "//XCUIElementTypeAlert";
     private static final String ACTION_BUTTON_LOCATOR_IOS = UNIQUE_ELEMENT_LOCATOR_IOS + "//XCUIElementTypeButton[@name=\"%s\"]";
 
-    private static final String ACTION_BUTTON_LOCATOR_ANDROID = "//android.widget.LinearLayout/android.widget.Button[@text=\"%s\"]";
+    private static final String UNIQUE_ELEMENT_LOCATOR_ANDROID = "//android.widget.LinearLayout[contains(@resource-id, \"grant_dialog\")]";
+    private static final String ACTION_BUTTON_LOCATOR_ANDROID = UNIQUE_ELEMENT_LOCATOR_ANDROID + "//android.widget.Button[@text=\"%s\"]";
 
     private final ILabel lblAlertMessage = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("permission_message")),
