@@ -75,7 +75,7 @@ jobs:
           path: target/site/allure-maven-plugin
 
       - name: Archive and publish Allure Report
-        uses: actions/github-pages-deploy@v2
+        uses: peaceiris/actions-gh-pages@v3
         with:
           token: ${{ secrets.PERSONAL_TOKEN }}
           folder: target/site/allure-maven-plugin
