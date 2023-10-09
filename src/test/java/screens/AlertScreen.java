@@ -18,7 +18,7 @@ public class AlertScreen extends  Screen{
     private static final String ACTION_BUTTON_LOCATOR_ANDROID = UNIQUE_ELEMENT_LOCATOR_ANDROID + "//android.widget.Button[@text=\"%s\"]";
 
     private final ILabel lblAlertMessage = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("")),
+            new AndroidLocator(By.id("permission_message")),
             new IosLocator(By.xpath(UNIQUE_ELEMENT_LOCATOR_IOS + "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))), "Alert message");
     private final ILabel lblNotificationAlert = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),

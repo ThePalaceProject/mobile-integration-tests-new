@@ -48,48 +48,52 @@ jobs:
         continue-on-error: true
 
       - name: Generate Allure Report
-        uses: AEkaterina/action-allure-report@v0.1.1
-        if: success() || failure()
-      - name: Upload report
-        uses: actions/upload-artifact@v3
+        run: mvn allure:report
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v2
         with:
           name: allure-report
-          path: allure-report/
-        if: success() || failure()
+          path: target/site/allure-maven-plugin
 
-      - name: Get Allure history
-        uses: actions/checkout@v3
-        if: always()
-        continue-on-error: true
+      - name: Archive Allure Report
+        uses: actions/upload-artifact@v2
         with:
-          ref: gh-pages
-          path: gh-pages
+          name: allure-report
+          path: target/site/allure-maven-plugin
 
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: ./
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
+#      - name: Get Allure history
+#        uses: actions/checkout@v3
+#        if: always()
+#        continue-on-error: true
+#        with:
+#          ref: gh-pages
+#          path: gh-pages
 
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
-          keep_files: true
+#      - name: Allure Report action from marketplace
+#        uses: simple-elf/allure-report-action@master
+#        if: always()
+#        id: allure-report
+#        with:
+#          allure_results: allure-results
+#          gh_pages: gh-pages
+#          allure_report: allure-report
+#          allure_history: allure-history
 
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.PERSONAL_TOKEN}}
-          context: 'Test report'
-          state: 'success'
-          sha: ${{ github.event.pull_request.head.sha || github.sha }}
-          target_url: https://thepalaceproject.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
+#      - name: Deploy report to GitHub Pages
+#        if: always()
+#        uses: peaceiris/actions-gh-pages@v2
+#        env:
+#          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+#          PUBLISH_BRANCH: gh-pages
+#          PUBLISH_DIR: allure-history
+
+#      - name: Post the link to the report
+#        if: always()
+#        uses: Sibz/github-status-action@v1
+#        with:
+#          authToken: ${{secrets.PERSONAL_TOKEN}}
+#          context: 'Test report'
+#          state: 'success'
+#          sha: ${{ github.event.pull_request.head.sha || github.sha }}
+#          target_url: https://thepalaceproject.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
