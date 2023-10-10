@@ -11,9 +11,9 @@ import org.openqa.selenium.By;
 
 public class TocBookmarksPdfScreen extends Screen {
 
-    protected ChaptersPdfScreen chaptersPdfScreen;
-    protected ThumbnailsPdfScreen thumbnailsPdfScreen;
-    protected BookmarksPdfScreen bookmarksPdfScreen;
+    private final ChaptersPdfScreen chaptersPdfScreen;
+    private final ThumbnailsPdfScreen thumbnailsPdfScreen;
+    private final BookmarksPdfScreen bookmarksPdfScreen;
 
     private final IButton btnThumbnails = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.RadioButton[@resource-id=\"viewThumbnail\"]")),

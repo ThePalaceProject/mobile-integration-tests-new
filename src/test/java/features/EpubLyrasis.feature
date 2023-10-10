@@ -9,7 +9,8 @@ Feature: Read EPUB in Lyrasis Reads
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
-    When Open Catalog
+    When Activate sync bookmarks on Sign in screen
+      And Open Catalog
       And Open search modal
 
 #  @logout @returnBooks @tier1
@@ -230,3 +231,25 @@ Feature: Read EPUB in Lyrasis Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Pages: Perform check of reader navigating (swiping left and right)
+    When Search for "Educational Visions" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+      And Wait for 5 seconds
+    Then 'bookInfo' book is present on epub reader screen
+    When Swipe to the next page from 7 to 10 times on Reader epub screen
+      And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Go to next page on Reader epub screen
+    Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Tap on right book corner on epub reader screen
+    Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Click on left book corner on epub reader screen
+    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Go to previous page on reader epub screen
+    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen

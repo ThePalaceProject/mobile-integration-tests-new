@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 public class TocEpubScreen extends Screen {
     private final BookmarksEpubScreen bookmarksEpubScreen;
-    private final TocEpubScreen tocEpubScreen;
 
     private final IButton btnFirstChapter = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.TextView[contains(@resource-id, \"chapterTitle\")]")),
@@ -39,7 +38,6 @@ public class TocEpubScreen extends Screen {
                 new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView[contains(@resource-id,\"tocTabs\")]")),
                 new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Table of Contents\"]"))), "TOC epub screen");
         bookmarksEpubScreen = new BookmarksEpubScreen();
-        tocEpubScreen = new TocEpubScreen();
     }
 
     public void openTab(TabsTocAndBookmarksEpub tab) {
@@ -74,10 +72,6 @@ public class TocEpubScreen extends Screen {
 
     public BookmarksEpubScreen getBookmarksEpubScreen() {
         return bookmarksEpubScreen;
-    }
-
-    public TocEpubScreen getTocEpubScreen() {
-        return tocEpubScreen;
     }
 
     private List<IElement> getChapters() {

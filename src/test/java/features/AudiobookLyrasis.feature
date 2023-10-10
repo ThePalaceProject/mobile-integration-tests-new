@@ -9,7 +9,8 @@ Feature: Audiobooks in LYRASIS Reads
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
-    When Open Catalog
+    When Activate sync bookmarks on Sign in screen
+      And Open Catalog
       And Open search modal
 
   @logout @returnBooks @tier1
@@ -326,18 +327,7 @@ Feature: Audiobooks in LYRASIS Reads
 
   @smoke @logout @returnBooks
   Scenario: Audiobooks: Perform check of Listen and Back button
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for 'LYRASIS Reads' library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search for "Down The Hatch" and save bookName as 'bookNameInfo'
+    When Search for "Down the Hatch" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -349,18 +339,7 @@ Feature: Audiobooks in LYRASIS Reads
 
   @smoke @logout @returnBooks
   Scenario: Audiobooks: Perform check of Play button and Pause buttons
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for 'LYRASIS Reads' library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search for "Down The Hatch" and save bookName as 'bookNameInfo'
+    When Search for "Down the Hatch" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen

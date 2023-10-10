@@ -151,16 +151,16 @@ public class EpubReaderSteps {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
         tocEpubScreen.openTab(TabsTocAndBookmarksEpub.TOC);
-        List<String> chapters = tocEpubScreen.getTocEpubScreen().getListOfBookChapters();
+        List<String> chapters = tocEpubScreen.getListOfBookChapters();
         String chapterName = chapters.get(RandomUtils.nextInt(1, chapters.size()));
-        tocEpubScreen.getTocEpubScreen().openChapter(chapterName);
+        tocEpubScreen.openChapter(chapterName);
         Assert.assertEquals("Chapter name is not correct. ExpectedChapterName-" + chapterName.toLowerCase() + ", ActualChapterName-"
                 + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase(), chapterName.toLowerCase());
     }
 
     @Then("Toc epub screen is opened")
     public void tocEpubScreenIsOpened() {
-        Assert.assertTrue("Toc epub screen is not opened", tocEpubScreen.getTocEpubScreen().state().waitForDisplayed());
+        Assert.assertTrue("Toc epub screen is not opened", tocEpubScreen.state().waitForDisplayed());
     }
 
     @When("Open font and background settings epub screen")

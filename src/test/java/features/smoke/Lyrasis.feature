@@ -1,81 +1,6 @@
 Feature: Smoke tests in LYRASIS Reads library
 
   @smoke @logout @returnBooks
-  Scenario: Catalog: Perform check of Reserve button and Allow notifications
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for "LYRASIS Reads" library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
-      And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click RESERVE action button without closing alert on Book details screen
-    Then There is an alert to allow notifications
-    When Tap ALLOW button on the alert
-    Then Alert to allow notification is not displayed
-      And Check that book contains REMOVE action button on Book details screen
-
-    @smoke @logout @returnBooks
-    Scenario: Catalog: Alert: Perform check of "Don't Allow" button
-      When Close tutorial screen
-      Then Welcome screen is opened
-      When Close welcome screen
-      Then Add library screen is opened
-      When Add library "LYRASIS Reads" on Add library screen
-      Then Library "LYRASIS Reads" is opened on Libraries screen
-      When Enter credentials for "LYRASIS Reads" library
-      Then Login is performed successfully
-      When Activate sync bookmarks on Sign in screen
-        And Open Catalog
-        And Open search modal
-        And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
-        And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-        And Click RESERVE action button without closing alert on Book details screen
-      Then There is an alert to allow notifications
-      When Tap Don't Allow button on the alert
-      Then Alert to allow notification is not displayed
-        And Check that book contains REMOVE action button on Book details screen
-
-#   from here
-  @smoke @logout @returnBooks
-  Scenario: Read ebooks: Pages: Perform check of reader navigating (swiping left and right)
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for 'LYRASIS Reads' library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search for "Educational Visions" and save bookName as 'bookNameInfo'
-      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click READ action button on Book details screen
-    Then 'bookInfo' book is present on epub reader screen
-    When Swipe to the next page from 7 to 10 times on Reader epub screen
-      And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And Go to next page on Reader epub screen
-    Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
-    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And Tap on right book corner on epub reader screen
-    Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
-    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And Click on left book corner on epub reader screen
-    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
-    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And Go to previous page on reader epub screen
-    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
-
-  @smoke @logout @returnBooks
   Scenario: Read ebooks: Table of contents: Perform check of navigation
     When Close tutorial screen
     Then Welcome screen is opened
@@ -88,7 +13,7 @@ Feature: Smoke tests in LYRASIS Reads library
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "The High 5 Habit" and save bookName as 'bookNameInfo'
+      And Search for "Foundations of Trusted Autonomy" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen

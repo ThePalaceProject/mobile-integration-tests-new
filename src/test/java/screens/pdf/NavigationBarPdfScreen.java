@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 public class NavigationBarPdfScreen extends Screen {
 
     private final IButton btnToc = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]")),
+            new AndroidLocator(By.xpath("//android.widget.Button[contains(@resource-id,\"readerMenuTOC\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeOther[1]//XCUIElementTypeButton[2]"))), "TOC button");
     private final IButton btnSearch = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
@@ -18,7 +18,7 @@ public class NavigationBarPdfScreen extends Screen {
     private final IButton btnBack = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Back\"]"))), "Back button");
-    private final IButton btnSettings = getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Settings\"]"), "Settings button");
+    private final IButton btnSettings = getElementFactory().getButton(By.xpath("//android.widget.Button[@content-desc=\"Settings\"]"), "Settings button");
     private final IButton btnBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Bookmark\"]"))), "Bookmark button");

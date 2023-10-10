@@ -9,7 +9,8 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
-    When Open Catalog
+    When Activate sync bookmarks on Sign in screen
+      And Open Catalog
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Check of book title
@@ -132,81 +133,52 @@ Feature: Read PDF in LYRASIS Reads on Android
 
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Table of contents: Perform check of navigation of TOC button
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for 'LYRASIS Reads' library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-    And Open Catalog
-    And Open search modal
-    And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    When Open search modal
+      And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-    And Click READ action button on Book details screen
+      And Click READ action button on Book details screen
     Then Reader pdf screen is opened
     When Open TOC on pdf reader screen
     Then There are content list with thumbnails and chapter content on pdf toc screen
     When Return to pdf reader screen from pdf toc screen
     Then PDF toc screen is closed
     When Open TOC on pdf reader screen
-    And Open TOC on pdf reader screen
+      And Open TOC on pdf reader screen
     Then PDF toc screen is closed
     When Open TOC on pdf reader screen
-    And Close pdf toc screen by back button
+      And Close pdf toc screen by back button
     Then PDF toc screen is closed
 
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Perform check of Settings
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for 'LYRASIS Reads' library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-    And Open Catalog
-    And Open search modal
-    And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    When Open search modal
+      And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-    And Click READ action button on Book details screen
+      And Click READ action button on Book details screen
     Then Reader pdf screen is opened
     When Open pdf settings screen on pdf reader screen
     Then PDF settings screen is opened
 
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Perform check of scrolling by default (down and up)
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for 'LYRASIS Reads' library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-    And Open Catalog
-    And Open search modal
-    And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    When Open search modal
+      And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-    And Click READ action button on Book details screen
+      And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-    When Save page number as 'pageInfo' on pdf reader screen
-    And Open pdf settings screen on pdf reader screen
-    Then Vertical scrolling is chosen by default on settings screen
     When Open pdf settings screen on pdf reader screen
-    And Scroll page down on pdf reader screen
+      Then Vertical scrolling is chosen by default on settings screen
+    When Open pdf settings screen on pdf reader screen
+      And Scroll page down on pdf reader screen
+      And Save page number as 'pageInfo' on pdf reader screen
+      And Scroll page down on pdf reader screen
     Then Page number is not equal to 'pageInfo' on pdf reader screen
     When Save page number as 'pageInfo2' on pdf reader screen
-    And Scroll page up on pdf reader screen
+      And Scroll page up on pdf reader screen
     Then Page number is not equal to 'pageInfo2' on pdf reader screen

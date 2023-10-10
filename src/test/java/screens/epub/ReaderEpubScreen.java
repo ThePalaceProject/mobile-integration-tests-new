@@ -20,7 +20,7 @@ import org.openqa.selenium.By;
 
 public class ReaderEpubScreen extends Screen {
 
-    protected NavigationBarScreen navigationBarScreen;
+    private final NavigationBarScreen navigationBarScreen;
 
     private final ILabel lblPage = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.webkit.WebView[1]")),
