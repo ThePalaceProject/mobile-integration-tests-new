@@ -17,10 +17,10 @@ import org.openqa.selenium.By;
 
 public class SignInScreen extends Screen {
     private final ITextBox txbLibraryCard = getElementFactory().getTextBox(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.LinearLayout[contains(@resource-id, \"authBasicUser\")]//android.widget.EditText")),
+            new AndroidLocator(By.id("authBasicTokenUserField")),
             new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"))), "Library card tex box");
     private final ITextBox txbPassword = getElementFactory().getTextBox(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.EditText[@text=\"Password\"]")),
+            new AndroidLocator(By.id("authBasicTokenPassField")),
             new IosLocator(By.xpath("//XCUIElementTypeSecureTextField[@value=\"Password\"]"))), "Password text box");
     private final IButton btnSignIn = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.Button[@text=\"Sign in\"]")),

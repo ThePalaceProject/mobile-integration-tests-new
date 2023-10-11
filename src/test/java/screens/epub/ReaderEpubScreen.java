@@ -20,13 +20,13 @@ import org.openqa.selenium.By;
 
 public class ReaderEpubScreen extends Screen {
 
-    protected NavigationBarScreen navigationBarScreen;
+    private final NavigationBarScreen navigationBarScreen;
 
     private final ILabel lblPage = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.webkit.WebView[1]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Page\")]/preceding-sibling::XCUIElementTypeOther"))), "Reader page label");
     private final ILabel lblPageNumber = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]")),
+            new AndroidLocator(By.id("reader2_position_page")),
             new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"))), "Page number label");
     private final ILabel lblChapterName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]")),

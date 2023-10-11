@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 public class TocEpubScreen extends Screen {
     private final BookmarksEpubScreen bookmarksEpubScreen;
-    private final TocEpubScreen tocEpubScreen;
 
     private final IButton btnFirstChapter = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.TextView[contains(@resource-id, \"chapterTitle\")]")),
@@ -27,7 +26,7 @@ public class TocEpubScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"))), "Back button");
 
     private static final String TOC_TAB_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
-    private static final String CHAPTER_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id,\"chapterTitle\")]";
+    private static final String CHAPTER_LOCATOR_ANDROID = "//android.view.ViewGroup/android.widget.TextView[contains(@resource-id, \"chapterTitle\")]";
     private static final String CHAPTER_BY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id,\"chapterTitle\") and @text=\"%s\"]";
 
     private static final String TOC_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%s\"]";
@@ -39,7 +38,6 @@ public class TocEpubScreen extends Screen {
                 new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView[contains(@resource-id,\"tocTabs\")]")),
                 new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Table of Contents\"]"))), "TOC epub screen");
         bookmarksEpubScreen = new BookmarksEpubScreen();
-        tocEpubScreen = new TocEpubScreen();
     }
 
     public void openTab(TabsTocAndBookmarksEpub tab) {
@@ -76,13 +74,9 @@ public class TocEpubScreen extends Screen {
         return bookmarksEpubScreen;
     }
 
-    public TocEpubScreen getTocEpubScreen() {
-        return tocEpubScreen;
-    }
-
     private List<IElement> getChapters() {
         return getElementFactory().findElements(LocatorUtils.getLocator(
-                new AndroidLocator(By.id(CHAPTER_LOCATOR_ANDROID)),
+                new AndroidLocator(By.xpath(CHAPTER_LOCATOR_ANDROID)),
                 new IosLocator(By.xpath(CHAPTER_LOCATOR_IOS))), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 

@@ -87,7 +87,7 @@ public class ReaderPdfScreen extends Screen {
     }
 
     public void swipePageDown() {
-        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.DOWN);
+        SwipeElementUtils.swipeDown();
     }
 
     public void swipePageUp() {
