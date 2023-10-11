@@ -39,7 +39,7 @@ public class AudioPlayerScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_leftLabel\"]"))), "Left time label");
     private final IButton btnToc = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_toc")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"))), "TOC button");
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[@label=\"Table of contents\"]"))), "TOC button");
     private final ILabel lblChapterName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_spine_element")),
             new IosLocator(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"))), "Chapter name label");

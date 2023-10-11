@@ -26,7 +26,7 @@ public class TocEpubScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"))), "Back button");
 
     private static final String TOC_TAB_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
-    private static final String CHAPTER_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id,\"chapterTitle\")]";
+    private static final String CHAPTER_LOCATOR_ANDROID = "//android.view.ViewGroup/android.widget.TextView[contains(@resource-id, \"chapterTitle\")]";
     private static final String CHAPTER_BY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id,\"chapterTitle\") and @text=\"%s\"]";
 
     private static final String TOC_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%s\"]";
@@ -76,7 +76,7 @@ public class TocEpubScreen extends Screen {
 
     private List<IElement> getChapters() {
         return getElementFactory().findElements(LocatorUtils.getLocator(
-                new AndroidLocator(By.id(CHAPTER_LOCATOR_ANDROID)),
+                new AndroidLocator(By.xpath(CHAPTER_LOCATOR_ANDROID)),
                 new IosLocator(By.xpath(CHAPTER_LOCATOR_IOS))), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 

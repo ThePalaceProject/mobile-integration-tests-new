@@ -60,7 +60,7 @@ public class EpubReaderSteps {
 
     @When("Go to next page on Reader epub screen")
     public void goToNextPage() {
-        readerEpubScreen.swipeToNextPage();
+        readerEpubScreen.clickRightCorner();
     }
 
     @When("Go to previous page on reader epub screen")

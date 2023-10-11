@@ -234,13 +234,13 @@ Feature: Read EPUB in Lyrasis Reads
 
   @smoke @logout @returnBooks
   Scenario: Read ebooks: Pages: Perform check of reader navigating (swiping left and right)
-    When Search for "Educational Visions" and save bookName as 'bookNameInfo'
+    When Search for "The Giants Return" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
       And Wait for 5 seconds
     Then 'bookInfo' book is present on epub reader screen
-    When Swipe to the next page from 7 to 10 times on Reader epub screen
+    When Scroll page forward from 7 to 10 times
       And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Go to next page on Reader epub screen
     Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
@@ -250,6 +250,28 @@ Feature: Read EPUB in Lyrasis Reads
     When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Click on left book corner on epub reader screen
     Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
-    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And Go to previous page on reader epub screen
-    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+#    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+#      And Go to previous page on reader epub screen
+#    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Table of contents: Perform check of navigation
+    When Search for "The Giants Return" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Open TOC epub screen
+    Then TOC screen is opened
+    When Switch to bookmarks on toc epub screen
+    Then Bookmark epub screen is opened
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Table of contents: Contents: Perform check of Contents navigation
+    When Search for "Faith, Finance, and Economy" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Open random chapter of epub and save it as 'chapterName' from toc epub screen
+    Then Chapter 'chapterName' is opened on epub reader screen

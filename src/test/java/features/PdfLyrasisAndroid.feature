@@ -182,3 +182,63 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Save page number as 'pageInfo2' on pdf reader screen
       And Scroll page up on pdf reader screen
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
+
+  @smoke @logout @returnBooks
+  Scenario: Read pdfs: Table of contents: Perform check of navigation
+    When Open search modal
+      And Search for "Race Cars" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then Reader pdf screen is opened
+    When Open TOC on pdf reader screen
+    Then There are content list with thumbnails and chapter content on pdf toc screen
+    When Open text chapter content on pdf toc screen
+    Then Text chapter content is opened on pdf toc screen
+    When Open content with thumbnails on pdf toc screen
+    Then Thumbnails of the book pages are displayed
+
+  @smoke @logout @returnBooks
+  Scenario: Read pdfs: Perform check of back button
+    When Open search modal
+      And Search for "Race Cars" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then Reader pdf screen is opened
+    When Close pdf reader by back button
+    Then Book "bookInfo" is opened on book details screen
+
+  @smoke @logout @returnBooks
+  Scenario: Read pdfs: Table of contents: Contents with thumbnails: Perform check of navigation
+    When Open search modal
+      And Search for "Race Cars" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then Reader pdf screen is opened
+    When Open TOC on pdf reader screen
+      And Open content with thumbnails on pdf toc screen
+    Then Thumbnails of the book pages are displayed
+    When Open random thumbnail and save the number as 'pageInfo' on pdf toc screen
+      And Return to pdf reader screen from pdf toc screen
+    Then Page number is equal to 'pageInfo' on pdf reader screen
+
+  @smoke @logout @returnBooks
+  Scenario: Read pdfs: Table of contents: Chapter content: Perform check of navigation
+    When Open search modal
+      And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then Reader pdf screen is opened
+    When Open TOC on pdf reader screen
+      And Open text chapter content on pdf toc screen
+    Then Text chapter content is opened on pdf toc screen
+    When Open random chapter and save the number as 'pageInfo' on pdf toc screen
+      And Return to pdf reader screen from pdf toc screen
+    Then Page number is equal to 'pageInfo' on pdf reader screen
