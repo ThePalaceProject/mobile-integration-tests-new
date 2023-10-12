@@ -1,7 +1,6 @@
 package screens.epub;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -48,11 +47,10 @@ public class BookmarksEpubScreen extends Screen {
     }
 
     public boolean isBookmarkPresent(String expectedBookmarkTitle, String bookmarkDateTime) {
-        LocalDateTime expectedLocalDateTime;
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            expectedLocalDateTime = getExpectedLocalDateTimeIos(bookmarkDateTime);
-        } else {
-            expectedLocalDateTime = DateUtils.getExpectedLocalDateTime(bookmarkDateTime);
+        LocalDateTime expectedLocalDateTime = ActionProcessorUtils.doForIos(() -> getExpectedLocalDateTimeIos(bookmarkDateTime));
+
+        if(expectedLocalDateTime == null) {
+            expectedLocalDateTime = ActionProcessorUtils.doForAndroid(() -> DateUtils.getExpectedLocalDateTime(bookmarkDateTime));
         }
 
         AqualityServices.getLogger().info("expected bookmark info: ");

@@ -1,13 +1,13 @@
 package screens.audiobook;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.Screen;
 import aquality.selenium.core.elements.ElementState;
 import constants.appattributes.IosAttributes;
 import enums.localization.catalog.TimerKeys;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.DateUtils;
 import framework.utilities.LocatorUtils;
 import io.appium.java_client.TouchAction;
@@ -129,11 +129,13 @@ public class AudioPlayerScreen extends Screen {
     }
 
     public Duration getLeftTime() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            return DateUtils.getDuration(lblLeftTime.getText());
-        } else {
-            return DateUtils.getDuration(lblLeftTime.getAttribute(IosAttributes.VALUE));
+        Duration leftTime = ActionProcessorUtils.doForAndroid(() -> DateUtils.getDuration(lblLeftTime.getText()));
+
+        if(leftTime == null) {
+            leftTime = ActionProcessorUtils.doForIos(() -> DateUtils.getDuration(lblLeftTime.getAttribute(IosAttributes.VALUE)));
         }
+
+        return leftTime;
     }
 
     public boolean isAudiobookNamePresent(String audiobookName) {
@@ -147,11 +149,13 @@ public class AudioPlayerScreen extends Screen {
     }
 
     public String getChapterName() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return lblChapterName.getAttribute(IosAttributes.VALUE);
-        } else {
-            return lblChapterName.getText();
+        String chapterName = ActionProcessorUtils.doForIos(() -> lblChapterName.getAttribute(IosAttributes.VALUE));
+
+        if(chapterName == null) {
+            chapterName = ActionProcessorUtils.doForAndroid(lblChapterName::getText);
         }
+
+        return chapterName;
     }
 
     public void openPlaybackSpeed() {
@@ -163,11 +167,13 @@ public class AudioPlayerScreen extends Screen {
     }
 
     public Duration getRightTime() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return DateUtils.getDuration(lblRightTime.getAttribute(IosAttributes.VALUE));
-        } else {
-            return DateUtils.getDuration(lblRightTime.getText());
+        Duration rightTime = ActionProcessorUtils.doForIos(() -> DateUtils.getDuration(lblRightTime.getAttribute(IosAttributes.VALUE)));
+
+        if(rightTime == null) {
+            rightTime = ActionProcessorUtils.doForAndroid(() -> DateUtils.getDuration(lblRightTime.getText()));
         }
+
+        return rightTime;
     }
 
     public void skipAhead() {
@@ -240,12 +246,17 @@ public class AudioPlayerScreen extends Screen {
     }
 
     public boolean isPlaybackSpeedPresent(String playbackSpeed) {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+        boolean isPresent = ActionProcessorUtils.doForIos(() -> {
             String speedOptionName = speedNameIos.get(playbackSpeed);
             return getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED_LOC_IOS, speedOptionName)), speedOptionName).state().waitForDisplayed();
-        }else {
-            return getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED_LOC_ANDROID, playbackSpeed)), "Playback speed").state().waitForDisplayed();
+        });
+
+        if(!isPresent) {
+            isPresent = ActionProcessorUtils.doForAndroid(() ->
+                    getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED_LOC_ANDROID, playbackSpeed)), "Playback speed").state().waitForDisplayed());
         }
+
+        return isPresent;
     }
 
     public void tapBookmarkIcon() {

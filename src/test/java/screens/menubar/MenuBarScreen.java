@@ -1,9 +1,9 @@
 package screens.menubar;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.Screen;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
 import models.AndroidLocator;
 import models.IosLocator;
@@ -45,11 +45,13 @@ public class MenuBarScreen extends Screen {
     private IButton getButton(MenuBar menuItem) {
         String itemName = menuItem.getItemName();
 
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            return getElementFactory().getButton(By.id(itemName), itemName);
-        } else {
-            return getElementFactory().getButton(By.xpath(String.format(BOTTOM_MENU_ELEMENT_LOC_IOS, itemName)), itemName);
+        IButton button = ActionProcessorUtils.doForAndroid(() -> getElementFactory().getButton(By.id(itemName), itemName));
+
+        if (button == null) {
+            button = ActionProcessorUtils.doForIos(() -> getElementFactory().getButton(By.xpath(String.format(BOTTOM_MENU_ELEMENT_LOC_IOS, itemName)), itemName));
         }
+
+        return button;
     }
 
     @FunctionalInterface

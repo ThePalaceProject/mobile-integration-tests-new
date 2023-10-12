@@ -1,7 +1,6 @@
 package screens;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ILink;
@@ -101,15 +100,19 @@ public class AccountScreen extends Screen {
     }
 
     public boolean isSignInSuccessful() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+        boolean isSignInSuccessful = ActionProcessorUtils.doForAndroid(() -> {
             lblLoading.state().waitForDisplayed();
             lblLoading.state().waitForNotDisplayed();
             AqualityServices.getConditionalWait().waitFor(() ->
                     btnSignOut.state().isDisplayed() || btnSignInError.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
             return getLoginButtonText().equals(AccountScreenSignInStatus.SIGN_OUT.getDefaultLocalizedValue());
-        } else {
-            return btnSignOut.state().isDisplayed();
+        });
+
+        if(!isSignInSuccessful) {
+            isSignInSuccessful = ActionProcessorUtils.doForIos(() -> btnSignOut.state().isDisplayed());
         }
+
+        return isSignInSuccessful;
     }
 
     private String getLoginButtonText() {

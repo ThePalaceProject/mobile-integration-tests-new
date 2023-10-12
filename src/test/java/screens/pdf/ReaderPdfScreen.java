@@ -1,7 +1,5 @@
 package screens.pdf;
 
-import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.Screen;
 import constants.appattributes.IosAttributes;
@@ -52,12 +50,16 @@ public class ReaderPdfScreen extends Screen {
     }
 
     public int getPageNumber() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+        Integer pageNumber = ActionProcessorUtils.doForIos(() -> {
             openNavigationBar();
             return Integer.parseInt(StringUtils.substringBefore(lblPageNumber.getAttribute(IosAttributes.NAME), "/"));
-        } else {
-            return Integer.parseInt(StringUtils.substringBefore(lblPageNumber.getText(), ","));
+        });
+
+        if(pageNumber == null) {
+            pageNumber = ActionProcessorUtils.doForAndroid(() -> Integer.parseInt(StringUtils.substringBefore(lblPageNumber.getText(), ",")));
         }
+
+        return pageNumber;
     }
 
     public void openNavigationBar() {
@@ -95,12 +97,16 @@ public class ReaderPdfScreen extends Screen {
     }
 
     public String getBookName() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+        String bookName = ActionProcessorUtils.doForIos(() -> {
             openNavigationBar();
             return lblBookName.getAttribute(IosAttributes.NAME);
-        } else {
-            return lblBookName.getText();
+        });
+
+        if(bookName == null) {
+            bookName = ActionProcessorUtils.doForAndroid(lblBookName::getText);
         }
+
+        return bookName;
     }
 
     public int getLastPageNumber() {

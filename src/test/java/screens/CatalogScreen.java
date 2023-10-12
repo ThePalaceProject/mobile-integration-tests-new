@@ -2,7 +2,6 @@ package screens;
 
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -12,11 +11,11 @@ import aquality.appium.mobile.screens.Screen;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
 import constants.appattributes.IosAttributes;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.AndroidLocator;
 import models.IosLocator;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 
 import java.util.HashSet;
@@ -95,19 +94,25 @@ public class CatalogScreen extends Screen {
     }
 
     public List<String> getListOfBooksNames() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+        List<String> listOfBookNames = ActionProcessorUtils.doForAndroid(() -> {
             List<ILabel> listOfBooks = getElementFactory().findElements(By.xpath(BOOK_NAME_LOCATOR_ANDROID), ElementType.LABEL);
             return listOfBooks.stream().map(book -> book.getText()).collect(Collectors.toList());
-        } else {
-            state().waitForDisplayed();
-            int countOfItems = getElements(By.xpath(BOOK_NAME_LOCATOR_IOS)).size();
-            AqualityServices.getConditionalWait().waitFor(() -> getElements(By.xpath(BOOK_NAME_LOCATOR_IOS)).size() <= countOfItems);
-            List<String> listOfNames = getValuesFromListOfLabels(By.xpath(BOOK_NAME_LOCATOR_IOS));
-            AqualityServices.getLogger().info("Found list of books from all subcategories on screen - " + listOfNames.stream().map(Object::toString)
-                    .collect(Collectors.joining(", ")));
-            AqualityServices.getLogger().info("amount of books from all subcategories on screen - " + listOfNames.size());
-            return listOfNames;
+        });
+
+        if(listOfBookNames == null) {
+            listOfBookNames = ActionProcessorUtils.doForIos(() -> {
+                state().waitForDisplayed();
+                int countOfItems = getElements(By.xpath(BOOK_NAME_LOCATOR_IOS)).size();
+                AqualityServices.getConditionalWait().waitFor(() -> getElements(By.xpath(BOOK_NAME_LOCATOR_IOS)).size() <= countOfItems);
+                List<String> listOfNames = getValuesFromListOfLabels(By.xpath(BOOK_NAME_LOCATOR_IOS));
+                AqualityServices.getLogger().info("Found list of books from all subcategories on screen - " + listOfNames.stream().map(Object::toString)
+                        .collect(Collectors.joining(", ")));
+                AqualityServices.getLogger().info("amount of books from all subcategories on screen - " + listOfNames.size());
+                return listOfNames;
+            });
         }
+
+        return listOfBookNames;
     }
 
     public void openCategory(String categoryName) {
@@ -137,29 +142,17 @@ public class CatalogScreen extends Screen {
     public boolean isMoreBtnPresent() {
         List<IButton> buttons = getMoreBtn();
 
-        IButton btn = getElementFactory().getButton(By.xpath(MORE_BUTTON_LOCATOR_IOS), "sdfs");
-        System.out.println("exist: " + btn.state().isExist());
-        System.out.println("Enabled:" + btn.state().isEnabled());
-
-        System.out.println("step with assert:" + buttons.size());
-
         return buttons.stream().allMatch(button -> button.state().waitForDisplayed());
     }
 
     public String clickToMoreBtn() {
         List<IButton> buttons = getMoreBtn();
 
-        System.out.println("btn: " + buttons.size());
-
         int randomNumber = 1 + (int) (Math.random() * buttons.size());
         String sectionName = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID, randomNumber))),
                 new IosLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS, randomNumber)))), "Book section name").getText();
         buttons.get(randomNumber - 1).click();
-
-
-
-        System.out.println(StringUtils.substringAfter(sectionName, "More"));
 
         return sectionName;
     }
@@ -190,11 +183,13 @@ public class CatalogScreen extends Screen {
     public boolean isSectionWithBookTypeOpen(String typeSection) {
         IButton btnSectionType = btnBookNameTypeSection.createBtn(typeSection);
 
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return btnSectionType.getAttribute(Attributes.VALUE).equals("1");
-        } else {
-            return btnSectionType.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString());
+        boolean isOpened = ActionProcessorUtils.doForIos(() -> btnSectionType.getAttribute(Attributes.VALUE).equals("1"));
+
+        if(!isOpened) {
+            isOpened = ActionProcessorUtils.doForAndroid(() -> btnSectionType.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString()));
         }
+
+        return isOpened;
     }
 
     public void switchToCatalogTab(String catalogTab) {

@@ -1,7 +1,6 @@
 package screens.audiobook;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
@@ -10,6 +9,7 @@ import aquality.appium.mobile.screens.Screen;
 import constants.appattributes.AndroidAttributes;
 import constants.appattributes.IosAttributes;
 import enums.timeouts.BooksTimeouts;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
 import models.AndroidLocator;
 import models.IosLocator;
@@ -49,19 +49,25 @@ public class TocAudiobookScreen extends Screen {
     }
 
     public String openChapterAndGetChapterName(int chapterNumber) {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS){
+        String chapterName = ActionProcessorUtils.doForIos(() -> {
             ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_NAME_BY_CHAPTER_NUMBER_LOC_IOS, chapterNumber)), "Chapter");
             String chapterText = lblChapter.getAttribute(IosAttributes.NAME);
             lblChapter.click();
             return chapterText;
-        } else {
-            IElement lblChapterText = getChapters().get(chapterNumber);
-            String chapterText = lblChapterText.getAttribute(AndroidAttributes.TEXT);
-            ILabel downloadProgress = getElementFactory().getLabel(By.xpath(String.format(DOWNLOADING_PROGRESS_LOC_ANDROID, chapterNumber + 1)), "Downloading progress");
-            AqualityServices.getConditionalWait().waitFor(() -> !downloadProgress.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-            lblChapterText.click();
-            return chapterText;
+        });
+
+        if(chapterName == null) {
+            chapterName = ActionProcessorUtils.doForAndroid(() -> {
+                IElement lblChapterText = getChapters().get(chapterNumber);
+                String chapterText = lblChapterText.getAttribute(AndroidAttributes.TEXT);
+                ILabel downloadProgress = getElementFactory().getLabel(By.xpath(String.format(DOWNLOADING_PROGRESS_LOC_ANDROID, chapterNumber + 1)), "Downloading progress");
+                AqualityServices.getConditionalWait().waitFor(() -> !downloadProgress.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+                lblChapterText.click();
+                return chapterText;
+            });
         }
+
+        return chapterName;
     }
 
     public int getCountOfChapters() {
@@ -94,11 +100,13 @@ public class TocAudiobookScreen extends Screen {
     }
 
     public boolean isChaptersSelected() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return lblChapterName.state().waitForDisplayed();
-        }else{
-            return btnChapters.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString());
+        boolean isSelected = ActionProcessorUtils.doForIos(() -> lblChapterName.state().waitForDisplayed());
+
+        if(!isSelected) {
+            isSelected = ActionProcessorUtils.doForAndroid(() -> btnChapters.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString()));
         }
+
+        return isSelected;
     }
 
     public void clickBackBtn() {

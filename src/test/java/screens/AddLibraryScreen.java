@@ -1,6 +1,5 @@
 package screens;
 
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
@@ -11,7 +10,6 @@ import com.google.common.collect.Ordering;
 import framework.utilities.ActionProcessorUtils;
 import framework.utilities.KeyboardUtils;
 import framework.utilities.LocatorUtils;
-import framework.utilities.PlatformUtils;
 import models.AndroidLocator;
 import models.IosLocator;
 import org.openqa.selenium.By;
@@ -81,11 +79,12 @@ public class AddLibraryScreen extends Screen {
     }
 
     public boolean isSearchFieldEmpty() {
-        if(PlatformUtils.getPlatformName() == PlatformName.ANDROID) {
-            return txbSearchField.getText().equals("Search accounts…");
-        } else {
-            return txbSearchField.getText().isEmpty();
+        boolean isEmpty = ActionProcessorUtils.doForAndroid(() -> txbSearchField.getText().equals("Search accounts…"));
+
+        if(!isEmpty) {
+            isEmpty = ActionProcessorUtils.doForIos(() -> txbSearchField.getText().isEmpty());
         }
+        return isEmpty;
     }
 
     public boolean isLibraryDisplayed(String libraryName) {

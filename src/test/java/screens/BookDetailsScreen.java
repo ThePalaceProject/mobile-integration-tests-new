@@ -1,7 +1,6 @@
 package screens;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -9,6 +8,7 @@ import aquality.appium.mobile.screens.Screen;
 import constants.appattributes.IosAttributes;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.timeouts.BooksTimeouts;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
 import models.AndroidLocator;
 import models.CatalogBookModel;
@@ -124,28 +124,35 @@ public class BookDetailsScreen extends Screen {
     }
 
     public String getPublisherInfo() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return lblPublisherInfo.getAttribute(IosAttributes.NAME);
-        } else {
-            return lblPublisherInfo.getText();
+        String publisherInfo = ActionProcessorUtils.doForIos(() -> lblPublisherInfo.getAttribute(IosAttributes.NAME));
+
+        if(publisherInfo == null) {
+            publisherInfo = ActionProcessorUtils.doForAndroid(lblPublisherInfo::getText);
         }
+
+        return publisherInfo;
     }
 
     public String getCategoryInfo() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return lblCategories.getAttribute(IosAttributes.NAME);
-        } else {
-            lblCategories.state().waitForDisplayed();
-            return lblCategories.getText();
+        String categoryInfo = ActionProcessorUtils.doForIos(() -> lblCategories.getAttribute(IosAttributes.NAME));
+
+        if(categoryInfo == null) {
+            categoryInfo = ActionProcessorUtils.doForAndroid(() -> {
+                lblCategories.state().waitForDisplayed();
+                return lblCategories.getText();
+            });
         }
+         return categoryInfo;
     }
 
     public String getDistributorInfo() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return lblDistributor.getAttribute(IosAttributes.NAME);
-        } else {
-            return lblDistributor.getText();
+        String distributorInfo = ActionProcessorUtils.doForIos(() -> lblDistributor.getAttribute(IosAttributes.NAME));
+
+        if(distributorInfo == null) {
+            distributorInfo = ActionProcessorUtils.doForAndroid(lblDistributor::getText);
         }
+
+        return distributorInfo;
     }
 
     public boolean isRelatedBooksExists(String authorName) {

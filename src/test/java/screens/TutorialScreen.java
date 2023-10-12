@@ -1,7 +1,5 @@
 package screens;
 
-import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -10,6 +8,7 @@ import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
 import constants.appattributes.AndroidAttributes;
 import constants.appattributes.IosAttributes;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
@@ -61,11 +60,13 @@ public class TutorialScreen extends Screen {
     }
 
     public List<String> getListOfPageNames() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            return getListOfLabelsOfTutorialTabs().stream().map(tab -> tab.getAttribute(AndroidAttributes.CONTENT_DESC)).collect(Collectors.toList());
-        } else {
-            return getListOfLabelsOfTutorialTabs().stream().map(tab -> tab.getAttribute(IosAttributes.NAME)).collect(Collectors.toList());
+        List<String> listOfPageNames = ActionProcessorUtils.doForAndroid(() -> getListOfLabelsOfTutorialTabs().stream().map(tab -> tab.getAttribute(AndroidAttributes.CONTENT_DESC)).collect(Collectors.toList()));
+
+        if(listOfPageNames == null) {
+            listOfPageNames = ActionProcessorUtils.doForIos(() -> getListOfLabelsOfTutorialTabs().stream().map(tab -> tab.getAttribute(IosAttributes.NAME)).collect(Collectors.toList()));
         }
+
+        return listOfPageNames;
     }
 
     private List<ILabel> getListOfLabelsOfTutorialTabs() {
