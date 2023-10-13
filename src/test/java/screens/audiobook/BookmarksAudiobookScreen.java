@@ -1,12 +1,11 @@
 package screens.audiobook;
 
-import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.Screen;
 import constants.appattributes.AndroidAttributes;
 import constants.appattributes.IosAttributes;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.DateUtils;
 import framework.utilities.LocatorUtils;
 import models.AndroidLocator;
@@ -35,11 +34,14 @@ public class BookmarksAudiobookScreen extends Screen {
     }
 
     public boolean isBookmarksScreenSelected() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            return btnBookmarks.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString());
-        }else {
-            return lblNoBookmarks.state().waitForDisplayed();
+        boolean isSelected = ActionProcessorUtils.doForAndroid(() ->
+                btnBookmarks.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString()));
+
+        if(!isSelected) {
+            isSelected = ActionProcessorUtils.doForIos(() -> lblNoBookmarks.state().waitForDisplayed());
         }
+
+        return isSelected;
     }
 
     public boolean isNoBookmarksMessageDisplayed() {
@@ -51,11 +53,12 @@ public class BookmarksAudiobookScreen extends Screen {
     }
 
     public String getChapterTime() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            return DateUtils.getDuration(lblChapterTime.getAttribute(IosAttributes.VALUE)).toString();
-        } else {
-            return DateUtils.getDuration(lblChapterTime.getText()).toString();
+        String chapterTime = ActionProcessorUtils.doForIos(() -> DateUtils.getDuration(lblChapterTime.getAttribute(IosAttributes.VALUE)).toString());
+
+        if(chapterTime == null) {
+            chapterTime = ActionProcessorUtils.doForAndroid(() -> DateUtils.getDuration(lblChapterTime.getText()).toString());
         }
 
+        return chapterTime;
     }
 }

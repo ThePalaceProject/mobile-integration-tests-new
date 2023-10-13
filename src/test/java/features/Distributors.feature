@@ -65,7 +65,7 @@ Feature: Distributors
       | Biblioboard        | EBOOK     | eBooks     | READ                  |
       | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN                |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @palace
   Scenario: Getting and returning a book from Book Detail View for Overdrive
     Given Close tutorial screen
     Then Welcome screen is opened
@@ -95,7 +95,7 @@ Feature: Distributors
       And Wait for 3 seconds
     Then Book 'bookInfo' with EBOOK type is present on epub or pdf or audiobook screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @palace
   Scenario: Getting and returning an audiobook from Book Detail View for Overdrive
     Given Close tutorial screen
     Then Welcome screen is opened
@@ -125,7 +125,7 @@ Feature: Distributors
       And Wait for 3 seconds
     Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
 
-  @tier2
+  @palace
   Scenario: Getting and returning a book from Book Detail View for Palace Bookshelf
     Given Close tutorial screen
     Then Welcome screen is opened
@@ -178,7 +178,7 @@ Feature: Distributors
       | Biblioboard        | EBOOK     | eBooks     |
       | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @palace
   Scenario: Check of canceling the downloading from book details view for Overdrive
     Given Close tutorial screen
     Then Welcome screen is opened

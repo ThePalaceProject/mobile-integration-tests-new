@@ -1,7 +1,6 @@
 package screens;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -73,13 +72,17 @@ public class LibrariesScreen extends Screen {
     }
 
     public boolean isLibrariesAreSorted() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+        boolean areSorted = ActionProcessorUtils.doForIos(() -> {
             List<String> libraries = getLibrariesNames();
             libraries.remove(0);
             return Ordering.natural().isOrdered(libraries);
-        } else {
-            return Ordering.natural().isOrdered(getLibrariesNames());
+        });
+
+        if(!areSorted) {
+            areSorted = ActionProcessorUtils.doForAndroid(() -> Ordering.natural().isOrdered(getLibrariesNames()));
         }
+
+        return areSorted;
     }
 
     public boolean isLibrarySettingsOpened(String libraryName) {

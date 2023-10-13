@@ -223,7 +223,7 @@ Feature: Search module
     Then Catalog screen is opened
       And Category names are loaded on Catalog screen
     When Open search modal
-      And Search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And Search for "An Open Web" and save bookName as 'bookNameInfo'
     Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
 
   @smoke

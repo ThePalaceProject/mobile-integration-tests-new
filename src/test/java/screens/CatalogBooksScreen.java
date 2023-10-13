@@ -10,6 +10,7 @@ import constants.appattributes.IosAttributes;
 import enums.BookType;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.timeouts.BooksTimeouts;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
 import framework.utilities.PlatformUtils;
 import models.AndroidLocator;
@@ -93,7 +94,7 @@ public class CatalogBooksScreen extends Screen {
 
     public CatalogBookModel openBookAndGetBookInfo(BookType bookType, String bookName, ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String bookNameForLocator = bookName;
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && BookType.AUDIOBOOK == bookType) {
+        if (PlatformUtils.getPlatformName() == PlatformName.IOS && BookType.AUDIOBOOK == bookType) {
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
 
@@ -215,13 +216,15 @@ public class CatalogBooksScreen extends Screen {
 
         CatalogBookModel bookInfo = new CatalogBookModel();
 
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+        ActionProcessorUtils.doForIos(() -> {
             bookInfo.setTitle(lblBookName.getAttribute(IosAttributes.NAME))
                     .setAuthor(author);
-        } else {
+        });
+
+        ActionProcessorUtils.doForAndroid(() -> {
             bookInfo.setTitle(lblBookName.getText())
                     .setAuthor(author);
-        }
+        });
 
         actionButton.click();
         if (actionButtonKey == ActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.REMOVE

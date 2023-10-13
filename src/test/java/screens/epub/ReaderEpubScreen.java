@@ -1,7 +1,6 @@
 package screens.epub;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.Screen;
 import constants.RegEx;
@@ -60,16 +59,21 @@ public class ReaderEpubScreen extends Screen {
     }
 
     public String getBookName() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+        String bookName = ActionProcessorUtils.doForIos(() -> {
             String text = lblBookName.getAttribute(IosAttributes.NAME);
             AqualityServices.getLogger().info("Book name on epub reader screen - " + text);
             return text;
-        } else {
-            hideNavigationBar();
-            String text = lblBookName.getText();
-            AqualityServices.getLogger().info("Book name on epub reader screen - " + text);
-            return text;
+        });
+
+        if(bookName == null) {
+            bookName = ActionProcessorUtils.doForAndroid(() -> {
+                hideNavigationBar();
+                String text = lblBookName.getText();
+                AqualityServices.getLogger().info("Book name on epub reader screen - " + text);
+                return text;
+            });
         }
+        return bookName;
     }
 
     public void hideNavigationBar() {
@@ -79,24 +83,34 @@ public class ReaderEpubScreen extends Screen {
     }
 
     public String getPageNumber() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            String pageNumber = lblPageNumber.getAttribute(IosAttributes.NAME);
-            pageNumber = RegExUtil.deleteBracketsFromText(pageNumber);
-            return RegExUtil.getStringFromFirstGroup(pageNumber, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
-        } else {
-            String pageNumber = lblPageNumber.getText();
-            return RegExUtil.getStringFromFirstGroup(pageNumber, RegEx.PAGE_NUMBER_REGEX_FOR_ANDROID);
+        String pageNumber = ActionProcessorUtils.doForIos(() -> {
+            String number = lblPageNumber.getAttribute(IosAttributes.NAME);
+            number = RegExUtil.deleteBracketsFromText(number);
+            return RegExUtil.getStringFromFirstGroup(number, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
+        });
+
+        if ((pageNumber == null)) {
+            pageNumber = ActionProcessorUtils.doForAndroid(() -> {
+                String number = lblPageNumber.getText();
+                return RegExUtil.getStringFromFirstGroup(number, RegEx.PAGE_NUMBER_REGEX_FOR_ANDROID);
+            });
         }
+
+        return pageNumber;
     }
 
     public String getChapterName() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            String chapterName = lblChapterName.getAttribute(IosAttributes.NAME);
-            chapterName = RegExUtil.deleteBracketsFromText(chapterName);
-            return RegExUtil.getStringFromThirdGroup(chapterName, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
-        } else {
-            return lblChapterName.getText();
+        String chapterName = ActionProcessorUtils.doForIos(() -> {
+            String chapter = lblChapterName.getAttribute(IosAttributes.NAME);
+            chapter = RegExUtil.deleteBracketsFromText(chapter);
+            return RegExUtil.getStringFromThirdGroup(chapter, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
+        });
+
+        if(chapterName == null) {
+            chapterName = ActionProcessorUtils.doForAndroid(lblChapterName::getText);
         }
+
+        return chapterName;
     }
 
     public void tapRightCorner() {

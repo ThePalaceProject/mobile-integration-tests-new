@@ -11,7 +11,7 @@ Feature: Read PDF in Palace Bookshelf on Android
       And Open search modal
       And Search for 'Pharo by Example 5.0' and save bookName as 'bookNameInfo'
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: Check of book title and back button Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -22,7 +22,7 @@ Feature: Read PDF in Palace Bookshelf on Android
     When Close pdf reader by back button
     Then Book "bookInfo" is opened on book details screen
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: Check table of contents Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -40,7 +40,7 @@ Feature: Read PDF in Palace Bookshelf on Android
       And Close pdf toc screen by back button
     Then PDF toc screen is closed
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: TOC: Contents with thumbnails: Check of Contents list and navigation Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -54,7 +54,7 @@ Feature: Read PDF in Palace Bookshelf on Android
       And Return to pdf reader screen from pdf toc screen
     Then Page number is equal to 'pageInfo' on pdf reader screen
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: TOC: Contents with text: Check of list of chapters and navigation Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -68,7 +68,7 @@ Feature: Read PDF in Palace Bookshelf on Android
       And Return to pdf reader screen from pdf toc screen
     Then Page number is equal to 'pageInfo' on pdf reader screen
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: Check of settings screen and page navigation Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -86,7 +86,7 @@ Feature: Read PDF in Palace Bookshelf on Android
     When Tap Go to first page button on pdf settings screen
     Then The first page is opened on pdf reader screen
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: Settings: Check of Vertical scrolling Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -106,7 +106,7 @@ Feature: Read PDF in Palace Bookshelf on Android
       And Scroll page up on pdf reader screen
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: Settings: Check of Horizontal scrolling Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -126,7 +126,7 @@ Feature: Read PDF in Palace Bookshelf on Android
       And Go to previous page on reader pdf screen
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: Settings: Check of Wrapped scrolling Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -146,7 +146,7 @@ Feature: Read PDF in Palace Bookshelf on Android
       And Go to previous page on reader pdf screen
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
-  @tier2 @exclude_ios
+  @palace @exclude_ios
   Scenario: Open book to last page read Palace
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
