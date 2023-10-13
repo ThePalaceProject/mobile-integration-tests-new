@@ -1,6 +1,6 @@
 Feature: Check of View Sample
 
-  @tier2 @exclude_android
+  @palace @exclude_android
   Scenario: Palace Marketplace: Check of view sample
     When Close tutorial screen
     Then Welcome screen is opened
@@ -21,7 +21,7 @@ Feature: Check of View Sample
       And Return to previous screen from epub
     Then Book 'bookInfo' is opened on book details screen
 
-  @tier2 @exclude_android
+  @palace @exclude_android
   Scenario: Overdrive: Check of view sample in epub
     When Close tutorial screen
     Then Welcome screen is opened
@@ -42,7 +42,7 @@ Feature: Check of View Sample
       And Click VIEW_SAMPLE action button on Book details screen
     Then Reader epub screen is opened
 
-  @tier2 @exclude_android
+  @palace @exclude_android
   Scenario: Overdrive: Check of view sample in audiobook
     When Close tutorial screen
     Then Welcome screen is opened

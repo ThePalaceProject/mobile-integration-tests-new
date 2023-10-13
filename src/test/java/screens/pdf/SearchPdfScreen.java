@@ -48,7 +48,7 @@ public class SearchPdfScreen extends Screen {
     }
 
     public boolean isSearchFieldEmpty() {
-        return txbSearchLine.getText().isEmpty();
+        return txbSearchLine.getText().equals("Search");
     }
 
     public boolean isSearchPdfScreenOpened() {

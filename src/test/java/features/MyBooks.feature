@@ -19,7 +19,7 @@ Feature: My books module
       And Open Books
     Then Added books from 'listOfBooks' are displayed on books screen
 
-  @tier2
+  @palace
   Scenario: Check of sorting in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened

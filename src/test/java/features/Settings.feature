@@ -1,6 +1,6 @@
 Feature: Check sections from settings screen
 
-  @tier2 @exclude_android
+  @palace @exclude_android
   Scenario: About Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -11,7 +11,7 @@ Feature: Check sections from settings screen
       And Open About Palace on settings screen
     Then About Palace screen is opened
 
-  @tier2
+  @palace
   Scenario: Privacy Policy
     When Close tutorial screen
     Then Welcome screen is opened
@@ -22,7 +22,7 @@ Feature: Check sections from settings screen
       And Open Privacy Policy on settings screen
     Then Privacy Policy screen is opened
 
-  @tier2
+  @palace
   Scenario: User Agreement
     When Close tutorial screen
     Then Welcome screen is opened
@@ -37,7 +37,7 @@ Feature: Check sections from settings screen
     When Scroll page to link "http://thepalaceproject.org/licenses/" on user agreement screen
     Then Link "http://thepalaceproject.org/licenses/" is available on user agreement screen
 
-  @tier2
+  @palace
   Scenario: Software Licenses
     When Close tutorial screen
     Then Welcome screen is opened
@@ -50,7 +50,7 @@ Feature: Check sections from settings screen
     When Scroll page to link "www.apache.org/licenses" on software licenses screen
     Then Link "www.apache.org/licenses" is available on software licenses screen
 
-  @tier2
+  @palace
   Scenario: Settings: User License Agreement
     When Close tutorial screen
     Then Welcome screen is opened
@@ -63,7 +63,7 @@ Feature: Check sections from settings screen
       And Open User license agreement on account screen
     Then User License Agreement link is opened
 
-  @logout @tier1 @exclude_android
+  @logout @palace @exclude_android
   Scenario: Setting: Advanced
     When Close tutorial screen
     Then Welcome screen is opened

@@ -39,7 +39,13 @@ public class Logger {
     public byte[] getLoggerInfoBytes() {
         byte[] data = new byte[0];
         try {
-            data = Files.readAllBytes(Paths.get(scenarioAppender.getFile()));
+            String filePath = scenarioAppender.getFile();
+            if(filePath != null) {
+                filePath = filePath.replace(":", "_");
+                data = Files.readAllBytes(Paths.get(filePath));
+            } else {
+                AqualityServices.getLogger().error("File path is null");
+            }
         } catch (IOException exception) {
             AqualityServices.getLogger().error(exception.toString());
         }
