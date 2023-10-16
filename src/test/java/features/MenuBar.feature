@@ -1,6 +1,6 @@
 Feature: Menu Bar module
 
-  @palace
+  @tier2
   Scenario Outline: Check of menu bar in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -15,7 +15,7 @@ Feature: Menu Bar module
       | tab1    | tab2     | tab3     |
       | Catalog | My Books | Settings |
 
-  @palace
+  @tier2
   Scenario: Check of the tabs in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -29,7 +29,7 @@ Feature: Menu Bar module
     When Open Settings
     Then Settings screen is opened
 
-  @palace
+  @tier2
   Scenario Outline: Check of menu bar in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -44,7 +44,7 @@ Feature: Menu Bar module
       | tab1    | tab2     | tab3         | tab4     |
       | Catalog | My Books | Reservations | Settings |
 
-  @palace
+  @tier2
   Scenario: Check of the tabs in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened

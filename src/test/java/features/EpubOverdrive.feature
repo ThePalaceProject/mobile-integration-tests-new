@@ -131,7 +131,7 @@ Feature: Read EPUB from Overdrive in A1QA
 #    And Click READ action button on book details screen
 #    Then The WHITE_TEXT_ON_BLACK background is correct
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Epub: Open book to last page read
     When Search for "Romeo and Juliet" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -155,7 +155,7 @@ Feature: Read EPUB from Overdrive in A1QA
     Then 'bookInfo' book is present on epub reader screen
       And PageNumber 'pageNumberKey' is correct
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Epub: Navigate by Page
     When Search for "The Book Thief" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -171,7 +171,7 @@ Feature: Read EPUB from Overdrive in A1QA
       And Click on left book corner on epub reader screen
     Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Epub: Navigate by bookmarks
     When Search for "Moby Dick" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -193,7 +193,7 @@ Feature: Read EPUB from Overdrive in A1QA
     When Open random bookmark and save chapter name as 'chapterNameKey3' on bookmarks epub screen
     Then 'chapterNameKey3' chapter name is displayed on reader epub screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Epub: Delete bookmarks
     When Search for "Little Women" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'

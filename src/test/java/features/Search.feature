@@ -1,6 +1,6 @@
 Feature: Search module
 
-  @palace
+  @tier2
   Scenario: Find a library and delete it
     When Close tutorial screen
       And Close welcome screen
@@ -9,7 +9,7 @@ Feature: Search module
     When Clear search field on Add library screen
     Then Search field is empty on Add library screen
 
-  @palace
+  @tier2
   Scenario Outline: Check that library name contains one or more entered latin letters
     When Close tutorial screen
       And Close welcome screen
@@ -24,7 +24,7 @@ Feature: Search module
       |LYRASIS |
       |lYrAsIs |
 
-  @palace
+  @tier2
   Scenario Outline: Enter invalid data
     When Close tutorial screen
       And Close welcome screen
@@ -40,7 +40,7 @@ Feature: Search module
       |@                                    |
       |$!                                   |
 
-  @palace
+  @tier2
   Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -56,7 +56,7 @@ Feature: Search module
       | cat           |
       | a             |
 
-  @palace
+  @tier2
   Scenario Outline: Find a book with name in different font cases in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -73,7 +73,7 @@ Feature: Search module
       | EL GATO NEGRO |
       | eL gAto NeGrO |
 
-  @palace
+  @tier2
   Scenario Outline: Enter invalid data in book name in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -92,7 +92,7 @@ Feature: Search module
       | @$                                    |
       | !                                     |
 
-  @palace
+  @tier2
   Scenario: Check a placeholder in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -102,7 +102,7 @@ Feature: Search module
       And Open search modal
     Then Placeholder contains "Search" text in search field
 
-  @palace
+  @tier2
   Scenario: Check the possibility of editing data in search field in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -114,7 +114,7 @@ Feature: Search module
       And Edit data by adding characters in search field and save it as 'newWord'
     Then Placeholder contains word 'newWord' text in search field
 
-  @report
+  @tier2
   Scenario: Check of empty field in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -124,7 +124,7 @@ Feature: Search module
       And Open search modal
     Then There is no possibility to search with empty search field
 
-  @palace
+  @tier2
   Scenario: Check of displaying the search field after search a book in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -135,7 +135,7 @@ Feature: Search module
       And Search for "Book" and save bookName as 'BookNameInfo'
     Then The search field is displayed and contains 'BookNameInfo' book
 
-  @palace
+  @tier2
   Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -152,7 +152,7 @@ Feature: Search module
       | a             |
       | 1            |
 
-  @palace
+  @tier2
   Scenario Outline: Find a book with name in different font cases in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -169,7 +169,7 @@ Feature: Search module
       | SILK ROAD |
       | SiLk rOaD |
 
-  @palace
+  @tier2
   Scenario Outline: Enter invalid data in book name in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -188,7 +188,7 @@ Feature: Search module
       | @$                                    |
       | !                                     |
 
-  @palace
+  @tier2
   Scenario: Search: Perform check that the text field appears after clicking "Search" icon
     When Close tutorial screen
     Then Welcome screen is opened

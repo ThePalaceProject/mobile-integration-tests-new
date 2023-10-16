@@ -1,6 +1,6 @@
 Feature: Book detail view screen
 
-  @palace
+  @tier2
   Scenario Outline: Check of a book title and author in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -28,7 +28,7 @@ Feature: Book detail view screen
       | Biblioboard        | EBOOK     | eBooks     |
       | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @palace
+  @tier2
   Scenario Outline: Check of a book format in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -55,7 +55,7 @@ Feature: Book detail view screen
       | Biblioboard        | EBOOK     | eBooks     | PDF       |
       | Biblioboard        | AUDIOBOOK | Audiobooks | Audiobook |
 
-  @palace
+  @tier2
   Scenario Outline: Check of a "More..." button in Description section in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -83,7 +83,7 @@ Feature: Book detail view screen
       | Biblioboard        | EBOOK     | eBooks     |
       | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @palace
+  @tier2
   Scenario Outline: Check fields in Information section in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -112,7 +112,7 @@ Feature: Book detail view screen
       | Biblioboard        | EBOOK     | eBooks     |
       | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @palace
+  @tier2
   Scenario Outline: Check related books section in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -171,7 +171,7 @@ Feature: Book detail view screen
 #      | Biblioboard        | EBOOK     | eBooks     |
 #      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @palace
+  @tier2
   Scenario: Check of a book title and author in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -187,7 +187,7 @@ Feature: Book detail view screen
       And Book 'bookInfo' has correct title and author name on Book details screen
       And The book cover is displayed on Book details screen
 
-  @palace
+  @tier2
   Scenario: Check of a "More..." button in Description section in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -203,7 +203,7 @@ Feature: Book detail view screen
       And Description is not empty on Book details screen
       And Button More in Description is available on Book details screen
 
-  @palace
+  @tier2
   Scenario: Check fields in Information section in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -218,7 +218,7 @@ Feature: Book detail view screen
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
 
-  @palace
+  @tier2
   Scenario: Check related books section in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened
@@ -253,7 +253,7 @@ Feature: Book detail view screen
 #    When I sort books by TITLE
 #    Then Books are sorted by Title ascending
 
-  @palace
+  @tier2
   Scenario: Check of a book title and author in Overdrive
     When Close tutorial screen
     Then Welcome screen is opened
@@ -274,7 +274,7 @@ Feature: Book detail view screen
       And Book 'bookInfo' has correct title and author name on Book details screen
       And The book cover is displayed on Book details screen
 
-  @palace
+  @tier2
   Scenario: Check of a "More..." button in Description section in Overdrive
     When Close tutorial screen
     Then Welcome screen is opened
@@ -295,7 +295,7 @@ Feature: Book detail view screen
       And Description is not empty on Book details screen
       And Button More in Description is available on Book details screen
 
-  @palace
+  @tier2
   Scenario: Check fields in Information section in Overdrive
     When Close tutorial screen
     Then Welcome screen is opened
@@ -316,7 +316,7 @@ Feature: Book detail view screen
       And Publisher and Categories in Information section are correct on book details screen
       And Distributor is equal to 'Overdrive' on book details screen
 
-  @palace
+  @tier2
   Scenario: Check related books section in Overdrive
     When Close tutorial screen
     Then Welcome screen is opened
@@ -338,7 +338,7 @@ Feature: Book detail view screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
 
-  @palace
+  @tier2
   Scenario: Get button: Check of availability of required interface elements
     When Close tutorial screen
     Then Welcome screen is opened
@@ -354,7 +354,7 @@ Feature: Book detail view screen
     Then Sing in screen is opened
       And All fields and links are displayed on Sign in screen
 
-  @palace @exclude_android
+  @tier2 @exclude_android
   Scenario: Get button: check of Library Card field
     When Close tutorial screen
     Then Welcome screen is opened
@@ -370,7 +370,7 @@ Feature: Book detail view screen
     Then Sing in screen is opened
       And There is a placeholder Library Card in the Library Card field on Sign in screen
 
-  @palace @exclude_android
+  @tier2 @exclude_android
   Scenario: Get button: check of Password field
     When Close tutorial screen
     Then Welcome screen is opened
@@ -386,7 +386,7 @@ Feature: Book detail view screen
     Then Sing in screen is opened
       And There is a placeholder "Password" in the Password field on Sign in screen
 
-  @palace
+  @tier2
   Scenario: Get: Sign in: Check of loging in with leaving the Library Card field empty
     When Close tutorial screen
     Then Welcome screen is opened
@@ -403,7 +403,7 @@ Feature: Book detail view screen
     When Enter a valid Password for "LYRASIS Reads" library on Sign in screen
     Then Sign in button is disabled on Sign in screen
 
-  @palace
+  @tier2
   Scenario: Get: Sign in: Check of loging in with leaving the Password field empty
     When Close tutorial screen
     Then Welcome screen is opened
@@ -420,7 +420,7 @@ Feature: Book detail view screen
     When Enter a valid Library card "01230000000098" on Sign in screen
     Then Sign in button is disabled on Sign in screen
 
-  @palace
+  @tier2
   Scenario: Get: Sign in: Library card: Check that the field allows you to edit the data
     When Close tutorial screen
     Then Welcome screen is opened
@@ -438,7 +438,7 @@ Feature: Book detail view screen
       And Edit data by adding "22" in Library card field and save it as 'newLibraryCard' on sign in screen
     Then There is a placeholder 'newLibraryCard' in the Library Card field on Sign in screen
 
-  @palace
+  @tier2
   Scenario Outline: Get: Sign in: Library card: Check of less than minimum allowed or more than maximum characters
     When Close tutorial screen
     Then Welcome screen is opened
@@ -462,7 +462,7 @@ Feature: Book detail view screen
       | 13      |
       | 15      |
 
-  @palace
+  @tier2
   Scenario: Get: Log in: Library card: Check that the field doesn't allow characters except numbers
     When Close tutorial screen
     Then Welcome screen is opened

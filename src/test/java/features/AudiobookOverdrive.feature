@@ -17,7 +17,7 @@ Feature: Audiobooks in A1QA library
     When Open Catalog
       And Open search modal
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Audiobooks: Open the audiobook at the last open chapter and check time code
     When Search for "Catching Fire" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -56,7 +56,7 @@ Feature: Audiobooks in A1QA library
       And Chapter name on audio player screen is equal to 'chapterNameKey2' saved chapter name
       And Play time is the same with 'timeAhead' play time before restart on books detail screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Audiobooks: Navigate by Audiobook
     When Search for "The Hunger Games" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -82,7 +82,7 @@ Feature: Audiobooks in A1QA library
     Then Play button is present on audio player screen
       And Playback has been moved behind by 15 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Audiobooks: Check end of chapter sleep timer
     When Search for "Waking the Tiger" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -102,7 +102,7 @@ Feature: Audiobooks in A1QA library
       And Open toc audiobook screen
     Then Chapter name next to 'chapterNumber' on toc audiobook screen is equal to 'nextChapter' saved chapter name
 
-  @logout @returnBooks @palace @exclude_android
+  @logout @returnBooks @tier2 @exclude_android
   Scenario: Audiobooks: Check of line for time remaining
     When Search for "Mockingjay" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -113,7 +113,7 @@ Feature: Audiobooks in A1QA library
     Then Audio player screen of book 'bookInfo' is opened
       And Line for time remaining is displayed on audio player screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of switching to the next chapter
     When Search for "The King's Taster" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -128,7 +128,7 @@ Feature: Audiobooks in A1QA library
       And Listen a chapter on audio player screen
     Then Next chapter play automatically and chapter name is not 'chapterName' on audio player screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Audiobooks: Check closing playback speed and sleep timer
     When Search for "The Lost Symbol" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -147,7 +147,7 @@ Feature: Audiobooks in A1QA library
       And Close sleep timer screen
     Then Play button is present on audio player screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Audiobooks: Check time tracking line
     When Search for "The Art of Racing in the Rain" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -169,7 +169,7 @@ Feature: Audiobooks in A1QA library
       And Wait for 5 seconds
     Then Playing time is not equal to 'timeInfo2' on audio playing screen
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of not rewinding forward and back by tapping on time bar
     When Search for "Master and Commander" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
@@ -192,7 +192,7 @@ Feature: Audiobooks in A1QA library
       And Save book play time as 'timeBackward' on audio player screen
     Then Play times 'timeBehind' and 'timeBackward' are equals
 
-  @logout @returnBooks @palace
+  @logout @returnBooks @tier2
   Scenario Outline: Audiobooks: Playback speed: Check of playback speed
     When Search for "The Lightning Thief" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
