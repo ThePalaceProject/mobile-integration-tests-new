@@ -31,12 +31,12 @@ public class BookDetailsSteps {
     public void isBookOpened(String bookInfoKey) {
         CatalogBookModel bookModel = context.get(bookInfoKey);
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(bookDetailsScreen.getBookInfo().getTitle())
+        softAssertions.assertThat(bookDetailsScreen.isBookTitleDisplayed(bookModel.getTitle().replace(". Audiobook.", "")))
                 .as("Expected book is not opened. Book title is wrong")
-                .isEqualTo(bookModel.getTitle().replace(". Audiobook.", ""));
-        softAssertions.assertThat(bookDetailsScreen.getBookInfo().getAuthor())
+                .isTrue();
+        softAssertions.assertThat(bookDetailsScreen.isAuthorNameDisplayed(bookModel.getAuthor()))
                 .as("Expected book is not opened. Author is wrong")
-                .isEqualTo(bookModel.getAuthor());
+                .isTrue();
         softAssertions.assertAll();
     }
 
