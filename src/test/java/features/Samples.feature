@@ -36,7 +36,7 @@ Feature: Check of View Sample
     Then Library "A1QA Test Library" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for "Alice in Wonderland" and save bookName as 'bookNameInfo'
+      And Search for "Writing Wild" and save bookName as 'bookNameInfo'
       And Switch to "eBooks" catalog tab
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click VIEW_SAMPLE action button on Book details screen

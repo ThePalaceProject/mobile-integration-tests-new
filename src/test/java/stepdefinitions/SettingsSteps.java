@@ -12,7 +12,7 @@ public class SettingsSteps {
 
     private final MenuBarScreen menuBarScreen;
     private final SettingsScreen settingsScreen;
-    private final AboutPalaceScreen aboutPalaceScreen;
+    private final AboutAppScreen aboutAppScreen;
     private final PrivacyPolicyScreen privacyPolicyScreen;
     private final UserAgreementScreen userAgreementScreen;
     private final SoftwareLicensesScreen softwareLicensesScreen;
@@ -21,7 +21,7 @@ public class SettingsSteps {
     public SettingsSteps(){
         menuBarScreen = new MenuBarScreen();
         settingsScreen = new SettingsScreen();
-        aboutPalaceScreen = new AboutPalaceScreen();
+        aboutAppScreen = new AboutAppScreen();
         privacyPolicyScreen = new PrivacyPolicyScreen();
         userAgreementScreen = new UserAgreementScreen();
         softwareLicensesScreen = new SoftwareLicensesScreen();
@@ -47,14 +47,14 @@ public class SettingsSteps {
         settingsScreen.openLibrary(libraryName);
     }
 
-    @When("Open About Palace on settings screen")
+    @When("Open About App on settings screen")
     public void openAboutPalace() {
-        settingsScreen.openAboutPalace();
+        settingsScreen.openAboutApp();
     }
 
-    @Then("About Palace screen is opened")
-    public void aboutPalaceIsPresent() {
-        aboutPalaceScreen.isOpened();
+    @Then("About App screen is opened")
+    public void aboutAppIsPresent() {
+        aboutAppScreen.isOpened();
     }
 
     @When("Open Privacy Policy on settings screen")

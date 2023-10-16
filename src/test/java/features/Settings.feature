@@ -1,6 +1,6 @@
 Feature: Check sections from settings screen
 
-  @tier2 @exclude_android
+  @tier2
   Scenario: About Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -8,8 +8,8 @@ Feature: Check sections from settings screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
       And Open Settings
-      And Open About Palace on settings screen
-    Then About Palace screen is opened
+      And Open About App on settings screen
+    Then About App screen is opened
 
   @tier2
   Scenario: Privacy Policy

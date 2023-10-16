@@ -25,7 +25,7 @@ public class BookDetailsScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]//XCUIElementTypeStaticText[1]"))), "Book title label");
     private final ILabel lblBookAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("bookDetailAuthors")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/preceding-sibling::XCUIElementTypeStaticText"))), "Book author label");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/preceding-sibling::XCUIElementTypeStaticText[2]"))), "Book author label");
     private final ILabel lblBookCover = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id, \"bookDetailCoverImage\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeOther//XCUIElementTypeImage[1]"))), "Book cover");
@@ -55,10 +55,14 @@ public class BookDetailsScreen extends Screen {
             new AndroidLocator(By.xpath("//android.widget.FrameLayout//android.widget.TextView[@text=\"More…\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeTable//XCUIElementTypeButton[@name=\"More...\"]"))), "More button in related books section");
 
+    private static final String BOOK_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
+    private static final String AUTHOR_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
     private static final String BOOK_ACTION_BUTTON_LOC_ANDROID = "//android.widget.Button[@text=\"%s\"]";
     private static final String AUTHOR_IN_RELATED_BOOKS_LOC_ANDROID = "//android.widget.FrameLayout//android.widget.TextView[@text=\"%s\"]";
     private static final String LIST_OF_RELATED_BOOKS_LOC_ANDROID = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id, \"feedLaneCoversScroll\")]/android.widget.LinearLayout";
 
+    private static final String BOOK_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String AUTHOR_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String BOOK_ACTION_BUTTON_LOC_IOS = "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_IN_RELATED_BOOKS_LOC_IOS = "//XCUIElementTypeTable//XCUIElementTypeButton[@name=\"%s\"]";
     private static final String LIST_OF_RELATED_BOOKS_LOC_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
@@ -70,9 +74,29 @@ public class BookDetailsScreen extends Screen {
     }
 
     public CatalogBookModel getBookInfo() {
+
+        System.out.println("title: " + lblBookTitle.getText());
+        System.out.println("author: " + lblBookAuthor.getText());
+
         return new CatalogBookModel()
                 .setTitle(lblBookTitle.getText())
                 .setAuthor(lblBookAuthor.getText());
+    }
+
+    public boolean isBookTitleDisplayed(String bookName) {
+        ILabel lblBookNameIos = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(BOOK_NAME_LOC_ANDROID, bookName))),
+                new IosLocator(By.xpath(String.format(BOOK_NAME_LOC_IOS, bookName)))), "Book name label");
+        return lblBookNameIos.state().waitForDisplayed();
+    }
+
+    public boolean isAuthorNameDisplayed(String authorName) {
+        ILabel lblAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(AUTHOR_NAME_LOC_ANDROID, authorName))),
+                new IosLocator(By.xpath(String.format(AUTHOR_NAME_LOC_IOS, authorName)))), "Author name label");
+        System.out.println(lblAuthor.getText());
+
+        return lblAuthor.state().waitForDisplayed();
     }
 
     public boolean isBookHasCover() {
