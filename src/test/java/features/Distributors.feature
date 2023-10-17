@@ -1,11 +1,13 @@
 Feature: Distributors
 
-  @logout @returnBooks @tier2
-  Scenario Outline: Reserving from Book Detail View in LYRASIS Reads
-    When Close tutorial screen
+  Background:
+    Given Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Reserving from Book Detail View in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -31,10 +33,6 @@ Feature: Distributors
 
   @logout @returnBooks @tier2
   Scenario Outline: Getting and returning books from Book Detail View in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -67,10 +65,6 @@ Feature: Distributors
 
   @logout @returnBooks @tier2
   Scenario: Getting and returning a book from Book Detail View for Overdrive
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Turn on test mode
@@ -97,10 +91,6 @@ Feature: Distributors
 
   @logout @returnBooks @tier2
   Scenario: Getting and returning an audiobook from Book Detail View for Overdrive
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Turn on test mode
@@ -127,10 +117,6 @@ Feature: Distributors
 
   @tier2
   Scenario: Getting and returning a book from Book Detail View for Palace Bookshelf
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -149,10 +135,6 @@ Feature: Distributors
 
   @logout @returnBooks @tier2
   Scenario Outline: Check of canceling the downloading from book details view for LYRASIS Reads
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -180,10 +162,6 @@ Feature: Distributors
 
   @logout @returnBooks @tier2
   Scenario: Check of canceling the downloading from book details view for Overdrive
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Turn on test mode

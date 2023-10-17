@@ -26,7 +26,7 @@ public class BookmarksEpubScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@text, \"no bookmarks\")]"))), "No bookmarks label");
     private final ILabel lblBookmarksTab = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("tocBookmarksList")),
-            new IosLocator(By.xpath(""))), "Bookmarks tab");
+            new IosLocator(By.xpath("//XCUIElementTypeTable"))), "Bookmarks tab");
     private final IButton btnDelete = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.Button[contains(@resource-id,\"button1\")]")),
             new IosLocator(By.name("Delete"))), "Delete bookmark button");
@@ -43,7 +43,12 @@ public class BookmarksEpubScreen extends Screen {
     }
 
     public boolean isBookmarkScreenOpened() {
-        return lblBookmarksTab.state().waitForDisplayed();
+        boolean isOpened = ActionProcessorUtils.doForAndroid(() -> lblBookmarksTab.state().waitForDisplayed());
+
+        if (!isOpened) {
+            isOpened = ActionProcessorUtils.doForIos(() -> lblNoBookmarks.state().waitForDisplayed() || lblBookmarksTab.state().waitForDisplayed());
+        }
+        return isOpened;
     }
 
     public boolean isBookmarkPresent(String expectedBookmarkTitle, String bookmarkDateTime) {

@@ -1,11 +1,13 @@
 Feature: Menu Bar module
 
-  @tier2
-  Scenario Outline: Check of menu bar in Palace Bookshelf
-    When Close tutorial screen
+  Background:
+    Given Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
+
+  @tier2
+  Scenario Outline: Check of menu bar in Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
       And There is a menu bar at the bottom of the screen
@@ -17,10 +19,6 @@ Feature: Menu Bar module
 
   @tier2
   Scenario: Check of the tabs in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
       And Open Catalog
     Then Catalog screen is opened
@@ -31,10 +29,6 @@ Feature: Menu Bar module
 
   @tier2
   Scenario Outline: Check of menu bar in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
       And There is a menu bar at the bottom of the screen
@@ -46,10 +40,6 @@ Feature: Menu Bar module
 
   @tier2
   Scenario: Check of the tabs in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
       And Open Catalog
     Then Catalog screen is opened

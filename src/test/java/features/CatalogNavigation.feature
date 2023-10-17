@@ -1,11 +1,13 @@
 Feature: Catalog Navigation module
 
-  @tier2
-  Scenario: Return to last library catalog
-    When Close tutorial screen
+  Background:
+    Given Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
+
+  @tier2
+  Scenario: Return to last library catalog
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Add 'LYRASIS Reads' library in Libraries screen
@@ -16,10 +18,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario: Browse Categories in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Catalog screen is opened
       And Library "Palace Bookshelf" is opened on Libraries screen
@@ -38,10 +36,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario: Check of the titles of books sections in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -50,10 +44,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario Outline: Check of books sorting in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -94,10 +84,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario Outline: Check of tabs at the top of the screen in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -115,10 +101,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario: Check of the titles of books sections in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -127,10 +109,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario Outline: Check of books sorting in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -171,10 +149,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario Outline: Check of books availability in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -191,10 +165,6 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario: Check all types of availability
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -211,10 +181,6 @@ Feature: Catalog Navigation module
 
   @tier2 @exclude_android
   Scenario Outline: Check of books collections
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -231,10 +197,6 @@ Feature: Catalog Navigation module
 
   @smoke @logout @returnBooks @exclude_android
   Scenario: Catalog: Perform check of Reserve button and Allow notifications
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for "LYRASIS Reads" library
@@ -252,10 +214,6 @@ Feature: Catalog Navigation module
 
   @smoke @logout @returnBooks @exclude_android
   Scenario: Catalog: Alert: Perform check of "Don't Allow" button
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for "LYRASIS Reads" library
@@ -267,7 +225,7 @@ Feature: Catalog Navigation module
       And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click RESERVE action button without closing alert on Book details screen
     Then There is an alert to allow notifications
-    When Tap Don't Allow button on the alert
+    When Don't Allow notifications on the alert
     Then Alert to allow notification is not displayed
       And Check that book contains REMOVE action button on Book details screen
 

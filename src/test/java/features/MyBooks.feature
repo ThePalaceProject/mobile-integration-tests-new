@@ -1,11 +1,13 @@
 Feature: My books module
 
-  @tier2
-  Scenario: Check of added books in Palace Bookshelf
-    When Close tutorial screen
+  Background:
+    Given Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
+
+  @tier2
+  Scenario: Check of added books in Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -21,10 +23,6 @@ Feature: My books module
 
   @tier2
   Scenario: Check of sorting in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -42,10 +40,6 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Return book from My Books in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -65,10 +59,6 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Get a book from Book Detail View and Return from Books in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -90,10 +80,6 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Get a book from Subcategory List View and Return from Books in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -119,10 +105,6 @@ Feature: My books module
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Get a book from Subcategory List View and Return from Subcategory List View in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -138,10 +120,6 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Get a book from Subcategory List View and Read from Books in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
