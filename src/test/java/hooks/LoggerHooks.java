@@ -64,6 +64,7 @@ public class LoggerHooks {
 
     @After
     public void afterTest(Scenario scenario) {
+        counter.remove();
         counter.set(0);
     }
 }

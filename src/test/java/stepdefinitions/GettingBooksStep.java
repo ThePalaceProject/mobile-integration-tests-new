@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 public class GettingBooksStep {
+    private static final Random random = new Random();
     private static final CatalogScreen catalogScreen = new CatalogScreen();
     private static final SearchScreen searchScreen = new SearchScreen();
     private static final SortOptionsScreen sortOptionsScreen = new SortOptionsScreen();
@@ -52,7 +53,6 @@ public class GettingBooksStep {
 
         SwipeElementUtils.swipeDown();
         List<String> books = catalogScreen.getListOfBooksNames();
-        Random random = new Random();
         int bookIndex = random.nextInt(books.size());
         String bookName = books.get(bookIndex);
         if(bookType.equalsIgnoreCase(BookType.AUDIOBOOK.getBookType())) {

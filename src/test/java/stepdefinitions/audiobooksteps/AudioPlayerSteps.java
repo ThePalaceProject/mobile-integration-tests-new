@@ -67,6 +67,7 @@ public class AudioPlayerSteps {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
         Assert.assertEquals("Book is playing on audio player screen", firstTiming, audioPlayerScreen.getLeftTime());
     }
