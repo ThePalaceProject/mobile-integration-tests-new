@@ -24,6 +24,8 @@ import java.util.List;
 
 public class CatalogBooksScreen extends Screen {
 
+    private static final String AUDIOBOOK_LOCATOR_PART = ". Audiobook.";
+
     private final ILabel lblNameOfFirstBook = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]")),
             new IosLocator(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))), "Book name of the first book");
@@ -60,7 +62,7 @@ public class CatalogBooksScreen extends Screen {
         String bookNameLocator = bookName;
 
         if(PlatformUtils.getPlatformName() == PlatformName.IOS && BookType.AUDIOBOOK == bookType) {
-            bookNameLocator = bookNameLocator + ". Audiobook.";
+            bookNameLocator = bookNameLocator + AUDIOBOOK_LOCATOR_PART;
         }
 
         ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
@@ -95,7 +97,7 @@ public class CatalogBooksScreen extends Screen {
     public CatalogBookModel openBookAndGetBookInfo(BookType bookType, String bookName, ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String bookNameForLocator = bookName;
         if (PlatformUtils.getPlatformName() == PlatformName.IOS && BookType.AUDIOBOOK == bookType) {
-            bookNameForLocator = bookNameForLocator + ". Audiobook.";
+            bookNameForLocator = bookNameForLocator + AUDIOBOOK_LOCATOR_PART;
         }
 
         String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
@@ -139,13 +141,13 @@ public class CatalogBooksScreen extends Screen {
     public CatalogBookModel clickActionButtonAndGetBookInfo(BookType bookType, String bookName, ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String bookNameForLocator = bookName;
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && BookType.AUDIOBOOK == bookType) {
-            bookNameForLocator = bookNameForLocator + ". Audiobook.";
+            bookNameForLocator = bookNameForLocator + AUDIOBOOK_LOCATOR_PART;
         }
 
         String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         IButton actionButton = getElementFactory().getButton(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID, bookNameForLocator, actionButtonString))),
-                new IosLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS, bookNameForLocator, actionButtonString)))), "Action button");
+                new IosLocator(By.xpath(String.format(BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS, bookNameForLocator, actionButtonString)))), "Action button to click");
 
         ILabel lblAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_ANDROID, bookNameForLocator, actionButtonString))),
@@ -195,7 +197,7 @@ public class CatalogBooksScreen extends Screen {
         String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         IButton actionButton = getElementFactory().getButton(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID, actionButtonString))),
-                new IosLocator(By.xpath(String.format(BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS, actionButtonString)))), "Action button");
+                new IosLocator(By.xpath(String.format(BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS, actionButtonString)))), "Action button on the first book");
         ILabel lblAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID, actionButtonString))),
                 new IosLocator(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_IOS, actionButtonString)))), "Author label");
@@ -216,15 +218,9 @@ public class CatalogBooksScreen extends Screen {
 
         CatalogBookModel bookInfo = new CatalogBookModel();
 
-        ActionProcessorUtils.doForIos(() -> {
-            bookInfo.setTitle(lblBookName.getAttribute(IosAttributes.NAME))
-                    .setAuthor(author);
-        });
+        ActionProcessorUtils.doForIos(() -> bookInfo.setTitle(lblBookName.getAttribute(IosAttributes.NAME)).setAuthor(author));
 
-        ActionProcessorUtils.doForAndroid(() -> {
-            bookInfo.setTitle(lblBookName.getText())
-                    .setAuthor(author);
-        });
+        ActionProcessorUtils.doForAndroid(() -> bookInfo.setTitle(lblBookName.getText()).setAuthor(author));
 
         actionButton.click();
         if (actionButtonKey == ActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == ActionButtonsForBooksAndAlertsKeys.REMOVE

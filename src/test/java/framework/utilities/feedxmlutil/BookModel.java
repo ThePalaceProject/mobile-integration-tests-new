@@ -1,4 +1,4 @@
-package framework.utilities.feedXMLUtil;
+package framework.utilities.feedxmlutil;
 
 import java.util.Objects;
 

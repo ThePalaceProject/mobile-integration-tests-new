@@ -74,10 +74,6 @@ public class BookDetailsScreen extends Screen {
     }
 
     public CatalogBookModel getBookInfo() {
-
-        System.out.println("title: " + lblBookTitle.getText());
-        System.out.println("author: " + lblBookAuthor.getText());
-
         return new CatalogBookModel()
                 .setTitle(lblBookTitle.getText())
                 .setAuthor(lblBookAuthor.getText());
@@ -94,7 +90,6 @@ public class BookDetailsScreen extends Screen {
         ILabel lblAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(AUTHOR_NAME_LOC_ANDROID, authorName))),
                 new IosLocator(By.xpath(String.format(AUTHOR_NAME_LOC_IOS, authorName)))), "Author name label");
-        System.out.println(lblAuthor.getText());
 
         return lblAuthor.state().waitForDisplayed();
     }

@@ -1,8 +1,8 @@
 package runners;
 
 import aquality.appium.mobile.application.AqualityServices;
-import framework.utilities.feedXMLUtil.GettingBookUtil;
-import framework.utilities.feedXMLUtil.XMLUtil;
+import framework.utilities.feedxmlutil.GettingBookUtil;
+import framework.utilities.feedxmlutil.XMLUtil;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.BeforeClass;
@@ -18,10 +18,12 @@ import org.junit.runner.RunWith;
         plugin = {
                 "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
         },
-        tags = "@settings"
+        tags = "@check"
 )
 
 public class TestRunner {
+
+        private TestRunner() {}
 
         @BeforeClass
         public static void setup() {

@@ -9,7 +9,7 @@ import models.IosLocator;
 import org.openqa.selenium.By;
 
 public class UserAgreementScreen extends Screen {
-    private final String LINK_IOS = "//XCUIElementTypeLink[contains(@name, \"%s\")]";
+    private static final String LINK_IOS = "//XCUIElementTypeLink[contains(@name, \"%s\")]";
     private final String LINK_ANDROID = "//android.widget.TextView[contains(@text, \"%s\")]";
     private final ILabel lblAgreement = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"License Agreement\")]")),

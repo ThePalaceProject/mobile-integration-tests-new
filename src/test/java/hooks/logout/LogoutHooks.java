@@ -44,7 +44,7 @@ public class LogoutHooks {
         AqualityServices.getLogger().info("Test finished - logging out");
         restartApp();
         List<String> listOfLibraries = context.get(ContextLibrariesKeys.LOG_OUT.getKey());
-        if (listOfLibraries.size() == 0) {
+        if (listOfLibraries.isEmpty()) {
             throw new RuntimeException("There are not libraries for logout");
         }
         for (String library : listOfLibraries) {

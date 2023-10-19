@@ -9,8 +9,8 @@ import models.IosLocator;
 import org.openqa.selenium.By;
 
 public class SoftwareLicensesScreen extends Screen {
-    private final String LINK_IOS = "//XCUIElementTypeLink[contains(@name, \"%s\")]";
-    private final String LINK_ANDROID = "//android.widget.TextView[contains(@text, \"%s\")]";
+    private static final String LINK_IOS = "//XCUIElementTypeLink[contains(@name, \"%s\")]";
+    private static final String LINK_ANDROID = "//android.widget.TextView[contains(@text, \"%s\")]";
 
     private final ILabel lblLicense = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Palace License\"]")),

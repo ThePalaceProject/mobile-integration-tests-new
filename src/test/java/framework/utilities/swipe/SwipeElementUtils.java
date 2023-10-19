@@ -26,29 +26,7 @@ public class SwipeElementUtils {
         Point center = mobileElement.getCenter();
         element.getTouchActions().swipe(new Point(upperLeft.x + dimensions.width / 2, center.getY() + dimensions.height / 2));
     }
-//
-//    public static void swipeElementUp(IElement element) {
-//        MobileElement mobileElement = element.getElement();
-//        Point upperLeft = mobileElement.getLocation();
-//        Point center = mobileElement.getCenter();
-//        element.getTouchActions().swipe(new Point(center.x, upperLeft.y));
-//    }
-//
-//    public static void swipeThroughEntireElementUp(IElement element) {
-//        MobileElement mobileElement = element.getElement();
-//        Point upperLeft = mobileElement.getLocation();
-//        Point center = mobileElement.getCenter();
-//        Dimension dimensions = mobileElement.getSize();
-//        ITouchActions touchActions = AqualityServices.getTouchActions();
-//        touchActions.swipe(new Point(center.x, upperLeft.y + dimensions.height - 1), new Point(center.x, upperLeft.y - 1));
-//    }
-//
-//    public static void swipeFromLeftToRight(IElement element) {
-//        MobileElement mobileElement = element.getElement();
-//        Rectangle rectangle = mobileElement.getRect();
-//        element.getTouchActions().swipe(new Point(rectangle.x + rectangle.width - 1, mobileElement.getCenter().y));
-//    }
-//
+
     public static void swipeFromRightToLeft(IElement element) {
         Point point = element.getElement().getCenter();
         AqualityServices.getTouchActions().swipe(new Point(0, element.getElement().getCenter().y), point);
@@ -65,18 +43,6 @@ public class SwipeElementUtils {
         Direction direction = entireElementSwipeDirection.getSwipeDirection(element);
         AqualityServices.getTouchActions().swipe(direction.getFrom(), direction.getTo());
     }
-
-    /*
-     * The method can be applied to every element with swiping/dragging support.
-     * Swipe/drag will be performed from one edge of the screen to another.
-     *
-     * @param element                   element to be dragged/swiped
-     * @param entireScreenDragDirection direction of the drag/swipe
-     */
-//    public static void dragElementThroughEntireScreen(IElement element, EntireScreenDragDirection entireScreenDragDirection) {
-//        Direction direction = entireScreenDragDirection.getDragDirection(element);
-//        AqualityServices.getTouchActions().swipe(direction.getFrom(), direction.getTo());
-//    }
 
     public static void swipeDown() {
         double x = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.5;

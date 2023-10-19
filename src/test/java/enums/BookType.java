@@ -8,9 +8,9 @@ public enum BookType {
     AUDIOBOOK("audiobook"),
     PDF("pdf");
 
-    private String bookType;
+    private String currentBookType;
 
     public String getBookType() {
-        return bookType;
+        return currentBookType;
     }
 }

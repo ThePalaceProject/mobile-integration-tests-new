@@ -1,7 +1,9 @@
-package framework.utilities.feedXMLUtil;
+package framework.utilities.feedxmlutil;
 
 public class GettingBookUtil {
     private static XMLUtil xmlUtil;
+
+    private GettingBookUtil() {}
 
     public static synchronized void setXmlUtil(XMLUtil xml){
         xmlUtil = xml;

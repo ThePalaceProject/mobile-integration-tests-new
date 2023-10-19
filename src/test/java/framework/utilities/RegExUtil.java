@@ -5,9 +5,11 @@ import java.util.regex.Pattern;
 
 public class RegExUtil {
 
+    private RegExUtil() {}
+
     public static String deleteBracketsFromText(String text) {
-        text = text.replaceAll("\\(", "");
-        text = text.replaceAll("\\)", "");
+        text = text.replace("\\(", "");
+        text = text.replace("\\)", "");
         return text;
     }
 

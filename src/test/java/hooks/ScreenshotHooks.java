@@ -2,7 +2,7 @@ package hooks;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
-import constants.keysForContext.ScenarioContextKey;
+import constants.keysforcontext.ScenarioContextKey;
 import framework.utilities.ScreenshotUtils;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.After;

@@ -8,6 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ConfigurationStorage {
     private static Map<Long, String> map = new ConcurrentHashMap<>();
 
+    private ConfigurationStorage() {}
+
     public static synchronized void lockCredentials(String barcode) {
         AqualityServices.getLogger().info("Locking credential with barcode " + barcode);
         map.put(Thread.currentThread().getId(), barcode);

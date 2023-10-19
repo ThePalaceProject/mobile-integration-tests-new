@@ -10,11 +10,11 @@ import screens.*;
 import screens.menubar.MenuBar;
 import screens.menubar.MenuBarScreen;
 
+import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 
 public class GettingBooksStep {
-    private static final Random random = new Random();
+    private static final SecureRandom random = new SecureRandom();
     private static final CatalogScreen catalogScreen = new CatalogScreen();
     private static final SearchScreen searchScreen = new SearchScreen();
     private static final SortOptionsScreen sortOptionsScreen = new SortOptionsScreen();

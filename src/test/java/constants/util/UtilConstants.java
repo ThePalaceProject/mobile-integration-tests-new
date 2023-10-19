@@ -15,4 +15,6 @@ public class UtilConstants {
     public static final String PALACE_MARKETPLACE = "palace marketplace";
     public static final String PALACE_MARKETPLACE_CATEGORY = "Palace Marketplace Test";
     public static final String PALACE_BOOKSHELF = "Palace Bookshelf";
+
+    private UtilConstants() { }
 }

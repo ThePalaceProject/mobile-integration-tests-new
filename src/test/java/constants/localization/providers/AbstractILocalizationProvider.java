@@ -27,7 +27,7 @@ public abstract class AbstractILocalizationProvider implements ILocalizationProv
      */
     private final String filename;
 
-    public AbstractILocalizationProvider(@NonNull String filename) {
+    protected AbstractILocalizationProvider(@NonNull String filename) {
         localizationController = new LocalizationController(StandardCharsets.UTF_8);
         this.filename = filename;
         bundles.put(DEFAULT_LOCALE, ResourceBundle

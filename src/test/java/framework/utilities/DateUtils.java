@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DateUtils {
+
+    private DateUtils() {}
     public static Duration getDuration(String date) {
         String formattedString = "";
         List<String> parts = Arrays.asList(date.split(":"));
