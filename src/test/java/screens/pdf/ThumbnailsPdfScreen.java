@@ -18,7 +18,7 @@ public class ThumbnailsPdfScreen extends Screen {
     private static final String THUMBNAIL_NUMBER_LOCATOR_ANDROID = "//android.view.View[@content-desc=\"Thumbnail of Page %d\"]";
 
     private static final String THUMBNAIL_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell";
-    private static final String THUMBNAIL_NUMBER_LOCATOR_IOS = THUMBNAIL_LOCATOR_IOS + "/XCUIElementTypeStaticText[@name=\"%d\"]";
+    private static final String THUMBNAIL_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]/XCUIElementTypeStaticText";
 
     public ThumbnailsPdfScreen() {
         super(LocatorUtils.getLocator(

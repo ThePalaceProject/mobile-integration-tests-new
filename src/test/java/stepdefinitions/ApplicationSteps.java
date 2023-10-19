@@ -1,7 +1,6 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.timeouts.RestartAppTimeouts;
@@ -144,11 +143,7 @@ public class ApplicationSteps {
                 readerEpubScreen.openNavigationBar();
                 readerEpubScreen.getNavigationBarEpubScreen().returnToPreviousScreen();
             } else if (readerPdfScreen.state().isDisplayed()) {
-                if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-                    readerPdfScreen.getNavigationBarScreen().tapBackButton();
-                } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-                    readerPdfScreen.getNavigationBarScreen().tapBackButton();
-                }
+                readerPdfScreen.getNavigationBarScreen().tapBackButton();
             }
         });
     }
