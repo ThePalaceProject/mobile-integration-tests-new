@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CatalogScreen extends Screen {
+    private final Random random = new Random();
 
     private final ILabel lblCatalog = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.TextView")),
@@ -149,7 +150,6 @@ public class CatalogScreen extends Screen {
     public String clickToMoreBtn() {
         List<IButton> buttons = getMoreBtn();
 
-        Random random = new Random();
         int randomNumber = random.nextInt(buttons.size()) + 1;
         String sectionName = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID, randomNumber))),
