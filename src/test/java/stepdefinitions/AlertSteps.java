@@ -23,7 +23,7 @@ public class AlertSteps {
         alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtons);
     }
 
-    @When("Tap Don't Allow button on the alert")
+    @When("Don't Allow notifications on the alert")
     public void tapDoNotAllow() {
         AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
     }

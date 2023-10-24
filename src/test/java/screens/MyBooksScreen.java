@@ -27,7 +27,7 @@ public class MyBooksScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name,'Visit the Catalog')]"))), "No books present label");
     private final ILabel mainBooksElementCollection = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"feedContentRefresh\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeCollectionView"))), "Elements collection container");
+            new IosLocator(By.xpath("//XCUIElementTypeScrollView"))), "Elements collection container");
 
     private static final String BOOK_LOC_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout";
     private static final String BOOK_NAME_LOC_ANDROID = BOOK_LOC_ANDROID + "/android.view.ViewGroup/android.widget.TextView[1]";
@@ -35,9 +35,9 @@ public class MyBooksScreen extends Screen {
     private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
 
-    private static final String BOOK_LOC_IOS = "//XCUIElementTypeCollectionView//XCUIElementTypeCell";
-    private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
-    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_LOC_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+    private static final String BOOK_LOC_IOS = "//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeButton";
+    private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeButton[contains(@name,\"%s\")]";
+    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_LOC_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeButton/XCUIElementTypeStaticText[1]";
     private static final String BOOK_NAME_LOC_IOS = BOOK_LOC_IOS + "/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
     private static final String AUTHORS_NAME_LOC_IOS = BOOK_LOC_IOS + "/XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
 

@@ -9,7 +9,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for 'Deep into Pharo' and save bookName as 'bookNameInfo'
+      And Search for 'Pharo by Example 5.0' and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -72,7 +72,8 @@ Feature: Read PDF in Palace Bookshelf on IOS
 
   @tier2 @exclude_android
   Scenario: Navigate by Page slider
-    When Save page number as 'pageNumber' on pdf reader screen
+    When Swipe pdf page forward from 4 to 6 times on reader pdf screen
+      And Save page number as 'pageNumber' on pdf reader screen
       And Slide page slider RIGHT on reader pdf screen
     Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen
     When Save page number as 'pageNumber' on pdf reader screen

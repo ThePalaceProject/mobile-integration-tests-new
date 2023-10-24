@@ -1,5 +1,6 @@
 package constants.localization.providers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,6 +19,7 @@ public class LocalizationController extends ResourceBundle.Control {
         this.charset = charset;
     }
 
+    @Override
     public ResourceBundle newBundle(String baseName, Locale locale, String format,
                                     ClassLoader loader, boolean reload) throws IOException {
         String bundleName = toBundleName(baseName, locale);
@@ -37,8 +39,9 @@ public class LocalizationController extends ResourceBundle.Control {
             stream = loader.getResourceAsStream(resourceName);
         }
         if (stream != null) {
-            try {
-                bundle = new PropertyResourceBundle(new InputStreamReader(stream, charset));
+            try(InputStreamReader inputStreamReader = new InputStreamReader(stream, charset);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+                bundle = new PropertyResourceBundle(bufferedReader);
             } finally {
                 stream.close();
             }

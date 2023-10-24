@@ -26,8 +26,8 @@ public class AlertScreen extends  Screen{
 
     public AlertScreen() {
         super(LocatorUtils.getLocator(
-                new AndroidLocator(By.xpath("//android.widget.LinearLayout[contains(@resource-id, \"grant_dialog\")]")),
-                new IosLocator(By.xpath("//XCUIElementTypeAlert"))), "Alert screen");
+                new AndroidLocator(By.xpath(UNIQUE_ELEMENT_LOCATOR_ANDROID)),
+                new IosLocator(By.xpath(UNIQUE_ELEMENT_LOCATOR_IOS))), "Alert screen");
     }
 
     public void waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {

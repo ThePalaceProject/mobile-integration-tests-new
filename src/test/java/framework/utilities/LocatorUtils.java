@@ -10,6 +10,8 @@ public class LocatorUtils {
 
     private static final PlatformName PLATFORM_NAME = AqualityServices.getApplication().getPlatformName();
 
+    private LocatorUtils() {}
+
     public static By getLocator(AndroidLocator androidLocator, IosLocator iosLocator) {
         switch (PLATFORM_NAME) {
             case ANDROID:

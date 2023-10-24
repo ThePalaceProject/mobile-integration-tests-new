@@ -1,11 +1,13 @@
 Feature: Book detail view screen
 
-  @tier2
-  Scenario Outline: Check of a book title and author in LYRASIS Reads
-    When Close tutorial screen
+  Background:
+    Given Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
+
+  @tier2
+  Scenario Outline: Check of a book title and author in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -30,10 +32,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check of a book format in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -57,10 +55,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check of a "More..." button in Description section in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -85,10 +79,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check fields in Information section in LYRASIS Reads
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -114,10 +104,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check related books section in LYRASIS
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -173,10 +159,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check of a book title and author in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -189,10 +171,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check of a "More..." button in Description section in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -205,10 +183,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check fields in Information section in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -220,10 +194,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check related books section in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -255,10 +225,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check of a book title and author in Overdrive
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Turn on test mode
@@ -276,10 +242,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check of a "More..." button in Description section in Overdrive
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Turn on test mode
@@ -297,10 +259,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check fields in Information section in Overdrive
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Turn on test mode
@@ -318,10 +276,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check related books section in Overdrive
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Turn on test mode
@@ -340,10 +294,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Get button: Check of availability of required interface elements
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -356,10 +306,6 @@ Feature: Book detail view screen
 
   @tier2 @exclude_android
   Scenario: Get button: check of Library Card field
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -372,10 +318,6 @@ Feature: Book detail view screen
 
   @tier2 @exclude_android
   Scenario: Get button: check of Password field
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -388,10 +330,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Get: Sign in: Check of loging in with leaving the Library Card field empty
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -405,10 +343,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Get: Sign in: Check of loging in with leaving the Password field empty
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -422,10 +356,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Get: Sign in: Library card: Check that the field allows you to edit the data
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -440,10 +370,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Get: Sign in: Library card: Check of less than minimum allowed or more than maximum characters
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -464,10 +390,6 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Get: Log in: Library card: Check that the field doesn't allow characters except numbers
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
@@ -483,49 +405,37 @@ Feature: Book detail view screen
 
   @smoke
   Scenario: Book detail view: Perform check of Get button before log in from the Settings tab
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
     And Open search modal
-    And Search for "Lemon" and save bookName as 'bookNameInfo'
+    And Search for "Eat That Frog!" and save bookName as 'bookNameInfo'
     And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
     And Click GET action button on Book details screen
     Then Sing in screen is opened
 
   @smoke
   Scenario: Book detail view: Get: Log in: Perform check of availability of required interface elements
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
-    And Open search modal
-    And Search for "Libertie" and save bookName as 'bookNameInfo'
-    And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
-    And Click GET action button on Book details screen
+      And Open search modal
+      And Search for "Libertie" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on Book details screen
     Then Sing in screen is opened
-    And All fields and links are displayed on Sign in screen
+      And All fields and links are displayed on Sign in screen
 
   @smoke @logout @returnBooks
   Scenario: Book detail view: Get: Log in: Perform check of logging in
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
-    And Open search modal
-    And Search for "Renaissance Futurities" and save bookName as 'bookNameInfo'
-    And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
-    And Click GET action button on Book details screen
+      And Open search modal
+      And Search for "Renaissance Futurities" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on Book details screen
     Then Sing in screen is opened
     When Save library "LYRASIS Reads" for log out
-    And Enter valid credentials fot "LYRASIS Reads" library on Sign in screen
+      And Enter valid credentials fot "LYRASIS Reads" library on Sign in screen
     Then Check that book contains READ action button on Book details screen

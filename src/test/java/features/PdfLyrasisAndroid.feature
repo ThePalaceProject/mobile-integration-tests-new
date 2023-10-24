@@ -183,8 +183,8 @@ Feature: Read PDF in LYRASIS Reads on Android
       And Scroll page up on pdf reader screen
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
-  @smoke @logout @returnBooks
-  Scenario: Read pdfs: Table of contents: Perform check of navigation
+  @smoke @logout @returnBooks @exclude_ios
+  Scenario: Android: Read pdfs: Table of contents: Perform check of navigation
     When Open search modal
       And Search for "Race Cars" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -199,8 +199,8 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Open content with thumbnails on pdf toc screen
     Then Thumbnails of the book pages are displayed
 
-  @smoke @logout @returnBooks
-  Scenario: Read pdfs: Perform check of back button
+  @smoke @logout @returnBooks @exclude_ios
+  Scenario: Android: Read pdfs: Perform check of back button
     When Open search modal
       And Search for "Race Cars" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -211,8 +211,8 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Close pdf reader by back button
     Then Book "bookInfo" is opened on book details screen
 
-  @smoke @logout @returnBooks
-  Scenario: Read pdfs: Table of contents: Contents with thumbnails: Perform check of navigation
+  @smoke @logout @returnBooks @exclude_ios
+  Scenario: Android: Read pdfs: Table of contents: Contents with thumbnails: Perform check of navigation
     When Open search modal
       And Search for "Race Cars" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -227,8 +227,8 @@ Feature: Read PDF in LYRASIS Reads on Android
       And Return to pdf reader screen from pdf toc screen
     Then Page number is equal to 'pageInfo' on pdf reader screen
 
-  @smoke @logout @returnBooks
-  Scenario: Read pdfs: Table of contents: Chapter content: Perform check of navigation
+  @smoke @logout @returnBooks @exclude_ios
+  Scenario: Android: Read pdfs: Table of contents: Chapter content: Perform check of navigation
     When Open search modal
       And Search for "Comprehension and Critical Thinking Grade 6" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'

@@ -3,7 +3,7 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
-import framework.utilities.feedXMLUtil.GettingBookUtil;
+import framework.utilities.feedxmlutil.GettingBookUtil;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import screens.MainToolBarScreen;

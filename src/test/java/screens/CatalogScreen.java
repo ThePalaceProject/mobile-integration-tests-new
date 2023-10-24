@@ -20,10 +20,12 @@ import org.openqa.selenium.By;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CatalogScreen extends Screen {
+    private final Random random = new Random();
 
     private final ILabel lblCatalog = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.TextView")),
@@ -136,7 +138,7 @@ public class CatalogScreen extends Screen {
                 new AndroidLocator(By.xpath(CATEGORY_LOCATOR_ANDROID)),
                 new IosLocator(By.xpath(CATEGORY_LOCATOR_IOS)))).size() > COUNT_OF_CATEGORIES_TO_WAIT_FOR);
         List<String> currentBooksNames = geListOfCategoriesNames();
-        return currentBooksNames.size() > 0;
+        return !currentBooksNames.isEmpty();
     }
 
     public boolean isMoreBtnPresent() {
@@ -148,7 +150,7 @@ public class CatalogScreen extends Screen {
     public String clickToMoreBtn() {
         List<IButton> buttons = getMoreBtn();
 
-        int randomNumber = 1 + (int) (Math.random() * buttons.size());
+        int randomNumber = random.nextInt(buttons.size()) + 1;
         String sectionName = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID, randomNumber))),
                 new IosLocator(By.xpath(String.format(CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS, randomNumber)))), "Book section name").getText();

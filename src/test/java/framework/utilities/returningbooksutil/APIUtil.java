@@ -1,4 +1,4 @@
-package framework.utilities.returningBooksUtil;
+package framework.utilities.returningbooksutil;
 
 import aquality.appium.mobile.application.AqualityServices;
 import framework.configuration.Credentials;
@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 public class APIUtil {
     private static final PropertyUtils propertyUtils = new PropertyUtils("src/test/resources/apiConfig.properties");
+    private static final String PROPERTY_BASE_URL = "base_url";
+
+    private APIUtil() {  }
 
     public static void returnBooks(Credentials credentials) {
         String authHeader = getAuthHeader(credentials);
@@ -43,14 +46,14 @@ public class APIUtil {
         OkHttpClient client = makeHttpClient();
         ReturnBooksAPIMethods getBooksAPIMethods = new Retrofit
                 .Builder()
-                .baseUrl(propertyUtils.getProperty("base_url"))
+                .baseUrl(propertyUtils.getProperty(PROPERTY_BASE_URL))
                 .client(client)
                 .build()
                 .create(ReturnBooksAPIMethods.class);
 
-        if (booksForReturning.size() != 0) {
+        if (!booksForReturning.isEmpty()) {
             for (String bookUrl : booksForReturning) {
-                String path = bookUrl.replace(propertyUtils.getProperty("base_url"), "");
+                String path = bookUrl.replace(propertyUtils.getProperty(PROPERTY_BASE_URL), "");
                 try {
                     getBooksAPIMethods.returnBooks(authHeader, path).execute();
                 } catch (IOException e) {
@@ -72,7 +75,7 @@ public class APIUtil {
         OkHttpClient client = makeHttpClient();
         GetBooksAPIMethods getBooksAPIMethods = new Retrofit
                 .Builder()
-                .baseUrl(propertyUtils.getProperty("base_url"))
+                .baseUrl(propertyUtils.getProperty(PROPERTY_BASE_URL))
                 .addConverterFactory(JaxbConverterFactory.create())
                 .client(client)
                 .build()

@@ -39,16 +39,14 @@ public class LoggerHooks {
     @BeforeStep
     public void getStepName(Scenario scenario) throws Exception {
         Field delegateField = scenario.getClass().getDeclaredField("delegate");
-        delegateField.setAccessible(true);
         TestCaseState testCaseState = (TestCaseState) delegateField.get(scenario);
 
         Field testCaseField = testCaseState.getClass().getDeclaredField("testCase");
-        testCaseField.setAccessible(true);
         TestCase r1 = (TestCase) testCaseField.get(testCaseState);
 
         List<PickleStepTestStep> stepDefinitions = r1.getTestSteps()
                 .stream()
-                .filter(x -> x instanceof PickleStepTestStep)
+                .filter(PickleStepTestStep.class::isInstance)
                 .map(x -> (PickleStepTestStep) x)
                 .collect(Collectors.toList());
 
@@ -64,6 +62,7 @@ public class LoggerHooks {
 
     @After
     public void afterTest(Scenario scenario) {
+        counter.remove();
         counter.set(0);
     }
 }

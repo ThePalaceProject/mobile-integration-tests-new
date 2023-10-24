@@ -10,6 +10,8 @@ public class ActionProcessorUtils {
 
     private static final PlatformName PLATFORM_NAME = AqualityServices.getApplication().getPlatformName();
 
+    private ActionProcessorUtils() {}
+
     private static void doForPlatform(PlatformName platformName, Runnable action) {
         if(PLATFORM_NAME.equals(platformName)) {
             action.run();

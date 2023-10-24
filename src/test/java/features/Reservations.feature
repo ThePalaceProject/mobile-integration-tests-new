@@ -13,7 +13,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "The Santa Suit" and save bookName as "bookNameInfo"
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click REMOVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -32,7 +32,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "Vanderbilt" and save bookName as "bookNameInfo"
       And Switch to 'Audiobooks' catalog tab
     Then Subcategory screen is opened
     When Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -59,7 +59,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "The Song of Achilles" and save bookName as "bookNameInfo"
       And Switch to 'Audiobooks' catalog tab
     Then Subcategory screen is opened
     When Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -185,16 +185,16 @@ Feature: Reservation of book in LYRASIS
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
-    And Open Catalog
-    And Open search modal
-    And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
-    And Switch to 'Audiobooks' catalog tab
-    And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open Catalog
+      And Open search modal
+      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open Reservations
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Reservations screen
     When Open AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo on Reservations screen
-    And Click REMOVE action button without closing alert on Book details screen
+      And Click REMOVE action button without closing alert on Book details screen
     Then There is an alert to remove reservations with REMOVE and CANCEL buttons
     When Tap CANCEL button on the alert
     Then Check that book contains REMOVE action button on Book details screen

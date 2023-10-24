@@ -11,6 +11,12 @@
       "platformVersion": "16"
     }
   },
+  "iPhone15ProMax_17": {
+    "capabilities": {
+      "deviceName": "iPhone 15 Pro Max",
+      "platformVersion": "17"
+    }
+  },
   "iPhone12Mini_14": {
     "capabilities": {
       "deviceName": "iPhone 12 Mini",

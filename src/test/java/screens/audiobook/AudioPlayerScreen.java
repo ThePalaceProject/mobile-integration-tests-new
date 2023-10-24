@@ -17,8 +17,9 @@ import models.IosLocator;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AudioPlayerScreen extends Screen {
 
@@ -93,12 +94,12 @@ public class AudioPlayerScreen extends Screen {
         sleepTimerScreen = new SleepTimerScreen();
     }
 
-    private static final Map<String, String> speedNameIos = new HashMap<String, String>() {{
-        put("2.0", "Two times normal speed. Fastest.");
-        put("0.75", "Three quarters of normal speed. Slower.");
-        put("1.25", "One and one quarter faster than normal speed.");
-        put("1.5", "One and a half times faster than normal speed.");
-    }};
+    private static final Map<String, String> speedNameIos = Stream.of(
+            new String[]{"2.0", "Two times normal speed. Fastest."},
+            new String[]{"0.75", "Three quarters of normal speed. Slower."},
+            new String[]{"1.25", "One and one quarter faster than normal speed."},
+            new String[]{"1.5", "One and a half times faster than normal speed."}
+    ).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
     public boolean isPlayerOpened(String bookName) {
         btnPlay.state().waitForDisplayed();

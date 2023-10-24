@@ -1,4 +1,4 @@
-package framework.utilities.feedXMLUtil;
+package framework.utilities.feedxmlutil;
 
 import aquality.appium.mobile.application.AqualityServices;
 import constants.util.UtilConstants;
@@ -15,8 +15,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class XMLUtil {
+    private static final String SEPARATOR_LINE = "//////////////////////////////////////////////////////////////////////////////////////";
     private static final String BASE_URL = "https://gorgon.tpp-qa.lyrasistechnology.org";
-    private static final String partOfURL = "lyrasis-reads/crawlable";
+    private static final String PART_OF_URL = "lyrasis-reads/crawlable";
     private HashMap<String, List<BookModel>> hashMapAvailableEbooks;
     private HashMap<String, List<BookModel>> hashMapAvailableAudiobooks;
     private HashMap<String, List<BookModel>> hashMapUnavailableEbooks;
@@ -24,33 +25,33 @@ public class XMLUtil {
     private ArrayList<BookModel> availableBooksAnyType;
     private ArrayList<BookModel> unavailableBooksAnyType;
     private ArrayList<BookModel> availablePdf;
-    private final int CONNECT_TIMEOUT = 120;
-    private final int READ_TIMEOUT = 120;
-    private final int WRITE_TIMEOUT = 120;
-    private final int THREAD_SLEEP_TIME = 3000;
+    private static final int CONNECT_TIMEOUT = 120;
+    private static final int READ_TIMEOUT = 120;
+    private static final int WRITE_TIMEOUT = 120;
+    private static final int THREAD_SLEEP_TIME = 3000;
 
     public XMLUtil() {
         setHashMapsForEBooksAndAudioBooks();
     }
 
     public void getDistributorsInfo(){
-        AqualityServices.getLogger().info("//////////////////////////////////////////////////////////////////////////////////////");
+        AqualityServices.getLogger().info(SEPARATOR_LINE);
         for (String distributor : hashMapAvailableAudiobooks.keySet()) {
             printDistributorInfo("hashMapAvailableAudiobooks", distributor, hashMapAvailableAudiobooks.get(distributor));
         }
-        AqualityServices.getLogger().info("//////////////////////////////////////////////////////////////////////////////////////");
+        AqualityServices.getLogger().info(SEPARATOR_LINE);
         for (String distributor : hashMapAvailableEbooks.keySet()) {
             printDistributorInfo("hashMapAvailableEbooks", distributor, hashMapAvailableEbooks.get(distributor));
         }
-        AqualityServices.getLogger().info("//////////////////////////////////////////////////////////////////////////////////////");
+        AqualityServices.getLogger().info(SEPARATOR_LINE);
         for (String distributor : hashMapUnavailableAudiobooks.keySet()) {
             printDistributorInfo("hashMapUnavailableAudiobooks", distributor, hashMapUnavailableAudiobooks.get(distributor));
         }
-        AqualityServices.getLogger().info("//////////////////////////////////////////////////////////////////////////////////////");
+        AqualityServices.getLogger().info(SEPARATOR_LINE);
         for (String distributor : hashMapUnavailableEbooks.keySet()) {
             printDistributorInfo("hashMapUnavailableEbooks", distributor, hashMapUnavailableEbooks.get(distributor));
         }
-        AqualityServices.getLogger().info("//////////////////////////////////////////////////////////////////////////////////////");
+        AqualityServices.getLogger().info(SEPARATOR_LINE);
     }
 
     private void printDistributorInfo(String text, String distributor, List<BookModel> list){
@@ -62,15 +63,14 @@ public class XMLUtil {
     }
 
     private void setListAvailableAndUnavailableBooksAnyTypeMayBeWithRepeat() {
-        String url = partOfURL;
+        String url = PART_OF_URL;
         ArrayList<BookModel> listAvailableBooksAnyType = new ArrayList<>();
         ArrayList<BookModel> listUnavailableBooksAnyType = new ArrayList<>();
         ArrayList<BookModel> listAvailablePdf = new ArrayList<>();
 
         while (true) {
             FeedModel feedModel = supportMethod(url);
-            boolean isNextXMLPresent = feedModel.getLinksFromFeed().stream().anyMatch(link -> link.getConditionForNextXML().equals(UtilConstants.NEXT.toLowerCase()));
-            if (!isNextXMLPresent) {
+            if (!hasNextXML(feedModel)) {
                 break;
             }
 
@@ -154,6 +154,11 @@ public class XMLUtil {
         availableBooksAnyType = listAvailableBooksAnyType;
         unavailableBooksAnyType = listUnavailableBooksAnyType;
         availablePdf = getListAvailablePdfWithoutRepetitions(listAvailablePdf);
+    }
+
+    private boolean hasNextXML(FeedModel feedModel) {
+        return feedModel.getLinksFromFeed().stream()
+                .anyMatch(link -> link.getConditionForNextXML().equals(UtilConstants.NEXT.toLowerCase()));
     }
 
     private ArrayList<BookModel> getListAvailablePdfWithoutRepetitions(ArrayList<BookModel> arrayList) {

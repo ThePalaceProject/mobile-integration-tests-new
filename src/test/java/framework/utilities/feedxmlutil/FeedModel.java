@@ -1,4 +1,4 @@
-package framework.utilities.feedXMLUtil;
+package framework.utilities.feedxmlutil;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -180,7 +180,7 @@ class Copies {
 
 class IndirectAcquisition{
     private String type;
-    private InternalIndirectAcquisition indirectAcquisition;
+    private InternalIndirectAcquisition internalIndirectAcquisition;
 
     public String getType() {
         return type;
@@ -192,12 +192,12 @@ class IndirectAcquisition{
     }
 
     public InternalIndirectAcquisition getInternalIndirectAcquisition() {
-        return indirectAcquisition;
+        return internalIndirectAcquisition;
     }
 
     @XmlElement(name = "indirectAcquisition", namespace = "http://opds-spec.org/2010/catalog")
     public void setInternalIndirectAcquisition(InternalIndirectAcquisition indirectAcquisition) {
-        this.indirectAcquisition = indirectAcquisition;
+        this.internalIndirectAcquisition = indirectAcquisition;
     }
 }
 

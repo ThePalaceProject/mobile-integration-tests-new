@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 public class SubcategoryScreen extends Screen {
 
     private final ILabel lblFirstBookTitle = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeCell//XCUIElementTypeStaticText[1]"))), "First book title label");
+            new AndroidLocator(By.xpath(BOOK_NAME_LOCATOR_ANDROID)),
+            new IosLocator(By.xpath(BOOK_NAME_LOCATOR_IOS))), "First book title label");
     private final ILabel lblFirstBookAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeCell//XCUIElementTypeStaticText[@name][2]"))), "First book author label");
+            new AndroidLocator(By.xpath(AUTHOR_INFO_LOCATOR_ANDROID)),
+            new IosLocator(By.xpath(AUTHOR_INFO_LOCATOR_IOS))), "First book author label");
     private final ILabel lblFirstBook = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id,\"bookCellIdleCover\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeCell//XCUIElementTypeStaticText[1]"))), "First book label");
@@ -140,9 +140,5 @@ public class SubcategoryScreen extends Screen {
                 .stream()
                 .map(IElement::getText)
                 .collect(Collectors.toList());
-    }
-
-    private List<aquality.appium.mobile.elements.interfaces.IElement> getElements(String xpath, ElementType label) {
-        return getElementFactory().findElements(By.xpath(xpath), label);
     }
 }
