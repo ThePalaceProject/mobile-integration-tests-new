@@ -100,3 +100,6 @@ jobs:
           state: 'success'
           sha: ${{ github.event.pull_request.head.sha || github.sha }}
           target_url: https://thepalaceproject.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
+
+      - name: Debug Allure Results
+        run: ls -R allure-results
