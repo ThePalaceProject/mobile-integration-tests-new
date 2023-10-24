@@ -86,6 +86,16 @@ jobs:
         env:
             GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
+      - name: Debug Git Config
+        run: |
+          git config --list
+        if: always()
+
+      - name: Debug Allure Report Files
+        run: |
+          ls -R allure-report
+        if: always()
+
 #      - name: Get Allure history
 #        uses: actions/checkout@v3
 #        if: always()
