@@ -62,44 +62,68 @@ jobs:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      - name: Get Allure history
-        uses: actions/checkout@v3
+      - name: Deploy Allure Report to GitHub Pages
         if: always()
+        run: |
+          mkdir -p allure-report
+          cp -r target/site/allure-maven-plugin/* allure-report/
+          echo "Allure report generated and copied to allure-report directory."
         continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Allure Report action from marketplace
-        uses: PavanMudigonda/allure-html-reporter-github-pages@v1.0
-        if: always()
-        id: allure-report
-        with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          WORKFLOW_ID: maven.yml
-          allure_results: allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
 
       - name: Deploy report to GitHub Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v2
+        run: |
+          git clone https://github.com/${{ github.repository }}.git gh-pages
+          cd gh-pages
+          git checkout gh-pages
+          mkdir -p allure-history/${{ github.run_number }}
+          cp -r ../allure-report/* allure-history/${{ github.run_number }}/
+          git add .
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Add Allure report from run ${{ github.run_number }}"
+          git push origin gh-pages
         env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
-          keep_files: true
+            GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.PERSONAL_TOKEN}}
-          context: 'Test report'
-          state: 'success'
-          sha: ${{ github.event.pull_request.head.sha || github.sha }}
-          target_url: https://thepalaceproject.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
-
-      - name: Debug Allure Results
-        run: ls -R allure-results
+#      - name: Get Allure history
+#        uses: actions/checkout@v3
+#        if: always()
+#        continue-on-error: true
+#        with:
+#          ref: gh-pages
+#          path: gh-pages
+#
+#      - name: Allure Report action from marketplace
+#        uses: PavanMudigonda/allure-html-reporter-github-pages@v1.0
+#        if: always()
+#        id: allure-report
+#        with:
+#          token: ${{ secrets.PERSONAL_TOKEN }}
+#          WORKFLOW_ID: maven.yml
+#          allure_results: allure-results
+#          gh_pages: gh-pages
+#          allure_report: allure-report
+#          allure_history: allure-history
+#
+#      - name: Deploy report to GitHub Pages
+#        if: always()
+#        uses: peaceiris/actions-gh-pages@v2
+#        env:
+#          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+#          PUBLISH_BRANCH: gh-pages
+#          PUBLISH_DIR: allure-history
+#          keep_files: true
+#
+#      - name: Post the link to the report
+#        if: always()
+#        uses: Sibz/github-status-action@v1
+#        with:
+#          authToken: ${{secrets.PERSONAL_TOKEN}}
+#          context: 'Test report'
+#          state: 'success'
+#          sha: ${{ github.event.pull_request.head.sha || github.sha }}
+#          target_url: https://thepalaceproject.github.io/allure-html-reporter-github-pages/${{ github.run_number }}
+#
+#      - name: Debug Allure Results
+#        run: ls -R allure-results
