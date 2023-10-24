@@ -403,7 +403,7 @@ Feature: Book detail view screen
       And Tap the Sign in button on Sign in screen
     Then There is an alert "Invalid credentials" on Sign in screen
 
-  @smoke
+  @report
   Scenario: Book detail view: Perform check of Get button before log in from the Settings tab
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen

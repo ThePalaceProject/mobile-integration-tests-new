@@ -39,9 +39,11 @@ public class LoggerHooks {
     @BeforeStep
     public void getStepName(Scenario scenario) throws Exception {
         Field delegateField = scenario.getClass().getDeclaredField("delegate");
+        delegateField.setAccessible(true);
         TestCaseState testCaseState = (TestCaseState) delegateField.get(scenario);
 
         Field testCaseField = testCaseState.getClass().getDeclaredField("testCase");
+        testCaseField.setAccessible(true);
         TestCase r1 = (TestCase) testCaseField.get(testCaseState);
 
         List<PickleStepTestStep> stepDefinitions = r1.getTestSteps()
