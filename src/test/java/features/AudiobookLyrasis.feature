@@ -102,7 +102,7 @@ Feature: Audiobooks in LYRASIS Reads
     When Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
       And Select 2X playback speed on playback speed audiobook screen
-      And Stretch slider on the time tracking line forward on audio player screen
+      And Stretch slider on the time tracking line to the end of playback
       And Listen a chapter on audio player screen
     Then Play button is present on audio player screen
     When Save the name of chapter as 'nextChapter' on audio player screen
