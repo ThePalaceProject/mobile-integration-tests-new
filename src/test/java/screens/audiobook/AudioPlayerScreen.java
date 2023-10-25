@@ -201,6 +201,14 @@ public class AudioPlayerScreen extends Screen {
         action.press(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, startY)).release().perform();
     }
 
+    public void stretchPlaySliderToTheEnd() {
+        int startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
+        int startY = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
+        double endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getSize().width * 0.9;
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.press(PointOption.point(startX, startY)).moveTo(PointOption.point((int) endX, startY)).release().perform();
+    }
+
     public boolean isLineRemainingDisplayed() {
         return lblLineRemaining.state().isDisplayed();
     }

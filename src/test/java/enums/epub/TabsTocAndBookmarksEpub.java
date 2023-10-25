@@ -9,8 +9,8 @@ import lombok.Getter;
 @Getter
 public enum TabsTocAndBookmarksEpub {
 
-    BOOKMARKS("Bookmarks", "BOOKMARKS"),
-    TOC("Contents", "TABLE OF CONTENTS");
+    BOOKMARKS("Bookmarks", "Bookmarks"),
+    TOC("Contents", "Table Of Contents");
 
     private final String iosValue;
     private final String androidValue;

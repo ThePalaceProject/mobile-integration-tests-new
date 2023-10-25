@@ -154,9 +154,14 @@ public class AudioPlayerSteps {
         audioPlayerScreen.stretchPlaySliderForward();
     }
 
+    @When("Stretch slider on the time tracking line to the end of playback")
+    public void stretchSliderToTheEnd() {
+        audioPlayerScreen.stretchPlaySliderToTheEnd();
+    }
+
     @When("Listen a chapter on audio player screen")
     public void waitTheEndOfChapter() {
-        audioPlayerScreen.stretchPlaySliderForward();
+        audioPlayerScreen.stretchPlaySliderToTheEnd();
         AqualityServices.getConditionalWait().waitFor(()-> {
             boolean isNull = false;
             long timer = audioPlayerScreen.getRightTime().getSeconds();
