@@ -14,9 +14,8 @@ public class PlaybackSpeedSteps {
         audioPlayerScreen = new AudioPlayerScreen();
     }
 
-    @And("Select {double}X playback speed on playback speed audiobook screen")
-    public void selectPlaybackSpeedOnPlaybackSpeedAudiobookScreen(Double playbackSpeedDouble) {
-        String playbackSpeed = String.valueOf(playbackSpeedDouble);
+    @And("Select {string}X playback speed on playback speed audiobook screen")
+    public void selectPlaybackSpeedOnPlaybackSpeedAudiobookScreen(String playbackSpeed) {
         audioPlayerScreen.openPlaybackSpeed();
         audioPlayerScreen.getPlaybackSpeedAudiobookScreen().selectPlaybackSpeed(playbackSpeed);
     }

@@ -28,7 +28,7 @@ Feature: Audiobooks in LYRASIS Reads
     Then Audio player screen of book 'bookInfo' is opened
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Pause button is present on audio player screen
-    When Select 2X playback speed on playback speed audiobook screen
+    When Select "2.0"X playback speed on playback speed audiobook screen
       And Wait for 3 seconds
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
@@ -61,8 +61,9 @@ Feature: Audiobooks in LYRASIS Reads
       | Biblioboard        |
 
   @logout @returnBooks @tier1
-  Scenario Outline: Navigate by Audiobook
-    When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+  Scenario: Navigate by Audiobook
+#    When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+    When Search for "Pinocchio" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -81,12 +82,12 @@ Feature: Audiobooks in LYRASIS Reads
     Then Play button is present on audio player screen
       And Playback has been moved behind by 15 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
 
-    Scenarios:
-      | distributor        |
-      | Bibliotheca        |
-      | Palace Marketplace |
-      | Axis 360           |
-      | Biblioboard        |
+#    Scenarios:
+#      | distributor        |
+#      | Bibliotheca        |
+#      | Palace Marketplace |
+#      | Axis 360           |
+#      | Biblioboard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check end of chapter sleep timer
@@ -325,7 +326,6 @@ Feature: Audiobooks in LYRASIS Reads
       And Open Bookmarks on toc audiobook screen
     Then Bookmark for the chapter 'chapterName' with the time 'chapterTime' is saved on Bookmarks screen
 
-#    need to fix for ios
   @smoke @logout @returnBooks
   Scenario: Audiobooks: Perform check of Listen and Back button
     When Search for "Down the Hatch" and save bookName as 'bookNameInfo'

@@ -40,7 +40,7 @@ public class TocAudiobookScreen extends Screen {
     private static final String CHAPTERS_LOC_ANDROID = "//android.widget.LinearLayout//android.widget.TextView[contains(@resource-id, \"player_toc_chapter_item_view_title\")]";
     private static final String DOWNLOADING_PROGRESS_LOC_ANDROID = "//androidx.recyclerview.widget.RecyclerView//android.widget.RelativeLayout[%d]//android.view.View";
 
-    private static final String CHAPTER_NAME_BY_CHAPTER_NUMBER_LOC_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell[%d]/XCUIElementTypeStaticText[1]";
+    private static final String CHAPTER_NAME_BY_CHAPTER_NUMBER_LOC_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]//XCUIElementTypeStaticText[1]";
 
     public TocAudiobookScreen() {
         super(LocatorUtils.getLocator(
