@@ -62,40 +62,6 @@ jobs:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      - name: Deploy Allure Report to GitHub Pages
-        if: always()
-        run: |
-          mkdir -p allure-report
-          cp -r target/site/allure-maven-plugin/* allure-report/
-          echo "Allure report generated and copied to allure-report directory."
-        continue-on-error: true
-
-      - name: Deploy report to GitHub Pages
-        if: always()
-        run: |
-          git clone https://github.com/${{ github.repository }}.git gh-pages
-          cd gh-pages
-          git checkout gh-pages
-          mkdir -p allure-history/${{ github.run_number }}
-          cp -r ../allure-report/* allure-history/${{ github.run_number }}/
-          git add .
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Add Allure report from run ${{ github.run_number }}"
-          git push origin gh-pages
-        env:
-            GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
-      - name: Debug Git Config
-        run: |
-          git config --list
-        if: always()
-
-      - name: Debug Allure Report Files
-        run: |
-          ls -R allure-report
-        if: always()
-
 #      - name: Get Allure history
 #        uses: actions/checkout@v3
 #        if: always()
