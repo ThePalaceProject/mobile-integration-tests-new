@@ -27,8 +27,8 @@ Feature: Audiobooks in LYRASIS Reads
       And Open the 3 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
     Then Audio player screen of book 'bookInfo' is opened
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
-      And Pause button is present on audio player screen
-    When Select "2.0"X playback speed on playback speed audiobook screen
+    When Select "1.5"X playback speed on playback speed audiobook screen
+      And Tap play button on audio player screen
       And Wait for 3 seconds
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
@@ -41,7 +41,8 @@ Feature: Audiobooks in LYRASIS Reads
     When Open toc audiobook screen
       And Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey2'
     Then Audio player screen of book 'bookInfo' is opened
-    When Wait for 3 seconds
+    When Tap play button on audio player screen
+      And Wait for 3 seconds
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
     When Save book play time as 'timeAhead' on audio player screen
@@ -61,9 +62,8 @@ Feature: Audiobooks in LYRASIS Reads
       | Biblioboard        |
 
   @logout @returnBooks @tier1
-  Scenario: Navigate by Audiobook
-#    When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
-    When Search for "Pinocchio" and save bookName as 'bookNameInfo'
+  Scenario Outline: Navigate by Audiobook
+    When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -82,12 +82,12 @@ Feature: Audiobooks in LYRASIS Reads
     Then Play button is present on audio player screen
       And Playback has been moved behind by 15 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
 
-#    Scenarios:
-#      | distributor        |
-#      | Bibliotheca        |
-#      | Palace Marketplace |
-#      | Axis 360           |
-#      | Biblioboard        |
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check end of chapter sleep timer
@@ -102,7 +102,7 @@ Feature: Audiobooks in LYRASIS Reads
     Then The first chapter is loaded
     When Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
-      And Select 2X playback speed on playback speed audiobook screen
+      And Select "2.0"X playback speed on playback speed audiobook screen
       And Stretch slider on the time tracking line to the end of playback
       And Listen a chapter on audio player screen
     Then Play button is present on audio player screen
@@ -147,7 +147,7 @@ Feature: Audiobooks in LYRASIS Reads
     When Open toc audiobook screen
     Then The first chapter is loaded
     When Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
-      And Select 2X playback speed on playback speed audiobook screen
+      And Select "2.0"X playback speed on playback speed audiobook screen
       And Listen a chapter on audio player screen
     Then Next chapter play automatically and chapter name is not 'chapterName' on audio player screen
 
@@ -252,7 +252,7 @@ Feature: Audiobooks in LYRASIS Reads
     Then Check that book contains LISTEN action button on Book details screen
     When Click LISTEN action button on Book details screen
     Then Audio player screen of book 'bookInfo' is opened
-    When Select <speed>X playback speed on playback speed audiobook screen
+    When Select "<speed>"X playback speed on playback speed audiobook screen
     Then Current playback speed value is <speed>X on audio player screen
     When Return to previous screen from audio player screen
       And Click LISTEN action button on Book details screen
@@ -275,19 +275,19 @@ Feature: Audiobooks in LYRASIS Reads
       | Palace Marketplace | 0.75  | 8                 | 6                  |
       | Palace Marketplace | 1.25  | 8                 | 10                 |
       | Palace Marketplace | 1.50  | 6                 | 9                  |
-      | Palace Marketplace | 2     | 5                 | 10                 |
+      | Palace Marketplace | 2.0   | 5                 | 10                 |
       | Axis 360           | 0.75  | 8                 | 6                  |
       | Axis 360           | 1.25  | 8                 | 10                 |
       | Axis 360           | 1.50  | 6                 | 9                  |
-      | Axis 360           | 2     | 5                 | 10                 |
+      | Axis 360           | 2.0   | 5                 | 10                 |
       | Biblioboard        | 0.75  | 8                 | 6                  |
       | Biblioboard        | 1.25  | 8                 | 10                 |
       | Biblioboard        | 1.50  | 6                 | 9                  |
-      | Biblioboard        | 2     | 5                 | 10                 |
+      | Biblioboard        | 2.0   | 5                 | 10                 |
       | Bibliotheca        | 0.75  | 8                 | 6                  |
       | Bibliotheca        | 1.25  | 8                 | 10                 |
       | Bibliotheca        | 1.50  | 6                 | 9                  |
-      | Bibliotheca        | 2     | 5                 | 10                 |
+      | Bibliotheca        | 2.0   | 5                 | 10                 |
 
   @logout @returnBooks @tier1
   Scenario: TOC: Check of table of contents

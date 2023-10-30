@@ -50,8 +50,7 @@ public class AudioPlayerSteps {
 
     @When("Tap pause button on audio player screen")
     public void tapPauseButtonOnAudioPlayerScreen() {
-        if(audioPlayerScreen.isPauseButtonPresent())
-            audioPlayerScreen.tapPauseBtn();
+        audioPlayerScreen.tapPauseBtn();
     }
 
     @Then("Play button is present on audio player screen")
