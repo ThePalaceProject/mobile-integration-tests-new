@@ -31,34 +31,34 @@ public class AudioPlayerScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Play\"]"))), "Play button");
     private final IButton btnBack = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"))), "Back button");
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeImage[@name=\"Back\"]"))), "Back button");
     private final IButton btnPause = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[@content-desc=\"Pause\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Pause\"]"))), "Pause button");
     private final ILabel lblLeftTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_time")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_leftLabel\"]"))), "Left time label");
+            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[6]"))), "Left time label");
     private final IButton btnToc = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_toc")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[@label=\"Table of contents\"]"))), "TOC button");
     private final ILabel lblChapterName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_spine_element")),
-            new IosLocator(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"))), "Chapter name label");
+            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[7]"))), "Chapter name label");
     private final IButton btnPlaybackSpeed = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_playback_rate_image")),
-            new IosLocator(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"))), "Playback speed button");
+            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeButton[4]"))), "Playback speed button");
     private final ILabel lblRightTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_time_maximum")),
-            new IosLocator(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[2]"))), "Right time label");
+            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[8]"))), "Right time label");
     private final IButton btnSkipAhead = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_jump_forwards")),
-            new IosLocator(By.name("skip_forward"))), "Skip ahead button");
+            new IosLocator(By.name("skip forward"))), "Skip ahead button");
     private final IButton btnSkipBehind = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_jump_backwards")),
-            new IosLocator(By.name("skip_back"))), "Skip behind button");
+            new IosLocator(By.name("skip back"))), "Skip behind button");
     private final IButton btnSleepTimer = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_sleep_image")),
-            new IosLocator(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"))), "Sleep timer button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Sleep Timer\"]"))), "Sleep timer button");
     private final IButton btnSlider = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.SeekBar")),
             new IosLocator(By.xpath("//XCUIElementTypeOther[@name=\"progress_grip\"]"))), "Slider");
