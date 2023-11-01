@@ -16,7 +16,7 @@ public class NavigationBarPdfScreen extends Screen {
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeOther[2]//XCUIElementTypeButton[2]"))), "Search button");
     private final IButton btnBack = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]")),
+            new AndroidLocator(By.xpath("//android.widget.ImageView[@content-desc=\"Back\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[@name=\"Back\"]"))), "Back button");
     private final IButton btnSettings = getElementFactory().getButton(By.xpath("//android.widget.Button[@content-desc=\"Settings\"]"), "Settings button");
     private final IButton btnBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
