@@ -63,7 +63,7 @@ Feature: Audiobooks in LYRASIS Reads
   @logout @returnBooks @tier1
   Scenario: Navigate by Audiobook
 #    When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
-    When Search for "Pinocchio" and save bookName as 'bookNameInfo'
+    When Search for "Down the Hatch" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
