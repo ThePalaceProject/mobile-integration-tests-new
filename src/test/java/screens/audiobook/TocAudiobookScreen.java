@@ -40,6 +40,7 @@ public class TocAudiobookScreen extends Screen {
     private static final String CHAPTERS_LOC_ANDROID = "//android.widget.LinearLayout//android.widget.TextView[contains(@resource-id, \"player_toc_chapter_item_view_title\")]";
     private static final String DOWNLOADING_PROGRESS_LOC_ANDROID = "//androidx.recyclerview.widget.RecyclerView//android.widget.RelativeLayout[%d]//android.view.View";
 
+    private static final String CHAPTERS_LOC_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeStaticText";
     private static final String CHAPTER_NAME_BY_CHAPTER_NUMBER_LOC_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]//XCUIElementTypeStaticText[1]";
 
     public TocAudiobookScreen() {
@@ -60,7 +61,7 @@ public class TocAudiobookScreen extends Screen {
             chapterName = ActionProcessorUtils.doForAndroid(() -> {
                 IElement lblChapterText = getChapters().get(chapterNumber);
                 String chapterText = lblChapterText.getAttribute(AndroidAttributes.TEXT);
-                ILabel downloadProgress = getElementFactory().getLabel(By.xpath(String.format(DOWNLOADING_PROGRESS_LOC_ANDROID, chapterNumber + 1)), "Downloading progress");
+                ILabel downloadProgress = getElementFactory().getLabel(By.xpath(String.format(DOWNLOADING_PROGRESS_LOC_ANDROID, chapterNumber - 1)), "Downloading progress");
                 AqualityServices.getConditionalWait().waitFor(() -> !downloadProgress.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
                 lblChapterText.click();
                 return chapterText;
@@ -114,6 +115,8 @@ public class TocAudiobookScreen extends Screen {
     }
 
     private List<IElement> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_LOC_ANDROID), ElementType.LABEL).stream().limit(10).collect(Collectors.toList());
+        return getElementFactory().findElements(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(CHAPTERS_LOC_ANDROID)),
+                new IosLocator(By.xpath(CHAPTERS_LOC_IOS))), ElementType.LABEL).stream().limit(10).collect(Collectors.toList());
     }
 }

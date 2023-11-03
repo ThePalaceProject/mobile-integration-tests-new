@@ -36,9 +36,9 @@ public class BookDetailsScreen extends Screen {
     private final ILabel lblBookFormat = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout//android.widget.TextView[@text=\"Format\"]/following::android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Book format\")]/following::XCUIElementTypeStaticText"))), "Book format label");
-    private final ILabel lblTextInDescription = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Description\"]/following::android.widget.TextView")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/following::XCUIElementTypeTextView"))), "Info in description section");
+    private final ILabel lblDescription = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.id("bookDetailDescriptionTitle")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]"))), "Info in description section");
     private final IButton btnMoreInDescription = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Description\"]//following::android.widget.TextView[@text=\"More…\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText//following::XCUIElementTypeButton[@name=\"More...\"]"))), "More btn in Description section");
@@ -126,8 +126,8 @@ public class BookDetailsScreen extends Screen {
         return lblBookFormat.getText();
     }
 
-    public boolean isDescriptionNotEmpty() {
-        return !lblTextInDescription.getText().isEmpty();
+    public boolean isDescriptionExists() {
+        return lblDescription.state().waitForExist();
     }
 
     public boolean isMoreBtnInDescriptionAvailable() {

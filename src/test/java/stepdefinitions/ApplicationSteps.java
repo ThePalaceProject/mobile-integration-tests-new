@@ -61,6 +61,11 @@ public class ApplicationSteps {
         SwipeElementUtils.swipeUp();
     }
 
+    @When("Swipe down")
+    public void swipeDown() {
+        SwipeElementUtils.swipeDown();
+    }
+
     @Then("Tutorial screen is opened")
     public void checkTutorialScreenIsOpened() {
         Assert.assertTrue("Tutorial screen is not opened!", tutorialScreen.isTutorialScreenOpened());

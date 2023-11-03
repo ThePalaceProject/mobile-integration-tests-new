@@ -23,7 +23,7 @@ public class PlaybackSpeedScreen extends Screen {
 
     private static final String PLAYBACK_SPEED_ANDROID = "//*[@text=\"%sx\"]";
 
-    private static final String PLAYBACK_SPEED_IOS = "//XCUIElementTypeButton[contains(@name,\"%s\")]";
+    private static final String PLAYBACK_SPEED_IOS = "//XCUIElementTypeScrollView//XCUIElementTypeAny/XCUIElementTypeButton[contains(@name,\"%s\")]";
 
     public PlaybackSpeedScreen() {
         super(LocatorUtils.getLocator(
@@ -40,6 +40,8 @@ public class PlaybackSpeedScreen extends Screen {
 
     public void selectPlaybackSpeed(String playbackSpeed) {
         ActionProcessorUtils.doForIos(() -> {
+            System.out.println("Speed: " + playbackSpeed);
+
             getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED_IOS, playbackSpeed)), "Playback speed " + playbackSpeed).click();
         });
         ActionProcessorUtils.doForAndroid(() -> {

@@ -20,6 +20,7 @@ import org.openqa.selenium.By;
 public class ReaderEpubScreen extends Screen {
 
     private final NavigationBarScreen navigationBarScreen;
+    private final SearchEpubScreen searchEpubScreen;
 
     private final ILabel lblPage = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.webkit.WebView[1]")),
@@ -42,6 +43,7 @@ public class ReaderEpubScreen extends Screen {
                 new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]")),
                 new IosLocator(By.xpath("//*[contains(@name,\"Page\")]"))), "Reader epub screen");
         navigationBarScreen = new NavigationBarScreen();
+        searchEpubScreen = new SearchEpubScreen();
     }
 
     public void swipeToNextPage() {
@@ -159,5 +161,9 @@ public class ReaderEpubScreen extends Screen {
             int width = lblPage.getElement().getSize().width;
             action.tap(PointOption.point(width - 10, height / 2)).perform();
         });
+    }
+
+    public SearchEpubScreen getSearchEpubScreen() {
+        return searchEpubScreen;
     }
 }

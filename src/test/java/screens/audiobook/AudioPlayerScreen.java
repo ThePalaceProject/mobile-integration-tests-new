@@ -102,11 +102,15 @@ public class AudioPlayerScreen extends Screen {
     ).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
     public boolean isPlayerOpened(String bookName) {
-        btnPlay.state().waitForDisplayed();
+        if(btnPause.state().waitForDisplayed()){
+            btnPause.click();
+        }
 
-        return getElementFactory().getLabel(LocatorUtils.getLocator(
+        ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR_ANDROID, bookName))),
-                new IosLocator(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR_IOS,bookName)))), "Book name").state().waitForDisplayed();
+                new IosLocator(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR_IOS,bookName)))), "Book name");
+
+        return lblBookName.state().waitForDisplayed();
     }
 
     public void returnToPreviousScreen() {

@@ -1,5 +1,7 @@
 Feature: Read PDF in Palace Bookshelf on Android
 
+  #there is an issue with TOC
+
   Background:
     Given Close tutorial screen
     Then Welcome screen is opened

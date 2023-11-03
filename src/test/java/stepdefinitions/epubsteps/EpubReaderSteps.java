@@ -180,4 +180,28 @@ public class EpubReaderSteps {
         String actualPageNumber = readerEpubScreen.getPageNumber();
         Assert.assertTrue(String.format("PageNumber is not correct. ExpectedPageNumber-%1$s but actualPageNumber-%2$s", expectedPageNumber, actualPageNumber), AqualityServices.getConditionalWait().waitFor(() -> expectedPageNumber.equals(actualPageNumber)));
     }
+
+    @When("Tap search icon on epub reader screen")
+    public void tapSearchIcon() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().tapSearchIcon();
+    }
+
+    @Then("Search epub screen is opened")
+    public void isSearchOpened() {
+        Assert.assertTrue("Search screen is not opened!", readerEpubScreen.getSearchEpubScreen().isSearchScreenOpened());
+    }
+
+    @When("Enter {string} text and save it as {string} on search epub screen")
+    public void enterTextAndSaveIt(String text, String searchedTextKey) {
+        readerEpubScreen.getSearchEpubScreen().enterText(text);
+        context.add(searchedTextKey, text);
+    }
+
+    @Then("The field allows to enter characters and contains {string} on search epub screen")
+    public void checkTheEnteredText(String searchedTextKey) {
+        String expectedSearchedText = context.get(searchedTextKey);
+        String actualSearchedText = readerEpubScreen.getSearchEpubScreen().getTextFromSearchTxb();
+        Assert.assertEquals("The field is empty!", expectedSearchedText, actualSearchedText);
+    }
 }

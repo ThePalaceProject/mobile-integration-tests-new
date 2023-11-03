@@ -31,7 +31,7 @@ Feature: Audiobooks in A1QA library
     Then Audio player screen of book 'bookInfo' is opened
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Pause button is present on audio player screen
-    When Select 2X playback speed on playback speed audiobook screen
+    When Select "2"X playback speed on playback speed audiobook screen
       And Wait for 3 seconds
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
@@ -75,12 +75,12 @@ Feature: Audiobooks in A1QA library
       And Skip ahead 15 seconds on audio player screen
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
-      And Playback has been moved forward by 15 seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
+      And Playback has been moved forward by 30 seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
     When Save book play time as 'timeBehind' on audio player screen
       And Skip behind 15 seconds on audio player screen
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
-      And Playback has been moved behind by 15 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
+      And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check end of chapter sleep timer
@@ -94,13 +94,13 @@ Feature: Audiobooks in A1QA library
     When Open toc audiobook screen
       And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
-      And Select 2X playback speed on playback speed audiobook screen
+      And Select "2"X playback speed on playback speed audiobook screen
       And Stretch slider on the time tracking line forward on audio player screen
       And Listen a chapter on audio player screen
     Then Play button is present on audio player screen
     When Save the name of chapter as 'nextChapter' on audio player screen
       And Open toc audiobook screen
-    Then Chapter name next to 'chapterNumber' on toc audiobook screen is equal to 'nextChapter' saved chapter name
+    Then Chapter name next to 'chapterNumber' chapter on toc audiobook screen is equal to 'nextChapter' saved chapter name
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Audiobooks: Check of line for time remaining
@@ -124,7 +124,7 @@ Feature: Audiobooks in A1QA library
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
       And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
-      And Select 2X playback speed on playback speed audiobook screen
+      And Select "2"X playback speed on playback speed audiobook screen
       And Listen a chapter on audio player screen
     Then Next chapter play automatically and chapter name is not 'chapterName' on audio player screen
 
@@ -201,7 +201,7 @@ Feature: Audiobooks in A1QA library
     Then Check that book contains LISTEN action button on Book details screen
     When Click LISTEN action button on Book details screen
     Then Audio player screen of book 'bookInfo' is opened
-    When Select <speed>X playback speed on playback speed audiobook screen
+    When Select "<speed>"X playback speed on playback speed audiobook screen
     Then Current playback speed value is <speed>X on audio player screen
     When Return to previous screen from audio player screen
       And Click LISTEN action button on Book details screen
