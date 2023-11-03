@@ -42,18 +42,17 @@ public class TocAudiobookSteps {
 
     @When("Open the {int} chapter on toc audiobook screen and save the chapter name as {string} and chapter number as {string}")
     public void openChapterAndSaveNameAndNumber(int chapterNumber, String chapterNameKey, String chapterNumberKey) {
-        String chapter = tocAudiobookScreen.openChapterAndGetChapterName(chapterNumber - 1);
+        String chapter = tocAudiobookScreen.openChapterAndGetChapterName(chapterNumber);
         context.add(chapterNameKey, chapter);
         context.add(chapterNumberKey, chapterNumber);
     }
 
-    @Then("Chapter name next to {string} on toc audiobook screen is equal to {string} saved chapter name")
-    public void checkChapterNameOnToc(String chapterNumberKey, String chapterNameKey) {
+    @Then("Chapter name next to {string} chapter on toc audiobook screen is equal to {string} saved chapter name")
+    public void checkChapterNameOnToc(String chapterNumberKey, String savedChapterNameKey) {
         int chapterNumber = context.get(chapterNumberKey);
-        String chapterNameFromToc = tocAudiobookScreen.getChapterName(chapterNumber);
-        String chapterNameFromScreen = context.get(chapterNameKey);
-        String cutChapterName = chapterNameFromScreen.substring(0, chapterNameFromScreen.indexOf('(') - 1);
-        Assert.assertEquals("Chapter does not change to next. ", cutChapterName, chapterNameFromToc);
+        String nextChapterName = tocAudiobookScreen.getChapterName(chapterNumber + 1);
+        String savedChapterName = context.get(savedChapterNameKey);
+        Assert.assertEquals("Chapter does not change to next. ", savedChapterName, nextChapterName);
     }
 
     @Then("There are two tabs Content and Bookmarks on toc audiobook screen")

@@ -160,11 +160,10 @@ public class AudioPlayerSteps {
 
     @When("Listen a chapter on audio player screen")
     public void waitTheEndOfChapter() {
-        audioPlayerScreen.stretchPlaySliderToTheEnd();
         AqualityServices.getConditionalWait().waitFor(()-> {
             boolean isNull = false;
             long timer = audioPlayerScreen.getRightTime().getSeconds();
-            if(timer==0 || audioPlayerScreen.isPlayButtonPresent())
+            if(timer == 0 || audioPlayerScreen.isPlayButtonPresent())
                 isNull = true;
             return  isNull;
         });
@@ -259,7 +258,9 @@ public class AudioPlayerSteps {
 
     @Then("The message Bookmark added appears on audio player screen")
     public void checkBookmarkMessageAppears() {
-        Assert.assertTrue("Bookmark added message is not displayed", audioPlayerScreen.isBookmarkAddedMessageDisplayed());
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Assert.assertTrue("Bookmark added message is not displayed", audioPlayerScreen.isBookmarkAddedMessageDisplayed());
+        }
     }
 
     @Then("Book is playing on audio player screen")

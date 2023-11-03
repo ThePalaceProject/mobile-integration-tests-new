@@ -25,6 +25,9 @@ public class NavigationBarScreen extends Screen {
     private final IButton btnFontSettings = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Reader settings\"]"))), "Font settings");
+    private final IButton btnSearch = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.id("readerMenuSearch")),
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"search.button\"]"))), "Search button");
 
     public NavigationBarScreen() {
         super(LocatorUtils.getLocator(
@@ -54,5 +57,9 @@ public class NavigationBarScreen extends Screen {
 
     public void tapFontSettingsButton() {
         btnFontSettings.click();
+    }
+
+    public void tapSearchIcon() {
+        btnSearch.click();
     }
 }

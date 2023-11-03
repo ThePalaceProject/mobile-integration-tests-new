@@ -75,12 +75,12 @@ Feature: Audiobooks in LYRASIS Reads
       And Skip ahead 15 seconds on audio player screen
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
-      And Playback has been moved forward by 15 seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
+      And Playback has been moved forward by 30 seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
     When Save book play time as 'timeBehind' on audio player screen
       And Skip behind 15 seconds on audio player screen
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
-      And Playback has been moved behind by 15 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
+      And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
 
     Scenarios:
       | distributor        |
@@ -99,16 +99,17 @@ Feature: Audiobooks in LYRASIS Reads
     When Click LISTEN action button on Book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
-    Then The first chapter is loaded
-    When Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+      And Wait for 3 seconds
+      And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+      And Tap pause button on audio player screen
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
       And Select "2.0"X playback speed on playback speed audiobook screen
-      And Stretch slider on the time tracking line to the end of playback
+      And Tap play button on audio player screen
       And Listen a chapter on audio player screen
     Then Play button is present on audio player screen
     When Save the name of chapter as 'nextChapter' on audio player screen
       And Open toc audiobook screen
-    Then Chapter name next to 'chapterNumber' on toc audiobook screen is equal to 'nextChapter' saved chapter name
+    Then Chapter name next to 'chapterNumber' chapter on toc audiobook screen is equal to 'nextChapter' saved chapter name
 
     Scenarios:
       | distributor        |
