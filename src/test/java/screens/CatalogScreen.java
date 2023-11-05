@@ -13,7 +13,6 @@ import aquality.selenium.core.elements.ElementsCount;
 import constants.appattributes.IosAttributes;
 import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
-import framework.utilities.swipe.SwipeElementUtils;
 import models.AndroidLocator;
 import models.IosLocator;
 import org.openqa.selenium.By;
@@ -42,7 +41,7 @@ public class CatalogScreen extends Screen {
 
     private static final String CATEGORY_NAME_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]/parent::android.widget.LinearLayout/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
     private static final String CATEGORY_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
-    private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_ANDROID = "/android.widget.LinearLayout";
+    private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_ANDROID = "/android.widget.FrameLayout";
     private static final String BOOK_NAME_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"feedWithoutGroupsList\")]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[1]";
     private static final String CURRENT_CATEGORY_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
     private static final String MORE_BUTTON_LOCATOR_ANDROID = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
@@ -87,7 +86,6 @@ public class CatalogScreen extends Screen {
         categoryLine.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         do {
             bookNames.addAll(currentBooksNames);
-            SwipeElementUtils.swipeFromRightToLeft(categoryLine);
             currentBooksNames = getValuesFromListOfLabels(LocatorUtils.getLocator(
                     new AndroidLocator(By.xpath(String.format(CATEGORY_NAME_LOCATOR_ANDROID, categoryName) + BOOK_COVER_IN_CATEGORY_LOCATOR_ANDROID)),
                     new IosLocator(By.xpath(String.format(CATEGORY_NAME_LOCATOR_IOS, categoryName) + BOOK_COVER_IN_CATEGORY_LOCATOR_IOS))));

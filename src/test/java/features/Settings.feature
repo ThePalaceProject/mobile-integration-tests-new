@@ -87,12 +87,12 @@ Feature: Check sections from settings screen
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    And Open Settings
-    And Open Libraries on Settings screen
-    And Open "LYRASIS Reads" library on Setting screen
+      And Open Settings
+      And Open Libraries on Settings screen
+      And Open "LYRASIS Reads" library on Setting screen
     Then Library "LYRASIS Reads" is opened on Account screen
-    And All fields and links are displayed on Account screen
-    And All fields and links are displayed on Sign in screen
+      And All fields and links are displayed on Account screen
+      And All fields and links are displayed on Sign in screen
 
   @smoke
   Scenario: Settings: Log in: Perform check of  the link Content Licenses
@@ -101,8 +101,8 @@ Feature: Check sections from settings screen
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    And Open Settings
-    And Open Libraries on Settings screen
-    And Open 'LYRASIS Reads' library on Setting screen
-    And Open Content Licenses on Account screen
+      And Open Settings
+      And Open Libraries on Settings screen
+      And Open 'LYRASIS Reads' library on Setting screen
+      And Open Content Licenses on Account screen
     Then Content Licenses screen is opened

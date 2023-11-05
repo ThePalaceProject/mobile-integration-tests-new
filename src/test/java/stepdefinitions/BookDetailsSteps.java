@@ -133,9 +133,10 @@ public class BookDetailsSteps {
         Assert.assertEquals("Distributor is not correct", distributor.toLowerCase(), distributorFromScreen.toLowerCase());
     }
 
-    @Then("Related books section is displayed on book details screen")
-    public void isRelatedBooksExists() {
-        String authorName = bookDetailsScreen.getBookInfo().getAuthor();
+    @Then("Related books section of {string} book is displayed on book details screen")
+    public void isRelatedBooksExists(String bookInfoKey) {
+        CatalogBookModel bookModel = context.get(bookInfoKey);
+        String authorName = bookModel.getAuthor();
         Assert.assertTrue("Related books section is not displayed", bookDetailsScreen.isRelatedBooksExists(authorName));
     }
 
