@@ -162,7 +162,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -187,7 +187,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen

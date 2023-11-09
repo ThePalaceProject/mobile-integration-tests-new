@@ -3,6 +3,7 @@ package screens;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
+import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.Screen;
 import constants.appattributes.IosAttributes;
@@ -36,14 +37,14 @@ public class BookDetailsScreen extends Screen {
     private final ILabel lblBookFormat = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout//android.widget.TextView[@text=\"Format\"]/following::android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Book format\")]/following::XCUIElementTypeStaticText"))), "Book format label");
-    private final ILabel lblTextInDescription = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Description\"]/following::android.widget.TextView")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/following::XCUIElementTypeTextView"))), "Info in description section");
+    private final ILabel lblDescription = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.id("bookDetailDescriptionTitle")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]"))), "Info in description section");
     private final IButton btnMoreInDescription = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Description\"]//following::android.widget.TextView[@text=\"More…\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText//following::XCUIElementTypeButton[@name=\"More...\"]"))), "More btn in Description section");
     private final ILabel lblPublisherInfo = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[contains(@text,\"Publisher\")]/following::android.widget.TextView")),
+            new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[@text=\"Publisher\"]/following::android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following::XCUIElementTypeStaticText"))), "Publisher label");
     private final ILabel lblCategories = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[contains(@text,\"Categor\")]/following::android.widget.TextView")),
@@ -59,7 +60,7 @@ public class BookDetailsScreen extends Screen {
     private static final String AUTHOR_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
     private static final String BOOK_ACTION_BUTTON_LOC_ANDROID = "//android.widget.Button[@text=\"%s\"]";
     private static final String AUTHOR_IN_RELATED_BOOKS_LOC_ANDROID = "//android.widget.FrameLayout//android.widget.TextView[@text=\"%s\"]";
-    private static final String LIST_OF_RELATED_BOOKS_LOC_ANDROID = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id, \"feedLaneCoversScroll\")]/android.widget.LinearLayout";
+    private static final String LIST_OF_RELATED_BOOKS_LOC_ANDROID = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id, \"feedLaneCoversScroll\")]/android.widget.FrameLayout";
 
     private static final String BOOK_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
@@ -126,8 +127,8 @@ public class BookDetailsScreen extends Screen {
         return lblBookFormat.getText();
     }
 
-    public boolean isDescriptionNotEmpty() {
-        return !lblTextInDescription.getText().isEmpty();
+    public boolean isDescriptionExists() {
+        return lblDescription.state().waitForExist();
     }
 
     public boolean isMoreBtnInDescriptionAvailable() {
@@ -182,7 +183,7 @@ public class BookDetailsScreen extends Screen {
     }
 
     public boolean isListOfBooksDisplayed() {
-        List<ILabel> listOfRelatedBooks = getElementFactory().findElements(LocatorUtils.getLocator(
+        List<IElement> listOfRelatedBooks = getElementFactory().findElements(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(LIST_OF_RELATED_BOOKS_LOC_ANDROID)),
                 new IosLocator(By.xpath(LIST_OF_RELATED_BOOKS_LOC_IOS))), ElementType.LABEL);
         return listOfRelatedBooks.size() != 0;

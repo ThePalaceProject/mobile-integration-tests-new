@@ -16,7 +16,7 @@ public class SleepTimerScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeOther[2]//XCUIElementTypeButton"))), "Cancel button");
 
     private static final String SLEEP_TIMER_LOC_ANDROID = "//*[contains(@resource-id, \"player_sleep_item_view_name\") and @text=\"%s\"]";
-    private static final String SLEEP_TIMER_LOC_IOS = "//XCUIElementTypeButton[@name=\"%s\"]";
+    private static final String SLEEP_TIMER_LOC_IOS = "//XCUIElementTypeScrollView//XCUIElementTypeOther/XCUIElementTypeButton[@name=\"%s\"]";
 
     public SleepTimerScreen() {
         super(LocatorUtils.getLocator(
@@ -27,6 +27,9 @@ public class SleepTimerScreen extends Screen {
     public void setTimer(TimerKeys timerSetting) {
         ActionProcessorUtils.doForIos(() -> {
             String buttonName = timerSetting.getDefaultLocalizedValue();
+
+            System.out.println("Sleep: " + buttonName);
+
             getElementFactory().getButton(By.xpath(String.format(SLEEP_TIMER_LOC_IOS, buttonName)), buttonName).click();
         });
 

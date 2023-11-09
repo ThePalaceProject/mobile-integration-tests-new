@@ -250,6 +250,7 @@ Feature: Read EPUB in Lyrasis Reads
     When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Click on left book corner on epub reader screen
     Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
+
 #    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
 #      And Go to previous page on reader epub screen
 #    Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
@@ -275,3 +276,24 @@ Feature: Read EPUB in Lyrasis Reads
     Then 'bookInfo' book is present on epub reader screen
     When Open random chapter of epub and save it as 'chapterName' from toc epub screen
     Then Chapter 'chapterName' is opened on epub reader screen
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Search: Perform check of Search icon
+    When Search for "The Voyages of Doctor Dolittle" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+    Then Search epub screen is opened
+
+  @smoke @logout @returnBooks
+  Scenario: Read ebooks: Search: Perform check of entering characters
+    When Search for "The Story of Doctor Dolittle" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Enter 'try' text and save it as 'searchedText' on search epub screen
+    Then The field allows to enter characters and contains 'searchedText' on search epub screen

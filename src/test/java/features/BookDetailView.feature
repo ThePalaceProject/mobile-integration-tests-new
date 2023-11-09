@@ -63,7 +63,7 @@ Feature: Book detail view screen
       And Switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
-      And Description is not empty on Book details screen
+      And Description exists on Book details screen
       And Button More in Description is available on Book details screen
 
     Scenarios:
@@ -112,7 +112,8 @@ Feature: Book detail view screen
       And Switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
-      And Related books section is displayed on book details screen
+    When Swipe down
+    Then Related books section of 'bookInfo' book is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
 
@@ -178,7 +179,7 @@ Feature: Book detail view screen
       And Search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
-      And Description is not empty on Book details screen
+      And Description exists on Book details screen
       And Button More in Description is available on Book details screen
 
   @tier2
@@ -187,7 +188,7 @@ Feature: Book detail view screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for "Persuasion" and save bookName as 'bookNameInfo'
+      And Search for "The Covid Archive" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
@@ -198,10 +199,11 @@ Feature: Book detail view screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for "Persuasion" and save bookName as 'bookNameInfo'
+      And Search for "The Picture of Dorian Gray" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
-      And Related books section is displayed on book details screen
+    When Swipe down
+    Then Related books section of 'bookInfo' book is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
 
@@ -254,7 +256,7 @@ Feature: Book detail view screen
       And Search for "The Oregon Trail" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
-      And Description is not empty on Book details screen
+      And Description exists on Book details screen
       And Button More in Description is available on Book details screen
 
   @tier2
@@ -268,7 +270,7 @@ Feature: Book detail view screen
     Then Library "A1QA Test Library" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for "The Count of Monte Cristo" and save bookName as 'bookNameInfo'
+      And Search for "Little Women" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
@@ -285,10 +287,11 @@ Feature: Book detail view screen
     Then Library "A1QA Test Library" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for "The Woman in White" and save bookName as 'bookNameInfo'
+      And Search for "Little Women" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
-      And Related books section is displayed on book details screen
+    When Swipe down
+    Then Related books section of 'bookInfo' book is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
 

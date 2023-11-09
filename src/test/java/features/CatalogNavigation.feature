@@ -195,39 +195,41 @@ Feature: Catalog Navigation module
       | type1      | type2         |
       | Everything | Popular Books |
 
-  @smoke @logout @returnBooks @exclude_android
-  Scenario: Catalog: Perform check of Reserve button and Allow notifications
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for "LYRASIS Reads" library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
-      And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click RESERVE action button without closing alert on Book details screen
-    Then There is an alert to allow notifications
-    When Tap ALLOW button on the alert
-    Then Alert to allow notification is not displayed
-      And Check that book contains REMOVE action button on Book details screen
+#  notifications are after opening the app
+#  @smoke1 @logout @returnBooks @exclude_android
+#  Scenario: Catalog: Perform check of Reserve button and Allow notifications
+#    When Add library "LYRASIS Reads" on Add library screen
+#    Then Library "LYRASIS Reads" is opened on Libraries screen
+#    When Enter credentials for "LYRASIS Reads" library
+#    Then Login is performed successfully
+#    When Activate sync bookmarks on Sign in screen
+#      And Open Catalog
+#      And Open search modal
+#      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+#      And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+#      And Click RESERVE action button without closing alert on Book details screen
+#    Then There is an alert to allow notifications
+#    When Tap ALLOW button on the alert
+#    Then Alert to allow notification is not displayed
+#      And Check that book contains REMOVE action button on Book details screen
 
-  @smoke @logout @returnBooks @exclude_android
-  Scenario: Catalog: Alert: Perform check of "Don't Allow" button
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Enter credentials for "LYRASIS Reads" library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search for "Fahrenheit 451" and save bookName as 'bookNameInfo'
-      And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click RESERVE action button without closing alert on Book details screen
-    Then There is an alert to allow notifications
-    When Don't Allow notifications on the alert
-    Then Alert to allow notification is not displayed
-      And Check that book contains REMOVE action button on Book details screen
+#  notifications are after opening the app
+#  @smoke1 @logout @returnBooks @exclude_android
+#  Scenario: Catalog: Alert: Perform check of "Don't Allow" button
+#    When Add library "LYRASIS Reads" on Add library screen
+#    Then Library "LYRASIS Reads" is opened on Libraries screen
+#    When Enter credentials for "LYRASIS Reads" library
+#    Then Login is performed successfully
+#    When Activate sync bookmarks on Sign in screen
+#      And Open Catalog
+#      And Open search modal
+#      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+#      And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+#      And Click RESERVE action button without closing alert on Book details screen
+#    Then There is an alert to allow notifications
+#    When Don't Allow notifications on the alert
+#    Then Alert to allow notification is not displayed
+#      And Check that book contains REMOVE action button on Book details screen
 
 #    More button is not available
 #  @smoke

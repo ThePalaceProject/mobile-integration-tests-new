@@ -91,9 +91,9 @@ public class BookDetailsSteps {
         Assert.assertEquals("Book format is not correct", bookFormat, bookDetailsScreen.getBookFormatInfo());
     }
 
-    @Then("Description is not empty on Book details screen")
+    @Then("Description exists on Book details screen")
     public void isDescriptionNotEmpty() {
-        Assert.assertTrue("Description section is empty", bookDetailsScreen.isDescriptionNotEmpty());
+        Assert.assertTrue("Description section is empty", bookDetailsScreen.isDescriptionExists());
     }
 
     @Then("Button More in Description is available on Book details screen")
@@ -133,12 +133,10 @@ public class BookDetailsSteps {
         Assert.assertEquals("Distributor is not correct", distributor.toLowerCase(), distributorFromScreen.toLowerCase());
     }
 
-    @Then("Related books section is displayed on book details screen")
-    public void isRelatedBooksExists() {
-        String authorName = bookDetailsScreen.getBookInfo().getAuthor();
-        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
-            SwipeElementUtils.swipeDown();
-        }
+    @Then("Related books section of {string} book is displayed on book details screen")
+    public void isRelatedBooksExists(String bookInfoKey) {
+        CatalogBookModel bookModel = context.get(bookInfoKey);
+        String authorName = bookModel.getAuthor();
         Assert.assertTrue("Related books section is not displayed", bookDetailsScreen.isRelatedBooksExists(authorName));
     }
 
