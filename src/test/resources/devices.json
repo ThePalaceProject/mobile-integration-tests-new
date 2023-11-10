@@ -11,6 +11,12 @@
       "platformVersion": "16"
     }
   },
+  "iPhoneXR": {
+    "capabilities": {
+      "deviceName": "iPhone XR",
+      "platformVersion": "15"
+    }
+  },
   "iPhone15ProMax_17": {
     "capabilities": {
       "deviceName": "iPhone 15 Pro Max",
