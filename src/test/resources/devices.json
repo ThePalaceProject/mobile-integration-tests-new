@@ -29,10 +29,10 @@
       "platformVersion": "14"
     }
   },
-  "iPadPro2021_14": {
+  "iPadPro112022_16": {
     "capabilities": {
-      "deviceName": "iPad Pro 12.9 2021",
-      "platformVersion": "14"
+      "deviceName": "iPad Pro 11 2022",
+      "platformVersion": "16"
     }
   },
   "SamsungGalaxyS8Plus_9": {
