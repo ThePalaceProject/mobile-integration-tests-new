@@ -1,13 +1,11 @@
 Feature: My books module
 
-  Background:
-    Given Close tutorial screen
+  @tier2
+  Scenario: Check of added books in Palace Bookshelf
+    When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-
-  @tier2
-  Scenario: Check of added books in Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -23,6 +21,10 @@ Feature: My books module
 
   @tier2
   Scenario: Check of sorting in Palace Bookshelf
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
     When Open Catalog
@@ -40,8 +42,12 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Return book from My Books in LYRASIS Reads
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -59,6 +65,10 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Get a book from Book Detail View and Return from Books in LYRASIS Reads
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -68,7 +78,7 @@ Feature: My books module
       And Open search modal
       And Search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Switch to 'eBooks' catalog tab
-    When Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
@@ -80,6 +90,10 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Get a book from Subcategory List View and Return from Books in LYRASIS Reads
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -105,6 +119,10 @@ Feature: My books module
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Get a book from Subcategory List View and Return from Subcategory List View in LYRASIS Reads
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
@@ -120,6 +138,10 @@ Feature: My books module
 
   @logout @returnBooks @tier1
   Scenario: Get a book from Subcategory List View and Read from Books in LYRASIS Reads
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Enter credentials for 'LYRASIS Reads' library
