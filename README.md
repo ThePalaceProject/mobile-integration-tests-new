@@ -32,9 +32,11 @@ Tests can also be run locally (e.g. by **Intellij Idea**). The [settings.json](h
 * _browserstack.key_ - key of the Browserstack account
 
 All devices are described in [devices.json](https://github.com/ThePalaceProject/mobile-integration-tests-new/blob/main/src/test/resources/devices.json) file.
+
 ![Screenshot_3](https://github.com/ThePalaceProject/mobile-integration-tests-new/assets/33911738/4167f0af-3b7c-49ae-8fc6-e938f8245095)
 
 For LYRASIS Reads and A1QA Test library libraries credentials are needed. It can be configured in [config.json](https://github.com/ThePalaceProject/mobile-integration-tests-new/blob/main/src/test/resources/config.json) file.
+
 ![Screenshot_4](https://github.com/ThePalaceProject/mobile-integration-tests-new/assets/33911738/b653ca3d-d989-4a23-851b-60423aa3d557)
 
 * _libraryName_ - LYRASISReads/A1QATestLibrary
@@ -42,6 +44,7 @@ For LYRASIS Reads and A1QA Test library libraries credentials are needed. It can
 * _pin_ - password
 
 Feature files are used to run tests.
+
 ![Screenshot_5](https://github.com/ThePalaceProject/mobile-integration-tests-new/assets/33911738/09d6e84e-2a9e-48b4-bc40-1183a816be94)
 
 ![Screenshot_6](https://github.com/ThePalaceProject/mobile-integration-tests-new/assets/33911738/868dbde7-b1f0-4a2f-bcab-b3edd27a326c)
