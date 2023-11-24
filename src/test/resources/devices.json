@@ -1,13 +1,25 @@
 {
+  "iPhone15ProMax_17": {
+    "capabilities": {
+      "deviceName": "iPhone 15 Pro Max",
+      "platformVersion": "17"
+    }
+  },
+  "iPhone14ProMax_16": {
+    "capabilities": {
+      "deviceName": "iPhone 14 Pro Max",
+      "platformVersion": "16"
+    }
+  },
   "iPhone13ProMax_15": {
     "capabilities": {
       "deviceName": "iPhone 13 Pro Max",
       "platformVersion": "15"
     }
   },
-  "iPhone14ProMax_16": {
+  "iPadPro12.92022_16": {
     "capabilities": {
-      "deviceName": "iPhone 14 Pro Max",
+      "deviceName": "iPad Pro 12.9 2022",
       "platformVersion": "16"
     }
   },
@@ -17,40 +29,22 @@
       "platformVersion": "15"
     }
   },
-  "iPhone15ProMax_17": {
+  "iPhoneSE2020_16": {
     "capabilities": {
-      "deviceName": "iPhone 15 Pro Max",
-      "platformVersion": "17"
-    }
-  },
-  "iPhone12Mini_14": {
-    "capabilities": {
-      "deviceName": "iPhone 12 Mini",
-      "platformVersion": "14"
-    }
-  },
-  "iPadPro112022_16": {
-    "capabilities": {
-      "deviceName": "iPad Pro 11 2022",
+      "deviceName": "iPhone SE 2020",
       "platformVersion": "16"
     }
   },
-  "SamsungGalaxyS8Plus_9": {
+  "iPhone8_15": {
     "capabilities": {
-      "deviceName": "Samsung Galaxy S8 Plus",
-      "platformVersion": "9.0"
+      "deviceName": "iPhone 8",
+      "platformVersion": "15"
     }
   },
-  "SamsungGalaxyTabS8_12": {
+  "SamsungGalaxyS23Ultra_13": {
     "capabilities": {
-      "deviceName": "Samsung Galaxy Tab S8",
-      "platformVersion": "12.0"
-    }
-  },
-  "SamsungGalaxyS21Ultra_11": {
-    "capabilities": {
-      "deviceName": "Samsung Galaxy S21 Ultra",
-      "platformVersion": "11.0"
+      "deviceName": "Samsung Galaxy S23 Ultra",
+      "platformVersion": "13.0"
     }
   },
   "SamsungGalaxyS22Ultra_12": {
@@ -59,15 +53,27 @@
       "platformVersion": "12.0"
     }
   },
-  "SamsungGalaxyS20Ultra_10": {
+  "SamsungGalaxyS21_12": {
     "capabilities": {
-      "deviceName": "Samsung Galaxy S20 Ultra",
-      "platformVersion": "10.0"
+      "deviceName": "Samsung Galaxy S21",
+      "platformVersion": "12.0"
     }
   },
-  "GooglePixel6Pro_13": {
+  "SamsungGalaxyTabS9_13": {
     "capabilities": {
-      "deviceName": "Google Pixel 6 Pro",
+      "deviceName": "Samsung Galaxy Tab S9",
+      "platformVersion": "13.0"
+    }
+  },
+  "GooglePixel8Pro_14": {
+    "capabilities": {
+      "deviceName": "Google Pixel 8 Pro",
+      "platformVersion": "14.0"
+    }
+  },
+  "GooglePixel7Pro_13": {
+    "capabilities": {
+      "deviceName": "Google Pixel 7 Pro",
       "platformVersion": "13.0"
     }
   }
