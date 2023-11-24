@@ -10,12 +10,12 @@ All tests run at night in BrowserStack. Runs are configured with GitHub Actions 
 ![Screenshot_2](https://github.com/ThePalaceProject/mobile-integration-tests-new/assets/33911738/b1ddcfc0-daa2-46ef-894c-ea1fbac32165)
 
 Select the **Test Run** option in the left menu and click the **Run workflow**. Options to configure:
-* ﻿﻿_Use workflow from_ - git branch to launch (e.g. main)
-﻿﻿* _Tags to run_ - tags (e.g. @tier1 @tier2, @smoke) if to run a specific tier
-* _﻿﻿app_url of uploaded to BS link_ - the app URL that can be gotten in the App Automate on the Browserstack 
-﻿﻿* _build name of given application_ - assembly name can be anything
-*﻿﻿ _Platform name_ - ios/android
-* _device name and version for the autotests_ - device name to run tests. They can be found in the [iOS](https://github.com/ThePalaceProject/ios-binaries/tree/master/.github/workflows) repository for iOS devices and [Android](https://github.com/ThePalaceProject/android-binaries/tree/main/.github/workflows) repository for the Android.
+1. ﻿﻿_Use workflow from_ - git branch to launch (e.g. main)
+2. _Tags to run_ - tags (e.g. @tier1 @tier2, @smoke) if to run a specific tier. @tier1 - Tests for LYRASIS Reads library, @tier2 - tests for A1QA Test Library and Palace Bookshelf libraries, @smoke - smoke tests.
+3. _﻿﻿app_url of uploaded to BS link_ - the app URL that can be gotten in the App Automate on the Browserstack 
+4. _build name of given application_ - assembly name can be anything
+5. _Platform name_ - ios/android
+6. _device name and version for the autotests_ - device name to run tests. They can be found in the [iOS](https://github.com/ThePalaceProject/ios-binaries/tree/master/.github/workflows) repository for iOS devices and [Android](https://github.com/ThePalaceProject/android-binaries/tree/main/.github/workflows) repository for the Android.
 
 After configuring the test run, click the **Run workflow** green button to apply the run
 
