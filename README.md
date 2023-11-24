@@ -2,7 +2,39 @@
 
 This repository contains integration tests for the Android and iOS code of the [Palace](https://thepalaceproject.org/) application
 
+# About framework
+
+JDK 11 is used in this project. As a framework for automation testing was selected [aquality](https://github.com/aquality-automation/aquality-appium-mobile-java) framework.
+This framework designed to simplify automation of Android and iOS mobile applications using Appium. Most of performed methods are logged using LOG4), so it is easy to see a history of performed actions in log.
+
+## Cucumber
+
+Cucumber is used in this project. It is a tool that supports BDD (behavior driver development). Central to the Cucumber BDD approach is its ordinary language parser Gherkin. It allows expected software behaviors to be specified in a logical language that every person can understand.
+
+## JUnit
+
+The next big part of the solution is a test runner. As the test runner JUnit is used. This framework permits validate results of the tests and run tests in pair with Cucumber.
+
 # How to run tests
+
+Tests are created for Palace Bookshelf, A1QA Test Library and LYRASIS Reads libraries and run on iOS and Android platforms on such devices:
+
+* Android
+  - Samsung Galaxy S23 Ultra (Android 13)
+  - Samsung Galaxy S22 Ultra (Android 12)
+  - Samsung Galaxy S21 (Android 12)
+  - Samsung Galaxy Tab S9 (Android 13)
+  - Google Pixel 8 Pro (Android 14)
+  - Google Pixel 7 Pro (Android 13)
+
+* iOS
+  - iPhone 15 Pro Max (iOS 17)
+  - iPhone 14 Pro Max (iOS 16)
+  - iPhone 13 Pro Max (iOS 15)
+  - iPad Pro 2022 (iOS 16)
+  - iPhone XR (iOS 15)
+  - iPhone SE 2020 (iOS 16) 
+  - iPhone 8 (iOS 15)
 
 ## Run via GitHub Actions
 All tests run at night in BrowserStack. Runs are configured with GitHub Actions in [maven.yml file](https://github.com/ThePalaceProject/mobile-integration-tests-new/blob/main/.github/workflows/maven.yml). Test run time on each device is configured in a file that describes it using cron expressions. These devices are described in repositories for [Android](https://github.com/ThePalaceProject/android-binaries/tree/main/.github/workflows) and [iOS](https://github.com/ThePalaceProject/ios-binaries/tree/master/.github/workflows) devices. In the [Actions](https://github.com/ThePalaceProject/mobile-integration-tests-new/actions) section click the **Run workflow** button and start tests configured by tiers, app version and git branch. Below attached the screenshot with Ul of the Github actions solution.
