@@ -53,6 +53,12 @@ public class AudioPlayerSteps {
         audioPlayerScreen.tapPauseBtn();
     }
 
+    @When("Stop playing audiobook")
+    public void stopPlaying() {
+        if(audioPlayerScreen.isPauseButtonPresent())
+            audioPlayerScreen.tapPauseBtn();
+    }
+
     @Then("Play button is present on audio player screen")
     public void checkThatPlayButtonIsPresentOnAudioPlayerScreen() {
         Assert.assertTrue("Play button is not present on audio player screen", audioPlayerScreen.isPlayButtonPresent());
@@ -102,7 +108,7 @@ public class AudioPlayerSteps {
         context.add(chapterTimeKey, audioPlayerScreen.getRightTime());
     }
 
-    @When("Skip ahead 15 seconds on audio player screen")
+    @When("Skip ahead 30 seconds on audio player screen")
     public void skipAheadOnAudioPlayerScreen() {
         audioPlayerScreen.skipAhead();
     }
@@ -125,7 +131,7 @@ public class AudioPlayerSteps {
         Assert.assertTrue("Date is not moved forward by " + secondsForward + " seconds", expectedTime == actualTime || expectedTime == actualTime + 1 || expectedTime == actualTime - 1);
     }
 
-    @When("Skip behind 15 seconds on audio player screen")
+    @When("Skip behind 30 seconds on audio player screen")
     public void skipBehindOnAudioPlayerScreen() {
         audioPlayerScreen.skipBehind();
     }
@@ -188,10 +194,11 @@ public class AudioPlayerSteps {
         softAssertions.assertThat(audioPlayerScreen.getChapterName().equals(chapterName)).as("Chapter name does not change").isFalse();
     }
 
-    @Then("The speed by default is 1.0")
-    public void isPlaySpeedNormal() {
+    @Then("The speed by default is {string}X")
+    public void isPlaySpeedNormal(String playbackSpeed) {
         if(AqualityServices.getApplication().getPlatformName()== PlatformName.IOS) {
-            Assert.assertEquals("Play speed is not default", "Normal speed.", audioPlayerScreen.getPlaySpeedValue());
+            String speedValue = audioPlayerScreen.getPlaySpeedValue();
+            Assert.assertTrue("Play speed is not default: " + playbackSpeed, speedValue.contains(playbackSpeed));
         }
         else {
             Assert.assertEquals("Play speed is not default", "1.0x", audioPlayerScreen.getPlaySpeedValue());
