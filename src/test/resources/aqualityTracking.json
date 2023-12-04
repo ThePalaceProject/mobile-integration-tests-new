@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "host": "http://aqualitytracking:8080/api/import",
+  "host": "http://144.24.167.167:8080/api/import",
   "token": "58de8488-2e5a-436b-8d82-ab8de844e5081695813731152",
   "projectId": 300,
   "executor": "Ekaterina",
