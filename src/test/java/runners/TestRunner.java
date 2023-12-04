@@ -16,7 +16,8 @@ import org.junit.runner.RunWith;
                 "stepdefinitions"
         },
         plugin = {
-                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
+                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
+                "aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm"
         }
 )
 
