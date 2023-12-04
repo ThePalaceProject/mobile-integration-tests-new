@@ -16,16 +16,16 @@ public class BookmarksAudiobookScreen extends Screen {
 
     private final IButton btnBookmarks = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout[@content-desc=\"Bookmarks\"]")),
-            new IosLocator(By.xpath(""))), "Bookmarks tab");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Bookmarks\"]"))), "Bookmarks tab");
     private final ILabel lblNoBookmarks = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name=\"no bookmarks\")]"))), "No bookmarks label");
     private final ILabel lblChapterName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_toc_bookmark_item_view_title")),
-            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]"))), "Chapter name");
+            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"))), "Chapter name");
     private final ILabel lblChapterTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_toc_bookmark_item_view_offset")),
-            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[3]"))), "Chapter time");
+            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[3]"))), "Chapter time");
 
     public BookmarksAudiobookScreen() {
         super(LocatorUtils.getLocator(
@@ -38,7 +38,8 @@ public class BookmarksAudiobookScreen extends Screen {
                 btnBookmarks.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString()));
 
         if(!isSelected) {
-            isSelected = ActionProcessorUtils.doForIos(() -> lblNoBookmarks.state().waitForDisplayed());
+            String btnValue = btnBookmarks.getAttribute(IosAttributes.VALUE);
+            isSelected = ActionProcessorUtils.doForIos(() -> btnValue.equals("1"));
         }
 
         return isSelected;

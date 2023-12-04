@@ -65,13 +65,13 @@ public class AudioPlayerScreen extends Screen {
     private final ILabel lblPlaybackProgress = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.SeekBar")),
             new IosLocator(By.xpath("//XCUIElementTypeOther[@name = \"progress_background\"]"))), "Playback progress");
-    private final ILabel lblLineRemaining = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"hours\")]"), "Line remaining");
+    private final ILabel lblLineRemaining = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"remaining\")]"), "Line remaining");
     private final IButton btnPlaySpeed = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, \"speed\")]"))), "Button play speed");
     private final IButton btnBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_add_bookmark")),
-            new IosLocator(By.name("Add Bookmark"))), "Bookmark icon");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[6]"))), "Bookmark icon");
     private final ILabel lblBookmarkAdded = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.name("Bookmark added"))), "Bookmark added message");
@@ -181,6 +181,11 @@ public class AudioPlayerScreen extends Screen {
         return rightTime;
     }
 
+    public Duration getTimerTime() {
+        Duration timer = DateUtils.getDuration(btnSleepTimer.getText());
+        return timer;
+    }
+
     public void skipAhead() {
         btnSkipAhead.click();
     }
@@ -218,7 +223,7 @@ public class AudioPlayerScreen extends Screen {
     }
 
     public String getPlaySpeedValue() {
-        return btnPlaySpeed.getText();
+        return btnPlaybackSpeed.getText();
     }
 
     public boolean isTimerSetTo(TimerKeys timerSetting) {

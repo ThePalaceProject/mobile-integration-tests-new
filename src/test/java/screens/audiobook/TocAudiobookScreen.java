@@ -30,10 +30,7 @@ public class TocAudiobookScreen extends Screen {
     private final IButton btnBookmarks = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout[@content-desc=\"Bookmarks\"]")),
             new IosLocator(By.name("Bookmarks"))), "Bookmarks tab");
-    private final ILabel lblChapterName = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("")),
-            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1]"))), "Chapter name");
-    private final IButton btnBack = getElementFactory().getButton(LocatorUtils.getLocator(
+   private final IButton btnBack = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"))), "Back button");
 
@@ -101,10 +98,12 @@ public class TocAudiobookScreen extends Screen {
     }
 
     public boolean isChaptersSelected() {
-        boolean isSelected = ActionProcessorUtils.doForIos(() -> lblChapterName.state().waitForDisplayed());
+        boolean isSelected = ActionProcessorUtils.doForAndroid(() ->
+                        btnChapters.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString()));
 
         if(!isSelected) {
-            isSelected = ActionProcessorUtils.doForAndroid(() -> btnChapters.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString()));
+            String btnValue = btnChapters.getAttribute(IosAttributes.VALUE);
+            isSelected = ActionProcessorUtils.doForIos(() -> btnValue.equals("1"));
         }
 
         return isSelected;
