@@ -18,7 +18,8 @@ import org.junit.runner.RunWith;
         plugin = {
                 "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
                 "aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm"
-        }
+        },
+        tags = "@test"
 )
 
 public class TestRunner {
