@@ -17,10 +17,10 @@ public class NavigationBarScreen extends Screen {
             new AndroidLocator(By.xpath("//android.widget.Button[contains(@resource-id,\"readerMenuTOC\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Table of contents and bookmarks\"]"))), "TOC button");
     private final IButton btnAddBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[@content-desc=\"Create a bookmark for the current page\"]")),
+            new AndroidLocator(By.id("readerMenuAddBookmark")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"))), "Add Bookmark button");
     private final IButton btnDeleteBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[@content-desc=\"Delete the bookmark for the current page\"]")),
+            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@content-desc,\"Delete the bookmark\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"))), "Delete bookmark button");
     private final IButton btnFontSettings = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]")),
@@ -48,7 +48,7 @@ public class NavigationBarScreen extends Screen {
     }
 
     public boolean isBookmarkDisplayed() {
-        return btnDeleteBookmark.state().isDisplayed();
+        return btnDeleteBookmark.state().waitForDisplayed();
     }
 
     public void tapDeleteBookmarkButton() {

@@ -72,12 +72,12 @@ Feature: Audiobooks in A1QA library
       And Book is not playing on audio player screen
     When Save book play time as 'timeAhead' on audio player screen
       And Save chapter time as 'chapterTimeKey' on audio player screen
-      And Skip ahead 15 seconds on audio player screen
+      And Skip ahead 30 seconds on audio player screen
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
       And Playback has been moved forward by 30 seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
     When Save book play time as 'timeBehind' on audio player screen
-      And Skip behind 15 seconds on audio player screen
+      And Skip behind 30 seconds on audio player screen
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
       And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
@@ -137,7 +137,7 @@ Feature: Audiobooks in A1QA library
     Then Check that book contains LISTEN action button on Book details screen
     When Click LISTEN action button on Book details screen
     Then Audio player screen of book 'bookInfo' is opened
-      And The speed by default is 1.0
+      And The speed by default is "1.0"X
     When Open playback speed on audio player screen
       And Close playback speed screen
     Then Play button is present on audio player screen
