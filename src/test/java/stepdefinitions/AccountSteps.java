@@ -224,6 +224,7 @@ public class AccountSteps {
 
     @Then("Library {string} is not present on Libraries screen")
     public void checkAccountIsNotPresent(String libraryName) {
+        openAccounts();
         Assert.assertFalse(libraryName + " is present on Accounts screen", librariesScreen.isLibraryPresent(libraryName));
     }
 

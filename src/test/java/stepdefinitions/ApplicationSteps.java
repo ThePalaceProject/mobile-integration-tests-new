@@ -176,7 +176,7 @@ public class ApplicationSteps {
     @Then("The sorting of {string} libraries is alphabetical on find your library screen")
     public void isSortingCorrect(String amountKey) {
         int amount = context.get(amountKey);
-        Assert.assertTrue("The list of libraries is not in alphabetical ored", findYourLibraryScreen.isSortingAlphabetical(amount));
+        Assert.assertTrue("The list of libraries is not in alphabetical order", findYourLibraryScreen.isSortingAlphabetical(amount));
     }
 
     @When("Tap cancel button on find your library screen")

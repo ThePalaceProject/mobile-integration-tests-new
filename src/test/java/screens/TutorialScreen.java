@@ -23,7 +23,7 @@ public class TutorialScreen extends Screen {
 
     private final IButton btnCloseTutorial = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id, \"skip_button\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton"))), "Close tutorial btn");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Close\"]"))), "Close tutorial btn");
     private final ILabel lblPage = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[@content-desc=\"Tutorial page\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeWindow"))), "Page label");

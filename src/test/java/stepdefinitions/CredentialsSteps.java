@@ -8,6 +8,7 @@ import enums.keysforcontext.ContextLibrariesKeys;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import framework.configuration.Configuration;
 import framework.configuration.Credentials;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import framework.utilities.returningbooksutil.APIUtil;
 import io.cucumber.java.en.Then;
@@ -78,7 +79,7 @@ public class CredentialsSteps {
     @When("Click the log out button on the account screen")
     public void clickLogOut() {
         accountScreen.tapSignOut();
-        accountScreen.tapApproveSignOut();
+        ActionProcessorUtils.doForIos(accountScreen::tapApproveSignOut);
         if(alertScreen.state().waitForDisplayed()){
             alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
         }

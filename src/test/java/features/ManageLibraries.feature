@@ -80,7 +80,7 @@ Feature: Manage Libraries
       And Open Catalog
       And Switch to 'Palace Bookshelf' from side menu
       And Open categories by chain and chain starts from CategoryScreen:
-      | Summer Reading |
+      | Holiday Reads |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
@@ -183,8 +183,8 @@ Feature: Manage Libraries
       | Escondido Public Library |
       | Granby Public Library    |
       | Victorville City Library |
-      And Save 5 amount as 'amountKey'
-    When Tap the logo on catalog screen
+      And Save 6 amount as 'amountKey'
+    And Tap the logo on catalog screen
     Then The sorting of 'amountKey' libraries is alphabetical on find your library screen
     When Tap cancel button on find your library screen
     Then Category names are loaded on Catalog screen
