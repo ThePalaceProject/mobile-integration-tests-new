@@ -142,15 +142,16 @@ Feature: Search module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
+      And Wait for 3 seconds
       And Open search modal
       And Search for word <word> and save as 'info' on Catalog books screen
     Then Books contain word 'info' on Catalog books screen
 
     Scenarios:
-      | word          |
-      | cat           |
-      | a             |
-      | 1            |
+      | word         |
+      | in           |
+      | a            |
+      | 0            |
 
   @tier2
   Scenario Outline: Find a book with name in different font cases in LYRASIS Reads
@@ -165,9 +166,9 @@ Feature: Search module
 
     Scenarios:
       |word       |
-      | silk road |
-      | SILK ROAD |
-      | SiLk rOaD |
+      | the silk road |
+      | THE SILK ROAD |
+      | ThE SiLk rOaD |
 
   @tier2
   Scenario Outline: Enter invalid data in book name in LYRASIS Reads
@@ -176,6 +177,7 @@ Feature: Search module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
+      And Wait for 3 seconds
       And Open search modal
       And Search for word <data> and save as 'info' on Catalog books screen
     Then There is no results on Catalog books screen
