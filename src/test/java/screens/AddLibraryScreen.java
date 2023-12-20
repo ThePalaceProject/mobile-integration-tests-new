@@ -2,7 +2,6 @@ package screens;
 
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
-import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.Screen;
@@ -32,7 +31,8 @@ public class AddLibraryScreen extends Screen {
             new AndroidLocator(By.id("search_close_btn")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"clear.button.text\"]"))), "Clear search field button");
 
-    private static final String LIBRARY_BUTTON_LOCATOR_ANDROID = "//android.widget.TextView[contains(@text, \"%s\")]";
+    private static final String CURRENT_LIBRARY_BUTTON_LOCATOR_ANDROID = "//android.widget.TextView[contains(@text, \"%s\")]";
+    private static final String LIBRARY_BUTTON_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.widget.TextView[1]";
     private static final String LIBRARY_BUTTON_LOCATOR_IOS = "//XCUIElementTypeStaticText[contains(@name, \"%s\")]";
 
 
@@ -108,12 +108,12 @@ public class AddLibraryScreen extends Screen {
 
     private IButton getLibraryButton(String libraryName) {
         return getElementFactory().getButton(LocatorUtils.getLocator(
-                new AndroidLocator(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_ANDROID, libraryName))),
+                new AndroidLocator(By.xpath(String.format(CURRENT_LIBRARY_BUTTON_LOCATOR_ANDROID, libraryName))),
                 new IosLocator(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_IOS, libraryName)))), libraryName);
     }
 
     private List<String> getLibrariesNames() {
-        List<IElement> libraries = getElementFactory().findElements(LocatorUtils.getLocator(
+        List<ILabel> libraries = getElementFactory().findElements(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(LIBRARY_BUTTON_LOCATOR_ANDROID)),
                 new IosLocator(By.xpath(LIBRARY_BUTTON_LOCATOR_IOS))), ElementType.LABEL);
 

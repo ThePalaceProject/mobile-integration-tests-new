@@ -86,7 +86,7 @@ public class CatalogSteps {
     @Then("List of books on screen is not equal to list of books saved as {string}")
     public void checkListOfBooksAndSavedListOfBooks(String booksNamesListKey) {
         List<String> expectedList = context.get(booksNamesListKey);
-        List<String> actualList = catalogBooksScreen.getListOfBooks();
+        List<String> actualList = catalogScreen.getListOfBooksNames();
         Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), expectedList, actualList);
     }
 

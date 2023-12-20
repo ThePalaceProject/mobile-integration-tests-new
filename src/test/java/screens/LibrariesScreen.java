@@ -25,9 +25,8 @@ public class LibrariesScreen extends Screen {
             new AndroidLocator(By.id("accountsMenuActionAccountAdd")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"))), "Add library button");
     private final IButton btnDeleteLibrary = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Delete\"]")),
+            new AndroidLocator(By.xpath("//android.widget.Button[@text=\"Remove\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Delete\"]"))), "Delete library button");
-    private final IButton btnAcceptDeletionAndroid = getElementFactory().getButton(By.id("android:id/button1"), "btnAcceptDeletion");
 
     private static final String LIBRARY_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeCell";
     private static final String LIBRARY_NAME_ON_LIBRARY_SETTINGS_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
@@ -101,7 +100,6 @@ public class LibrariesScreen extends Screen {
         ActionProcessorUtils.doForAndroid(() -> {
             getElementFactory().getButton(By.xpath(String.format(POPUP_MENU_BUTTON_BY_LIBRARY_NAME_LOC_ANDROID, libraryName)), "Popup menu button").click();
             btnDeleteLibrary.click();
-            btnAcceptDeletionAndroid.click();
         });
     }
 
