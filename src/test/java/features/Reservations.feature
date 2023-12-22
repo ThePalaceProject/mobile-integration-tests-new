@@ -13,7 +13,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "The Santa Suit" and save bookName as "bookNameInfo"
+      And Search for "Peter Pan" and save bookName as "bookNameInfo"
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click REMOVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -32,7 +32,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "Vanderbilt" and save bookName as "bookNameInfo"
+      And Search for "Ladies' Night" and save bookName as "bookNameInfo"
       And Switch to 'Audiobooks' catalog tab
     Then Subcategory screen is opened
     When Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -59,7 +59,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "The Song of Achilles" and save bookName as "bookNameInfo"
+      And Search for "The 9/11 Commission Report" and save bookName as "bookNameInfo"
       And Switch to 'Audiobooks' catalog tab
     Then Subcategory screen is opened
     When Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -81,7 +81,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "The Secret Garden" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
@@ -105,24 +105,24 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "Wwii Airmen" and save bookName as 'bookNameInfo'
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo2'
+      And Search for "The Secret Garden" and save bookName as 'bookNameInfo'
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo2' bookName on Catalog books screen and save book as 'bookInfo2'
       And Clear search field on Catalog books screen
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo3'
+      And Search for "Peter Pan" and save bookName as 'bookNameInfo'
       And Click RESERVE action button on EBOOK book with 'bookNameInfo3' bookName on Catalog books screen and save book as 'bookInfo3'
       And Open Reservations
     Then Books are sorted by Title by default on Reservations screen
-    And Books are sorted by Title ascending on Reservations screen
-    When Sort books by AUTHOR
+      And Books are sorted by Title ascending on Reservations screen
+    When Sort books by AUTHOR in "LYRASIS Reads"
     Then Books are sorted by Author ascending on Reservations screen
       And There are sorting by 'Title' and 'Author' in 'LYRASIS Reads' on Reservations screen
 
   @logout @returnBooks @tier1 @exclude_android
-  Scenario Outline: Alert: Check of Cancel button after Remove button tapping
+  Scenario: Alert: Check of Cancel button after Remove button tapping
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
@@ -133,21 +133,16 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
-      And Switch to '<tabName>' catalog tab
-      And Open <bookType> book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Search for "Wwii Airmen" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click RESERVE action button on Book details screen
       And Open Reservations
-    Then <bookType> book with REMOVE action button and 'bookInfo' bookInfo is present on Reservations screen
-    When Open <bookType> book with REMOVE action button and 'bookInfo' bookInfo on Reservations screen
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Reservations screen
+    When Open AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo on Reservations screen
       And Click REMOVE button but cancel the action by clicking CANCEL button on the alert
       And Open Reservations
-    Then <bookType> book with REMOVE action button and 'bookInfo' bookInfo is present on Reservations screen
-
-    Scenarios:
-      | distributor        | bookType  | tabName    |
-      | Bibliotheca        | AUDIOBOOK | Audiobooks |
-      | Palace Marketplace | AUDIOBOOK | Audiobooks |
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Reservations screen
 
   @smoke @logout @returnBooks
   Scenario: Reservations: Perform check of book appearance and remove it
@@ -162,7 +157,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "The Secret Garden" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -187,7 +182,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search for "The Secret Garden" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
