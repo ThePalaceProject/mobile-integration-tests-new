@@ -59,10 +59,10 @@
       "platformVersion": "12.0"
     }
   },
-  "SamsungGalaxyTabS9_13": {
+  "SamsungGalaxyTabS8_12": {
     "capabilities": {
-      "deviceName": "Samsung Galaxy Tab S9",
-      "platformVersion": "13.0"
+      "deviceName": "Samsung Galaxy Tab S8",
+      "platformVersion": "12.0"
     }
   },
   "GooglePixel8Pro_14": {
