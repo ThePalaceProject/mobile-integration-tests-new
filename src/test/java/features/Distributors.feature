@@ -74,7 +74,8 @@ Feature: Distributors
     Then Library "A1QA Test Library" is opened on Libraries screen
     When Enter credentials for "A1QA Test Library" library
     Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
+    When Swipe down
+      And Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
       And Search for "Silk Road" and save bookName as 'bookNameInfo'

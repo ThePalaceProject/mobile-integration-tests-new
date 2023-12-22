@@ -49,9 +49,9 @@ Feature: Catalog Navigation module
     When Open Catalog
     Then Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
-      | Banned Books |
+      | Holiday Reads |
     Then Books are sorted by Author by default on subcategory screen in 'Palace Bookshelf'
-      And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen
+      And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen in 'Palace Bookshelf'
 
     Scenarios:
       | type1  | type2          | type3 |
@@ -115,8 +115,9 @@ Feature: Catalog Navigation module
     Then Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
+      And Swipe sort options
     Then Books are sorted by Author by default on subcategory screen in 'LYRASIS Reads'
-      And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen
+      And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen in "LYRASIS Reads"
 
     Scenarios:
       | type1  | type2          | type3 |

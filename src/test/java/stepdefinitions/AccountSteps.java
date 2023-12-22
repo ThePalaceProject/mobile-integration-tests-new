@@ -90,7 +90,7 @@ public class AccountSteps {
     @Then("Libraries contain word {string} on Add library screen")
     public void isLibraryContainsWord(String wordKey) {
         String word = context.get(wordKey);
-        Assert.assertTrue("Search result does not contain libraries with " + word, addLibraryScreen.isLibraryContainsWord(word));
+        Assert.assertTrue("Search result does not contain libraries with " + word, addLibraryScreen.isLibraryContainsWord(word.toLowerCase()));
     }
 
     @Then("Search result is empty on Add library screen")

@@ -57,4 +57,8 @@ public class SwipeElementUtils {
         double toY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.8;
         AqualityServices.getTouchActions().swipe(new Point((int) x, (int) fromY), new Point((int) x, (int) toY));
     }
+
+    public static void swipeByCoordinates(double fromX, double fromY, double toX, double toY) {
+        AqualityServices.getTouchActions().swipe(new Point((int) fromX, (int) fromY), new Point((int) toX, (int) toY));
+    }
 }
