@@ -129,14 +129,26 @@ public class CatalogSteps {
         subcategoryScreen.tapBack();
     }
 
+    @When("Swipe sort options")
+    public void swipeSortOptions() {
+        double fromX = 870;
+        double fromY = 350;
+        double toX = 100;
+        double toY = 350;
+
+        SwipeElementUtils.swipeByCoordinates(fromX, fromY, toX, toY);
+        SwipeElementUtils.swipeByCoordinates(fromX, fromY, toX, toY);
+        SwipeElementUtils.swipeByCoordinates(fromX, fromY, toX, toY);
+    }
+
     @Then("Books are sorted by Author by default on subcategory screen in {string}")
     public void isSortedByDefaultInPalace(String libraryName) {
         Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting(libraryName));
     }
 
-    @Then("There are sorting by {string}, {string} and {string} on Subcategory screen")
-    public void checkTypeOfSorting(String type1, String type2, String type3) {
-        sortOptionsScreen.openSortBy();
+    @Then("There are sorting by {string}, {string} and {string} on Subcategory screen in {string}")
+    public void checkTypeOfSorting(String type1, String type2, String type3, String libraryName) {
+        sortOptionsScreen.openSortBy(libraryName);
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
         softAssertions.assertThat(sortOptionsScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
@@ -144,9 +156,9 @@ public class CatalogSteps {
         softAssertions.assertAll();
     }
 
-    @When("Sort books by {}")
-    public void sortBooksBy(SortByKeys sortingCategory) {
-        sortOptionsScreen.openSortBy();
+    @When("Sort books by {} in {string}")
+    public void sortBooksBy(SortByKeys sortingCategory, String libraryName) {
+        sortOptionsScreen.openSortBy(libraryName);
         sortOptionsScreen.changeSortByTo(sortingCategory);
     }
 

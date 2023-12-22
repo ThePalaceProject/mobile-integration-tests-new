@@ -16,7 +16,10 @@ import java.util.List;
 public class SortOptionsScreen extends Screen {
 
     private final IButton btnSortBy = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button")),
+            new AndroidLocator(By.xpath("//android.widget.Button[@index=\"5\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
+    private final IButton btnSortByPalace = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnAvailability = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//*[contains(@resource-id,\"feedHeaderFacets\")]/android.widget.Button[1]")),
@@ -25,8 +28,9 @@ public class SortOptionsScreen extends Screen {
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"))), "Collection button");
 
-    private static final String SORT_SELECTION_ANDROID = "//*[contains(@resource-id,\"select_dialog_listview\")]//*[@text=\"%1$s\"]";
-    private static final String SORT_SELECTION_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
+    private static final String SORT_SELECTION_LOCATOR_ANDROID = "//*[contains(@resource-id,\"select_dialog_listview\")]//*[@text=\"%1$s\"]";
+    private static final String SORT_OPTION_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%1$s\"]";
+    private static final String SORT_SELECTION_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String OPTIONS_IN_TABS_LOCATOR_IOS = "//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeScrollView//XCUIElementTypeButton";
 
     private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
@@ -41,8 +45,12 @@ public class SortOptionsScreen extends Screen {
                 new IosLocator(By.xpath("//XCUIElementTypeCollectionView/preceding-sibling::XCUIElementTypeOther"))), "Sort options screen");
     }
 
-    public void openSortBy() {
-        btnSortBy.click();
+    public void openSortBy(String libraryName) {
+        if(libraryName.equals("Palace Bookshelf")) {
+            btnSortByPalace.click();
+        } else {
+            btnSortBy.click();
+        }
     }
 
     public String getTypeVariantsOfBtn(String type) {
@@ -72,10 +80,14 @@ public class SortOptionsScreen extends Screen {
         return options;
     }
 
+    public boolean isSortOptionDisplayed(String sortOption) {
+        return getElementFactory().getButton(By.xpath(String.format(SORT_OPTION_LOCATOR_ANDROID, sortOption)), "Sort option").state().waitForDisplayed();
+    }
+
     private void setSortSelection(String value) {
         getElementFactory().getButton(LocatorUtils.getLocator(
-                new AndroidLocator(By.xpath(String.format(SORT_SELECTION_ANDROID, value))),
-                new IosLocator(By.xpath(String.format(SORT_SELECTION_IOS, value)))), "Sorting value " + value).click();
+                new AndroidLocator(By.xpath(String.format(SORT_SELECTION_LOCATOR_ANDROID, value))),
+                new IosLocator(By.xpath(String.format(SORT_SELECTION_LOCATOR_IOS, value)))), "Sorting value " + value).click();
     }
 
     @FunctionalInterface
