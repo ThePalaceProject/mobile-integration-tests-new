@@ -20,10 +20,10 @@ public class NavigationBarScreen extends Screen {
             new AndroidLocator(By.id("readerMenuAddBookmark")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"))), "Add Bookmark button");
     private final IButton btnDeleteBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@content-desc,\"Delete the bookmark\")]")),
+            new AndroidLocator(By.xpath("//android.widget.Button[contains(@content-desc,\"Delete the bookmark\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"))), "Delete bookmark button");
     private final IButton btnFontSettings = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]")),
+            new AndroidLocator(By.xpath("//android.widget.Button[contains(@resource-id,\"readerMenuSettings\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Reader settings\"]"))), "Font settings");
     private final IButton btnSearch = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("readerMenuSearch")),
