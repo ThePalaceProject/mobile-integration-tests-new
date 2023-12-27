@@ -68,6 +68,10 @@ public class ApplicationSteps {
 
     @Then("Tutorial screen is opened")
     public void checkTutorialScreenIsOpened() {
+        if(alertScreen.state().waitForDisplayed()) {
+            alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.ALLOW);
+        }
+
         Assert.assertTrue("Tutorial screen is not opened!", tutorialScreen.isTutorialScreenOpened());
     }
 
