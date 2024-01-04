@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.epub.FontAndBackgroundSettingsEpubScreen;
 import screens.epub.ReaderEpubScreen;
@@ -203,5 +204,54 @@ public class EpubReaderSteps {
         String expectedSearchedText = context.get(searchedTextKey);
         String actualSearchedText = readerEpubScreen.getSearchEpubScreen().getTextFromSearchTxb();
         Assert.assertEquals("The field is empty!", expectedSearchedText, actualSearchedText);
+    }
+
+    @Then("Placeholder contains {string} text on search epub screen")
+    public void checkTextInSearchField(String expectedText) {
+        String actualText = readerEpubScreen.getSearchEpubScreen().getTextFromSearchTxb();
+        Assert.assertTrue(String.format("The placeholder doesn't contain %s!", expectedText), actualText.contains(expectedText));
+    }
+
+    @When("Edit data by adding characters in search epub screen and save it as {string}")
+    public void editData(String newTextKey){
+        readerEpubScreen.getSearchEpubScreen().deleteSomeData();
+        readerEpubScreen.getSearchEpubScreen().deleteSomeData();
+        readerEpubScreen.getSearchEpubScreen().inputCharacterK();
+        readerEpubScreen.getSearchEpubScreen().inputCharacterK();
+        readerEpubScreen.getSearchEpubScreen().inputCharacterK();
+        context.add(newTextKey, readerEpubScreen.getSearchEpubScreen().getTextFromSearchTxb());
+    }
+
+    @Then("Placeholder contains word {string} text in search epub screen")
+    public void checkNewText(String newTextKey) {
+        String expectedText = context.get(newTextKey);
+        String actualText = readerEpubScreen.getSearchEpubScreen().getTextFromSearchTxb();
+        Assert.assertEquals("Field doesn't allow to edit the data!", expectedText, actualText);
+    }
+
+    @When("Search for {string} and save word as {string} on search epub screen")
+    public void searchAWord(String word, String wordKey) {
+        context.add(wordKey, word);
+        readerEpubScreen.getSearchEpubScreen().enterText(word);
+        readerEpubScreen.getSearchEpubScreen().applySearch();
+    }
+
+    @Then("Search results contain word {string} on search epub screen")
+    public void checkSearchResults(String wordKey) {
+        String searchedText = context.get(wordKey);
+        SoftAssertions softAssertions = new SoftAssertions();
+        readerEpubScreen.getSearchEpubScreen().getListOfFoundTexts().forEach(text -> softAssertions.assertThat(text.toLowerCase().contains(searchedText.toLowerCase())).
+                as(String.format("Found text doesn't contain word %s", searchedText)).isTrue());
+    }
+
+    @When("Delete text in search line on search epub screen")
+    public void deleteTextInSearchLine() {
+        readerEpubScreen.getSearchEpubScreen().deleteText();
+    }
+
+    @Then("Placeholder does not contain word {string} text on search epub screen")
+    public void checkThatWordDoesNotExist(String searchedTextKey) {
+        String searchedText = context.get(searchedTextKey);
+        Assert.assertFalse(String.format("Searched text %s exists in search field", searchedText), readerEpubScreen.getSearchEpubScreen().getTextFromSearchTxb().contains(searchedText));
     }
 }
