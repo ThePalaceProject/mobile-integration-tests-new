@@ -229,7 +229,7 @@ public class EpubReaderSteps {
         Assert.assertEquals("Field doesn't allow to edit the data!", expectedText, actualText);
     }
 
-    @When("Search for {string} and save word as {string} on search epub screen")
+    @When("Search for {} and save word as {string} on search epub screen")
     public void searchAWord(String word, String wordKey) {
         context.add(wordKey, word);
         readerEpubScreen.getSearchEpubScreen().enterText(word);
@@ -242,6 +242,7 @@ public class EpubReaderSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         readerEpubScreen.getSearchEpubScreen().getListOfFoundTexts().forEach(text -> softAssertions.assertThat(text.toLowerCase().contains(searchedText.toLowerCase())).
                 as(String.format("Found text doesn't contain word %s", searchedText)).isTrue());
+        softAssertions.assertAll();
     }
 
     @When("Delete text in search line on search epub screen")
@@ -253,5 +254,10 @@ public class EpubReaderSteps {
     public void checkThatWordDoesNotExist(String searchedTextKey) {
         String searchedText = context.get(searchedTextKey);
         Assert.assertFalse(String.format("Searched text %s exists in search field", searchedText), readerEpubScreen.getSearchEpubScreen().getTextFromSearchTxb().contains(searchedText));
+    }
+
+    @Then("Search result is empty on search epub screen")
+    public void isSearchResultEmpty() {
+        Assert.assertTrue("Results are not empty!", readerEpubScreen.getSearchEpubScreen().isSearchResultEmpty());
     }
 }
