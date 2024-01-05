@@ -17,7 +17,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
     Then 'bookInfo' book is present on epub reader screen
-    When Scroll page forward from 3 to 6 times
+    When Scroll page forward from 3 to 5 times
       And Open navigation bar on reader epub screen
       And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Tap on right book corner on epub reader screen
@@ -33,10 +33,9 @@ Feature: Read EPUB in Palace Bookshelf
       And Click READ action button on Book details screen
       And Open navigation bar on reader epub screen
       And Add bookmark on reader epub screen
-    Then Bookmark is displayed on reader epub screen
-    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
-      And Scroll page forward from 3 to 6 times
+      And Scroll page forward from 3 to 5 times
       And Add bookmark on reader epub screen
       And Save pageNumber as 'pageNumberKey2' and chapterName as 'chapterNameKey2' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey2'

@@ -52,7 +52,7 @@ public class ReaderPdfScreen extends Screen {
     public int getPageNumber() {
         Integer pageNumber = ActionProcessorUtils.doForIos(() -> {
             openNavigationBar();
-            return Integer.parseInt(StringUtils.substringBetween(lblPageNumber.getAttribute(IosAttributes.NAME), "(", "/"));
+            return Integer.parseInt(StringUtils.substringBefore(lblPageNumber.getAttribute(IosAttributes.NAME), "/"));
         });
 
         if(pageNumber == null) {

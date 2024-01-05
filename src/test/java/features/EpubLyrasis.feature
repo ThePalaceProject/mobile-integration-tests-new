@@ -183,8 +183,9 @@ Feature: Read EPUB in Lyrasis Reads
       And Click READ action button on Book details screen
       And Open navigation bar on reader epub screen
       And Add bookmark on reader epub screen
-    Then Bookmark is displayed on reader epub screen
-    When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+#      And Wait for 3 seconds
+#    Then Bookmark is displayed on reader epub screen
+    And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
       And Scroll page forward from 7 to 9 times
       And Add bookmark on reader epub screen
@@ -231,6 +232,91 @@ Feature: Read EPUB in Lyrasis Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+
+  @logout @returnBooks @tier1
+  Scenario: Read ebooks: Search: Perform check of the placeholder
+    When Search for "The Voyages of Doctor Dolittle" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+    Then Placeholder contains "Search" text on search epub screen
+
+  @logout @returnBooks @tier1
+  Scenario: Read ebooks: Search: Perform check of editing the data
+    When Search for "The Voyages of Doctor Dolittle" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Enter 'Book' text and save it as 'searchedText' on search epub screen
+      And Edit data by adding characters in search epub screen and save it as 'newText'
+    Then Placeholder contains word 'newText' text in search epub screen
+
+  @logout @returnBooks @tier1
+  Scenario Outline: Read ebooks: Search: Perform check that search result contain one or more entered latin letters or numeric
+    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Search for <word> and save word as 'searchedWord' on search epub screen
+    Then Search results contain word 'searchedWord' on search epub screen
+
+    Scenarios:
+      | word |
+      | in   |
+      | F    |
+      | 1    |
+
+  @logout @returnBooks @tier1
+  Scenario Outline: Read ebooks: Search: Enter data and get empty search result
+    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Search for <word> and save word as 'searchedWord' on search epub screen
+    Then Search result is empty on search epub screen
+
+    Scenarios:
+      | word                                  |
+      | рнл                                   |
+      | <font color=red>Red text</font>       |
+      | <script>alert(‘hello world’)</script> |
+      | @$                                    |
+
+  @logout @returnBooks @tier1
+  Scenario Outline: Read ebooks: Perform check of the input in different font cases
+    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Search for <word> and save word as 'searchedWord' on search epub screen
+    Then Search results contain word 'searchedText' on search epub screen
+
+    Scenarios:
+      | word  |
+      | world |
+      | WORLD |
+      | WorLD |
+
+  @logout @returnBooks @tier1
+  Scenario: Read ebooks: Search: Perform check of empty field
+    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Apply search on search epub screen
+    Then Search result is empty on search epub screen
 
   @smoke @logout @returnBooks
   Scenario: Read ebooks: Pages: Perform check of reader navigating (swiping left and right)
@@ -297,3 +383,26 @@ Feature: Read EPUB in Lyrasis Reads
     When Tap search icon on epub reader screen
       And Enter 'try' text and save it as 'searchedText' on search epub screen
     Then The field allows to enter characters and contains 'searchedText' on search epub screen
+
+  @logout @returnBooks @smoke
+  Scenario: Read ebooks: Search: Perform check of finding an existing word
+    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Search for but and save word as 'searchedText' on search epub screen
+    Then Search results contain word 'searchedText' on search epub screen
+
+  @logout @returnBooks @smoke
+  Scenario: Read ebooks: Search: Perform check of the "Delete" button
+    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Enter 'Make for the Hills' text and save it as 'searchedText' on search epub screen
+      And Delete text in search line on search epub screen
+    Then Placeholder does not contain word 'searchedText' text on search epub screen

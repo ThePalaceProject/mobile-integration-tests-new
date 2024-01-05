@@ -45,7 +45,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
   Scenario: Navigate by Thumbnails
     When Open TOC on pdf reader screen
     Then There are content list with thumbnails and chapter content on pdf toc screen
-    When Open random thumbnail and save the number as 'pageInfo' on pdf toc screen
+    When Open 2 thumbnail and save the number as 'pageInfo' on pdf toc screen
     Then Page number is equal to 'pageInfo' on pdf reader screen
 
   @tier2 @exclude_android
@@ -66,7 +66,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
   @tier2 @exclude_android
   Scenario: Navigate by Pdf Search Results
     When Open search pdf screen
-      And Enter 'try' text on search pdf screen
+      And Search for 'try' text on search pdf screen
       And Open random found text and save page number as 'pageNumber' on search pdf screen
     Then Page number is equal to 'pageNumber' on pdf reader screen
 

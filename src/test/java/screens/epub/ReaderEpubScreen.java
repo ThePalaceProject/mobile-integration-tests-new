@@ -15,6 +15,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import models.AndroidLocator;
 import models.IosLocator;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 
 public class ReaderEpubScreen extends Screen {
@@ -87,8 +88,7 @@ public class ReaderEpubScreen extends Screen {
     public String getPageNumber() {
         String pageNumber = ActionProcessorUtils.doForIos(() -> {
             String number = lblPageNumber.getAttribute(IosAttributes.NAME);
-            number = RegExUtil.deleteBracketsFromText(number);
-            return RegExUtil.getStringFromFirstGroup(number, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
+            return StringUtils.substringBetween(number, "Page", "of");
         });
 
         if ((pageNumber == null)) {

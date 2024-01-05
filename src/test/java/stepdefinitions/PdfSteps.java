@@ -120,6 +120,13 @@ public class PdfSteps {
         readerPdfScreen.getSearchPdfScreen().enterText(text);
     }
 
+    @When("Search for {string} text on search pdf screen")
+    public void searchText(String text) {
+        readerPdfScreen.getSearchPdfScreen().enterText(text);
+        readerPdfScreen.getSearchPdfScreen().applySearch();
+
+    }
+
     @When("Open random found text and save page number as {string} on search pdf screen")
     public void openRandomTextAndSavePageNumber(String pageNumberKey) {
         context.add(pageNumberKey, readerPdfScreen.getSearchPdfScreen().openRandomFoundText());
@@ -149,6 +156,12 @@ public class PdfSteps {
     @When("Open random thumbnail and save the number as {string} on pdf toc screen")
     public void openRandomThumbnail(String pageInfoKey) {
         context.add(pageInfoKey, tocBookmarksPdfScreen.getThumbnailsPdfScreen().openRandomThumbnail());
+    }
+
+    @When("Open {} thumbnail and save the number as {string} on pdf toc screen")
+    public void openCurrentThumbnail(int thumbnailNumber, String pageNumberKey) {
+        context.add(pageNumberKey, thumbnailNumber);
+        tocBookmarksPdfScreen.getThumbnailsPdfScreen().openThumbnail(thumbnailNumber);
     }
 
     @When("Return to pdf reader screen from pdf toc screen")
