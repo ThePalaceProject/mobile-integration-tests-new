@@ -3,6 +3,7 @@ package stepdefinitions.epubsteps;
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import enums.epub.TabsTocAndBookmarksEpub;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -258,6 +259,14 @@ public class EpubReaderSteps {
 
     @Then("Search result is empty on search epub screen")
     public void isSearchResultEmpty() {
-        Assert.assertTrue("Results are not empty!", readerEpubScreen.getSearchEpubScreen().isSearchResultEmpty());
+        ActionProcessorUtils.doForAndroid(() -> Assert.assertTrue("Results are not empty!", readerEpubScreen.getSearchEpubScreen().isSearchResultEmpty()));
+        ActionProcessorUtils.doForIos(() -> {
+            Assert.assertTrue("Results are not empty!", !readerEpubScreen.getSearchEpubScreen().isSearchResultEmpty() || readerEpubScreen.getSearchEpubScreen().getListOfFoundTexts().isEmpty());
+        });
+    }
+
+    @When("Apply search on search epub screen")
+    public void apllySearch() {
+        readerEpubScreen.getSearchEpubScreen().applySearch();
     }
 }

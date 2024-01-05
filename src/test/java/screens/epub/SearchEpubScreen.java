@@ -24,15 +24,15 @@ public class SearchEpubScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeTextField"))), "Search text box");
     private final IButton btnClear = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("search_close_btn")),
-            new IosLocator(By.xpath(""))), "Clear text button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"\tClose\"]"))), "Clear text button");
     private final ILabel lblNoResults = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("noResultLabel")),
-            new IosLocator(By.xpath(""))), "No results label");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"There are no results\"]"))), "No results label");
     private final IButton btnDeleteKeyIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
     private final IButton btnKIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"k\"]"), "K button");
-    private final IButton btnSearchIos = getElementFactory().getButton(By.xpath(""), "Search button");
+    private final IButton btnSearchIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"Return\"]"), "Search button");
 
-    private static final String FOUND_TEXT_LOCATOR_IOS = "";
+    private static final String FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeStaticText";
 
     private static final String FOUND_TEXT_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.widget.TextView";
 
@@ -75,7 +75,10 @@ public class SearchEpubScreen extends Screen {
         ActionProcessorUtils.doForAndroid(() -> foundTextLabels.forEach(lblText -> resultList.add(lblText.getText())));
 
         if(resultList.isEmpty()){
-            ActionProcessorUtils.doForIos(() -> foundTextLabels.forEach(lblText -> resultList.add(lblText.getAttribute(IosAttributes.NAME))));
+            ActionProcessorUtils.doForIos(() -> {
+                foundTextLabels.forEach(lblText -> resultList.add(lblText.getAttribute(IosAttributes.NAME)));
+                resultList.remove(0);
+            });
         }
 
         return resultList;

@@ -307,6 +307,16 @@ Feature: Read EPUB in Lyrasis Reads
       | WORLD |
       | WorLD |
 
+  @logout @returnBooks @tier1
+  Scenario: Read ebooks: Search: Perform check of empty field
+    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click READ action button on Book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When Tap search icon on epub reader screen
+      And Apply search on search epub screen
+    Then Search result is empty on search epub screen
 
   @smoke @logout @returnBooks
   Scenario: Read ebooks: Pages: Perform check of reader navigating (swiping left and right)
