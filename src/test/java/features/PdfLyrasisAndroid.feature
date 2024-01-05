@@ -134,7 +134,7 @@ Feature: Read PDF in LYRASIS Reads on Android
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Table of contents: Perform check of navigation of TOC button
     When Open search modal
-      And Search for "Being Plumville" and save bookName as 'bookNameInfo'
+      And Search for "A Queen From the North" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -202,7 +202,7 @@ Feature: Read PDF in LYRASIS Reads on Android
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Perform check of back button
     When Open search modal
-      And Search for "A Queen From the North" and save bookName as 'bookNameInfo'
+      And Search for "Being Plumville" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'

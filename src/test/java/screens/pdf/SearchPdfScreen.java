@@ -6,6 +6,9 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.Screen;
 import constants.appattributes.IosAttributes;
+import framework.utilities.ActionProcessorUtils;
+import framework.utilities.KeyboardUtils;
+import io.appium.java_client.android.nativekey.AndroidKey;
 import org.openqa.selenium.By;
 
 import java.util.List;
@@ -15,9 +18,10 @@ public class SearchPdfScreen extends Screen {
 
     private final ITextBox txbSearchLine = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeTextField"), "Search line");
     private final IButton btnDone = getElementFactory().getButton(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeButton"), "Apply search");
+    private final IButton returnKey = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Return\"]"), "Return key");
 
     private static final String NUMBER_OF_FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[2]";
-    private static final String FOUND_TEXT_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"%d\"]";
+    private static final String FOUND_TEXT_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
     private static final String FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
 
     public SearchPdfScreen() {
@@ -26,6 +30,11 @@ public class SearchPdfScreen extends Screen {
 
     public void enterText(String text) {
         txbSearchLine.sendKeys(text);
+    }
+
+    public void applySearch() {
+        ActionProcessorUtils.doForIos(returnKey::click);
+        ActionProcessorUtils.doForAndroid(() -> KeyboardUtils.pressKey(AndroidKey.ENTER));
     }
 
     public String getTextFromSearchTxb() {
