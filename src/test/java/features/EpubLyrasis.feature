@@ -365,7 +365,7 @@ Feature: Read EPUB in Lyrasis Reads
 
   @smoke @logout @returnBooks
   Scenario: Read ebooks: Search: Perform check of Search icon
-    When Search for "The Voyages of Doctor Dolittle" and save bookName as 'bookNameInfo'
+    When Search for "Quicksand" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
@@ -375,7 +375,7 @@ Feature: Read EPUB in Lyrasis Reads
 
   @smoke @logout @returnBooks
   Scenario: Read ebooks: Search: Perform check of entering characters
-    When Search for "The Story of Doctor Dolittle" and save bookName as 'bookNameInfo'
+    When Search for "The Perishing" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
@@ -386,7 +386,7 @@ Feature: Read EPUB in Lyrasis Reads
 
   @logout @returnBooks @smoke
   Scenario: Read ebooks: Search: Perform check of finding an existing word
-    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+    When Search for "Tell A Thousand Lies" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
@@ -397,7 +397,7 @@ Feature: Read EPUB in Lyrasis Reads
 
   @logout @returnBooks @smoke
   Scenario: Read ebooks: Search: Perform check of the "Delete" button
-    When Search for "Make for the Hills" and save bookName as 'bookNameInfo'
+    When Search for "Writing Wild" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen

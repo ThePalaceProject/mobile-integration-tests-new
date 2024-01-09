@@ -158,7 +158,7 @@ public class PdfSteps {
         context.add(pageInfoKey, tocBookmarksPdfScreen.getThumbnailsPdfScreen().openRandomThumbnail());
     }
 
-    @When("Open {} thumbnail and save the number as {string} on pdf toc screen")
+    @When("Open {int} thumbnail and save the number as {string} on pdf toc screen")
     public void openCurrentThumbnail(int thumbnailNumber, String pageNumberKey) {
         context.add(pageNumberKey, thumbnailNumber);
         tocBookmarksPdfScreen.getThumbnailsPdfScreen().openThumbnail(thumbnailNumber);
