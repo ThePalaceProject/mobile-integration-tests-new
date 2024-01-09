@@ -36,12 +36,11 @@ public class ChaptersPdfScreen extends Screen {
                 new IosLocator(By.xpath(CHAPTER_LOCATOR_IOS))), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 
-    public int  openRandomChapter() {
+    public void openRandomChapter() {
         int chapterNumber = (int) (Math.random() * (getChapters().size()) + 1);
         ILabel chapter = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CHAPTER_NUMBER_LOCATOR_ANDROID, chapterNumber))),
                 new IosLocator(By.xpath(String.format(CHAPTER_NUMBER_LOCATOR_IOS, chapterNumber)))), "Chapter");
         chapter.click();
-        return chapterNumber;
     }
 }

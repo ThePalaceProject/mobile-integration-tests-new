@@ -173,7 +173,8 @@ public class PdfSteps {
 
     @When("Open random chapter and save the number as {string} on pdf toc screen")
     public void openRandomChapter(String pageInfoKey){
-        context.add(pageInfoKey, chaptersPdfScreen.openRandomChapter());
+        chaptersPdfScreen.openRandomChapter();
+        context.add(pageInfoKey, readerPdfScreen.getPageNumber());
     }
 
     @When("Open pdf settings screen on pdf reader screen")

@@ -1,10 +1,9 @@
 package stepdefinitions;
 
-import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.keysforcontext.ContextLibrariesKeys;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
@@ -127,9 +126,7 @@ public class AccountSteps {
 
     @When("Open Content Licenses on Account screen")
     public void openAccountLicenses() {
-        if(AqualityServices.getApplication().getPlatformName()== PlatformName.ANDROID) {
-            SwipeElementUtils.swipeDown();
-        }
+        ActionProcessorUtils.doForAndroid(SwipeElementUtils::swipeDown);
         accountScreen.openContentLicenses();
     }
 
