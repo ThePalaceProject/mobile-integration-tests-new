@@ -17,8 +17,8 @@ public class ChaptersPdfScreen extends Screen {
     private static final String CHAPTER_LOCATOR_ANDROID = "//android.view.View[contains(@resource-id, \"outlineView\")]/android.view.View";
     private static final String CHAPTER_NUMBER_LOCATOR_ANDROID = "//android.view.View[contains(@resource-id, \"outlineView\")]/android.view.View[%d]/android.view.View";
 
-    private static final String CHAPTER_LOCATOR_IOS = "//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
-    private static final String CHAPTER_NUMBER_LOCATOR_IOS = "//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"%d\"]";
+    private static final String CHAPTER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther[2]";
+    private static final String CHAPTER_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]";
 
     public ChaptersPdfScreen () {
         super(LocatorUtils.getLocator(
