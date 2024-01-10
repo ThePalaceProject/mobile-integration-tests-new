@@ -342,7 +342,7 @@ Feature: Audiobooks in LYRASIS Reads
 
   @smoke @logout @returnBooks
   Scenario: Audiobooks: Perform check of Play button and Pause buttons
-    When Search for "Down the Hatch" and save bookName as 'bookNameInfo'
+    When Search for "The Wizard of Oz" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
