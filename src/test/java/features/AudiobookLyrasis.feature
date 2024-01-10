@@ -59,7 +59,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Navigate by Audiobook
@@ -87,7 +86,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check end of chapter sleep timer
@@ -116,7 +114,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check of line for time remaining
@@ -134,7 +131,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check of switching to the next time
@@ -156,7 +152,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check playback speed and sleep timer
@@ -185,7 +180,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1 @exlude_ios
   Scenario Outline: Check time tracking line
@@ -214,7 +208,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario Outline: Check of not rewinding forward and back by tapping on time bar
@@ -244,7 +237,6 @@ Feature: Audiobooks in LYRASIS Reads
       | Palace Marketplace |
       | Axis 360           |
       | Bibliotheca        |
-      | Biblioboard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Playback speed: Check of playback speed
@@ -283,13 +275,9 @@ Feature: Audiobooks in LYRASIS Reads
       | Axis 360           | 1.25  | 8                 | 10                 |
       | Axis 360           | 1.50  | 6                 | 9                  |
       | Axis 360           | 2.0   | 5                 | 10                 |
-      | Biblioboard        | 0.75  | 8                 | 6                  |
-      | Biblioboard        | 1.25  | 8                 | 10                 |
-      | Biblioboard        | 1.50  | 6                 | 9                  |
-      | Biblioboard        | 2.0   | 5                 | 10                 |
-      | Bibliotheca        | 0.75  | 8                 | 6                  |
-      | Bibliotheca        | 1.25  | 8                 | 10                 |
-      | Bibliotheca        | 1.50  | 6                 | 9                  |
+      | Bibliotheca        | 2.0   | 5                 | 10                 |
+      | Bibliotheca        | 2.0   | 5                 | 10                 |
+      | Bibliotheca        | 2.0   | 5                 | 10                 |
       | Bibliotheca        | 2.0   | 5                 | 10                 |
 
   @logout @returnBooks @tier1
