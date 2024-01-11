@@ -88,7 +88,7 @@ public class ReaderEpubScreen extends Screen {
     public String getPageNumber() {
         String pageNumber = ActionProcessorUtils.doForIos(() -> {
             String number = lblPageNumber.getAttribute(IosAttributes.NAME);
-            return StringUtils.substringBetween(number, "Page", "of");
+            return StringUtils.substringBetween(number, "Page ", " of");
         });
 
         if ((pageNumber == null)) {
@@ -104,8 +104,9 @@ public class ReaderEpubScreen extends Screen {
     public String getChapterName() {
         String chapterName = ActionProcessorUtils.doForIos(() -> {
             String chapter = lblChapterName.getAttribute(IosAttributes.NAME);
-            chapter = RegExUtil.deleteBracketsFromText(chapter);
-            return RegExUtil.getStringFromThirdGroup(chapter, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
+//            chapter = RegExUtil.deleteBracketsFromText(chapter);
+//            return RegExUtil.getStringFromThirdGroup(chapter, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
+            return StringUtils.substringAfter(chapter, "(");
         });
 
         if(chapterName == null) {

@@ -174,6 +174,7 @@ Feature: Read EPUB in Lyrasis Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Navigate by bookmarks
@@ -203,6 +204,7 @@ Feature: Read EPUB in Lyrasis Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Delete bookmarks
@@ -232,6 +234,7 @@ Feature: Read EPUB in Lyrasis Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario: Read ebooks: Search: Perform check of the placeholder
