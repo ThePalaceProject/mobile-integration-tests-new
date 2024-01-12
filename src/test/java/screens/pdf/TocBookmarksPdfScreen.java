@@ -1,6 +1,5 @@
 package screens.pdf;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.Screen;
 import framework.utilities.ActionProcessorUtils;
@@ -61,7 +60,6 @@ public class TocBookmarksPdfScreen extends Screen {
 
     public void returnToReaderPdfScreen() {
         ActionProcessorUtils.doForIos(btnResume::click);
-        ActionProcessorUtils.doForAndroid(() -> AqualityServices.getApplication().getDriver().navigate().back());
     }
 
     public void tapBookmarksButton() {

@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import io.cucumber.java.en.Then;
@@ -155,7 +156,8 @@ public class PdfSteps {
 
     @When("Open random thumbnail and save the number as {string} on pdf toc screen")
     public void openRandomThumbnail(String pageInfoKey) {
-        context.add(pageInfoKey, tocBookmarksPdfScreen.getThumbnailsPdfScreen().openRandomThumbnail());
+        tocBookmarksPdfScreen.getThumbnailsPdfScreen().openRandomThumbnail();
+        context.add(pageInfoKey, readerPdfScreen.getPageNumber());
     }
 
     @When("Open {int} thumbnail and save the number as {string} on pdf toc screen")
@@ -167,7 +169,8 @@ public class PdfSteps {
     @When("Return to pdf reader screen from pdf toc screen")
     public void returnToReaderFromTOC() {
         if (tocBookmarksPdfScreen.getThumbnailsPdfScreen().areThumbnailsDisplayed() || tocBookmarksPdfScreen.getChaptersPdfScreen().areChaptersDisplayed()) {
-            tocBookmarksPdfScreen.returnToReaderPdfScreen();
+            ActionProcessorUtils.doForIos(tocBookmarksPdfScreen::returnToReaderPdfScreen);
+            ActionProcessorUtils.doForAndroid(() -> readerPdfScreen.getNavigationBarScreen().tapTocBookmarksBarButton());
         }
     }
 
