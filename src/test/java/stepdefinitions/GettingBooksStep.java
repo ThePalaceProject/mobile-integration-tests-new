@@ -52,7 +52,7 @@ public class GettingBooksStep {
         AqualityServices.getConditionalWait().waitFor(catalogBooksScreen::isFirstBookInCatalogDisplayed);
 
         SwipeElementUtils.swipeDown();
-        List<String> books = catalogScreen.getListOfBooksNames();
+        List<String> books = catalogBooksScreen.getListOfBooks();
         int bookIndex = random.nextInt(books.size());
         String bookName = books.get(bookIndex);
         if(bookType.equalsIgnoreCase(BookType.AUDIOBOOK.getBookType())) {

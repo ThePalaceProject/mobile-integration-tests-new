@@ -17,8 +17,8 @@ public class ChaptersPdfScreen extends Screen {
     private static final String CHAPTER_LOCATOR_ANDROID = "//android.view.View[contains(@resource-id, \"outlineView\")]/android.view.View";
     private static final String CHAPTER_NUMBER_LOCATOR_ANDROID = "//android.view.View[contains(@resource-id, \"outlineView\")]/android.view.View[%d]/android.view.View";
 
-    private static final String CHAPTER_LOCATOR_IOS = "//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
-    private static final String CHAPTER_NUMBER_LOCATOR_IOS = "//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"%d\"]";
+    private static final String CHAPTER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther[2]";
+    private static final String CHAPTER_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]";
 
     public ChaptersPdfScreen () {
         super(LocatorUtils.getLocator(
@@ -36,12 +36,11 @@ public class ChaptersPdfScreen extends Screen {
                 new IosLocator(By.xpath(CHAPTER_LOCATOR_IOS))), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 
-    public int  openRandomChapter() {
+    public void openRandomChapter() {
         int chapterNumber = (int) (Math.random() * (getChapters().size()) + 1);
         ILabel chapter = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CHAPTER_NUMBER_LOCATOR_ANDROID, chapterNumber))),
                 new IosLocator(By.xpath(String.format(CHAPTER_NUMBER_LOCATOR_IOS, chapterNumber)))), "Chapter");
         chapter.click();
-        return chapterNumber;
     }
 }

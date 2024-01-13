@@ -1,7 +1,5 @@
 Feature: Read PDF in Palace Bookshelf on Android
 
-  #there is an issue with TOC
-
   Background:
     Given Close tutorial screen
     Then Welcome screen is opened
@@ -31,7 +29,6 @@ Feature: Read PDF in Palace Bookshelf on Android
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-    When Open TOC on pdf reader screen
       And There are content list with thumbnails and chapter content on pdf toc screen
     When Return to pdf reader screen from pdf toc screen
     Then PDF toc screen is closed
@@ -49,8 +46,7 @@ Feature: Read PDF in Palace Bookshelf on Android
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-    When Open TOC on pdf reader screen
-      And Open content with thumbnails on pdf toc screen
+    When Open content with thumbnails on pdf toc screen
     Then Thumbnails of the book pages are displayed
     When Open random thumbnail and save the number as 'pageInfo' on pdf toc screen
       And Return to pdf reader screen from pdf toc screen
@@ -63,8 +59,7 @@ Feature: Read PDF in Palace Bookshelf on Android
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-    When Open TOC on pdf reader screen
-      And Open text chapter content on pdf toc screen
+    When Open text chapter content on pdf toc screen
     Then Text chapter content is opened on pdf toc screen
     When Open random chapter and save the number as 'pageInfo' on pdf toc screen
       And Return to pdf reader screen from pdf toc screen

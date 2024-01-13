@@ -135,7 +135,7 @@ public class CatalogBooksScreen extends Screen {
                 new IosLocator(By.xpath(BOOK_NAME_LOCATOR_IOS))), ElementType.LABEL);
 
         List<String> booksName = new ArrayList<>();
-        lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
+        lblBooks.forEach(book->booksName.add(book.getText()));
         return booksName;
     }
 

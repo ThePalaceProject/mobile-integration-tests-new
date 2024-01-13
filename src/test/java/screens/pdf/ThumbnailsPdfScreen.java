@@ -15,7 +15,7 @@ import java.util.List;
 public class ThumbnailsPdfScreen extends Screen {
 
     private static final String THUMBNAIL_LOCATOR_ANDROID = "//android.view.View[contains(@content-desc, \"Thumbnail of Page\")]";
-    private static final String THUMBNAIL_NUMBER_LOCATOR_ANDROID = "//android.view.View[@content-desc=\"Thumbnail of Page %d\"]";
+    private static final String THUMBNAIL_NUMBER_LOCATOR_ANDROID = "//android.view.View[@resource-id=\"thumbnailView\"]/android.view.View[%d]";
 
     private static final String THUMBNAIL_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell";
     private static final String THUMBNAIL_NUMBER_LOCATOR_IOS = "//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]/XCUIElementTypeStaticText";
@@ -36,13 +36,12 @@ public class ThumbnailsPdfScreen extends Screen {
                 new IosLocator(By.xpath(THUMBNAIL_LOCATOR_IOS))), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 
-    public int openRandomThumbnail() {
+    public void openRandomThumbnail() {
         int thumbnailNumber = (int) (Math.random() * (getThumbnails().size()) + 1);
         ILabel thumbnail = getElementFactory().getLabel(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(THUMBNAIL_NUMBER_LOCATOR_ANDROID, thumbnailNumber))),
                 new IosLocator(By.xpath(String.format(THUMBNAIL_NUMBER_LOCATOR_IOS, thumbnailNumber)))), "Thumbnail");
         thumbnail.click();
-        return thumbnailNumber;
     }
 
     public void openThumbnail(int thumbnailNumber) {

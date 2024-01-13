@@ -435,7 +435,7 @@ Feature: Book detail view screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
     When Open Catalog
       And Open search modal
-      And Search for "Renaissance Futurities" and save bookName as 'bookNameInfo'
+      And Search for "Friended" and save bookName as 'bookNameInfo'
       And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
       And Click GET action button on Book details screen
     Then Sing in screen is opened

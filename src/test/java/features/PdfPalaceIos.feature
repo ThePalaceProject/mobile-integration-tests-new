@@ -74,10 +74,10 @@ Feature: Read PDF in Palace Bookshelf on IOS
   Scenario: Navigate by Page slider
     When Swipe pdf page forward from 4 to 6 times on reader pdf screen
       And Save page number as 'pageNumber' on pdf reader screen
-      And Slide page slider RIGHT on reader pdf screen
+      And Slide page slider LEFT on reader pdf screen
     Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen
     When Save page number as 'pageNumber' on pdf reader screen
-      And Slide page slider LEFT on reader pdf screen
+      And Slide page slider RIGHT on reader pdf screen
     Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen
 
   @tier2 @exclude_android
