@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.localization.catalog.BookActionButtonNames;
+import enums.BookType;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.localization.sortoptions.AvailabilityKeys;
 import enums.localization.sortoptions.SortByKeys;
@@ -11,12 +12,14 @@ import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.*;
 import screens.menubar.MenuBar;
 import screens.menubar.MenuBarScreen;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +34,9 @@ public class CatalogSteps {
     private final MainToolBarScreen mainToolBarScreen;
     private final CatalogBooksScreen catalogBooksScreen;
     private final SortOptionsScreen sortOptionsScreen;
+    private final SearchScreen searchScreen;
     private final ScenarioContext context;
+    private static final SecureRandom random = new SecureRandom();
 
     @Inject
     public CatalogSteps(ScenarioContext context){
@@ -42,6 +47,7 @@ public class CatalogSteps {
         mainToolBarScreen = new MainToolBarScreen();
         catalogBooksScreen = new CatalogBooksScreen();
         sortOptionsScreen = new SortOptionsScreen();
+        searchScreen = new SearchScreen();
     }
 
     @When("Open Catalog")
@@ -271,6 +277,32 @@ public class CatalogSteps {
         menuBarScreen.openBottomMenuTab(MenuBar.CATALOG);
         mainToolBarScreen.chooseAnotherLibrary();
         catalogScreen.selectLibraryFromListOfAddedLibraries(libraryName);
+    }
+
+    @When("Get {} book from {string} category and save it as {string}")
+    public void getABookAndSave(BookType bookType, String categoryName, String bookNameKey) {
+        catalogScreen.state().waitForDisplayed();
+
+        catalogScreen.openCategory(categoryName);
+
+        AqualityServices.getConditionalWait().waitFor(catalogBooksScreen::isFirstBookInCatalogDisplayed);
+
+        SwipeElementUtils.swipeDown();
+        List<String> books = catalogBooksScreen.getListOfBooks();
+
+
+        System.out.println("size: " + books.size());
+
+        String bookName = books.get(random.nextInt(books.size()));
+
+        if(bookType == BookType.AUDIOBOOK) {
+            bookName = StringUtils.substringBefore(bookName, ". Audiobook.");
+        }
+
+        mainToolBarScreen.openSearchModal();
+        searchScreen.setSearchedText(bookName);
+        searchScreen.applySearch();
+        context.add(bookNameKey, bookName);
     }
 
     private List<String> getSurnames(List<String> list) {

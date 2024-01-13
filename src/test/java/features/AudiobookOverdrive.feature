@@ -15,12 +15,11 @@ Feature: Audiobooks in A1QA library
     When Enter credentials for "A1QA Test Library" library
     Then Login is performed successfully
     When Open Catalog
-      And Open search modal
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Open the audiobook at the last open chapter and check time code
-    When Search for "Catching Fire" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -58,8 +57,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Navigate by Audiobook
-    When Search for "The Hunger Games" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -84,8 +83,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check end of chapter sleep timer
-    When Search for "Waking the Tiger" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -95,7 +94,6 @@ Feature: Audiobooks in A1QA library
       And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
       And Select "2"X playback speed on playback speed audiobook screen
-      And Stretch slider on the time tracking line forward on audio player screen
       And Listen a chapter on audio player screen
     Then Play button is present on audio player screen
     When Save the name of chapter as 'nextChapter' on audio player screen
@@ -104,8 +102,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Audiobooks: Check of line for time remaining
-    When Search for "Mockingjay" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -115,8 +113,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of switching to the next chapter
-    When Search for "The King's Taster" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -130,8 +128,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check closing playback speed and sleep timer
-    When Search for "The Lost Symbol" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -149,8 +147,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check time tracking line
-    When Search for "The Art of Racing in the Rain" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -171,8 +169,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of not rewinding forward and back by tapping on time bar
-    When Search for "Master and Commander" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -194,8 +192,8 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario Outline: Audiobooks: Playback speed: Check of playback speed
-    When Search for "The Lightning Thief" and save bookName as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    When Switch to "Audiobooks" catalog tab
+      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
