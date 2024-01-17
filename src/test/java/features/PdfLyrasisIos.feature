@@ -155,7 +155,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @smoke @logout @returnBooks @exclude_android
   Scenario:  IOS: Read pdfs: Pages: Perform check of reader navigating (swiping left and right)
     When Open search modal
-      And Search for "A Queen From the North" and save bookName as 'bookNameInfo'
+      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -171,7 +171,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Search: Perform check that the field allows you to enter characters and delete them
     When Open search modal
-      And Search for "A Queen From the North" and save bookName as 'bookNameInfo'
+      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -186,7 +186,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Search: Perform check of finding a word in the book
     When Open search modal
-      And Search for "A Queen From the North" and save bookName as 'bookNameInfo'
+      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -200,7 +200,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Table of contents: Perform check of navigation
     When Open search modal
-      And Search for "Being Plumville" and save bookName as 'bookNameInfo'
+      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -216,7 +216,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Perform check of back button
     When Open search modal
-      And Search for "Being Plumville" and save bookName as 'bookNameInfo'
+      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -228,7 +228,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Table of contents: Contents with thumbnails: Perform check of navigation
     When Open search modal
-      And Search for "The Art of Three" and save bookName as 'bookNameInfo'
+      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -244,7 +244,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Table of contents: Chapter content: Perform check of navigation
     When Open search modal
-      And Search for "The Art of Three" and save bookName as 'bookNameInfo'
+      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
