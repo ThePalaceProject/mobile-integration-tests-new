@@ -45,7 +45,7 @@ public class AudioPlayerScreen extends Screen {
             new AndroidLocator(By.id("player_spine_element")),
             new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[7]"))), "Chapter name label");
     private final IButton btnPlaybackSpeed = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.id("player_menu_playback_rate_image")),
+            new AndroidLocator(By.id("player_menu_playback_rate_text")),
             new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeButton[4]"))), "Playback speed button");
     private final ILabel lblRightTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_time_maximum")),

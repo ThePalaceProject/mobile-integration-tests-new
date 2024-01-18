@@ -64,13 +64,14 @@ Feature: Audiobooks in LYRASIS Reads
   @logout @returnBooks @tier1
   Scenario Outline: Navigate by Audiobook
     When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
     When Click LISTEN action button on Book details screen
     Then Audio player screen of book 'bookInfo' is opened
-    When Tap play button on audio player screen
+    When Save chapter time as 'chapterTimeKeyForBehind' on audio player screen
+      And Tap play button on audio player screen
       And Tap pause button on audio player screen
       And Save book play time as 'timeAhead' on audio player screen
       And Save chapter time as 'chapterTimeKey' on audio player screen
@@ -80,7 +81,7 @@ Feature: Audiobooks in LYRASIS Reads
     When Save book play time as 'timeBehind' on audio player screen
       And Skip behind 30 seconds on audio player screen
     Then Play button is present on audio player screen
-      And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
+      And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKeyForBehind' seconds on audio player screen
 
     Scenarios:
       | distributor        |
@@ -91,7 +92,7 @@ Feature: Audiobooks in LYRASIS Reads
 
   @logout @returnBooks @tier1
   Scenario Outline: Check end of chapter sleep timer
-    When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+    When Search for '<bookName>' and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -112,11 +113,11 @@ Feature: Audiobooks in LYRASIS Reads
     Then Chapter name next to 'chapterNumber' chapter on toc audiobook screen is equal to 'nextChapter' saved chapter name
 
     Scenarios:
-      | distributor        |
-      | Bibliotheca        |
-      | Palace Marketplace |
-      | Axis 360           |
-      | BiblioBoard        |
+      | bookName             |
+      | The Sentence         |
+      | Smart Brevity        |
+      | The Beasts of Tarzan |
+      | Two in the Bush      |
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check of line for time remaining
