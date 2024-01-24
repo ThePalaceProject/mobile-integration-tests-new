@@ -36,9 +36,9 @@ public class PdfSteps {
         Assert.assertTrue("PDF reader is not opened", readerPdfScreen.isReaderOpened());
     }
 
-    @When("Save page number as {string} on pdf reader screen")
-    public void savePageNumberOnReader(String pageInfoKey){
-        context.add(pageInfoKey, readerPdfScreen.getPageNumber());
+    @When("Save page number as {string} on pdf reader screen in {string}")
+    public void savePageNumberOnReader(String pageInfoKey, String libraryName){
+        context.add(pageInfoKey, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Go to next page on reader pdf screen")
@@ -46,10 +46,10 @@ public class PdfSteps {
         readerPdfScreen.goToNextPage();
     }
 
-    @Then("Page number increased by 1 from {string} on pdf reader screen")
-    public void isPageNumberIncreased(String pageInfoKey) {
+    @Then("Page number increased by 1 from {string} on pdf reader screen in {string}")
+    public void isPageNumberIncreased(String pageInfoKey, String libraryName) {
         int numberBefore = context.get(pageInfoKey);
-        Assert.assertEquals("Page number has not increased", numberBefore + 1, readerPdfScreen.getPageNumber());
+        Assert.assertEquals("Page number has not increased", numberBefore + 1, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Go to previous page on reader pdf screen")
@@ -57,10 +57,10 @@ public class PdfSteps {
         readerPdfScreen.goToPreviousPage();
     }
 
-    @Then("Page number decreased by 1 from {string} on pdf reader screen")
-    public void isPageNumberDecreased(String pageInfoKey) {
+    @Then("Page number decreased by 1 from {string} on pdf reader screen in {string}")
+    public void isPageNumberDecreased(String pageInfoKey, String libraryName) {
         int numberBefore = context.get(pageInfoKey);
-        Assert.assertEquals("Page number has not decreased", numberBefore - 1, readerPdfScreen.getPageNumber());
+        Assert.assertEquals("Page number has not decreased", numberBefore - 1, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Open TOC on pdf reader screen")
@@ -133,10 +133,10 @@ public class PdfSteps {
         context.add(pageNumberKey, readerPdfScreen.getSearchPdfScreen().openRandomFoundText());
     }
 
-    @Then("Page number is equal to {string} on pdf reader screen")
-    public void comparePageNumbers(String pageInfoKey) {
+    @Then("Page number is equal to {string} on pdf reader screen in {string}")
+    public void comparePageNumbers(String pageInfoKey, String libraryName) {
         int pageNumber = context.get(pageInfoKey);
-        Assert.assertEquals("Page number is wrong", pageNumber, readerPdfScreen.getPageNumber());
+        Assert.assertEquals("Page number is wrong", pageNumber, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Delete text in search line on search pdf screen")
@@ -154,10 +154,10 @@ public class PdfSteps {
         readerPdfScreen.getNavigationBarScreen().tapBackButton();
     }
 
-    @When("Open random thumbnail and save the number as {string} on pdf toc screen")
-    public void openRandomThumbnail(String pageInfoKey) {
+    @When("Open random thumbnail and save the number as {string} on pdf toc screen in {string}")
+    public void openRandomThumbnail(String pageInfoKey, String libraryName) {
         tocBookmarksPdfScreen.getThumbnailsPdfScreen().openRandomThumbnail();
-        context.add(pageInfoKey, readerPdfScreen.getPageNumber());
+        context.add(pageInfoKey, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Open {int} thumbnail and save the number as {string} on pdf toc screen")
@@ -174,10 +174,10 @@ public class PdfSteps {
         }
     }
 
-    @When("Open random chapter and save the number as {string} on pdf toc screen")
-    public void openRandomChapter(String pageInfoKey){
+    @When("Open random chapter and save the number as {string} on pdf toc screen in {string}")
+    public void openRandomChapter(String pageInfoKey, String libraryName){
         chaptersPdfScreen.openRandomChapter();
-        context.add(pageInfoKey, readerPdfScreen.getPageNumber());
+        context.add(pageInfoKey, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Open pdf settings screen on pdf reader screen")
@@ -200,10 +200,10 @@ public class PdfSteps {
         readerPdfScreen.swipePageDown();
     }
 
-    @Then("Page number is not equal to {string} on pdf reader screen")
-    public void isPageNotEqual(String pageInfoKey) {
+    @Then("Page number is not equal to {string} on pdf reader screen in {string}")
+    public void isPageNotEqual(String pageInfoKey, String libraryName) {
         int pageNumber = context.get(pageInfoKey);
-        Assert.assertNotEquals("Page number is wrong", pageNumber, readerPdfScreen.getPageNumber());
+        Assert.assertNotEquals("Page number is wrong", pageNumber, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Scroll page up on pdf reader screen")
@@ -233,9 +233,9 @@ public class PdfSteps {
         readerPdfScreen.getSettingsPdfScreen().tapGoToFirstPage();
     }
 
-    @Then("The first page is opened on pdf reader screen")
-    public void isFirstPageOpened(){
-        Assert.assertEquals("The first page is not opened", 1, readerPdfScreen.getPageNumber());
+    @Then("The first page is opened on pdf reader screen in {string}")
+    public void isFirstPageOpened(String libraryName){
+        Assert.assertEquals("The first page is not opened", 1, readerPdfScreen.getPageNumber(libraryName));
     }
 
     @When("Tap Vertical scrolling on pdf settings screen")
@@ -301,18 +301,18 @@ public class PdfSteps {
         readerPdfScreen.slidePageSlider(entireScreenDragDirection);
     }
 
-    @Then("The {string} saved page number is less than the current page number on the reader pdf screen")
-    public void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey) {
+    @Then("The {string} saved page number is less than the current page number on the reader pdf screen in {string}")
+    public void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey, String libraryName) {
         int savedPageNumber = context.get(pageNumberKey);
-        int currentPageNumber = readerPdfScreen.getPageNumber();
+        int currentPageNumber = readerPdfScreen.getPageNumber(libraryName);
         Assert.assertTrue("Saved page number is greater that current page number on reader pdf screen. SavedPageNumber - " +
                 savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber < currentPageNumber);
     }
 
-    @Then("The {string} saved page number is greater than the current page number on the reader pdf screen")
-    public void checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(String pageNumberKey) {
+    @Then("The {string} saved page number is greater than the current page number on the reader pdf screen in {string}")
+    public void checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(String pageNumberKey, String libraryName) {
         int savedPageNumber = context.get(pageNumberKey);
-        int currentPageNumber = readerPdfScreen.getPageNumber();
+        int currentPageNumber = readerPdfScreen.getPageNumber(libraryName);
         Assert.assertTrue("Saved page number is less than current page number on reader pdf screen. SavedPageNumber - " +
                 savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber > currentPageNumber);
     }

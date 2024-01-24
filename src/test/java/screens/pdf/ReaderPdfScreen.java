@@ -26,6 +26,10 @@ public class ReaderPdfScreen extends Screen {
     private final ILabel lblPageNumber = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.EditText[@resource-id=\"pageNumber\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@value,\"/\")]"))), "Page number label");
+
+    private final ILabel lblPageNumberPalace = getElementFactory().getLabel(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[@resource-id=\"numPages\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@value,\"/\")]"))), "Page number in Palace Bookshelf");
     private final ILabel lblBookName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup/android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeToolbar/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[2]/XCUIElementTypeStaticText"))), "Book name");
@@ -49,7 +53,7 @@ public class ReaderPdfScreen extends Screen {
         return lblPage.state().waitForDisplayed();
     }
 
-    public int getPageNumber() {
+    public int getPageNumber(String libraryName) {
         Integer pageNumber = ActionProcessorUtils.doForIos(() -> {
             openNavigationBar();
             String pageNumberStr = StringUtils.substringBetween(lblPageNumber.getAttribute(IosAttributes.NAME), "(", "/");
@@ -58,10 +62,17 @@ public class ReaderPdfScreen extends Screen {
             return Integer.parseInt(pageNumberStr);
         });
 
-        if(pageNumber == null) {
-            pageNumber = ActionProcessorUtils.doForAndroid(() -> Integer.parseInt(StringUtils.substringBefore(lblPageNumber.getText(), ",")));
+        if (pageNumber == null) {
+            pageNumber = ActionProcessorUtils.doForAndroid(() -> {
+                String pageNumberStr;
+                if(libraryName.equals("Palace Bookshelf")) {
+                   pageNumberStr = StringUtils.substringBetween(lblPageNumberPalace.getText(), "(", " of");
+                } else {
+                    pageNumberStr = StringUtils.substringBefore(lblPageNumber.getText(), ",");
+                }
+                return Integer.parseInt(pageNumberStr);
+            });
         }
-
         return pageNumber;
     }
 
@@ -72,11 +83,11 @@ public class ReaderPdfScreen extends Screen {
     }
 
     public void goToNextPage() {
-        ActionProcessorUtils.doForIos(() -> SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.RIGHT));
+        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.RIGHT);
     }
 
     public void goToPreviousPage() {
-        ActionProcessorUtils.doForIos(() -> SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.LEFT));
+        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.LEFT);
     }
 
     public NavigationBarPdfScreen getNavigationBarScreen() {

@@ -23,18 +23,18 @@ Feature: Read PDF in LYRARIS Reads on IOS
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
     When Swipe pdf page forward from 4 to 6 times on reader pdf screen
-      And Save page number as 'pageNumber' on pdf reader screen
+      And Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
       And Return to previous screen for epub and pdf
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen
+      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
       And Restart app
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen
+      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
 
 #  @logout @returnBooks @tier1 @exclude_android
 #  Scenario: Search Pdf Functionality Lyrasis
@@ -71,12 +71,12 @@ Feature: Read PDF in LYRARIS Reads on IOS
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-    When Save page number as 'pageNumber' on pdf reader screen
+    When Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
       And Slide page slider RIGHT on reader pdf screen
-    Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen
-    When Save page number as 'pageNumber' on pdf reader screen
+    Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen in "LYRASIS Reads"
+    When Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
       And Slide page slider LEFT on reader pdf screen
-    Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen
+    Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen in "LYRASIS Reads"
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Bookmarks Functionality Lyrasis
@@ -95,10 +95,10 @@ Feature: Read PDF in LYRARIS Reads on IOS
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
 #    Then Bookmark is displayed on reader pdf screen
-      And Save page number as 'pageNumberInfo' on pdf reader screen
+      And Save page number as 'pageNumberInfo' on pdf reader screen in "LYRASIS Reads"
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
-      And Save page number as 'pageNumberInfo2' on pdf reader screen
+      And Save page number as 'pageNumberInfo2' on pdf reader screen in "LYRASIS Reads"
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
 #      And Delete bookmark on reader pdf screen
@@ -106,7 +106,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
       And Open bookmarks pdf screen
     Then Amount of bookmarks is 2 on bookmarks pdf screen
     When Open the 0 bookmark on bookmarks pdf screen
-    Then Page number is equal to 'pageNumberInfo' on pdf reader screen
+    Then Page number is equal to 'pageNumberInfo' on pdf reader screen in "LYRASIS Reads"
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check invalid data in searching Lyrasis
@@ -161,12 +161,12 @@ Feature: Read PDF in LYRARIS Reads on IOS
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-    When Save page number as 'pageInfo' on pdf reader screen
+    When Save page number as 'pageInfo' on pdf reader screen in "LYRASIS Reads"
       And Go to next page on reader pdf screen
-    Then Page number increased by 1 from 'pageInfo' on pdf reader screen
-    When Save page number as 'pageInfo2' on pdf reader screen
+    Then Page number increased by 1 from 'pageInfo' on pdf reader screen in "LYRASIS Reads"
+    When Save page number as 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
       And Go to previous page on reader pdf screen
-    Then Page number decreased by 1 from 'pageInfo2' on pdf reader screen
+    Then Page number decreased by 1 from 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
 
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Search: Perform check that the field allows you to enter characters and delete them
@@ -195,7 +195,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
     When Open search pdf screen
       And Enter 'try' text on search pdf screen
       And Open random found text and save page number as 'pageNumber' on search pdf screen
-    Then Page number is equal to 'pageNumber' on pdf reader screen
+    Then Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
 
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Table of contents: Perform check of navigation
@@ -237,9 +237,9 @@ Feature: Read PDF in LYRARIS Reads on IOS
     When Open TOC on pdf reader screen
       And Open content with thumbnails on pdf toc screen
     Then Thumbnails of the book pages are displayed
-    When Open random thumbnail and save the number as 'pageInfo' on pdf toc screen
+    When Open random thumbnail and save the number as 'pageInfo' on pdf toc screen in "LYRASIS Reads"
       And Return to pdf reader screen from pdf toc screen
-    Then Page number is equal to 'pageInfo' on pdf reader screen
+    Then Page number is equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
 
   @smoke @logout @returnBooks @exclude_android
   Scenario: iOS: Read pdfs: Table of contents: Chapter content: Perform check of navigation
@@ -253,6 +253,6 @@ Feature: Read PDF in LYRARIS Reads on IOS
     When Open TOC on pdf reader screen
       And Open text chapter content on pdf toc screen
     Then Text chapter content is opened on pdf toc screen
-    When Open random chapter and save the number as 'pageInfo' on pdf toc screen
+    When Open random chapter and save the number as 'pageInfo' on pdf toc screen in "LYRASIS Reads"
       And Return to pdf reader screen from pdf toc screen
-    Then Page number is equal to 'pageInfo' on pdf reader screen
+    Then Page number is equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"

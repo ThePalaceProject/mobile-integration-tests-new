@@ -36,11 +36,11 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Save the number of the last page as 'lastPageInfo' on pdf reader screen
       And Open pdf settings screen on pdf reader screen
     When Tap Go to last page button on pdf settings screen
-    Then Page number is equal to 'lastPageInfo' on pdf reader screen
+    Then Page number is equal to 'lastPageInfo' on pdf reader screen in "LYRASIS Reads"
     When Open pdf settings screen on pdf reader screen
     Then PDF settings screen is opened
     When Tap Go to first page button on pdf settings screen
-    Then The first page is opened on pdf reader screen
+    Then The first page is opened on pdf reader screen in "LYRASIS Reads"
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Settings: Check of Vertical scrolling in Lyrasis
@@ -57,12 +57,12 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Vertical scrolling is chosen on settings screen
       And Spreads options are available on settings screen
     When Open pdf settings screen on pdf reader screen
-      And Save page number as 'pageInfo' on pdf reader screen
+      And Save page number as 'pageInfo' on pdf reader screen in "LYRASIS Reads"
       And Scroll page down on pdf reader screen
-    Then Page number is not equal to 'pageInfo' on pdf reader screen
-    When Save page number as 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
+    When Save page number as 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
       And Scroll page up on pdf reader screen
-    Then Page number is not equal to 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Settings: Check of Horizontal scrolling in Lyrasis
@@ -79,12 +79,12 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Horizontal scrolling is chosen on settings screen
       And Spreads options are not available on settings screen
     When Open pdf settings screen on pdf reader screen
-      And Save page number as 'pageInfo' on pdf reader screen
+      And Save page number as 'pageInfo' on pdf reader screen in "LYRASIS Reads"
       And Go to next page on reader pdf screen
-    Then Page number is not equal to 'pageInfo' on pdf reader screen
-    When Save page number as 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
+    When Save page number as 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
       And Go to previous page on reader pdf screen
-    Then Page number is not equal to 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Settings: Check of Wrapped scrolling in Lyrasis
@@ -101,12 +101,12 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Wrapped scrolling is chosen on settings screen
       And Spreads options are available on settings screen
     When Open pdf settings screen on pdf reader screen
-      And Save page number as 'pageInfo' on pdf reader screen
+      And Save page number as 'pageInfo' on pdf reader screen in "LYRASIS Reads"
       And Go to next page on reader pdf screen
-    Then Page number is not equal to 'pageInfo' on pdf reader screen
-    When Save page number as 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
+    When Save page number as 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
       And Go to previous page on reader pdf screen
-    Then Page number is not equal to 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
 
   @ignore @logout @returnBooks @tier1 @exclude_ios
   Scenario: Open book to last page read in Lyrasis
@@ -118,18 +118,18 @@ Feature: Read PDF in LYRASIS Reads on Android
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
     When Swipe pdf page down from 7 to 10 times on reader pdf screen
-      And Save page number as 'pageNumber' on pdf reader screen
+      And Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
       And Return to previous screen for epub and pdf
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen
+      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
     When Restart app
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen
+      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
 
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Table of contents: Perform check of navigation of TOC button
@@ -176,12 +176,12 @@ Feature: Read PDF in LYRASIS Reads on Android
       Then Vertical scrolling is chosen by default on settings screen
     When Open pdf settings screen on pdf reader screen
       And Scroll page down on pdf reader screen
-      And Save page number as 'pageInfo' on pdf reader screen
+      And Save page number as 'pageInfo' on pdf reader screen in "LYRASIS Reads"
       And Scroll page down on pdf reader screen
-    Then Page number is not equal to 'pageInfo' on pdf reader screen
-    When Save page number as 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
+    When Save page number as 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
       And Scroll page up on pdf reader screen
-    Then Page number is not equal to 'pageInfo2' on pdf reader screen
+    Then Page number is not equal to 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
 
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Table of contents: Perform check of navigation
@@ -223,9 +223,9 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Open TOC on pdf reader screen
       And Open content with thumbnails on pdf toc screen
     Then Thumbnails of the book pages are displayed
-    When Open random thumbnail and save the number as 'pageInfo' on pdf toc screen
+    When Open random thumbnail and save the number as 'pageInfo' on pdf toc screen in "LYRASIS Reads"
       And Return to pdf reader screen from pdf toc screen
-    Then Page number is equal to 'pageInfo' on pdf reader screen
+    Then Page number is equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
 
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Table of contents: Chapter content: Perform check of navigation
@@ -239,6 +239,6 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Open TOC on pdf reader screen
       And Open text chapter content on pdf toc screen
     Then Text chapter content is opened on pdf toc screen
-    When Open random chapter and save the number as 'pageInfo' on pdf toc screen
+    When Open random chapter and save the number as 'pageInfo' on pdf toc screen in "LYRASIS Reads"
       And Return to pdf reader screen from pdf toc screen
-    Then Page number is equal to 'pageInfo' on pdf reader screen
+    Then Page number is equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
