@@ -44,7 +44,7 @@ public class CatalogScreen extends Screen {
     private static final String CATEGORY_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_ANDROID = "/android.widget.FrameLayout";
     private static final String BOOK_NAME_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"feedLaneCoversScroll\")]/android.widget.FrameLayout";
-    private static final String CURRENT_CATEGORY_LOCATOR_ANDROID = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
+    private static final String CURRENT_CATEGORY_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
     private static final String MORE_BUTTON_LOCATOR_ANDROID = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String SECTION_TITLE_ANDROID = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";

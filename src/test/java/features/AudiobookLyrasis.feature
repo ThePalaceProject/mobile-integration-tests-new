@@ -59,17 +59,19 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Navigate by Audiobook
     When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
-      And Switch to 'Audiobooks' catalog tab
+    And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
     When Click LISTEN action button on Book details screen
     Then Audio player screen of book 'bookInfo' is opened
-    When Tap play button on audio player screen
+    When Save chapter time as 'chapterTimeKeyForBehind' on audio player screen
+      And Tap play button on audio player screen
       And Tap pause button on audio player screen
       And Save book play time as 'timeAhead' on audio player screen
       And Save chapter time as 'chapterTimeKey' on audio player screen
@@ -79,17 +81,18 @@ Feature: Audiobooks in LYRASIS Reads
     When Save book play time as 'timeBehind' on audio player screen
       And Skip behind 30 seconds on audio player screen
     Then Play button is present on audio player screen
-      And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
+      And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKeyForBehind' seconds on audio player screen
 
     Scenarios:
       | distributor        |
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check end of chapter sleep timer
-    When Search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+    When Search for '<bookName>' and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -110,10 +113,11 @@ Feature: Audiobooks in LYRASIS Reads
     Then Chapter name next to 'chapterNumber' chapter on toc audiobook screen is equal to 'nextChapter' saved chapter name
 
     Scenarios:
-      | distributor        |
-      | Bibliotheca        |
-      | Palace Marketplace |
-      | Axis 360           |
+      | bookName             |
+      | The Sentence         |
+      | Smart Brevity        |
+      | The Beasts of Tarzan |
+      | Two in the Bush      |
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check of line for time remaining
@@ -131,6 +135,7 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check of switching to the next time
@@ -152,6 +157,7 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Check playback speed and sleep timer
@@ -180,6 +186,7 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1 @exlude_ios
   Scenario Outline: Check time tracking line
@@ -208,6 +215,7 @@ Feature: Audiobooks in LYRASIS Reads
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario Outline: Check of not rewinding forward and back by tapping on time bar
@@ -237,6 +245,7 @@ Feature: Audiobooks in LYRASIS Reads
       | Palace Marketplace |
       | Axis 360           |
       | Bibliotheca        |
+      | BiblioBoard        |
 
   @logout @returnBooks @tier1
   Scenario Outline: Playback speed: Check of playback speed
@@ -275,10 +284,14 @@ Feature: Audiobooks in LYRASIS Reads
       | Axis 360           | 1.25  | 8                 | 10                 |
       | Axis 360           | 1.50  | 6                 | 9                  |
       | Axis 360           | 2.0   | 5                 | 10                 |
+      | Bibliotheca        | 0.75  | 8                 | 6                  |
+      | Bibliotheca        | 1.25  | 8                 | 10                 |
+      | Bibliotheca        | 1.50  | 6                 | 9                  |
       | Bibliotheca        | 2.0   | 5                 | 10                 |
-      | Bibliotheca        | 2.0   | 5                 | 10                 |
-      | Bibliotheca        | 2.0   | 5                 | 10                 |
-      | Bibliotheca        | 2.0   | 5                 | 10                 |
+      | BiblioBoard        | 0.75  | 8                 | 6                  |
+      | BiblioBoard        | 1.25  | 8                 | 10                 |
+      | BiblioBoard        | 1.50  | 6                 | 9                  |
+      | BiblioBoard        | 2.0   | 5                 | 10                 |
 
   @logout @returnBooks @tier1
   Scenario: TOC: Check of table of contents

@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.localization.catalog.TimerKeys;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -140,15 +141,15 @@ public class AudioPlayerSteps {
     public void checkThatPlaybackHasBeenMovedBehindOnAudioPlayerScreen(long secondsBehind, String timeKey, String chapterTimeKey) {
         Duration savedDate = context.get(timeKey);
         Duration chapterTime = context.get(chapterTimeKey);
-        long secondsBefore = savedDate.getSeconds();
-        long secondsOfChapterTime = chapterTime.getSeconds();
+        long secondsOfPreviousChapter = savedDate.getSeconds();
+        long currentChapterSeconds = chapterTime.getSeconds();
         long actualTime = audioPlayerScreen.getLeftTime().getSeconds();
         long expectedTime;
 
-        if(secondsOfChapterTime <= secondsBehind) {
-            expectedTime = secondsOfChapterTime - (secondsBehind - secondsBefore);
+        if(secondsOfPreviousChapter <= secondsBehind) {
+            expectedTime = currentChapterSeconds - (secondsBehind - secondsOfPreviousChapter);
         } else {
-            expectedTime = secondsBefore - secondsBehind;
+            expectedTime = secondsOfPreviousChapter - secondsBehind;
         }
 
         Assert.assertTrue("Date is not moved behind by " + secondsBehind + " seconds, Date is moved behind by ", actualTime == expectedTime || actualTime + 1 == expectedTime);
@@ -196,13 +197,11 @@ public class AudioPlayerSteps {
 
     @Then("The speed by default is {string}X")
     public void isPlaySpeedNormal(String playbackSpeed) {
-        if(AqualityServices.getApplication().getPlatformName()== PlatformName.IOS) {
+        ActionProcessorUtils.doForIos(() -> {
             String speedValue = audioPlayerScreen.getPlaySpeedValue();
             Assert.assertTrue("Play speed is not default: " + playbackSpeed, speedValue.contains(playbackSpeed));
-        }
-        else {
-            Assert.assertEquals("Play speed is not default", "1.0x", audioPlayerScreen.getPlaySpeedValue());
-        }
+        });
+        ActionProcessorUtils.doForAndroid(() -> Assert.assertEquals("Play speed is not default", "1.0x", audioPlayerScreen.getPlaySpeedValue()));
     }
 
     @When("Open playback speed on audio player screen")
@@ -212,11 +211,8 @@ public class AudioPlayerSteps {
 
     @Then("Sleep timer is set to endOfChapter on audio player screen")
     public void checkThatSleepTimerIsSetToEndOfChapterOnAudioPLayerScreen() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerSetTo(TimerKeys.END_OF_CHAPTER));
-        } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerEqualTo(audioPlayerScreen.getRightTime()));
-        }
+        ActionProcessorUtils.doForAndroid(() -> Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerSetTo(TimerKeys.END_OF_CHAPTER)));
+        ActionProcessorUtils.doForIos(() -> Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerEqualTo(audioPlayerScreen.getRightTime())));
     }
 
     @When("Open sleep timer on audio player screen")
