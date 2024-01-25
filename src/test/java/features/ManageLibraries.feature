@@ -80,7 +80,7 @@ Feature: Manage Libraries
       And Open Catalog
       And Switch to 'Palace Bookshelf' from side menu
       And Open categories by chain and chain starts from CategoryScreen:
-      | Holiday Reads |
+      | Open Textbooks |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
@@ -127,7 +127,7 @@ Feature: Manage Libraries
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Switch to 'eBooks' catalog tab
     Then Subcategory screen is opened
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
