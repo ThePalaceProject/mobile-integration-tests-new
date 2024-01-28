@@ -49,7 +49,7 @@ Feature: Catalog Navigation module
     When Open Catalog
     Then Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
-      | Holiday Reads |
+      | Big Ten Open Books |
     Then Books are sorted by Author by default on subcategory screen in 'Palace Bookshelf'
       And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen in 'Palace Bookshelf'
 
