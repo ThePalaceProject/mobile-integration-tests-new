@@ -6,9 +6,8 @@ Feature: Read PDF in Palace Bookshelf on Android
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Open search modal
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Open search modal
       And Search for 'Pharo by Example 5.0' and save bookName as 'bookNameInfo'
 
   @tier2 @exclude_ios

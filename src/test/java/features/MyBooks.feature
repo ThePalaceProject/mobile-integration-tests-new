@@ -7,9 +7,8 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Open search modal
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Open search modal
       And Search several books and save them in list as 'listOfBooks':
       | One Way     |
       | Jane Eyre   |
@@ -26,9 +25,8 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Open search modal
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Open search modal
       And Search several books and save them in list as 'listOfBooks':
       | One Way     |
       | Jane Eyre   |
@@ -47,7 +45,7 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -70,7 +68,7 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -95,7 +93,7 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -124,7 +122,7 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -143,7 +141,7 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -166,7 +164,7 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -201,7 +199,7 @@ Feature: My books module
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen

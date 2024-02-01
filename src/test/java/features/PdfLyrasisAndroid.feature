@@ -6,7 +6,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen

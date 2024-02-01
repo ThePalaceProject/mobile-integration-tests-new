@@ -9,7 +9,7 @@ Feature: Catalog Navigation module
   @tier2
   Scenario: Return to last library catalog
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Add 'LYRASIS Reads' library in Libraries screen
     Then Catalog screen is opened
     When Restart app
@@ -20,9 +20,8 @@ Feature: Catalog Navigation module
   Scenario: Browse Categories in Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
     Then Catalog screen is opened
-      And Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+      And Library "Palace Bookshelf" is opened on Catalog screen
+      And Catalog screen is opened
     When Swipe up
       And Count of books in first category is more than 1
     When Get names of books on screen and save them as 'listOfBooksOnMainPage'
@@ -37,19 +36,17 @@ Feature: Catalog Navigation module
   @tier2
   Scenario: Check of the titles of books sections in Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+      And Catalog screen is opened
       And Category names are correct on Catalog screen
 
   @tier2
   Scenario Outline: Check of books sorting in Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+      And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
-      | Holiday Reads |
+      | Big Ten Open Books |
     Then Books are sorted by Author by default on subcategory screen in 'Palace Bookshelf'
       And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen in 'Palace Bookshelf'
 
@@ -57,37 +54,11 @@ Feature: Catalog Navigation module
       | type1  | type2          | type3 |
       | Author | Recently Added | Title |
 
-#  Sorting doesn't work correctly
-#  @palace
-#  Scenario: Sort Lists in Palace Bookshelf
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "Palace Bookshelf" on Add library screen
-#    Then Library "Palace Bookshelf" is opened on Libraries screen
-#    When Open Catalog
-#    Then Catalog screen is opened
-#    When Open categories by chain and chain starts from CategoryScreen:
-#      | Banned Books |
-#    Then Subcategory name is "Banned Books"
-#    When Sort books by AUTHOR
-#    Then Subcategory name is "Banned Books"
-#      And Books are sorted by Author ascending
-#    When Sort books by TITLE
-#    Then Subcategory name is "Banned Books"
-#    And Books are sorted by Title ascending
-#    When Save list of books as 'listOfBooks'
-#    And Sort books by RECENTLY_ADDED
-#    Then Subcategory name is "Banned Books"
-#    And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
-
   @tier2
   Scenario Outline: Check of tabs at the top of the screen in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+      And Catalog screen is opened
       And There are types '<type1>', '<type2>' and '<type3>' of books on catalog book screen:
       And Section with books of '<type1>' type is opened on catalog book screen
     When Switch to '<type2>' catalog tab
@@ -102,17 +73,15 @@ Feature: Catalog Navigation module
   @tier2
   Scenario: Check of the titles of books sections in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+      And Catalog screen is opened
       And Category names are correct on Catalog screen
 
   @tier2
   Scenario Outline: Check of books sorting in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+      And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
       And Swipe sort options
@@ -123,37 +92,11 @@ Feature: Catalog Navigation module
       | type1  | type2          | type3 |
       | Author | Recently Added | Title |
 
-    #  Sorting doesn't work correctly
-#  @tier2
-#  Scenario: Sort Lists in LYRASIS
-#    When Close tutorial screen
-#    Then Welcome screen is opened
-#    When Close welcome screen
-#    Then Add library screen is opened
-#    When Add library "LYRASIS Reads" on Add library screen
-#    Then Library "LYRASIS Reads" is opened on Libraries screen
-#    When Open Catalog
-#    Then Catalog screen is opened
-#    When Open categories by chain and chain starts from CategoryScreen:
-#      | Baker & Taylor Axis360 Test |
-#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
-#    When Sort books by AUTHOR
-#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
-#      And Books are sorted by Author ascending
-#    When Sort books by TITLE
-#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
-#      And Books are sorted by Title ascending
-#    When Save list of books as 'listOfBooks'
-#      And Sort books by RECENTLY_ADDED
-#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
-#      And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
-
   @tier2
   Scenario Outline: Check of books availability in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+      And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
     Then Subcategory name is 'Baker & Taylor Axis360 Test'
@@ -167,9 +110,8 @@ Feature: Catalog Navigation module
   @tier2
   Scenario: Check all types of availability
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+      And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
     Then Subcategory name is 'Baker & Taylor Axis360 Test'
@@ -183,9 +125,8 @@ Feature: Catalog Navigation module
   @tier2 @exclude_android
   Scenario Outline: Check of books collections
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+      And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
     Then Subcategory name is 'Baker & Taylor Axis360 Test'
@@ -268,3 +209,53 @@ Feature: Catalog Navigation module
 #    Then Book section 'sectionInfo' is opened
 #    When Tap Back button on Subcategory screen
 #    Then Catalog screen is opened
+
+  #  Sorting doesn't work correctly
+#  @palace
+#  Scenario: Sort Lists in Palace Bookshelf
+#    When Close tutorial screen
+#    Then Welcome screen is opened
+#    When Close welcome screen
+#    Then Add library screen is opened
+#    When Add library "Palace Bookshelf" on Add library screen
+#    Then Library "Palace Bookshelf" is opened on Libraries screen
+#    When Open Catalog
+#    Then Catalog screen is opened
+#    When Open categories by chain and chain starts from CategoryScreen:
+#      | Banned Books |
+#    Then Subcategory name is "Banned Books"
+#    When Sort books by AUTHOR
+#    Then Subcategory name is "Banned Books"
+#      And Books are sorted by Author ascending
+#    When Sort books by TITLE
+#    Then Subcategory name is "Banned Books"
+#    And Books are sorted by Title ascending
+#    When Save list of books as 'listOfBooks'
+#    And Sort books by RECENTLY_ADDED
+#    Then Subcategory name is "Banned Books"
+#    And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
+
+  #  Sorting doesn't work correctly
+#  @tier2
+#  Scenario: Sort Lists in LYRASIS
+#    When Close tutorial screen
+#    Then Welcome screen is opened
+#    When Close welcome screen
+#    Then Add library screen is opened
+#    When Add library "LYRASIS Reads" on Add library screen
+#    Then Library "LYRASIS Reads" is opened on Libraries screen
+#    When Open Catalog
+#    Then Catalog screen is opened
+#    When Open categories by chain and chain starts from CategoryScreen:
+#      | Baker & Taylor Axis360 Test |
+#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
+#    When Sort books by AUTHOR
+#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
+#      And Books are sorted by Author ascending
+#    When Sort books by TITLE
+#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
+#      And Books are sorted by Title ascending
+#    When Save list of books as 'listOfBooks'
+#      And Sort books by RECENTLY_ADDED
+#    Then Subcategory name is 'Baker & Taylor Axis360 Test'
+#      And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'

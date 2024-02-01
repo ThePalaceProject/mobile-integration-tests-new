@@ -11,11 +11,13 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.*;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchSteps {
 
+    private static final SecureRandom random = new SecureRandom();
     private final MainToolBarScreen mainToolBarScreen;
     private final SearchScreen searchScreen;
     private final CatalogScreen catalogScreen;
@@ -135,5 +137,15 @@ public class SearchSteps {
     @When("Return back from search modal")
     public void returnBack() {
         searchScreen.closeSearchScreen();
+    }
+
+    @When("Search a book from the list {string} and save book name as {string}")
+    public void searchFromList(String listNameKey, String bookNameInfoKey) {
+        List<String> bookList = context.get(listNameKey);
+        int bookIndex = random.nextInt(bookList.size());
+        String bookName = bookList.get(bookIndex);
+        searchScreen.setSearchedText(bookName);
+        searchScreen.applySearch();
+        context.add(bookNameInfoKey, bookName);
     }
 }

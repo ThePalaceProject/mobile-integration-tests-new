@@ -104,8 +104,6 @@ public class ReaderEpubScreen extends Screen {
     public String getChapterName() {
         String chapterName = ActionProcessorUtils.doForIos(() -> {
             String chapter = lblChapterName.getAttribute(IosAttributes.NAME);
-//            chapter = RegExUtil.deleteBracketsFromText(chapter);
-//            return RegExUtil.getStringFromThirdGroup(chapter, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
             return StringUtils.substringAfter(chapter, "(");
         });
 

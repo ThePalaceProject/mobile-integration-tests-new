@@ -131,6 +131,10 @@ public class BookDetailsScreen extends Screen {
         return lblDescription.state().waitForExist();
     }
 
+    public boolean isMoreBtnInDescriptionExist() {
+        return btnMoreInDescription.state().isExist();
+    }
+
     public boolean isMoreBtnInDescriptionAvailable() {
         return btnMoreInDescription.state().isClickable();
     }

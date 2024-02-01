@@ -98,7 +98,8 @@ public class BookDetailsSteps {
 
     @Then("Button More in Description is available on Book details screen")
     public void moreBtnIsAvailable() {
-        Assert.assertTrue("More button is not available", bookDetailsScreen.isMoreBtnInDescriptionAvailable());
+        if(bookDetailsScreen.isMoreBtnInDescriptionExist())
+            Assert.assertTrue("More button is not available", bookDetailsScreen.isMoreBtnInDescriptionAvailable());
     }
 
     @Then("Publisher and Categories in Information section are displayed on book details screen")

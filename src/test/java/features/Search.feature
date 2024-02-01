@@ -1,6 +1,6 @@
 Feature: Search module
 
-  @test @tier1
+  @tier1
   Scenario: Find a library and delete it
     When Close tutorial screen
       And Close welcome screen
