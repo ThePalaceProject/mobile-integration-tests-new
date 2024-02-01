@@ -57,7 +57,12 @@ public class CatalogSteps {
 
     @Then("Catalog screen is opened")
     public void isCatalogScreenOpened() {
-        Assert.assertTrue("Catalog is not opened!", catalogScreen.isCatalogScreenOpened());
+        Assert.assertTrue("Catalog is not opened!", catalogScreen.state().waitForDisplayed());
+    }
+
+    @Then("Library {string} is opened on Catalog screen")
+    public void isLibraryOpenedInCatalog(String libraryName){
+        Assert.assertTrue("Library is not opened on the Catalog screen!", catalogScreen.isLibraryOnTheCatalogDisplayed(libraryName));
     }
 
     @Then("Count of books in first category is more than {int}")
@@ -69,6 +74,12 @@ public class CatalogSteps {
     public void getNamesOfBooksAndSaveThem(String booksNamesListKey) {
         List<String> books = catalogScreen.getListOfBooksNames();
         context.add(booksNamesListKey, books);
+    }
+
+    @When("Get names of books on Catalog books screen and save them as {string}")
+    public void getNamesOfBooksInCatalog(String booksNameListKey) {
+        List<String> books = catalogBooksScreen.getListOfBooks();
+        context.add(booksNameListKey, books);
     }
 
     @When("Open categories by chain and chain starts from CategoryScreen:")
@@ -289,9 +300,6 @@ public class CatalogSteps {
 
         SwipeElementUtils.swipeDown();
         List<String> books = catalogBooksScreen.getListOfBooks();
-
-
-        System.out.println("size: " + books.size());
 
         String bookName = books.get(random.nextInt(books.size()));
 

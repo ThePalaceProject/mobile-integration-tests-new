@@ -27,9 +27,6 @@ import java.util.stream.Collectors;
 public class CatalogScreen extends Screen {
     private final Random random = new Random();
 
-    private final ILabel lblCatalog = getElementFactory().getLabel(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.TextView")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"))), "Catalog label");
     private final ILabel lblCategoryName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[contains(@resource-id,\"feedLaneTitle\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeOther[1]/XCUIElementTypeButton[1]"))), "Category name label");
@@ -50,6 +47,7 @@ public class CatalogScreen extends Screen {
     private static final String SECTION_TITLE_ANDROID = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";
     private static final String CATALOG_TAB_LOCATOR_ANDROID = "//android.widget.RadioButton[@text=\"%s\"]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_ANDROID = "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
+    private static final String LIBRARY_LOGO_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
 
     private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1]";
     private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
@@ -61,16 +59,20 @@ public class CatalogScreen extends Screen {
     private static final String SECTION_TITLE_IOS = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
+    private static final String LIBRARY_LOGO_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     public CatalogScreen() {
         super(LocatorUtils.getLocator(
-                new AndroidLocator(By.id("feedWithGroups")),
+                new AndroidLocator(By.id("feedContentLogoHeader")),
                 new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"AccessibilitySwitchLibrary\")]"))), "Catalog screen");
     }
 
-    public boolean isCatalogScreenOpened() {
-        return lblCatalog.state().waitForDisplayed();
+    public boolean isLibraryOnTheCatalogDisplayed(String libraryName) {
+        ILabel libraryLogo = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(LIBRARY_LOGO_LOCATOR_ANDROID, libraryName))),
+                new IosLocator(By.xpath(String.format(LIBRARY_LOGO_LOCATOR_IOS, libraryName)))), "Library logo");
+        return libraryLogo.state().waitForDisplayed();
     }
 
     public Set<String> getListOfBooksNameInFirstCategory() {
