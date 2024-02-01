@@ -77,8 +77,15 @@ Feature: Distributors
     When Swipe down
       And Activate sync bookmarks on Sign in screen
       And Open Catalog
+      And Switch to "eBooks" catalog tab
+    Then Catalog screen is opened
+    When Open categories by chain and chain starts from CategoryScreen:
+      | OverDrive |
+    Then Subcategory screen is opened
+    When Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
       And Open search modal
-      And Search for "Silk Road" and save bookName as 'bookNameInfo'
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains READ action button on Book details screen
@@ -89,6 +96,9 @@ Feature: Distributors
     When Click READ action button on Book details screen
       And Wait for 3 seconds
     Then Book 'bookInfo' with EBOOK type is present on epub or pdf or audiobook screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Getting and returning an audiobook from Book Detail View for Overdrive
@@ -134,7 +144,7 @@ Feature: Distributors
       And Wait for 3 seconds
     Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @exclude_android
   Scenario Outline: Check of canceling the downloading from book details view for LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
     Then Library "LYRASIS Reads" is opened on Libraries screen
@@ -161,7 +171,7 @@ Feature: Distributors
       | Biblioboard        | EBOOK     | eBooks     |
       | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @exclude_android
   Scenario: Check of canceling the downloading from book details view for Overdrive
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Libraries screen
