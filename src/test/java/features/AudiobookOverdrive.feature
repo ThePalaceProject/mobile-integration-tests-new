@@ -6,19 +6,28 @@ Feature: Audiobooks in A1QA library
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Turn on test mode
       And Enable hidden libraries
       And Open Catalog
       And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Libraries screen
+    Then Library "A1QA Test Library" is opened on Catalog screen
     When Enter credentials for "A1QA Test Library" library
     Then Login is performed successfully
     When Open Catalog
+      And Switch to "Audiobooks" catalog tab
+    Then Catalog screen is opened
+    When Open categories by chain and chain starts from CategoryScreen:
+      | OverDrive |
+    Then Subcategory screen is opened
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Open the audiobook at the last open chapter and check time code
-    When Switch to "Audiobooks" catalog tab
+    When Swipe down
+      And Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -54,10 +63,17 @@ Feature: Audiobooks in A1QA library
     Then Audio player screen of book 'bookInfo' is opened
       And Chapter name on audio player screen is equal to 'chapterNameKey2' saved chapter name
       And Play time is the same with 'timeAhead' play time before restart on books detail screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
+
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Navigate by Audiobook
-    When Switch to "Audiobooks" catalog tab
+    When Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -80,10 +96,17 @@ Feature: Audiobooks in A1QA library
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
       And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check end of chapter sleep timer
-    When Switch to "Audiobooks" catalog tab
+    When Swipe down
+      And Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -99,10 +122,16 @@ Feature: Audiobooks in A1QA library
     When Save the name of chapter as 'nextChapter' on audio player screen
       And Open toc audiobook screen
     Then Chapter name next to 'chapterNumber' chapter on toc audiobook screen is equal to 'nextChapter' saved chapter name
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Audiobooks: Check of line for time remaining
-    When Switch to "Audiobooks" catalog tab
+    When Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -110,10 +139,17 @@ Feature: Audiobooks in A1QA library
     When Click LISTEN action button on Book details screen
     Then Audio player screen of book 'bookInfo' is opened
       And Line for time remaining is displayed on audio player screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of switching to the next chapter
-    When Switch to "Audiobooks" catalog tab
+    When Swipe down
+      And Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -125,10 +161,16 @@ Feature: Audiobooks in A1QA library
       And Select "2"X playback speed on playback speed audiobook screen
       And Listen a chapter on audio player screen
     Then Next chapter play automatically and chapter name is not 'chapterName' on audio player screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check closing playback speed and sleep timer
-    When Switch to "Audiobooks" catalog tab
+    When Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -144,10 +186,17 @@ Feature: Audiobooks in A1QA library
     When Open sleep timer on audio player screen
       And Close sleep timer screen
     Then Play button is present on audio player screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check time tracking line
-    When Switch to "Audiobooks" catalog tab
+    When Swipe down
+      And Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -166,10 +215,16 @@ Feature: Audiobooks in A1QA library
       And Stretch slider on the time tracking line back on audio player screen
       And Wait for 5 seconds
     Then Playing time is not equal to 'timeInfo2' on audio playing screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of not rewinding forward and back by tapping on time bar
-    When Switch to "Audiobooks" catalog tab
+    When Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -189,10 +244,17 @@ Feature: Audiobooks in A1QA library
     When Tap on the time bar back on audio player screen
       And Save book play time as 'timeBackward' on audio player screen
     Then Play times 'timeBehind' and 'timeBackward' are equals
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario Outline: Audiobooks: Playback speed: Check of playback speed
-    When Switch to "Audiobooks" catalog tab
+    When Swipe down
+      And Get names of books on Catalog books screen and save them as "bookList"
+      And Open Catalog
+      And Open search modal
+      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
       And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -216,6 +278,9 @@ Feature: Audiobooks in A1QA library
       And Save chapter time as 'chapterTimeKey' on audio player screen
       And Wait for <secondsForWaiting> seconds
     Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
+    When Return to previous screen for epub and pdf
+      And Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen
 
     Scenarios:
       | speed | secondsForWaiting | moveForwardSeconds |
