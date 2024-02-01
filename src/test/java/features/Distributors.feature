@@ -9,7 +9,7 @@ Feature: Distributors
   @logout @returnBooks @tier2
   Scenario Outline: Reserving from Book Detail View in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -34,7 +34,7 @@ Feature: Distributors
   @logout @returnBooks @tier2
   Scenario Outline: Getting and returning books from Book Detail View in LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Open Catalog
@@ -66,12 +66,12 @@ Feature: Distributors
   @logout @returnBooks @tier2
   Scenario: Getting and returning a book from Book Detail View for Overdrive
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Turn on test mode
       And Enable hidden libraries
       And Open Catalog
       And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Libraries screen
+    Then Library "A1QA Test Library" is opened on Catalog screen
     When Enter credentials for "A1QA Test Library" library
     Then Login is performed successfully
     When Swipe down
@@ -103,12 +103,12 @@ Feature: Distributors
   @logout @returnBooks @tier2
   Scenario: Getting and returning an audiobook from Book Detail View for Overdrive
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Turn on test mode
       And Enable hidden libraries
       And Open Catalog
       And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Libraries screen
+    Then Library "A1QA Test Library" is opened on Catalog screen
     When Enter credentials for "A1QA Test Library" library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -129,9 +129,8 @@ Feature: Distributors
   @tier2
   Scenario: Getting and returning a book from Book Detail View for Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Open search modal
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Open search modal
       And Search for "Jane Eyre" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
@@ -147,7 +146,7 @@ Feature: Distributors
   @logout @returnBooks @tier2 @exclude_android
   Scenario Outline: Check of canceling the downloading from book details view for LYRASIS Reads
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
+    Then Library "LYRASIS Reads" is opened on Catalog screen
     When Enter credentials for 'LYRASIS Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
@@ -174,7 +173,7 @@ Feature: Distributors
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Check of canceling the downloading from book details view for Overdrive
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Turn on test mode
       And Enable hidden libraries
     When Open Catalog

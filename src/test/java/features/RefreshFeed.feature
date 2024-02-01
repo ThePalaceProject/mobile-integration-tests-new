@@ -24,9 +24,8 @@ Feature: Feed
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Open categories by chain and chain starts from CategoryScreen:
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Open categories by chain and chain starts from CategoryScreen:
       | Big Ten Open Books |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And Open Books

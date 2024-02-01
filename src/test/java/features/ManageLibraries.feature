@@ -7,7 +7,7 @@ Feature: Manage Libraries
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Open Settings
       And Open Libraries on Settings screen
     Then Button Add Library is displayed on libraries screen
@@ -28,9 +28,8 @@ Feature: Manage Libraries
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Get names of books on screen and save them as 'nameOfBooks'
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Get names of books on screen and save them as 'nameOfBooks'
       And Add 'LYRASIS Reads' library in Libraries screen
     Then Category names are loaded on Catalog screen
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
@@ -175,9 +174,8 @@ Feature: Manage Libraries
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Add libraries by the logo:
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Add libraries by the logo:
       | LYRASIS Reads            |
       | Plumas County Library    |
       | Escondido Public Library |
@@ -196,9 +194,8 @@ Feature: Manage Libraries
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
-    When Open Catalog
-      And Add libraries by the logo:
+    Then Library "Palace Bookshelf" is opened on Catalog screen
+    When Add libraries by the logo:
       | LYRASIS Reads            |
       | Plumas County Library    |
       | Escondido Public Library |
@@ -213,7 +210,6 @@ Feature: Manage Libraries
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-    Then Catalog screen is opened
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+      And Catalog screen is opened
       And Category names are loaded on Catalog screen

@@ -7,9 +7,8 @@ Feature: Check of View Sample
     When Close welcome screen
     Then Add library screen is opened
     When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Libraries screen
-    When Open Catalog
-      And Open search modal
+    Then Library "LYRASIS Reads" is opened on Catalog screen
+    When Open search modal
       And Search for "The Optimistic Decade" and save bookName as 'bookNameInfo'
       And Switch to "eBooks" catalog tab
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -28,14 +27,13 @@ Feature: Check of View Sample
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Turn on test mode
       And Enable hidden libraries
       And Open Catalog
       And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Libraries screen
-    When Open Catalog
-      And Open search modal
+    Then Library "A1QA Test Library" is opened on Catalog screen
+    When Open search modal
       And Search for "Writing Wild" and save bookName as 'bookNameInfo'
       And Switch to "eBooks" catalog tab
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
@@ -49,14 +47,13 @@ Feature: Check of View Sample
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Libraries screen
+    Then Library "Palace Bookshelf" is opened on Catalog screen
     When Turn on test mode
       And Enable hidden libraries
       And Open Catalog
       And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Libraries screen
-    When Open Catalog
-      And Open search modal
+    Then Library "A1QA Test Library" is opened on Catalog screen
+    When Open search modal
       And Search for "The Lost Symbol" and save bookName as 'bookNameInfo'
       And Switch to "Audiobooks" catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'

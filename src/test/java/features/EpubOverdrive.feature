@@ -54,8 +54,7 @@ Feature: Read EPUB from Overdrive in A1QA
 
   @logout @tier2
   Scenario: Epub: Navigate by Page
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
+    When Get names of books on Catalog books screen and save them as "bookList"
       And Open Catalog
       And Open search modal
       And Search a book from the list "bookList" and save book name as 'bookNameInfo'
@@ -106,8 +105,7 @@ Feature: Read EPUB from Overdrive in A1QA
 
   @logout @returnBooks @tier2
   Scenario: Epub: Delete bookmarks
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
+    When Get names of books on Catalog books screen and save them as "bookList"
       And Open Catalog
       And Open search modal
       And Search a book from the list "bookList" and save book name as 'bookNameInfo'
