@@ -307,6 +307,7 @@ public class CatalogSteps {
             bookName = StringUtils.substringBefore(bookName, ". Audiobook.");
         }
 
+        menuBarScreen.openBottomMenuTab(MenuBar.CATALOG);
         mainToolBarScreen.openSearchModal();
         searchScreen.setSearchedText(bookName);
         searchScreen.applySearch();

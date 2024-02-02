@@ -17,18 +17,10 @@ Feature: Audiobooks in A1QA library
     When Open Catalog
       And Switch to "Audiobooks" catalog tab
     Then Catalog screen is opened
-    When Open categories by chain and chain starts from CategoryScreen:
-      | OverDrive |
-    Then Subcategory screen is opened
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Open the audiobook at the last open chapter and check time code
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -70,11 +62,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Navigate by Audiobook
-    When Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -102,12 +90,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check end of chapter sleep timer
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -128,11 +111,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Audiobooks: Check of line for time remaining
-    When Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -145,12 +124,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of switching to the next chapter
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -167,11 +141,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check closing playback speed and sleep timer
-    When Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -192,12 +162,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check time tracking line
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -221,11 +186,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of not rewinding forward and back by tapping on time bar
-    When Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
@@ -250,12 +211,7 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario Outline: Audiobooks: Playback speed: Check of playback speed
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
-      And Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains LISTEN action button on Book details screen
