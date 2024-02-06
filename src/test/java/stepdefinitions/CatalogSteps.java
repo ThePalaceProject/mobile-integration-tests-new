@@ -8,6 +8,7 @@ import enums.BookType;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.localization.sortoptions.AvailabilityKeys;
 import enums.localization.sortoptions.SortByKeys;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
@@ -35,6 +36,8 @@ public class CatalogSteps {
     private final CatalogBooksScreen catalogBooksScreen;
     private final SortOptionsScreen sortOptionsScreen;
     private final SearchScreen searchScreen;
+    private final SettingsScreen settingsScreen;
+    private final LibrariesScreen librariesScreen;
     private final ScenarioContext context;
     private static final SecureRandom random = new SecureRandom();
 
@@ -48,6 +51,8 @@ public class CatalogSteps {
         catalogBooksScreen = new CatalogBooksScreen();
         sortOptionsScreen = new SortOptionsScreen();
         searchScreen = new SearchScreen();
+        settingsScreen = new SettingsScreen();
+        librariesScreen = new LibrariesScreen();
     }
 
     @When("Open Catalog")
@@ -62,7 +67,13 @@ public class CatalogSteps {
 
     @Then("Library {string} is opened on Catalog screen")
     public void isLibraryOpenedInCatalog(String libraryName){
-        Assert.assertTrue("Library is not opened on the Catalog screen!", catalogScreen.isLibraryOnTheCatalogDisplayed(libraryName));
+        ActionProcessorUtils.doForAndroid(() -> Assert.assertTrue("Library is not opened on the Catalog screen!", catalogScreen.isLibraryOnTheCatalogDisplayed(libraryName)));
+        ActionProcessorUtils.doForIos(() -> {
+            menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
+            menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
+            settingsScreen.openLibraries();
+            Assert.assertTrue(libraryName + " is not present on Libraries screen", librariesScreen.isLibraryPresent(libraryName));
+        });
     }
 
     @Then("Count of books in first category is more than {int}")
