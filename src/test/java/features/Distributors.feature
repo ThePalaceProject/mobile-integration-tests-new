@@ -79,13 +79,7 @@ Feature: Distributors
       And Open Catalog
       And Switch to "eBooks" catalog tab
     Then Catalog screen is opened
-    When Open categories by chain and chain starts from CategoryScreen:
-      | OverDrive |
-    Then Subcategory screen is opened
-    When Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
+    When Get EBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains READ action button on Book details screen

@@ -17,17 +17,10 @@ Feature: Read EPUB from Overdrive in A1QA
     When Open Catalog
       And Switch to "eBooks" catalog tab
     Then Catalog screen is opened
-    When Open categories by chain and chain starts from CategoryScreen:
-      | OverDrive |
-    Then Subcategory screen is opened
 
   @logout @tier2
   Scenario: Epub: Open book to last page read
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
+    When Get EBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
@@ -54,10 +47,7 @@ Feature: Read EPUB from Overdrive in A1QA
 
   @logout @tier2
   Scenario: Epub: Navigate by Page
-    When Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
+    When Get EBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
@@ -76,11 +66,7 @@ Feature: Read EPUB from Overdrive in A1QA
 
   @logout @returnBooks @tier2
   Scenario: Epub: Navigate by bookmarks
-    When Swipe down
-      And Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
+    When Get EBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
@@ -105,10 +91,7 @@ Feature: Read EPUB from Overdrive in A1QA
 
   @logout @returnBooks @tier2
   Scenario: Epub: Delete bookmarks
-    When Get names of books on Catalog books screen and save them as "bookList"
-      And Open Catalog
-      And Open search modal
-      And Search a book from the list "bookList" and save book name as 'bookNameInfo'
+    When Get EBOOK book from "OverDrive" category and save it as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
