@@ -73,6 +73,7 @@ public class CatalogSteps {
             menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
             settingsScreen.openLibraries();
             Assert.assertTrue(libraryName + " is not present on Libraries screen", librariesScreen.isLibraryPresent(libraryName));
+            menuBarScreen.openBottomMenuTab(MenuBar.CATALOG);
         });
     }
 
