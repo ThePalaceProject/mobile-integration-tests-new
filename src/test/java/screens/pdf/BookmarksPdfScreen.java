@@ -17,7 +17,7 @@ public class BookmarksPdfScreen extends Screen {
     public BookmarksPdfScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath("")),
-                new IosLocator(By.xpath("//XCUIElementTypeCollectionView"))), "Bookmarks screen");
+                new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name=\"no bookmarks\")]"))), "Bookmarks screen");
     }
 
     public int getCountOfBookmarks() {

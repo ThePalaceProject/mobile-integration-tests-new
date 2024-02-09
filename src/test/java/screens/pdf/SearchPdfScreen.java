@@ -21,7 +21,7 @@ public class SearchPdfScreen extends Screen {
     private final IButton returnKey = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Return\"]"), "Return key");
 
     private static final String NUMBER_OF_FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[2]";
-    private static final String FOUND_TEXT_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
+    private static final String FOUND_TEXT_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
     private static final String FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
 
     public SearchPdfScreen() {
