@@ -65,9 +65,9 @@ Feature: Read PDF in Palace Bookshelf on IOS
   @tier2 @exclude_android
   Scenario: Navigate by Pdf Search Results
     When Open search pdf screen
-      And Search for 'try' text on search pdf screen
-      And Open random found text and save page number as 'pageNumber' on search pdf screen
-    Then Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
+      And Search for 'try' text on search pdf screen and save word as 'foundText'
+      And Open the found text with 'foundText' word and save page number as 'pageNumber' on search pdf screen
+    Then Current page number is equal to 'pageNumber' on pdf reader screen
 
   @tier2 @exclude_android
   Scenario: Navigate by Page slider
@@ -83,22 +83,19 @@ Feature: Read PDF in Palace Bookshelf on IOS
   Scenario: Navigate by pdf bookmarks
     When Open bookmarks pdf screen
     Then Bookmarks pdf screen is opened
-      And Amount of bookmarks is 0 on bookmarks pdf screen
+      And There are no bookmarks on bookmarks pdf screen
     When Close toc bookmarks pdf screen
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
-#    Then Bookmark is displayed on reader pdf screen
       And Save page number as 'pageNumberInfo' on pdf reader screen in "LYRASIS Reads"
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
       And Save page number as 'pageNumberInfo2' on pdf reader screen in "LYRASIS Reads"
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
-#      And Delete bookmark on reader pdf screen
-#    Then Bookmark is not displayed on reader pdf screen
       And Open bookmarks pdf screen
-    Then Amount of bookmarks is 2 on bookmarks pdf screen
-    When Open the 0 bookmark on bookmarks pdf screen
+    Then Amount of bookmarks is 3 on bookmarks pdf screen
+    When Open the 1 bookmark on bookmarks pdf screen
     Then Page number is equal to 'pageNumberInfo' on pdf reader screen in "LYRASIS Reads"
 
   @tier2 @exclude_android
@@ -113,5 +110,5 @@ Feature: Read PDF in Palace Bookshelf on IOS
   Scenario: Navigate by Chapters
     When Open TOC on pdf reader screen
       And Open text chapter content on pdf toc screen
-      And Open random chapter and save the number as 'pageNumberInfo' on pdf toc screen in "LYRASIS Reads"
-    Then Page number is equal to 'pageNumberInfo' on pdf reader screen in "LYRASIS Reads"
+      And Open the 4 chapter and save the number as 'pageNumberInfo' on pdf toc screen
+    Then Current page number is equal to 'pageNumberInfo' on pdf reader screen

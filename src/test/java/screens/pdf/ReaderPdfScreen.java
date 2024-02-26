@@ -76,6 +76,14 @@ public class ReaderPdfScreen extends Screen {
         return pageNumber;
     }
 
+    public String getCurrentPageNumber() {
+
+        return ActionProcessorUtils.doForIos(() ->{
+            openNavigationBar();
+            return StringUtils.substringBefore(lblPageNumber.getAttribute(IosAttributes.NAME), " (");
+        });
+    }
+
     public void openNavigationBar() {
         if (!navigationBarPdfScreen.state().waitForDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
@@ -83,7 +91,7 @@ public class ReaderPdfScreen extends Screen {
     }
 
     public void goToNextPage() {
-        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.RIGHT);
+      SwipeElementUtils.swipeLeft();
     }
 
     public void goToPreviousPage() {

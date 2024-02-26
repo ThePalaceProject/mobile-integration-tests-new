@@ -53,9 +53,23 @@ public class SwipeElementUtils {
 
     public static void swipeUp() {
         double x = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.5;
-        double fromY = 260;
+        double fromY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.15;
         double toY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.8;
         AqualityServices.getTouchActions().swipe(new Point((int) x, (int) fromY), new Point((int) x, (int) toY));
+    }
+
+    public static void swipeLeft() {
+        double fromX = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.9;
+        double y = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.5;
+        double toX = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.2;
+        AqualityServices.getTouchActions().swipe(new Point((int) fromX, (int) y), new Point((int) toX, (int) y));
+    }
+
+    public static void swipeRight() {
+        double fromX = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.15;
+        double y = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.5;
+        double toX = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.9;
+        AqualityServices.getTouchActions().swipe(new Point((int) fromX, (int) y), new Point((int) toX, (int) y));
     }
 
     public static void swipeByCoordinates(double fromX, double fromY, double toX, double toY) {

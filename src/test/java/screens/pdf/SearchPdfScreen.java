@@ -20,8 +20,8 @@ public class SearchPdfScreen extends Screen {
     private final IButton btnDone = getElementFactory().getButton(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeButton"), "Apply search");
     private final IButton returnKey = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Return\"]"), "Return key");
 
-    private static final String NUMBER_OF_FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[2]";
-    private static final String FOUND_TEXT_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
+    private static final String FOUND_TEXT_WITH_TEXT_LOCATOR_IOS = "//XCUIElementTypeStaticText[contains(@name, \"%s\")]";
+    private static final String FOUND_TEXT_NUMBER_BY_FOUND_TEXT_LOCATOR_IOS = FOUND_TEXT_WITH_TEXT_LOCATOR_IOS + "/following-sibling::XCUIElementTypeStaticText";
     private static final String FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
 
     public SearchPdfScreen() {
@@ -41,15 +41,12 @@ public class SearchPdfScreen extends Screen {
         return txbSearchLine.getText();
     }
 
-    public int openRandomFoundText() {
-        int pageNumber = (int) (Math.random() * (getNumbersOfFoundTexts().size()) + 1);
-        ILabel foundText = getElementFactory().getLabel(By.xpath(String.format(FOUND_TEXT_NUMBER_LOCATOR_IOS, pageNumber)), "Found text");
+    public String openFoundText(String text) {
+        ILabel foundText = getElementFactory().getLabel(By.xpath(String.format(FOUND_TEXT_WITH_TEXT_LOCATOR_IOS,text)), text);
+        ILabel foundTextNumber = getElementFactory().getLabel(By.xpath(String.format(FOUND_TEXT_NUMBER_BY_FOUND_TEXT_LOCATOR_IOS, text)), "Page number");
+        String pageNumber = foundTextNumber.getText();
         foundText.click();
         return pageNumber;
-    }
-
-    private List<ILabel> getNumbersOfFoundTexts() {
-        return getElementFactory().findElements(By.xpath(NUMBER_OF_FOUND_TEXT_LOCATOR_IOS), ElementType.LABEL);
     }
 
     public void deleteText() {

@@ -35,7 +35,7 @@ public class CatalogBooksScreen extends Screen {
 
     private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout/android.widget.Button[@text=\"%s\"]";
     private static final String BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_ANDROID = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
-    private static final String BOOK_NAME_LOCATOR_ANDROID = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
+    private static final String BOOK_NAME_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_ANDROID = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID + "/ancestor::android.view.ViewGroup/android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
     private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC_ANDROID = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.ProgressBar";
     private static final String BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_ANDROID = "//android.widget.TextView/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
@@ -44,7 +44,7 @@ public class CatalogBooksScreen extends Screen {
 
     private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
     private static final String BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
-    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
     private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeProgressIndicator";
     private static final String BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
