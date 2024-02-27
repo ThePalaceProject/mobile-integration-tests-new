@@ -25,9 +25,7 @@ public class SortOptionsScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"))), "Collection button");
 
     private static final String SORT_SELECTION_LOCATOR_ANDROID = "//*[contains(@resource-id,\"select_dialog_listview\")]//*[@text=\"%1$s\"]";
-    private static final String SORT_OPTION_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%1$s\"]";
     private static final String SORT_SELECTION_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
-    private static final String OPTIONS_IN_TABS_LOCATOR_IOS = "//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeScrollView//XCUIElementTypeButton";
 
     private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
             getElementFactory().getButton(LocatorUtils.getLocator(
