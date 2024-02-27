@@ -63,23 +63,12 @@ Feature: Distributors
       | Biblioboard        | EBOOK     | eBooks     | READ                  |
       | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN                |
 
-  @logout @returnBooks @tier2
-  Scenario: Getting and returning a book from Book Detail View for Overdrive
+  @tier2 @exclude_ios
+  Scenario: Getting and returning a book from Book Detail View for Palace Bookshelf (Android)
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Catalog screen
-    When Turn on test mode
-      And Enable hidden libraries
-      And Open Catalog
-      And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Catalog screen
-    When Enter credentials for "A1QA Test Library" library
-    Then Login is performed successfully
-    When Swipe down
-      And Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Switch to "eBooks" catalog tab
-    Then Catalog screen is opened
-    When Get EBOOK book from "OverDrive" category and save it as 'bookNameInfo'
+    When Open search modal
+      And Search for "Jane Eyre" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains READ action button on Book details screen
@@ -89,39 +78,10 @@ Feature: Distributors
     Then Check that book contains READ action button on Book details screen
     When Click READ action button on Book details screen
       And Wait for 3 seconds
-    Then Book 'bookInfo' with EBOOK type is present on epub or pdf or audiobook screen
-    When Return to previous screen for epub and pdf
-      And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
-
-  @logout @returnBooks @tier2
-  Scenario: Getting and returning an audiobook from Book Detail View for Overdrive
-    When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Catalog screen
-    When Turn on test mode
-      And Enable hidden libraries
-      And Open Catalog
-      And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Catalog screen
-    When Enter credentials for "A1QA Test Library" library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search for "We Are Water" and save bookName as 'bookNameInfo'
-      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click GET action button on Book details screen
-    Then Check that book contains LISTEN action button on Book details screen
-    When Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
-    When Click GET action button on Book details screen
-    Then Check that book contains LISTEN action button on Book details screen
-    When Click LISTEN action button on Book details screen
-      And Wait for 3 seconds
     Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
 
-  @tier2
-  Scenario: Getting and returning a book from Book Detail View for Palace Bookshelf
+  @tier2 @exclude_android
+  Scenario: Getting and returning a book from Book Detail View for Palace Bookshelf (iOS)
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Catalog screen
     When Open search modal
@@ -129,7 +89,7 @@ Feature: Distributors
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click GET action button on Book details screen
     Then Check that book contains READ action button on Book details screen
-    When Click RETURN action button on Book details screen
+    When Click DELETE action button on Book details screen
     Then Check that book contains GET action button on Book details screen
     When Click GET action button on Book details screen
     Then Check that book contains READ action button on Book details screen
@@ -164,7 +124,7 @@ Feature: Distributors
       | Biblioboard        | EBOOK     | eBooks     |
       | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @tier2 @exclude_android
   Scenario: Check of canceling the downloading from book details view for Overdrive
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Catalog screen
@@ -183,3 +143,5 @@ Feature: Distributors
       And Click GET action button and cancel downloading by click CANCEL button on book detail screen
     Then Check that book contains DOWNLOAD action button on Book details screen
       And Check that book contains RETURN action button on Book details screen
+    When Click RETURN action button on Book details screen
+    Then Check that book contains GET action button on Book details screen

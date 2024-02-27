@@ -266,7 +266,7 @@ public class EpubReaderSteps {
     }
 
     @When("Apply search on search epub screen")
-    public void apllySearch() {
+    public void applySearch() {
         readerEpubScreen.getSearchEpubScreen().applySearch();
     }
 }

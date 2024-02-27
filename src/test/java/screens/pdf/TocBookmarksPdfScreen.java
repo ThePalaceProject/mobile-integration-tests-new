@@ -23,7 +23,7 @@ public class TocBookmarksPdfScreen extends Screen {
     private final IButton btnBookmarks = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[3]"))), "Bookmarks button");
-    private final IButton btnResume = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeOther//XCUIElementTypeButton[1]"), "Resume button");
+    private final IButton btnResume = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeOther[2]//XCUIElementTypeButton[1]"), "Resume button");
 
     public TocBookmarksPdfScreen() {
         super(LocatorUtils.getLocator(

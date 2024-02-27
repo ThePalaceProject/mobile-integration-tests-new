@@ -35,7 +35,7 @@ public class SubcategoryScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[1]"))), "Sort by button in Palace");
     private final IButton btnSorting = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.Button[@index=\"5\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[1]"))), "Sort by button");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort by:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnAvailability = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView//android.widget.Button[1]")),
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"))), "Availability btn");

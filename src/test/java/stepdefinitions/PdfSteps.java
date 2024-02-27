@@ -121,22 +121,28 @@ public class PdfSteps {
         readerPdfScreen.getSearchPdfScreen().enterText(text);
     }
 
-    @When("Search for {string} text on search pdf screen")
-    public void searchText(String text) {
+    @When("Search for {string} text on search pdf screen and save word as {string}")
+    public void searchText(String text, String textKey) {
         readerPdfScreen.getSearchPdfScreen().enterText(text);
         readerPdfScreen.getSearchPdfScreen().applySearch();
-
+        context.add(textKey, text);
     }
 
-    @When("Open random found text and save page number as {string} on search pdf screen")
-    public void openRandomTextAndSavePageNumber(String pageNumberKey) {
-        context.add(pageNumberKey, readerPdfScreen.getSearchPdfScreen().openRandomFoundText());
+    @When("Open the found text with {string} word and save page number as {string} on search pdf screen")
+    public void openFirstTextAndSavePage(String textKey, String pageNumberKey) {
+        context.add(pageNumberKey, readerPdfScreen.getSearchPdfScreen().openFoundText(context.get(textKey)));
     }
 
     @Then("Page number is equal to {string} on pdf reader screen in {string}")
     public void comparePageNumbers(String pageInfoKey, String libraryName) {
         int pageNumber = context.get(pageInfoKey);
         Assert.assertEquals("Page number is wrong", pageNumber, readerPdfScreen.getPageNumber(libraryName));
+    }
+
+    @Then("Current page number is equal to {string} on pdf reader screen")
+    public void checkPageNumber(String pageNumberKey) {
+        String pageNumber = Integer.toString(context.get(pageNumberKey));
+        Assert.assertEquals("Page number is wrong", pageNumber, readerPdfScreen.getCurrentPageNumber());
     }
 
     @When("Delete text in search line on search pdf screen")
@@ -178,6 +184,12 @@ public class PdfSteps {
     public void openRandomChapter(String pageInfoKey, String libraryName){
         chaptersPdfScreen.openRandomChapter();
         context.add(pageInfoKey, readerPdfScreen.getPageNumber(libraryName));
+    }
+
+    @When("Open the {int} chapter and save the number as {string} on pdf toc screen")
+    public void openChapter(int chapterNumber, String pageInfoKey) {
+        chaptersPdfScreen.openChapter(chapterNumber);
+        context.add(pageInfoKey, chapterNumber);
     }
 
     @When("Open pdf settings screen on pdf reader screen")
@@ -334,6 +346,11 @@ public class PdfSteps {
         Assert.assertEquals(String.format("Amount of bookmarks is not correct on bookmarks pdf screen. ExpectedAmountOfBookmarks-%d, actualAmountOfBookmarks-%d", expectedAmountOfBookmarks, actualAmountOfBookmarks), expectedAmountOfBookmarks, actualAmountOfBookmarks);
     }
 
+    @Then("There are no bookmarks on bookmarks pdf screen")
+    public void isScreeEmpty() {
+        Assert.assertTrue("Bookmarks screen is not empty!", tocBookmarksPdfScreen.getBookmarksPdfScreen().isScreenEmpty());
+    }
+
     @When("Close toc bookmarks pdf screen")
     public void closeTocBookmarksGalleryScreen() {
         tocBookmarksPdfScreen.tapResumeButton();
@@ -341,6 +358,7 @@ public class PdfSteps {
 
     @When("Add bookmark on reader pdf screen")
     public void addBookmarkOnReaderPdfScreen() {
+        readerPdfScreen.openNavigationBar();
         readerPdfScreen.getNavigationBarScreen().tapBookmarkButton();
     }
 

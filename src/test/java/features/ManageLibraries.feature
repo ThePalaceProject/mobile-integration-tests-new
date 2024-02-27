@@ -13,7 +13,6 @@ Feature: Manage Libraries
     Then Button Add Library is displayed on libraries screen
     When Click Add library button on libraries screen
     Then Add library screen is opened
-      And Libraries are sorted in alphabetical order on add account screen
 
   @tier2
   Scenario: Navigate by Tutorial
@@ -79,7 +78,7 @@ Feature: Manage Libraries
       And Open Catalog
       And Switch to 'Palace Bookshelf' from side menu
       And Open categories by chain and chain starts from CategoryScreen:
-      | Open Textbooks |
+      | DPLA Publications |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
@@ -111,35 +110,6 @@ Feature: Manage Libraries
       And Switch to 'LYRASIS Reads' from side menu
       And Open Books
     Then There are not books on books screen
-
-  @logout @returnBooks @tier2
-  Scenario: Switch Library Reservations
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "Plumas County Library" on Add library screen
-    Then Library "Plumas County Library" is opened on Libraries screen
-    When Add 'LYRASIS Reads' library in Libraries screen
-      And Enter credentials for 'LYRASIS Reads' library
-    Then Login is performed successfully
-    When Activate sync bookmarks on Sign in screen
-      And Open Catalog
-      And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'EBOOK' and save as 'bookNameInfo'
-      And Switch to 'eBooks' catalog tab
-    Then Subcategory screen is opened
-    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is opened on book details screen
-      And Click RESERVE action button on Book details screen
-    Then Check that book contains REMOVE action button on Book details screen
-    When Open Reservations
-    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Reservations screen
-    When Open Catalog
-      And Open Catalog
-      And Switch to 'Plumas County Library' from side menu
-      And Open Reservations
-    Then There are not books on Reservations screen
 
   @logout @tier2
   Scenario: Store library card

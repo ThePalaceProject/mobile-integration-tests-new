@@ -140,6 +140,7 @@ public class ApplicationSteps {
     @When("Turn on test mode")
     public void turnOnTestMode() {
         menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
+        menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
         settingsScreen.openTestMode();
     }
 

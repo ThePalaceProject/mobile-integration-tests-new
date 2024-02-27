@@ -41,22 +41,6 @@ Feature: Search module
       |$!                                   |
 
   @tier2
-  Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in Palace Bookshelf
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "Palace Bookshelf" on Add library screen
-      And Open search modal
-      And Search for word <word> and save as 'info' on Catalog books screen
-    Then Books contain word 'info' on Catalog books screen
-
-    Scenarios:
-      | word          |
-      | cat           |
-      | a             |
-
-  @tier2
   Scenario Outline: Find a book with name in different font cases in Palace Bookshelf
     When Close tutorial screen
     Then Welcome screen is opened

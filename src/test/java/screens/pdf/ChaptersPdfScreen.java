@@ -18,7 +18,8 @@ public class ChaptersPdfScreen extends Screen {
     private static final String CHAPTER_NUMBER_LOCATOR_ANDROID = "//android.view.View[contains(@resource-id, \"outlineView\")]/android.view.View[%d]/android.view.View";
 
     private static final String CHAPTER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther[2]";
-    private static final String CHAPTER_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]";
+    private static final String CHAPTER_NUMBER_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]/XCUIElementTypeOther[2]//XCUIElementTypeStaticText[1]";
+    private static final String CHAPTER_NUMBER_BY_PAGE_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%d\"]";
 
     public ChaptersPdfScreen () {
         super(LocatorUtils.getLocator(
@@ -30,10 +31,11 @@ public class ChaptersPdfScreen extends Screen {
         return getChapters().size() == 0 || getChapters().size() != 0;
     }
 
-    private List<ILabel> getChapters() {
-        return getElementFactory().findElements(LocatorUtils.getLocator(
-                new AndroidLocator(By.xpath(CHAPTER_LOCATOR_ANDROID)),
-                new IosLocator(By.xpath(CHAPTER_LOCATOR_IOS))), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
+    public void openChapter(int chapterNumber){
+        ILabel chapter = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(String.format(CHAPTER_NUMBER_LOCATOR_ANDROID, chapterNumber))),
+                new IosLocator(By.xpath(String.format(CHAPTER_NUMBER_BY_PAGE_LOCATOR_IOS, chapterNumber)))), "Chapter");
+        chapter.click();
     }
 
     public void openRandomChapter() {
@@ -42,5 +44,11 @@ public class ChaptersPdfScreen extends Screen {
                 new AndroidLocator(By.xpath(String.format(CHAPTER_NUMBER_LOCATOR_ANDROID, chapterNumber))),
                 new IosLocator(By.xpath(String.format(CHAPTER_NUMBER_LOCATOR_IOS, chapterNumber)))), "Chapter");
         chapter.click();
+    }
+
+    private List<ILabel> getChapters() {
+        return getElementFactory().findElements(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(CHAPTER_LOCATOR_ANDROID)),
+                new IosLocator(By.xpath(CHAPTER_LOCATOR_IOS))), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 }

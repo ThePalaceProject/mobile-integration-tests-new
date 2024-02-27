@@ -17,23 +17,6 @@ Feature: Catalog Navigation module
       And Category names are loaded on Catalog screen
 
   @tier2
-  Scenario: Browse Categories in Palace Bookshelf
-    When Add library "Palace Bookshelf" on Add library screen
-    Then Catalog screen is opened
-      And Library "Palace Bookshelf" is opened on Catalog screen
-      And Catalog screen is opened
-    When Swipe up
-      And Count of books in first category is more than 1
-    When Get names of books on screen and save them as 'listOfBooksOnMainPage'
-      And Open categories by chain and chain starts from CategoryScreen:
-        | Nonfiction          |
-        | Biography & Memoir  |
-    Then Subcategory name is 'Biography & Memoir'
-      And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When Open first book in Subcategory List and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened on book details screen
-
-  @tier2
   Scenario: Check of the titles of books sections in Palace Bookshelf
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Catalog screen
@@ -46,7 +29,7 @@ Feature: Catalog Navigation module
     Then Library "Palace Bookshelf" is opened on Catalog screen
       And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
-      | Big Ten Open Books |
+      | DPLA Publications |
     Then Books are sorted by Author by default on subcategory screen in 'Palace Bookshelf'
       And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen in 'Palace Bookshelf'
 

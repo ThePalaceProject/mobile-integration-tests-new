@@ -1,6 +1,5 @@
 package screens;
 
-import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.Screen;
 import enums.localization.sortoptions.SortByKeys;
@@ -10,17 +9,14 @@ import models.AndroidLocator;
 import models.IosLocator;
 import org.openqa.selenium.By;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SortOptionsScreen extends Screen {
 
     private final IButton btnSortBy = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.Button[@index=\"5\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort by:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnSortByPalace = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
+            new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button")),
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort by:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnAvailability = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//*[contains(@resource-id,\"feedHeaderFacets\")]/android.widget.Button[1]")),
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"))), "Availability button");
@@ -29,9 +25,7 @@ public class SortOptionsScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"))), "Collection button");
 
     private static final String SORT_SELECTION_LOCATOR_ANDROID = "//*[contains(@resource-id,\"select_dialog_listview\")]//*[@text=\"%1$s\"]";
-    private static final String SORT_OPTION_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%1$s\"]";
     private static final String SORT_SELECTION_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
-    private static final String OPTIONS_IN_TABS_LOCATOR_IOS = "//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeScrollView//XCUIElementTypeButton";
 
     private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
             getElementFactory().getButton(LocatorUtils.getLocator(
@@ -72,16 +66,6 @@ public class SortOptionsScreen extends Screen {
 
     public void openCollection() {
         btnCollection.click();
-    }
-
-    public List<String> getOptionsInTabs() {
-        List<String> options = new ArrayList<>();
-        getElementFactory().findElements(By.xpath(OPTIONS_IN_TABS_LOCATOR_IOS), ElementType.BUTTON).forEach(option -> options.add(option.getText()));
-        return options;
-    }
-
-    public boolean isSortOptionDisplayed(String sortOption) {
-        return getElementFactory().getButton(By.xpath(String.format(SORT_OPTION_LOCATOR_ANDROID, sortOption)), "Sort option").state().waitForDisplayed();
     }
 
     private void setSortSelection(String value) {
