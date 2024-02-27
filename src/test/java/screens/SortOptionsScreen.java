@@ -1,6 +1,5 @@
 package screens;
 
-import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.Screen;
 import enums.localization.sortoptions.SortByKeys;
@@ -9,9 +8,6 @@ import framework.utilities.LocatorUtils;
 import models.AndroidLocator;
 import models.IosLocator;
 import org.openqa.selenium.By;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SortOptionsScreen extends Screen {
 
