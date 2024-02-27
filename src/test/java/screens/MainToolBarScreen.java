@@ -18,7 +18,7 @@ public class MainToolBarScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]/following-sibling::*"))), "Category name");
     private final IButton btnChooseAnotherLibrary = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//*[contains(@resource-id,\"mainToolbar\")]/android.widget.ImageView")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[@name=\"Change Library Account\"]"))), "Change library account");
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"librarySwitchButton\"]"))), "Change library account");
 
     public MainToolBarScreen(){
         super(LocatorUtils.getLocator(

@@ -29,6 +29,7 @@ public class LibrariesScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Delete\"]"))), "Delete library button");
 
     private static final String LIBRARY_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeCell";
+    private static final String LIBRARY_LOC_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell";
     private static final String LIBRARY_NAME_ON_LIBRARY_SETTINGS_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String LIBRARY_CELL_BY_LIBRARY_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeCell";
 
@@ -112,7 +113,7 @@ public class LibrariesScreen extends Screen {
     private List<String> getLibrariesNames() {
         List<ILabel> libraries = getElementFactory().findElements(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(LIBRARY_NAME_LOC_ANDROID)),
-                new IosLocator(By.xpath(LIBRARY_NAME_LOC_IOS))), ElementType.LABEL);
+                new IosLocator(By.xpath(LIBRARY_LOC_IOS))), ElementType.LABEL);
         List<String> names = new ArrayList<>();
         libraries.forEach(library -> names.add(library.getText().toLowerCase()));
         return names;

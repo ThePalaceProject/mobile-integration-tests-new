@@ -30,6 +30,7 @@ public class SettingsSteps {
     @When("Open Settings")
     public void openSettings() {
         menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
+        menuBarScreen.openBottomMenuTab(MenuBar.SETTINGS);
     }
 
     @Then("Settings screen is opened")

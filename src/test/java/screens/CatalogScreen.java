@@ -52,7 +52,7 @@ public class CatalogScreen extends Screen {
     private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1]";
     private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_IOS = "/XCUIElementTypeButton";
-    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
     private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"More\")]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "//XCUIElementTypeTable/XCUIElementTypeButton[%d]";
@@ -60,7 +60,7 @@ public class CatalogScreen extends Screen {
     private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String LIBRARY_LOGO_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
-    private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
+    private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 7;
 
     public CatalogScreen() {
         super(LocatorUtils.getLocator(
