@@ -74,16 +74,6 @@ public class SortOptionsScreen extends Screen {
         btnCollection.click();
     }
 
-    public List<String> getOptionsInTabs() {
-        List<String> options = new ArrayList<>();
-        getElementFactory().findElements(By.xpath(OPTIONS_IN_TABS_LOCATOR_IOS), ElementType.BUTTON).forEach(option -> options.add(option.getText()));
-        return options;
-    }
-
-    public boolean isSortOptionDisplayed(String sortOption) {
-        return getElementFactory().getButton(By.xpath(String.format(SORT_OPTION_LOCATOR_ANDROID, sortOption)), "Sort option").state().waitForDisplayed();
-    }
-
     private void setSortSelection(String value) {
         getElementFactory().getButton(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(SORT_SELECTION_LOCATOR_ANDROID, value))),
