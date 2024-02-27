@@ -17,10 +17,10 @@ public class SortOptionsScreen extends Screen {
 
     private final IButton btnSortBy = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.Button[@index=\"5\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort by:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnSortByPalace = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort by:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnAvailability = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//*[contains(@resource-id,\"feedHeaderFacets\")]/android.widget.Button[1]")),
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"))), "Availability button");

@@ -109,7 +109,7 @@ public class CatalogSteps {
 
     @Then("Subcategory name is {string}")
     public void checkCurrentCategoryName(String expectedCategoryName) {
-        Assert.assertTrue(String.format("Current category name is not correct! Expected '%1$s' but found '%2$s'", expectedCategoryName, mainToolBarScreen.getCategoryName()), AqualityServices.getConditionalWait().waitFor(() -> mainToolBarScreen.getCategoryName().equals(expectedCategoryName), "Wait while category become correct."));
+        Assert.assertEquals(String.format("Current category name is not correct! Expected '%1$s' but found '%2$s'", expectedCategoryName, mainToolBarScreen.getCategoryName()), mainToolBarScreen.getCategoryName(), expectedCategoryName);
     }
 
     @Then("List of books on screen is not equal to list of books saved as {string}")

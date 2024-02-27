@@ -65,7 +65,7 @@ public class CatalogScreen extends Screen {
     public CatalogScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.id("feedContentLogoHeader")),
-                new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"AccessibilitySwitchLibrary\")]"))), "Catalog screen");
+                new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"librarySwitchButton\")]"))), "Catalog screen");
     }
 
     public boolean isLibraryOnTheCatalogDisplayed(String libraryName) {
