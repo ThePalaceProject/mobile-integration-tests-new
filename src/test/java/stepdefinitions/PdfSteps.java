@@ -141,7 +141,7 @@ public class PdfSteps {
 
     @Then("Current page number is equal to {string} on pdf reader screen")
     public void checkPageNumber(String pageNumberKey) {
-        String pageNumber = Integer.toString(context.get(pageNumberKey));
+        String pageNumber = context.get(pageNumberKey);
         Assert.assertEquals("Page number is wrong", pageNumber, readerPdfScreen.getCurrentPageNumber());
     }
 
