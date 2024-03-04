@@ -15,10 +15,12 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.AlertScreen;
 import screens.BookDetailsScreen;
+import screens.PlaySampleScreen;
 
 public class BookDetailsSteps {
     private final BookDetailsScreen bookDetailsScreen;
     private final AlertScreen alertScreen;
+    private final PlaySampleScreen playSampleScreen;
     private final ScenarioContext context;
 
     @Inject
@@ -26,6 +28,7 @@ public class BookDetailsSteps {
         this.context = context;
         bookDetailsScreen = new BookDetailsScreen();
         alertScreen = new AlertScreen();
+        playSampleScreen = new PlaySampleScreen();
     }
 
     @Then("Book {string} is opened on book details screen")
@@ -182,6 +185,6 @@ public class BookDetailsSteps {
 
     @Then("Sample player screen is displayed on Books details screen")
     public void isSamplePlayerDisplayed() {
-
+        Assert.assertTrue("Sample player is not displayed", playSampleScreen.isTimeDurationDisplayed());
     }
 }

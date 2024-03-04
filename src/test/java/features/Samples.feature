@@ -1,28 +1,7 @@
-Feature: Check of View Sample
+Feature: Check of View Sample in A1QA Test Library
 
-  @tier2 @exclude_android
-  Scenario: Palace Marketplace: Check of view sample
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Open search modal
-      And Search for "The Optimistic Decade" and save bookName as 'bookNameInfo'
-      And Switch to "eBooks" catalog tab
-      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click VIEW_SAMPLE action button on Book details screen
-    Then 'bookInfo' book is present on epub reader screen
-    When Open TOC epub screen
-    Then TOC screen is opened
-    When Close TOC epub screen
-      And Return to previous screen from epub
-    Then Book 'bookInfo' is opened on book details screen
-
-  @tier2 @exclude_android
-  Scenario: Overdrive: Check of view sample in epub
-    When Close tutorial screen
+  Background:
+    Given Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
@@ -33,33 +12,43 @@ Feature: Check of View Sample
       And Open Catalog
       And Add "A1QA Test Library" account by the logo
     Then Library "A1QA Test Library" is opened on Catalog screen
-    When Open search modal
-      And Search for "Writing Wild" and save bookName as 'bookNameInfo'
-      And Switch to "eBooks" catalog tab
-      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click VIEW_SAMPLE action button on Book details screen
-    Then Reader epub screen is opened
-
-  @tier2 @exclude_android
-  Scenario: Overdrive: Check of view sample in audiobook
-    When Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "Palace Bookshelf" on Add library screen
-    Then Library "Palace Bookshelf" is opened on Catalog screen
-    When Turn on test mode
-      And Enable hidden libraries
-      And Open Catalog
-      And Add "A1QA Test Library" account by the logo
-    Then Library "A1QA Test Library" is opened on Catalog screen
-    When Open search modal
-      And Search for "The Lost Symbol" and save bookName as 'bookNameInfo'
+    When Open Catalog
       And Switch to "Audiobooks" catalog tab
+    Then Catalog screen is opened
+
+  @tier2
+  Scenario: Audiobooks: Play Sample: Sample player: Perform check of the elements
+    When Get AUDIOBOOK book from "OneAudio Test" category and save it as 'bookNameInfo'
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click PLAY_SAMPLE action button on Book details screen
-    Then Play button is present on audio player screen
-    When Tap play button on audio player screen
-    Then Pause button is present on audio player screen
-    When Tap pause button on audio player screen
-    Then Play button is present on audio player screen
+    Then Check that Sample player screen of 'bookNameInfo' book contains all necessary elements
+
+  @smoke @exclude_android
+  Scenario: iOS: Audiobooks: Play Sample: Play Sample button: Perform check of activating and deactivating sample player
+    When Get AUDIOBOOK book from "OneAudio Test" category and save it as 'bookNameInfo'
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click PLAY_SAMPLE action button on Book details screen
+    Then Sample player screen is displayed on Books details screen
+      And Pause button is displayed on Sample player screen
+    When Click PLAY_SAMPLE action button on Book details screen
+    Then Play button is displayed on Sample player screen
+
+  @smoke
+  Scenario: Audiobooks: Play Sample: Sample player: Perform check of pause and play buttons
+    When Get AUDIOBOOK book from "OneAudio Test" category and save it as 'bookNameInfo'
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click PLAY_SAMPLE action button on Book details screen
+    Then Sample player screen is displayed on Books details screen
+    When Tap pause button on Sample player screen
+    Then Play button is displayed on Sample player screen
+    When Tap play button on Sample player screen
+    Then Pause button is displayed on Sample player screen
+
+  @smoke @exclude_ios
+  Scenario: Android: Audiobooks: Play Sample: Sample player: Perform check of Back button
+    When Get AUDIOBOOK book from "OneAudio Test" category and save it as 'bookNameInfo'
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
+      And Click PLAY_SAMPLE action button on Book details screen
+    Then Sample player screen is displayed on Books details screen
+    When Tap Back button on Sample played screen
+    Then Book 'bookNameInfo' is opened on book details screen
