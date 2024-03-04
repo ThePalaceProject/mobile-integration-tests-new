@@ -21,6 +21,7 @@ import org.openqa.selenium.By;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CatalogBooksScreen extends Screen {
 
@@ -44,7 +45,7 @@ public class CatalogBooksScreen extends Screen {
 
     private static final String BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
     private static final String BOOK_BY_BOOK_NAME_AND_BUTTON_LOC_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
-    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_LOCATOR_IOS = BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
     private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeProgressIndicator";
     private static final String BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC_IOS = "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
@@ -80,6 +81,16 @@ public class CatalogBooksScreen extends Screen {
 
     public List<String> getListOfBooks(){
         return getBooksName();
+    }
+
+    public String getBookFromCatalogSection(){
+        List<ILabel> bookLabels = getBooksLabels();
+        Random random = new Random();
+        int bookIndex = random.nextInt(bookLabels.size() - 3) + 4;
+        ILabel bookName = getElementFactory().getLabel(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]")),
+                new IosLocator(By.xpath(String.format("//XCUIElementTypeCollectionView/XCUIElementTypeCell[%d]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]", bookIndex)))), "Book name");
+        return bookName.getText();
     }
 
     public String getNameOfFirstBook() {
@@ -137,6 +148,12 @@ public class CatalogBooksScreen extends Screen {
         List<String> booksName = new ArrayList<>();
         lblBooks.forEach(book->booksName.add(book.getText()));
         return booksName;
+    }
+
+    private List<ILabel> getBooksLabels() {
+        return getElementFactory().findElements(LocatorUtils.getLocator(
+                new AndroidLocator(By.xpath(BOOK_NAME_LOCATOR_ANDROID)),
+                new IosLocator(By.xpath(BOOK_NAME_LOCATOR_IOS))), ElementType.LABEL);
     }
 
     public CatalogBookModel clickActionButtonAndGetBookInfo(BookType bookType, String bookName, ActionButtonsForBooksAndAlertsKeys actionButtonKey) {
