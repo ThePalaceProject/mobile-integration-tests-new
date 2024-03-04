@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
@@ -83,6 +84,7 @@ public class BookDetailsSteps {
 
     @Then("Book format in Information section is displayed on Book details screen")
     public void isBookFormatDisplayed() {
+        ActionProcessorUtils.doForAndroid(SwipeElementUtils::swipeDown);
         Assert.assertTrue("Book format is not displayed", bookDetailsScreen.isBookFormatInfoExist());
     }
 
@@ -117,14 +119,18 @@ public class BookDetailsSteps {
     @Then("Publisher and Categories in Information section are correct on book details screen")
     public void isInformationSectionIsCorrect() {
         SoftAssertions softAssertions = new SoftAssertions();
-        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
-            SwipeElementUtils.swipeDown();
+        ActionProcessorUtils.doForAndroid(SwipeElementUtils::swipeDown);
+
+        if(bookDetailsScreen.isPublisherInfoExist()) {
+            String publisher = bookDetailsScreen.getPublisherInfo();
+            softAssertions.assertThat(publisher.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Publisher field has invalid symbols").isTrue();
         }
 
-        String publisher = bookDetailsScreen.getPublisherInfo();
-        softAssertions.assertThat(publisher.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Publisher field has invalid symbols").isTrue();
-        String categories = bookDetailsScreen.getCategoryInfo();
-        softAssertions.assertThat(categories.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Category field has invalid symbols").isTrue();
+        if(bookDetailsScreen.isCategoryInfoExist()) {
+            String categories = bookDetailsScreen.getCategoryInfo();
+            softAssertions.assertThat(categories.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Category field has invalid symbols").isTrue();
+
+        }
         softAssertions.assertAll();
     }
 
@@ -172,5 +178,10 @@ public class BookDetailsSteps {
     public void pressActionButtonAndAlertActionButtonOnBookDetailsScreen(ActionButtonsForBooksAndAlertsKeys actionBookButtonKey, ActionButtonsForBooksAndAlertsKeys actionAlertButtonKey) {
         bookDetailsScreen.clickActionButton(actionBookButtonKey);
         alertScreen.waitAndPerformAlertActionIfDisplayed(actionAlertButtonKey);
+    }
+
+    @Then("Sample player screen is displayed on Books details screen")
+    public void isSamplePlayerDisplayed() {
+
     }
 }

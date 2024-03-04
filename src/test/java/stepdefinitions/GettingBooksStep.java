@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import constants.util.UtilConstants;
 import enums.BookType;
 import enums.localization.sortoptions.AvailabilityKeys;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.apache.commons.lang3.StringUtils;
 import screens.*;
@@ -52,9 +53,16 @@ public class GettingBooksStep {
         AqualityServices.getConditionalWait().waitFor(catalogBooksScreen::isFirstBookInCatalogDisplayed);
 
         SwipeElementUtils.swipeDown();
-        List<String> books = catalogBooksScreen.getListOfBooks();
-        int bookIndex = random.nextInt(books.size());
-        String bookName = books.get(bookIndex);
+        String bookName = ActionProcessorUtils.doForAndroid(() -> {
+            List<String> books = catalogBooksScreen.getListOfBooks();
+            int bookIndex = random.nextInt(books.size());
+            return books.get(bookIndex);
+        });
+
+        if(bookName == null) {
+            bookName = ActionProcessorUtils.doForIos(catalogBooksScreen::getBookFromCatalogSection);
+        }
+
         if(bookType.equalsIgnoreCase(BookType.AUDIOBOOK.getBookType())) {
             bookName = StringUtils.substringBefore(bookName, ". Audiobook.");
         }
