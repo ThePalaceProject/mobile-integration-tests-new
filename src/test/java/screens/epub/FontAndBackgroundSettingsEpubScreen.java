@@ -11,6 +11,6 @@ public class FontAndBackgroundSettingsEpubScreen extends Screen {
     public FontAndBackgroundSettingsEpubScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath("//android.widget.FrameLayout[contains(@resource-id,\"custom\")]")),
-                new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Sans font\"]"))), "Font and Background settings screen");
+                new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Font selector: Sans font\"]"))), "Font and Background settings screen");
     }
 }

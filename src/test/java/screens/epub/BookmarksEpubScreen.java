@@ -30,7 +30,7 @@ public class BookmarksEpubScreen extends Screen {
             new AndroidLocator(By.id("tocBookmarksList")),
             new IosLocator(By.xpath("//XCUIElementTypeTable"))), "Bookmarks tab");
     private final IButton btnDelete = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id,\"bookmarkDelete\")]")),
+            new AndroidLocator(By.xpath("//android.widget.Button[@text=\"Delete\"]")),
             new IosLocator(By.name("Delete"))), "Delete bookmark button");
 
     private static final String BTN_DELETE_LOC_ANDROID = "//android.widget.ImageView[contains(@resource-id,\"bookmarkDelete\")]";
@@ -57,6 +57,9 @@ public class BookmarksEpubScreen extends Screen {
 
     public boolean isBookmarkPresent(String expectedBookmarkTitle, String bookmarkDateTime) {
         LocalDateTime expectedLocalDateTime = DateUtils.getExpectedLocalDateTime(bookmarkDateTime);
+        if (expectedBookmarkTitle == null) {
+            expectedBookmarkTitle = "";
+        }
 
         AqualityServices.getLogger().info("expected bookmark info: ");
         AqualityServices.getLogger().info("expected bookmark title-" + expectedBookmarkTitle);
@@ -67,10 +70,11 @@ public class BookmarksEpubScreen extends Screen {
         AqualityServices.getLogger().info("expected hour-" + expectedLocalDateTime.getHour());
         boolean isBookmarkPresent = false;
 
-        System.out.println("List size: " + getListOfBookmarkTitles().size());
-
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
             String actualBookmarkTitle = getListOfBookmarkTitles().get(i);
+            if(actualBookmarkTitle == null) {
+                actualBookmarkTitle = "";
+            }
             LocalDateTime actualLocalDateTime = getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
             AqualityServices.getLogger().info("bookmark number " + i + " info: ");
             AqualityServices.getLogger().info("actual bookmark title-" + actualBookmarkTitle);
@@ -116,7 +120,7 @@ public class BookmarksEpubScreen extends Screen {
 
     public void deleteBookmark(int bookmarkNumber) {
         ActionProcessorUtils.doForAndroid(() -> {
-            getListOfDeleteBtns().get(bookmarkNumber).click();
+            getListOfDeleteBtns().get(bookmarkNumber + 1).click();
             btnDelete.click();
         });
 
@@ -129,11 +133,6 @@ public class BookmarksEpubScreen extends Screen {
 
     private List<IButton> getListOfDeleteBtns() {
         return getElementFactory().findElements(By.xpath(BTN_DELETE_LOC_ANDROID), ElementType.BUTTON);
-    }
-
-    private LocalDateTime getExpectedLocalDateTimeIos(String stringExpectedDateTime) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("y-M-dd HH:m:s");
-        return LocalDateTime.parse(deleteSomeCharactersForExpectedDateTime(stringExpectedDateTime), dateTimeFormatter);
     }
 
     private String deleteSomeCharactersForExpectedDateTime(String stringExpectedDateTime) {
@@ -150,7 +149,7 @@ public class BookmarksEpubScreen extends Screen {
         DateTimeFormatter dateTimeFormatter = ActionProcessorUtils.doForAndroid(() -> DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         if(dateTimeFormatter == null) {
-            ActionProcessorUtils.doForIos(() -> DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
+            dateTimeFormatter = ActionProcessorUtils.doForIos(() -> DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
         }
         return LocalDateTime.parse(deleteSomeCharactersForActualDateTime(stringActualDateTime), Objects.requireNonNull(dateTimeFormatter));
     }
