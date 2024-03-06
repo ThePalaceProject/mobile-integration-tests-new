@@ -5,12 +5,6 @@
       "platformVersion": "17"
     }
   },
-  "iPhone14ProMax_16": {
-    "capabilities": {
-      "deviceName": "iPhone 14 Pro Max",
-      "platformVersion": "16"
-    }
-  },
   "iPhone13ProMax_15": {
     "capabilities": {
       "deviceName": "iPhone 13 Pro Max",
@@ -35,16 +29,10 @@
       "platformVersion": "16"
     }
   },
-  "iPhone8_15": {
+  "SamsungGalaxyS24Ultra_14": {
     "capabilities": {
-      "deviceName": "iPhone 8",
-      "platformVersion": "15"
-    }
-  },
-  "SamsungGalaxyS23Ultra_13": {
-    "capabilities": {
-      "deviceName": "Samsung Galaxy S23 Ultra",
-      "platformVersion": "13.0"
+      "deviceName": "Samsung Galaxy S24 Ultra",
+      "platformVersion": "14.0"
     }
   },
   "SamsungGalaxyS22Ultra_12": {
@@ -63,12 +51,6 @@
     "capabilities": {
       "deviceName": "Samsung Galaxy Tab S8",
       "platformVersion": "12.0"
-    }
-  },
-  "GooglePixel8Pro_14": {
-    "capabilities": {
-      "deviceName": "Google Pixel 8 Pro",
-      "platformVersion": "14.0"
     }
   },
   "GooglePixel7Pro_13": {
