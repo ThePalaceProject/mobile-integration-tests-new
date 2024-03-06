@@ -104,7 +104,7 @@ public class ReaderEpubScreen extends Screen {
     public String getChapterName() {
         String chapterName = ActionProcessorUtils.doForIos(() -> {
             String chapter = lblChapterName.getAttribute(IosAttributes.NAME);
-            return StringUtils.substringAfter(chapter, "(");
+            return StringUtils.substringBetween(chapter, "(", ")");
         });
 
         if(chapterName == null) {

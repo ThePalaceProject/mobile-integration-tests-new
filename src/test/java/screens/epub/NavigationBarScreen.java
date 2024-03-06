@@ -15,7 +15,7 @@ public class NavigationBarScreen extends Screen {
 
     private final IButton btnTOC = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.Button[contains(@resource-id,\"readerMenuTOC\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Table of contents and bookmarks\"]"))), "TOC button");
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"viewBookmarksAndTocButton\"]"))), "TOC button");
     private final IButton btnAddBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("readerMenuAddBookmark")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"))), "Add Bookmark button");
