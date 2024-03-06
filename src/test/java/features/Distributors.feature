@@ -29,7 +29,6 @@ Feature: Distributors
       | Axis 360           | AUDIOBOOK | Audiobooks |
       | Palace Marketplace | EBOOK     | eBooks     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
-      | Biblioboard        | EBOOK     | eBooks     |
 
   @logout @returnBooks @tier2
   Scenario Outline: Getting and returning books from Book Detail View in LYRASIS Reads
