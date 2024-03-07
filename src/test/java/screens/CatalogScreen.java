@@ -53,7 +53,7 @@ public class CatalogScreen extends Screen {
     private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_IOS = "/XCUIElementTypeButton";
     private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
-    private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
+    private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"More\")]";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "//XCUIElementTypeTable/XCUIElementTypeButton[%d]";
     private static final String SECTION_TITLE_IOS = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";

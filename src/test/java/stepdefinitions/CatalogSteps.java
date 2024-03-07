@@ -191,6 +191,12 @@ public class CatalogSteps {
         sortOptionsScreen.changeSortByTo(sortingCategory);
     }
 
+    @When("Sort books by {} in {string} on My Books screen")
+    public void sortBooksByMyBooks(SortByKeys sortingCategory, String libraryName) {
+        sortOptionsScreen.openSortByInMyBooks(libraryName);
+        sortOptionsScreen.changeSortByTo(sortingCategory);
+    }
+
     @Then("Books are sorted by Author ascending")
     public void checkBooksAreSortedByAuthorAscending() {
         List<String> list = subcategoryScreen.getAuthorsInfo();
@@ -311,9 +317,15 @@ public class CatalogSteps {
         AqualityServices.getConditionalWait().waitFor(catalogBooksScreen::isFirstBookInCatalogDisplayed);
 
         SwipeElementUtils.swipeDown();
-        List<String> books = catalogBooksScreen.getListOfBooks();
 
-        String bookName = books.get(random.nextInt(books.size()));
+        String bookName = ActionProcessorUtils.doForIos(catalogBooksScreen::getBookFromCatalogSection);
+
+        if(bookName == null) {
+            bookName = ActionProcessorUtils.doForAndroid(()-> {
+                List<String> books = catalogBooksScreen.getListOfBooks();
+                return books.get(random.nextInt(books.size()));
+            });
+        }
 
         if(bookType == BookType.AUDIOBOOK) {
             bookName = StringUtils.substringBefore(bookName, ". Audiobook.");

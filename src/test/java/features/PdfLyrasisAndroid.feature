@@ -23,7 +23,6 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Reader pdf screen is opened
       And The book name is 'bookNameInfo' on pdf reader screen
 
-
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Check of settings screen and page navigation in Lyrasis
     When Open search modal
@@ -107,29 +106,6 @@ Feature: Read PDF in LYRASIS Reads on Android
     When Save page number as 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
       And Go to previous page on reader pdf screen
     Then Page number is not equal to 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
-
-  @ignore @logout @returnBooks @tier1 @exclude_ios
-  Scenario: Open book to last page read in Lyrasis
-    When Open search modal
-      And Search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
-      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on Catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click READ action button on Book details screen
-    Then Reader pdf screen is opened
-    When Swipe pdf page down from 7 to 10 times on reader pdf screen
-      And Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
-      And Return to previous screen for epub and pdf
-      And Click READ action button on Book details screen
-    Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
-    When Restart app
-      And Open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And Click READ action button on Book details screen
-    Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
 
   @smoke @logout @returnBooks @exclude_ios
   Scenario: Android: Read pdfs: Table of contents: Perform check of navigation of TOC button

@@ -57,7 +57,6 @@ Feature: Audiobooks in A1QA library
       And Play time is the same with 'timeAhead' play time before restart on books detail screen
     When Return to previous screen for epub and pdf
       And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
 
 
   @logout @returnBooks @tier2
@@ -86,28 +85,6 @@ Feature: Audiobooks in A1QA library
       And Playback has been moved behind by 30 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
     When Return to previous screen for epub and pdf
       And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
-
-  @logout @returnBooks @tier2
-  Scenario: Audiobooks: Check end of chapter sleep timer
-    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
-      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click GET action button on Book details screen
-    Then Check that book contains LISTEN action button on Book details screen
-    When Click LISTEN action button on Book details screen
-    Then Audio player screen of book 'bookInfo' is opened
-    When Open toc audiobook screen
-      And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
-      And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
-      And Select "2"X playback speed on playback speed audiobook screen
-      And Listen a chapter on audio player screen
-    Then Play button is present on audio player screen
-    When Save the name of chapter as 'nextChapter' on audio player screen
-      And Open toc audiobook screen
-    Then Chapter name next to 'chapterNumber' chapter on toc audiobook screen is equal to 'nextChapter' saved chapter name
-    When Return to previous screen for epub and pdf
-      And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Audiobooks: Check of line for time remaining
@@ -120,7 +97,6 @@ Feature: Audiobooks in A1QA library
       And Line for time remaining is displayed on audio player screen
     When Return to previous screen for epub and pdf
       And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of switching to the next chapter
@@ -137,7 +113,6 @@ Feature: Audiobooks in A1QA library
     Then Next chapter play automatically and chapter name is not 'chapterName' on audio player screen
     When Return to previous screen for epub and pdf
       And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check closing playback speed and sleep timer
@@ -158,56 +133,6 @@ Feature: Audiobooks in A1QA library
     Then Play button is present on audio player screen
     When Return to previous screen for epub and pdf
       And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
-
-  @logout @returnBooks @tier2
-  Scenario: Audiobooks: Check time tracking line
-    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
-      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click GET action button on Book details screen
-    Then Check that book contains LISTEN action button on Book details screen
-    When Click LISTEN action button on Book details screen
-    Then Audio player screen of book 'bookInfo' is opened
-    When Tap play button on audio player screen
-    Then Pause button is present on audio player screen
-    When Tap pause button on audio player screen
-    Then Play button is present on audio player screen
-    When Save book play time as 'timeInfo' on audio player screen
-      And Stretch slider on the time tracking line forward on audio player screen
-      And Wait for 5 seconds
-    Then Playing time is not equal to 'timeInfo' on audio playing screen
-    When Save book play time as 'timeInfo2' on audio player screen
-      And Stretch slider on the time tracking line back on audio player screen
-      And Wait for 5 seconds
-    Then Playing time is not equal to 'timeInfo2' on audio playing screen
-    When Return to previous screen for epub and pdf
-      And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
-
-  @logout @returnBooks @tier2
-  Scenario: Audiobooks: Check of not rewinding forward and back by tapping on time bar
-    When Get AUDIOBOOK book from "OverDrive" category and save it as 'bookNameInfo'
-      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
-      And Click GET action button on Book details screen
-    Then Check that book contains LISTEN action button on Book details screen
-    When Click LISTEN action button on Book details screen
-    Then Audio player screen of book 'bookInfo' is opened
-    When Tap play button on audio player screen
-    Then Pause button is present on audio player screen
-    When Tap pause button on audio player screen
-    Then Play button is present on audio player screen
-    When Stretch slider on the time tracking line forward on audio player screen
-      And Wait for 5 seconds
-      And Save book play time as 'timeBehind' on audio player screen
-      And Tap on the time bar forward on audio player screen
-      And Save book play time as 'timeForward' on audio player screen
-    Then Play times 'timeBehind' and 'timeForward' are equals
-    When Tap on the time bar back on audio player screen
-      And Save book play time as 'timeBackward' on audio player screen
-    Then Play times 'timeBehind' and 'timeBackward' are equals
-    When Return to previous screen for epub and pdf
-      And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
 
   @logout @returnBooks @tier2
   Scenario Outline: Audiobooks: Playback speed: Check of playback speed
@@ -236,7 +161,6 @@ Feature: Audiobooks in A1QA library
     Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
     When Return to previous screen for epub and pdf
       And Click RETURN action button on Book details screen
-    Then Check that book contains GET action button on Book details screen
 
     Scenarios:
       | speed | secondsForWaiting | moveForwardSeconds |

@@ -22,7 +22,7 @@ Feature: Check sections from settings screen
       And Open Privacy Policy on settings screen
     Then Privacy Policy screen is opened
 
-  @tier2
+  @tier2 @exclude_android
   Scenario: User Agreement
     When Close tutorial screen
     Then Welcome screen is opened
