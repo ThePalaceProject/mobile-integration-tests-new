@@ -44,17 +44,15 @@ Feature: Read EPUB in Lyrasis Reads
       | Axis 360           |
 
   @logout @returnBooks @tier1
-  Scenario: Navigate by bookmarks
-#    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' and save as 'bookNameInfo'
-    When Search for "Five Tuesdays in Winter" and save bookName as 'bookNameInfo'
+  Scenario Outline: Navigate by bookmarks
+    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' and save as 'bookNameInfo'
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
       And Open navigation bar on reader epub screen
       And Add bookmark on reader epub screen
-#      And Wait for 3 seconds
-#    Then Bookmark is displayed on reader epub screen
-    And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Wait for 3 seconds
+      And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
       And Scroll page forward from 7 to 9 times
       And Add bookmark on reader epub screen
@@ -67,11 +65,11 @@ Feature: Read EPUB in Lyrasis Reads
     When Open random bookmark and save chapter name as 'chapterNameKey3' on bookmarks epub screen
     Then 'chapterNameKey3' chapter name is displayed on reader epub screen
 
-#    Scenarios:
-#      | distributor        |
-#      | Bibliotheca        |
-#      | Palace Marketplace |
-#      | Axis 360           |
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
 
   @logout @returnBooks @tier1
   Scenario Outline: Delete bookmarks
@@ -126,7 +124,7 @@ Feature: Read EPUB in Lyrasis Reads
 
   @logout @returnBooks @tier1
   Scenario Outline: Read ebooks: Search: Perform check that search result contain one or more entered latin letters or numeric
-    When Search for "A Spark of Light" and save bookName as 'bookNameInfo'
+    When Search for "The Last Goodnight" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Click READ action button on Book details screen
