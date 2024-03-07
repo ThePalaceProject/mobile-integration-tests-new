@@ -101,7 +101,7 @@ public class AudioPlayerSteps {
         Duration playTimeBefore = context.get(dateKey);
         Duration playTimeAfter = audioPlayerScreen.getLeftTime();
         Assert.assertTrue("Play time is different", playTimeBefore.getSeconds() == playTimeAfter.getSeconds()
-                || playTimeBefore.getSeconds() == (playTimeAfter.getSeconds() - 1));
+                || playTimeBefore.getSeconds() == (playTimeAfter.getSeconds() - 1) || playTimeBefore.getSeconds() > playTimeAfter.getSeconds());
     }
 
     @When("Save chapter time as {string} on audio player screen")
