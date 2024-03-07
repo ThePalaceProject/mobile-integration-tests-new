@@ -191,6 +191,12 @@ public class CatalogSteps {
         sortOptionsScreen.changeSortByTo(sortingCategory);
     }
 
+    @When("Sort books by {} in {string} on My Books screen")
+    public void sortBooksByMyBooks(SortByKeys sortingCategory, String libraryName) {
+        sortOptionsScreen.openSortByInMyBooks(libraryName);
+        sortOptionsScreen.changeSortByTo(sortingCategory);
+    }
+
     @Then("Books are sorted by Author ascending")
     public void checkBooksAreSortedByAuthorAscending() {
         List<String> list = subcategoryScreen.getAuthorsInfo();

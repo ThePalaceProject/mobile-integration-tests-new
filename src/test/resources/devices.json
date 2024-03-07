@@ -5,6 +5,12 @@
       "platformVersion": "17"
     }
   },
+  "iPhone14ProMax_16": {
+    "capabilities": {
+      "deviceName": "iPhone 14 Pro Max",
+      "platformVersion": "16"
+    }
+  },
   "iPhone13ProMax_15": {
     "capabilities": {
       "deviceName": "iPhone 13 Pro Max",
