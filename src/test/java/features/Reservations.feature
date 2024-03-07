@@ -59,8 +59,8 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'EBOOK' and save as 'bookNameInfo'
-      And Switch to 'eBooks' catalog tab
+      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
     Then Subcategory screen is opened
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
@@ -109,10 +109,10 @@ Feature: Reservation of book in LYRASIS
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
       And Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo2'
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo2' bookName on Catalog books screen and save book as 'bookInfo2'
       And Clear search field on Catalog books screen
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo3'
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo3' bookName on Catalog books screen and save book as 'bookInfo3'
       And Open Reservations
     Then Books are sorted by Title by default on Reservations screen
@@ -157,7 +157,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "The Secret Garden" and save bookName as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
@@ -182,7 +182,7 @@ Feature: Reservation of book in LYRASIS
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
       And Open search modal
-      And Search for "The Secret Garden" and save bookName as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on Catalog books screen and save book as 'bookInfo'
     Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on Catalog books screen
