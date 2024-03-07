@@ -18,7 +18,7 @@ public class SortOptionsScreen extends Screen {
             new AndroidLocator(By.xpath("//android.widget.Button[@index=\"5\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnSortByPalace = getElementFactory().getButton(LocatorUtils.getLocator(
-            new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button")),
+            new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort by:\"]/following-sibling::XCUIElementTypeButton"))), "Sort by button");
     private final IButton btnSortByInMyBooksPalace = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button")),
