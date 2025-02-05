@@ -51,13 +51,13 @@ jobs:
         run: mvn allure:report
 
       - name: Upload Allure Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: target/site/allure-maven-plugin
 
       - name: Archive Allure Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: target/site/allure-maven-plugin
