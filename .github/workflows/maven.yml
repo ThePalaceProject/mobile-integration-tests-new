@@ -56,11 +56,5 @@ jobs:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      - name: Archive Allure Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: target/site/allure-maven-plugin
-
       - name: Clean Up
         run: rm -rf allure-results
