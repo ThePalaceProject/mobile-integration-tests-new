@@ -67,7 +67,7 @@
   },
   "iPhone16_18.3": {
     "capabilities":{
-      "deviceName": "iPhone 16",
+      "deviceName": "iPhone 16"
       "platformVersion": "18.3"
     }  
 }
