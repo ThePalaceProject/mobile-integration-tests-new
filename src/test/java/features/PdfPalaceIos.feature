@@ -17,35 +17,35 @@ Feature: Read PDF in Palace Bookshelf on IOS
 
   @tier2 @exclude_android
   Scenario: Navigate by Page
-    Then Save page number as 'pageInfo' on pdf reader screen in "LYRASIS Reads"
+    Then Save page number as 'pageInfo' on pdf reader screen in "Lyrasis Reads"
     When Go to next page on reader pdf screen
-    Then Page number increased by 1 from 'pageInfo' on pdf reader screen in "LYRASIS Reads"
-    When Save page number as 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
+    Then Page number increased by 1 from 'pageInfo' on pdf reader screen in "Lyrasis Reads"
+    When Save page number as 'pageInfo2' on pdf reader screen in "Lyrasis Reads"
       And Go to previous page on reader pdf screen
-    Then Page number decreased by 1 from 'pageInfo2' on pdf reader screen in "LYRASIS Reads"
+    Then Page number decreased by 1 from 'pageInfo2' on pdf reader screen in "Lyrasis Reads"
 
   @tier2 @exclude_android
   Scenario: Open book to last page read
     When Swipe pdf page forward from 4 to 6 times on reader pdf screen
-      And Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
+      And Save page number as 'pageNumber' on pdf reader screen in "Lyrasis Reads"
       And Return to previous screen for epub and pdf
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
+      And Page number is equal to 'pageNumber' on pdf reader screen in "Lyrasis Reads"
     When Restart app
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on Book details screen
     Then Reader pdf screen is opened
-      And Page number is equal to 'pageNumber' on pdf reader screen in "LYRASIS Reads"
+      And Page number is equal to 'pageNumber' on pdf reader screen in "Lyrasis Reads"
 
   @tier2 @exclude_android
   Scenario: Navigate by Thumbnails
     When Open TOC on pdf reader screen
     Then There are content list with thumbnails and chapter content on pdf toc screen
     When Open 2 thumbnail and save the number as 'pageInfo' on pdf toc screen
-    Then Page number is equal to 'pageInfo' on pdf reader screen in "LYRASIS Reads"
+    Then Page number is equal to 'pageInfo' on pdf reader screen in "Lyrasis Reads"
 
   @tier2 @exclude_android
   Scenario: Search Pdf Functionality
@@ -72,12 +72,12 @@ Feature: Read PDF in Palace Bookshelf on IOS
   @tier2 @exclude_android
   Scenario: Navigate by Page slider
     When Swipe pdf page forward from 4 to 6 times on reader pdf screen
-      And Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
+      And Save page number as 'pageNumber' on pdf reader screen in "Lyrasis Reads"
       And Slide page slider LEFT on reader pdf screen
-    Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen in "LYRASIS Reads"
-    When Save page number as 'pageNumber' on pdf reader screen in "LYRASIS Reads"
+    Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen in "Lyrasis Reads"
+    When Save page number as 'pageNumber' on pdf reader screen in "Lyrasis Reads"
       And Slide page slider RIGHT on reader pdf screen
-    Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen in "LYRASIS Reads"
+    Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen in "Lyrasis Reads"
 
   @tier2 @exclude_android
   Scenario: Navigate by pdf bookmarks
@@ -87,16 +87,16 @@ Feature: Read PDF in Palace Bookshelf on IOS
     When Close toc bookmarks pdf screen
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
-      And Save page number as 'pageNumberInfo' on pdf reader screen in "LYRASIS Reads"
+      And Save page number as 'pageNumberInfo' on pdf reader screen in "Lyrasis Reads"
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
-      And Save page number as 'pageNumberInfo2' on pdf reader screen in "LYRASIS Reads"
+      And Save page number as 'pageNumberInfo2' on pdf reader screen in "Lyrasis Reads"
       And Go to next page on reader pdf screen
       And Add bookmark on reader pdf screen
       And Open bookmarks pdf screen
     Then Amount of bookmarks is 3 on bookmarks pdf screen
     When Open the 1 bookmark on bookmarks pdf screen
-    Then Page number is equal to 'pageNumberInfo' on pdf reader screen in "LYRASIS Reads"
+    Then Page number is equal to 'pageNumberInfo' on pdf reader screen in "Lyrasis Reads"
 
   @tier2 @exclude_android
   Scenario: Check table of contents
