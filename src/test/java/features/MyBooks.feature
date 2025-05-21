@@ -39,14 +39,14 @@ Feature: My books module
     Then Books are sorted by Title ascending on books screen
 
   @logout @returnBooks @tier1
-  Scenario: Return book from My Books in LYRASIS Reads
+  Scenario: Return book from My Books in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -62,14 +62,14 @@ Feature: My books module
     Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier1
-  Scenario: Get a book from Book Detail View and Return from Books in LYRASIS Reads
+  Scenario: Get a book from Book Detail View and Return from Books in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -87,14 +87,14 @@ Feature: My books module
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier1
-  Scenario: Get a book from Subcategory List View and Return from Books in LYRASIS Reads
+  Scenario: Get a book from Subcategory List View and Return from Books in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -116,14 +116,14 @@ Feature: My books module
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier1 @exclude_android
-  Scenario: Get a book from Subcategory List View and Return from Subcategory List View in LYRASIS Reads
+  Scenario: Get a book from Subcategory List View and Return from Subcategory List View in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -135,14 +135,14 @@ Feature: My books module
     Then EBOOK book with GET action button and 'bookInfo' bookInfo is present on Catalog books screen
 
   @logout @returnBooks @tier1
-  Scenario: Get a book from Subcategory List View and Read from Books in LYRASIS Reads
+  Scenario: Get a book from Subcategory List View and Read from Books in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -163,9 +163,9 @@ Feature: My books module
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -193,14 +193,14 @@ Feature: My books module
       | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN     |
 
   @logout @returnBooks @tier1
-  Scenario Outline: Check buttons under the book title in LYRASIS Reads
+  Scenario Outline: Check buttons under the book title in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog

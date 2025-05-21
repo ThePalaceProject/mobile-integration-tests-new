@@ -27,9 +27,9 @@ Feature: Menu Bar module
     Then Settings screen is opened
 
   @tier2
-  Scenario Outline: Check of menu bar in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
+  Scenario Outline: Check of menu bar in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
       And There is a menu bar at the bottom of the screen
       And There are tabs '<tab1>', '<tab2>', '<tab3>' and '<tab4>' at the bottom of the screen
 
@@ -38,8 +38,8 @@ Feature: Menu Bar module
       | Catalog | My Books | Reservations | Settings |
 
   @tier2
-  Scenario: Check of the tabs in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
+  Scenario: Check of the tabs in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
     Then Catalog screen is opened
     When Open Books
     Then Books screen is opened

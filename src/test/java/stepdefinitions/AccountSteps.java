@@ -103,7 +103,7 @@ public class AccountSteps {
         librariesScreen.addLibrary();
         addLibraryScreen.addLibraryViaSearch(libraryName);
 
-        if(libraryName.equalsIgnoreCase("LYRASIS Reads")){
+        if(libraryName.equalsIgnoreCase("Lyrasis Reads")){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
     }
