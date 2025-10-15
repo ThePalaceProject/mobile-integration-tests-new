@@ -1,11 +1,13 @@
 {
   "credentials": {
-    "library": {
+    "LyrasisReads": {
       "ios": {
-        "card": "password"
+        "barcode": "01230000000002",
+        "pin": "Lyrtest123"
       },
       "android": {
-        "barcode1": "password1"
+        "barcode": "01230000000003",
+        "pin": "Lyrtest123"
       }
     }
   },

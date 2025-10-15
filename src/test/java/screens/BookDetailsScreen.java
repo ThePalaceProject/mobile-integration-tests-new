@@ -64,7 +64,7 @@ public class BookDetailsScreen extends Screen {
 
     private static final String BOOK_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
-    private static final String BOOK_ACTION_BUTTON_LOC_IOS = "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String BOOK_ACTION_BUTTON_LOC_IOS = "//XCUIElementTypeButton[@name=\"%s\"]";
     private static final String AUTHOR_IN_RELATED_BOOKS_LOC_IOS = "//XCUIElementTypeTable//XCUIElementTypeButton[@name=\"%s\"]";
     private static final String LIST_OF_RELATED_BOOKS_LOC_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
 

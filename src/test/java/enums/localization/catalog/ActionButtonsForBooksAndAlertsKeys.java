@@ -3,12 +3,9 @@ package enums.localization.catalog;
 import constants.localization.providers.AbstractILocalizationProvider;
 import constants.localization.providers.LocalizationProviderFactory;
 import constants.localization.providers.LocalizedValue;
-import lombok.AllArgsConstructor;
-import lombok.NonNull;
 
 import java.util.Locale;
 
-@AllArgsConstructor
 public enum ActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     GET("get"),
     READ("read"),
@@ -32,13 +29,18 @@ public enum ActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
 
     private final String key;
 
+    // ✅ Explicit constructor
+    ActionButtonsForBooksAndAlertsKeys(String key) {
+        this.key = key;
+    }
+
     @Override
     public String getDefaultLocalizedValue() {
         return localizationProvider.getLocalization(key);
     }
 
     @Override
-    public String getLocalizedValueOfSpecificLocale(@NonNull Locale locale) {
+    public String getLocalizedValueOfSpecificLocale(Locale locale) {
         return localizationProvider.getLocalization(key, locale);
     }
 }

@@ -3,12 +3,9 @@ package enums.localization.account;
 import constants.localization.providers.AbstractILocalizationProvider;
 import constants.localization.providers.LocalizationProviderFactory;
 import constants.localization.providers.LocalizedValue;
-import lombok.AllArgsConstructor;
-import lombok.NonNull;
 
 import java.util.Locale;
 
-@AllArgsConstructor
 public enum AccountScreenSignInStatus implements LocalizedValue {
 
     SIGN_IN("sign_in"),
@@ -19,13 +16,18 @@ public enum AccountScreenSignInStatus implements LocalizedValue {
 
     private final String key;
 
+    // ✅ Explicit constructor
+    AccountScreenSignInStatus(String key) {
+        this.key = key;
+    }
+
     @Override
     public String getDefaultLocalizedValue() {
         return localizationProvider.getLocalization(key);
     }
 
     @Override
-    public String getLocalizedValueOfSpecificLocale(@NonNull Locale locale) {
+    public String getLocalizedValueOfSpecificLocale(Locale locale) {
         return localizationProvider.getLocalization(key, locale);
     }
 }

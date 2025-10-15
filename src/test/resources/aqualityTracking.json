@@ -1,5 +1,5 @@
 {
-  "enabled": true,
+  "enabled": false,
   "host": "http://144.24.167.167:8080/api/import",
   "token": "",
   "projectId": 300,
