@@ -5,9 +5,9 @@ Feature: Read EPUB in Lyrasis Reads
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -276,7 +276,7 @@ Feature: Read EPUB in Lyrasis Reads
 
     #  @logout @returnBooks @tier1
 #  Scenario Outline: Font settings: Check of increasing and reducing the text size
-#    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+#    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' from "Lyrasis Reads" and save as 'bookNameInfo'
 #      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
 #      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
 #      And Click READ action button on book details screen
@@ -314,7 +314,7 @@ Feature: Read EPUB in Lyrasis Reads
 
 #  @logout @returnBooks @tier1
 #  Scenario Outline: Font settings: Check of font style
-#    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+#    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' from "Lyrasis Reads" and save as 'bookNameInfo'
 #    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
 #    And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
 #    And Click READ action button on book details screen
@@ -361,7 +361,7 @@ Feature: Read EPUB in Lyrasis Reads
 
 #  @logout @returnBooks @tier1
 #  Scenario Outline: Font settings: Check of text theme
-#    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+#    When Search 'available' book of distributor '<distributor>' and bookType 'EBOOK' from "Lyrasis Reads" and save as 'bookNameInfo'
 #    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
 #    And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
 #    And Click READ action button on book details screen

@@ -10,7 +10,7 @@ Feature: Catalog Navigation module
   Scenario: Return to last library catalog
     When Add library "Palace Bookshelf" on Add library screen
     Then Library "Palace Bookshelf" is opened on Catalog screen
-    When Add 'LYRASIS Reads' library in Libraries screen
+    When Add 'Lyrasis Reads' library in Libraries screen
     Then Catalog screen is opened
     When Restart app
     Then Catalog screen is opened
@@ -38,9 +38,9 @@ Feature: Catalog Navigation module
       | Author | Recently Added | Title |
 
   @tier2
-  Scenario Outline: Check of tabs at the top of the screen in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
+  Scenario Outline: Check of tabs at the top of the screen in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
       And Catalog screen is opened
       And There are types '<type1>', '<type2>' and '<type3>' of books on catalog book screen:
       And Section with books of '<type1>' type is opened on catalog book screen
@@ -54,31 +54,31 @@ Feature: Catalog Navigation module
       | All   | eBooks | Audiobooks |
 
   @tier2
-  Scenario: Check of the titles of books sections in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
+  Scenario: Check of the titles of books sections in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
       And Catalog screen is opened
       And Category names are correct on Catalog screen
 
   @tier2
-  Scenario Outline: Check of books sorting in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
+  Scenario Outline: Check of books sorting in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
       And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
       And Swipe sort options
-    Then Books are sorted by Author by default on subcategory screen in 'LYRASIS Reads'
-      And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen in "LYRASIS Reads"
+    Then Books are sorted by Author by default on subcategory screen in 'Lyrasis Reads'
+      And There are sorting by '<type1>', '<type2>' and '<type3>' on Subcategory screen in "Lyrasis Reads"
 
     Scenarios:
       | type1  | type2          | type3 |
       | Author | Recently Added | Title |
 
   @tier2
-  Scenario Outline: Check of books availability in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
+  Scenario Outline: Check of books availability in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
       And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
@@ -91,8 +91,8 @@ Feature: Catalog Navigation module
 
   @tier2
   Scenario: Check all types of availability
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
       And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
@@ -105,8 +105,8 @@ Feature: Catalog Navigation module
 
   @tier2 @exclude_android
   Scenario Outline: Check of books collections
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
       And Catalog screen is opened
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |

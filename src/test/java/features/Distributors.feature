@@ -7,10 +7,10 @@ Feature: Distributors
     Then Add library screen is opened
 
   @logout @returnBooks @tier2
-  Scenario Outline: Reserving from Book Detail View in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+  Scenario Outline: Reserving from Book Detail View in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -31,10 +31,10 @@ Feature: Distributors
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
 
   @logout @returnBooks @tier2
-  Scenario Outline: Getting and returning books from Book Detail View in LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+  Scenario Outline: Getting and returning books from Book Detail View in Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
@@ -97,10 +97,10 @@ Feature: Distributors
     Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
 
   @logout @returnBooks @tier2 @exclude_android
-  Scenario Outline: Check of canceling the downloading from book details view for LYRASIS Reads
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+  Scenario Outline: Check of canceling the downloading from book details view for Lyrasis Reads
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog

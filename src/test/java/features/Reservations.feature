@@ -6,9 +6,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -25,9 +25,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -52,9 +52,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -74,9 +74,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -98,9 +98,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -117,9 +117,9 @@ Feature: Reservation of book in LYRASIS
       And Open Reservations
     Then Books are sorted by Title by default on Reservations screen
       And Books are sorted by Title ascending on Reservations screen
-    When Sort books by AUTHOR in "LYRASIS Reads"
+    When Sort books by AUTHOR in "Lyrasis Reads"
     Then Books are sorted by Author ascending on Reservations screen
-      And There are sorting by 'Title' and 'Author' in 'LYRASIS Reads' on Reservations screen
+      And There are sorting by 'Title' and 'Author' in 'Lyrasis Reads' on Reservations screen
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Alert: Check of Cancel button after Remove button tapping
@@ -127,9 +127,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
@@ -150,9 +150,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog
@@ -175,9 +175,9 @@ Feature: Reservation of book in LYRASIS
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-    Then Library "LYRASIS Reads" is opened on Catalog screen
-    When Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+    Then Library "Lyrasis Reads" is opened on Catalog screen
+    When Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Activate sync bookmarks on Sign in screen
       And Open Catalog

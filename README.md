@@ -17,7 +17,7 @@ The next big part of the solution is a test runner. As the test runner JUnit is 
 
 # How to run tests
 
-Tests are created for Palace Bookshelf, A1QA Test Library and LYRASIS Reads libraries and run on iOS and Android platforms on such devices:
+Tests are created for Palace Bookshelf, A1QA Test Library and Lyrasis Reads libraries and run on iOS and Android platforms on such devices:
 
 * Android
   - Samsung Galaxy S23 Ultra (Android 13)
@@ -43,7 +43,7 @@ All tests run at night in BrowserStack. Runs are configured with GitHub Actions 
 
 Select the **Test Run** option in the left menu and click the **Run workflow**. Options to configure:
 1. ﻿﻿_Use workflow from_ - git branch to launch (e.g. main)
-2. _Tags to run_ - tags (e.g. @tier1 @tier2, @smoke) if to run a specific tier. @tier1 - Tests for LYRASIS Reads library, @tier2 - tests for A1QA Test Library and Palace Bookshelf libraries, @smoke - smoke tests.
+2. _Tags to run_ - tags (e.g. @tier1 @tier2, @smoke) if to run a specific tier. @tier1 - Tests for Lyrasis Reads library, @tier2 - tests for A1QA Test Library and Palace Bookshelf libraries, @smoke - smoke tests.
 3. _﻿﻿app_url of uploaded to BS link_ - the app URL that can be gotten in the App Automate on the Browserstack 
 4. _build name of given application_ - assembly name can be anything
 5. _Platform name_ - ios/android
@@ -67,7 +67,7 @@ All devices are described in [devices.json](https://github.com/ThePalaceProject/
 
 ![Screenshot_3](https://github.com/ThePalaceProject/mobile-integration-tests-new/assets/33911738/4167f0af-3b7c-49ae-8fc6-e938f8245095)
 
-For LYRASIS Reads and A1QA Test library libraries credentials are needed. It can be configured in [config.json](https://github.com/ThePalaceProject/mobile-integration-tests-new/blob/main/src/test/resources/config.json) file.
+For Lyrasis Reads and A1QA Test library libraries credentials are needed. It can be configured in [config.json](https://github.com/ThePalaceProject/mobile-integration-tests-new/blob/main/src/test/resources/config.json) file.
 
 ![Screenshot_4](https://github.com/ThePalaceProject/mobile-integration-tests-new/assets/33911738/b653ca3d-d989-4a23-851b-60423aa3d557)
 

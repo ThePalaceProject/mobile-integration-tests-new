@@ -56,10 +56,10 @@ Feature: Check sections from settings screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open Settings
       And Open Libraries on Settings screen
-      And Open 'LYRASIS Reads' library on Setting screen
+      And Open 'Lyrasis Reads' library on Setting screen
       And Open User license agreement on account screen
     Then User License Agreement link is opened
 
@@ -69,12 +69,12 @@ Feature: Check sections from settings screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
-      And Enter credentials for 'LYRASIS Reads' library
+    When Add library "Lyrasis Reads" on Add library screen
+      And Enter credentials for 'Lyrasis Reads' library
     Then Login is performed successfully
     When Open Settings
       And Open Libraries on Settings screen
-      And Open 'LYRASIS Reads' library on Setting screen
+      And Open 'Lyrasis Reads' library on Setting screen
     When Open Advanced on account screen
     Then Advanced screen contains "Delete Server Data" button
     When Click "Delete Server Data" button and cancel it on Advanced screen
@@ -86,11 +86,11 @@ Feature: Check sections from settings screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open Settings
       And Open Libraries on Settings screen
-      And Open "LYRASIS Reads" library on Setting screen
-    Then Library "LYRASIS Reads" is opened on Account screen
+      And Open "Lyrasis Reads" library on Setting screen
+    Then Library "Lyrasis Reads" is opened on Account screen
       And All fields and links are displayed on Account screen
       And All fields and links are displayed on Sign in screen
 
@@ -100,9 +100,9 @@ Feature: Check sections from settings screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open Settings
       And Open Libraries on Settings screen
-      And Open 'LYRASIS Reads' library on Setting screen
+      And Open 'Lyrasis Reads' library on Setting screen
       And Open Content Licenses on Account screen
     Then Content Licenses screen is opened

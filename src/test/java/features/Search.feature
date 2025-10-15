@@ -77,55 +77,55 @@ Feature: Search module
       | !                                     |
 
   @tier2
-  Scenario: Check a placeholder in LYRASIS Reads
+  Scenario: Check a placeholder in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open search modal
     Then Placeholder contains "Search" text in search field
 
   @tier2
-  Scenario: Check the possibility of editing data in search field in LYRASIS Reads
+  Scenario: Check the possibility of editing data in search field in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open search modal
       And Type text "Book" and save it as 'word'
       And Edit data by adding characters in search field and save it as 'newWord'
     Then Placeholder contains word 'newWord' text in search field
 
   @tier2
-  Scenario: Check of empty field in LYRASIS Reads
+  Scenario: Check of empty field in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open search modal
     Then There is no possibility to search with empty search field
 
   @tier2
-  Scenario: Check of displaying the search field after search a book in LYRASIS Reads
+  Scenario: Check of displaying the search field after search a book in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open search modal
       And Search for "Book" and save bookName as 'BookNameInfo'
     Then The search field is displayed and contains 'BookNameInfo' book
 
   @tier2
-  Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in LYRASIS Reads
+  Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Wait for 3 seconds
       And Open search modal
       And Search for word <word> and save as 'info' on Catalog books screen
@@ -138,12 +138,12 @@ Feature: Search module
       | 0            |
 
   @tier2
-  Scenario Outline: Find a book with name in different font cases in LYRASIS Reads
+  Scenario Outline: Find a book with name in different font cases in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Open search modal
       And Search for word <word> and save as 'info' on Catalog books screen
     Then The first book has 'info' bookName on Catalog books screen
@@ -155,12 +155,12 @@ Feature: Search module
       | ThE SiLk rOaD |
 
   @tier2
-  Scenario Outline: Enter invalid data in book name in LYRASIS Reads
+  Scenario Outline: Enter invalid data in book name in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
       And Wait for 3 seconds
       And Open search modal
       And Search for word <data> and save as 'info' on Catalog books screen
@@ -180,7 +180,7 @@ Feature: Search module
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
     Then Catalog screen is opened
       And Category names are loaded on Catalog screen
     When Open search modal
@@ -192,7 +192,7 @@ Feature: Search module
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
     Then Catalog screen is opened
       And Category names are loaded on Catalog screen
     When Open search modal
@@ -200,12 +200,12 @@ Feature: Search module
     Then Placeholder contains word 'bookInfo' text in search field
 
   @smoke
-  Scenario: Search: Perform check of finding a book in LYRASIS Reads
+  Scenario: Search: Perform check of finding a book in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
     Then Catalog screen is opened
       And Category names are loaded on Catalog screen
     When Open search modal
@@ -213,12 +213,12 @@ Feature: Search module
     Then EBOOK book with GET action button and 'bookNameInfo' bookName is displayed on Catalog books screen
 
   @smoke
-  Scenario: Search: Perform check of the Delete button in LYRASIS Reads
+  Scenario: Search: Perform check of the Delete button in Lyrasis Reads
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
     Then Add library screen is opened
-    When Add library "LYRASIS Reads" on Add library screen
+    When Add library "Lyrasis Reads" on Add library screen
     Then Catalog screen is opened
       And Category names are loaded on Catalog screen
     When Open search modal
