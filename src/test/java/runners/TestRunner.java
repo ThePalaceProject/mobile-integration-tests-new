@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"src/test/java/features"},
+        features = {"src/test/resources/features"},
         glue = {
                 "hooks",
                 "stepdefinitions"
@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
                 "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
                 "aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm"
         },
-        tags = "@test"
+        tags = "@tier1"
 )
 
 public class TestRunner {

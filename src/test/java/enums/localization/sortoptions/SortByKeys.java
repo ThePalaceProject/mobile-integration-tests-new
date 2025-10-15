@@ -8,7 +8,13 @@ import lombok.NonNull;
 
 import java.util.Locale;
 
-@AllArgsConstructor
+import constants.localization.providers.AbstractILocalizationProvider;
+import constants.localization.providers.LocalizationProviderFactory;
+import constants.localization.providers.LocalizedValue;
+import lombok.NonNull;
+
+import java.util.Locale;
+
 public enum SortByKeys implements LocalizedValue {
 
     TITLE("title"),
@@ -20,6 +26,11 @@ public enum SortByKeys implements LocalizedValue {
             LocalizationProviderFactory.getProvider("sortoptions.sortByKeys");
 
     private final String key;
+
+    // ✅ Add explicit constructor
+    SortByKeys(String key) {
+        this.key = key;
+    }
 
     @Override
     public String getDefaultLocalizedValue() {

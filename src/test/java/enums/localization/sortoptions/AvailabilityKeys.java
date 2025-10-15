@@ -3,12 +3,10 @@ package enums.localization.sortoptions;
 import constants.localization.providers.AbstractILocalizationProvider;
 import constants.localization.providers.LocalizationProviderFactory;
 import constants.localization.providers.LocalizedValue;
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 
 import java.util.Locale;
 
-@AllArgsConstructor
 public enum AvailabilityKeys implements LocalizedValue {
     ALL("all"),
     AVAILABLE_NOW("available_now"),
@@ -18,6 +16,11 @@ public enum AvailabilityKeys implements LocalizedValue {
             LocalizationProviderFactory.getProvider("sortoptions.availabilityKeys");
 
     private final String key;
+
+    // ✅ Explicit constructor
+    AvailabilityKeys(String key) {
+        this.key = key;
+    }
 
     @Override
     public String getDefaultLocalizedValue() {
