@@ -37,19 +37,19 @@ public class AudioPlayerScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Pause\"]"))), "Pause button");
     private final ILabel lblLeftTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_time")),
-            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[6]"))), "Left time label");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"audiobookPlayer.currentTimeLabel\"] | //XCUIElementTypeStaticText[contains(@value, ':')]"))), "Left time label");
     private final IButton btnToc = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_toc")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[@label=\"Table of contents\"]"))), "TOC button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.tocButton\"] | //XCUIElementTypeNavigationBar//XCUIElementTypeButton[@label=\"Table of contents\"]"))), "TOC button");
     private final ILabel lblChapterName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_spine_element")),
-            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[7]"))), "Chapter name label");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"audiobookPlayer.chapterTitle\"] | //XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, 'Chapter')]"))), "Chapter name label");
     private final IButton btnPlaybackSpeed = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_playback_rate_text")),
-            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeButton[4]"))), "Playback speed button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.playbackSpeedButton\"] | //XCUIElementTypeButton[contains(@name, 'speed')]"))), "Playback speed button");
     private final ILabel lblRightTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_time_maximum")),
-            new IosLocator(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[8]"))), "Right time label");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"audiobookPlayer.remainingTimeLabel\"] | //XCUIElementTypeStaticText[contains(@value, 'remaining')]"))), "Right time label");
     private final IButton btnSkipAhead = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_jump_forwards")),
             new IosLocator(By.name("skip forward"))), "Skip ahead button");
@@ -71,7 +71,7 @@ public class AudioPlayerScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, \"speed\")]"))), "Button play speed");
     private final IButton btnBookmark = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_add_bookmark")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[6]"))), "Bookmark icon");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, 'Bookmark') or contains(@name, 'bookmark')]"))), "Bookmark icon");
     private final ILabel lblBookmarkAdded = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.name("Bookmark added"))), "Bookmark added message");

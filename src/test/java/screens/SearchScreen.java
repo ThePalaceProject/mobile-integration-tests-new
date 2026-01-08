@@ -18,7 +18,7 @@ public class SearchScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeSearchField"))), "Search field");
     private final IButton btnClearSearch = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id,\"search_close_btn\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"clear.button.text\"]"))), "Clear search field button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"search.clearButton\"] | //XCUIElementTypeButton[@name=\"Clear text\"] | //XCUIElementTypeSearchField//XCUIElementTypeButton"))), "Clear search field button");
     private final IButton btnBackIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button ios");
     private final IButton btnDeleteIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
     private final IButton btnSearchIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Search\"]"), "Search button on iOS");

@@ -49,23 +49,23 @@ public class CatalogScreen extends Screen {
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_ANDROID = "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
     private static final String LIBRARY_LOGO_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
 
-    private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1]";
-    private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
+    private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1] | (//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%1$s\"]/following-sibling::XCUIElementTypeScrollView)[1]";
+    private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1] | //XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_IOS = "/XCUIElementTypeButton";
-    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
+    private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton | //XCUIElementTypeScrollView//XCUIElementTypeButton[contains(@name, 'catalog.bookCell')]";
     private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeButton[contains(@name, \"%s\")]";
-    private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"More\")]";
-    private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "//XCUIElementTypeTable/XCUIElementTypeButton[%d]";
+    private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeButton[contains(@name,'More')] | //XCUIElementTypeButton[@name='catalog.lane.moreButton']";
+    private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "(//XCUIElementTypeButton[contains(@name, 'catalog.lane')])[%d]";
     private static final String SECTION_TITLE_IOS = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";
-    private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
+    private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"] | //XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
-    private static final String LIBRARY_LOGO_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String LIBRARY_LOGO_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"] | //XCUIElementTypeNavigationBar/XCUIElementTypeStaticText";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 7;
 
     public CatalogScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.id("feedContentLogoHeader")),
-                new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"librarySwitchButton\")]"))), "Catalog screen");
+                new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"catalog.libraryLogo\"] | //XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"librarySwitchButton\")]"))), "Catalog screen");
     }
 
     public boolean isLibraryOnTheCatalogDisplayed(String libraryName) {

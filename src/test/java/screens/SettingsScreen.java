@@ -26,7 +26,7 @@ public class SettingsScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar"))), "Settings label");
     private final IButton btnAboutPalace = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"About Palace\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"About App\"]"))), "About App button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"))), "About Palace button");
     private final IButton btnPrivacyPolicy = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Privacy Policy\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"))), "Privacy Policy button");

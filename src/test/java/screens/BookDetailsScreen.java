@@ -23,13 +23,13 @@ public class BookDetailsScreen extends Screen {
 
     private final ILabel lblBookTitle = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("bookDetailTitle")),
-            new IosLocator(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]//XCUIElementTypeStaticText[1]"))), "Book title label");
+            new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeStaticText[@name=\"bookDetail.title\"] | //XCUIElementTypeScrollView/XCUIElementTypeOther[1]//XCUIElementTypeStaticText[1]"))), "Book title label");
     private final ILabel lblBookAuthor = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("bookDetailAuthors")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/preceding-sibling::XCUIElementTypeStaticText[2]"))), "Book author label");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"bookDetail.author\"] | //XCUIElementTypeStaticText[@name=\"Description\"]/preceding-sibling::XCUIElementTypeStaticText[2]"))), "Book author label");
     private final ILabel lblBookCover = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id, \"bookDetailCoverImage\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeOther//XCUIElementTypeImage[1]"))), "Book cover");
+            new IosLocator(By.xpath("//XCUIElementTypeImage[@name=\"bookDetail.coverImage\"] | //XCUIElementTypeOther//XCUIElementTypeImage[1]"))), "Book cover");
 
     private final ILabel lblProgressBar = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"bookDetailStatusInProgress\")]")),
