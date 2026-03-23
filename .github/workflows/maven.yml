@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
 name: Test Run
-run-name: ${{github.event.inputs.device_name_and_version}}
+run-name: ${{github.event.inputs.platform_name }}-${{ github.event.inputs.device_name_and_version }}-${{ github.event.inputs.test_tag }}-shards-${{ github.event.inputs.parallel_shards }}
 
 on:
 
@@ -11,7 +11,7 @@ on:
       test_tag:
         description: 'Tags to run'
         required: true
-        default: '@example_tag'
+        default: '@smoke'
       bs_app_link:
         description: 'app_url of uploaded to BS link'
         required: true
@@ -23,16 +23,43 @@ on:
       platform_name:
         description: 'Platform name'
         required: true
-        default: 'android'
+        default: 'ios'
       device_name_and_version:
         description: 'device name and version for autotests'
         required: true
-        default: 'SamsungGalaxyS22Ultra_12'
+        default: 'iPhone15ProMax_17'
+      parallel_shards:
+        description: 'How many feature shards to run in parallel'
+        required: true
+        default: '1'
 
 jobs:
-  job:
-    name: "${{github.event.inputs.device_name_and_version}}"
+  prepare-matrix:
+    name: "Prepare Matrix"
     runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - name: Build Shard Matrix
+        id: matrix
+        run: |
+          SHARDS="${{ github.event.inputs.parallel_shards }}"
+          if ! [[ "$SHARDS" =~ ^[0-9]+$ ]] || [ "$SHARDS" -lt 1 ]; then
+            echo "parallel_shards must be a positive integer. Received: $SHARDS" >&2
+            exit 1
+          fi
+
+          MATRIX_JSON=$(seq 1 "$SHARDS" | jq -R . | jq -sc '{shard: .}')
+          echo "matrix=$MATRIX_JSON" >> "$GITHUB_OUTPUT"
+
+  job:
+    needs: prepare-matrix
+    name: "${{github.event.inputs.device_name_and_version}}-shard-${{ matrix.shard }}"
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare-matrix.outputs.matrix) }}
+    timeout-minutes: 240
 
     steps:
       - uses: actions/checkout@v4
@@ -44,17 +71,72 @@ jobs:
           java-version: 11
 
       - name: Run tests
-        run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis5}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis6}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis7}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis8}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis5}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis6}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis7}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis8}}=${{secrets.BookPinLyrasis4}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}}'" -Daquality.enabled="true" -Daquality.host="http://144.24.167.167:8080/api/import" -Daquality.token=${{secrets.AQUALITY_TRACKING}} -Daquality.projectId="300" -Daquality.executor="Ekaterina" -Daquality.ciBuild="debug" -Daquality.debug="false" -Daquality.attachmentsDirectory="target/attachments"
-        continue-on-error: true
+        run: |
+          FEATURES=$(bash scripts/feature_shard.sh "${{ matrix.shard }}" "${{ github.event.inputs.parallel_shards }}" "src/test/resources/features" "${{ github.event.inputs.test_tag }}")
+          echo "Running shard ${{ matrix.shard }} with features: $FEATURES"
+
+          EXTRA_MVN_ARGS=()
+          if [[ "${{ github.event.inputs.platform_name }}" == "ios" ]]; then
+            EXTRA_MVN_ARGS+=(-Dsurefire.parallel=none -Dsurefire.threadCount=1 -Dios.logoutMode=device_switch)
+          fi
+
+          mvn clean test \
+          "${EXTRA_MVN_ARGS[@]}" \
+          -DskipFeedBootstrap=false \
+          -DfeedBootstrapTimeoutSeconds=180 \
+          -Daquality.buildName="${{github.event.inputs.build_name}}-shard-${{ matrix.shard }}" \
+          -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} \
+          -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}} - shard ${{ matrix.shard }}" \
+          -Daquality.environment="${{github.event.inputs.platform_name}}" \
+          -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} \
+          -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} \
+          -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} \
+          -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} \
+          -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis5}}=${{secrets.BookPinLyrasis1}} \
+          -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis6}}=${{secrets.BookPinLyrasis2}} \
+          -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis7}}=${{secrets.BookPinLyrasis3}} \
+          -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis8}}=${{secrets.BookPinLyrasis4}} \
+          -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} \
+          -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} \
+          -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} \
+          -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} \
+          -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis5}}=${{secrets.BookPinLyrasis1}} \
+          -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis6}}=${{secrets.BookPinLyrasis2}} \
+          -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis7}}=${{secrets.BookPinLyrasis3}} \
+          -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis8}}=${{secrets.BookPinLyrasis4}} \
+          -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} \
+          -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} \
+          -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} \
+          -DplatformName=${{github.event.inputs.platform_name}} \
+          -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} \
+          -Dcucumber.options="$FEATURES --tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}}'" \
+          -Daquality.enabled="true" \
+          -Daquality.host="http://144.24.167.167:8080/api/import" \
+          -Daquality.token=${{secrets.AQUALITY_TRACKING}} \
+          -Daquality.projectId="300" \
+          -Daquality.executor="Ekaterina" \
+          -Daquality.ciBuild="debug" \
+          -Daquality.debug="false" \
+          -Daquality.attachmentsDirectory="target/attachments"
 
       - name: Generate Allure Report
+        if: always()
         run: mvn allure:report
 
       - name: Upload Allure Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
+          name: allure-report-shard-${{ matrix.shard }}
           path: target/site/allure-maven-plugin
 
+      - name: Upload Surefire Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports-shard-${{ matrix.shard }}
+          path: target/surefire-reports
+
       - name: Clean Up
+        if: always()
         run: rm -rf allure-results

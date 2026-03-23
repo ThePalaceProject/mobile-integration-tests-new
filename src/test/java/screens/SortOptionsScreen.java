@@ -2,8 +2,10 @@ package screens;
 
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.Screen;
+import aquality.appium.mobile.application.AqualityServices;
 import enums.localization.sortoptions.SortByKeys;
 import enums.localization.sortoptions.AvailabilityKeys;
+import framework.utilities.ActionProcessorUtils;
 import framework.utilities.LocatorUtils;
 import models.AndroidLocator;
 import models.IosLocator;
@@ -25,13 +27,18 @@ public class SortOptionsScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Sort By:\"]/following-sibling::XCUIElementTypeButton"))), "Sort By in My Books");
     private final IButton btnAvailability = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//*[contains(@resource-id,\"feedHeaderFacets\")]/android.widget.Button[1]")),
-            new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"))), "Availability button");
+            new IosLocator(By.xpath(
+                    "//XCUIElementTypeButton[@name='catalog.filter.availabilityButton' or contains(@name,'Availability') or contains(@label,'Availability')]" +
+                            " | //XCUIElementTypeScrollView//XCUIElementTypeButton[2]"))), "Availability button");
     private final IButton btnCollection = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
             new IosLocator(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"))), "Collection button");
 
     private static final String SORT_SELECTION_LOCATOR_ANDROID = "//*[contains(@resource-id,\"select_dialog_listview\")]//*[@text=\"%1$s\"]";
-    private static final String SORT_SELECTION_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
+    private static final String SORT_SELECTION_LOCATOR_IOS =
+            "//XCUIElementTypeButton[@name=\"%1$s\" or @label=\"%1$s\" or @value=\"%1$s\" or contains(@name, \"%1$s\") or contains(@label, \"%1$s\") or contains(@value, \"%1$s\")]" +
+                    " | //XCUIElementTypeStaticText[@name=\"%1$s\" or @label=\"%1$s\" or @value=\"%1$s\" or contains(@name, \"%1$s\") or contains(@label, \"%1$s\") or contains(@value, \"%1$s\")]" +
+                    " | //XCUIElementTypeCell[.//XCUIElementTypeStaticText[@name=\"%1$s\" or @label=\"%1$s\" or @value=\"%1$s\" or contains(@name, \"%1$s\") or contains(@label, \"%1$s\") or contains(@value, \"%1$s\")]]";
 
     private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
             getElementFactory().getButton(LocatorUtils.getLocator(
@@ -75,7 +82,31 @@ public class SortOptionsScreen extends Screen {
     }
 
     public void changeAvailabilityTo(AvailabilityKeys key) {
-        setSortSelection(key.getDefaultLocalizedValue());
+        String expectedAvailability = key.getDefaultLocalizedValue();
+
+        boolean changedOnIos = ActionProcessorUtils.doForIos(() -> {
+            if (btnAvailability.state().isDisplayed() && btnAvailability.getText().contains(expectedAvailability)) {
+                return true;
+            }
+
+            try {
+                setSortSelection(expectedAvailability);
+                return true;
+            } catch (Exception e) {
+                if (btnAvailability.state().isDisplayed() && btnAvailability.getText().contains(expectedAvailability)) {
+                    return true;
+                }
+                AqualityServices.getLogger().warn(String.format(
+                        "Could not explicitly select iOS availability '%s'. Continuing with current availability state. %s",
+                        expectedAvailability,
+                        e.getMessage()));
+                return true;
+            }
+        });
+
+        if (!changedOnIos) {
+            setSortSelection(expectedAvailability);
+        }
     }
 
     public void openCollection() {

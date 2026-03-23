@@ -9,6 +9,7 @@ import constants.appattributes.IosAttributes;
 import framework.utilities.ActionProcessorUtils;
 import framework.utilities.KeyboardUtils;
 import io.appium.java_client.android.nativekey.AndroidKey;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class SearchPdfScreen extends Screen {
     private static final String FOUND_TEXT_WITH_TEXT_LOCATOR_IOS = "//XCUIElementTypeStaticText[contains(@name, \"%s\")]";
     private static final String FOUND_TEXT_NUMBER_BY_FOUND_TEXT_LOCATOR_IOS = FOUND_TEXT_WITH_TEXT_LOCATOR_IOS + "/following-sibling::XCUIElementTypeStaticText";
     private static final String FOUND_TEXT_LOCATOR_IOS = "//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
+    private static final String FOUND_TEXT_BY_INDEX_LOCATOR_IOS = "//XCUIElementTypeCell[%d]/XCUIElementTypeStaticText[1]";
+    private static final String FOUND_TEXT_NUMBER_BY_INDEX_LOCATOR_IOS = "//XCUIElementTypeCell[%d]/XCUIElementTypeStaticText[2]";
 
     public SearchPdfScreen() {
         super(By.xpath("//XCUIElementTypeSearchField"), "Search pdf screen");
@@ -44,6 +47,19 @@ public class SearchPdfScreen extends Screen {
     public String openFoundText(String text) {
         ILabel foundText = getElementFactory().getLabel(By.xpath(String.format(FOUND_TEXT_WITH_TEXT_LOCATOR_IOS,text)), text);
         ILabel foundTextNumber = getElementFactory().getLabel(By.xpath(String.format(FOUND_TEXT_NUMBER_BY_FOUND_TEXT_LOCATOR_IOS, text)), "Page number");
+        String pageNumber = foundTextNumber.getText();
+        foundText.click();
+        return pageNumber;
+    }
+
+    public String openRandomFoundText() {
+        List<ILabel> foundTexts = getFoundTexts();
+        if (foundTexts.isEmpty()) {
+            throw new IllegalStateException("No found text results were displayed on search pdf screen");
+        }
+        int resultIndex = RandomUtils.nextInt(1, foundTexts.size() + 1);
+        ILabel foundText = getElementFactory().getLabel(By.xpath(String.format(FOUND_TEXT_BY_INDEX_LOCATOR_IOS, resultIndex)), "Found text");
+        ILabel foundTextNumber = getElementFactory().getLabel(By.xpath(String.format(FOUND_TEXT_NUMBER_BY_INDEX_LOCATOR_IOS, resultIndex)), "Page number");
         String pageNumber = foundTextNumber.getText();
         foundText.click();
         return pageNumber;

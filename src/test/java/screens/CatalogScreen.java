@@ -2,6 +2,7 @@ package screens;
 
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -49,18 +50,19 @@ public class CatalogScreen extends Screen {
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_ANDROID = "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
     private static final String LIBRARY_LOGO_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
 
-    private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1] | (//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%1$s\"]/following-sibling::XCUIElementTypeScrollView)[1]";
-    private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1] | //XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeButton[1]";
+    private static final String CATEGORY_NAME_LOCATOR_IOS = "(//XCUIElementTypeStaticText[@name=\"%1$s\"]/following-sibling::*[self::XCUIElementTypeCollectionView or self::XCUIElementTypeScrollView])[1]";
+    private static final String CATEGORY_LOCATOR_IOS = "//XCUIElementTypeButton[contains(@name,'More')]/preceding-sibling::XCUIElementTypeStaticText[1]";
     private static final String BOOK_COVER_IN_CATEGORY_LOCATOR_IOS = "/XCUIElementTypeButton";
     private static final String BOOK_NAME_LOCATOR_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton | //XCUIElementTypeScrollView//XCUIElementTypeButton[contains(@name, 'catalog.bookCell')]";
-    private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeButton[contains(@name, \"%s\")]";
+    private static final String CURRENT_CATEGORY_LOCATOR_IOS = "//XCUIElementTypeButton[contains(@name, \"%1$s\")] | //XCUIElementTypeStaticText[@name=\"%1$s\"]";
     private static final String MORE_BUTTON_LOCATOR_IOS = "//XCUIElementTypeButton[contains(@name,'More')] | //XCUIElementTypeButton[@name='catalog.lane.moreButton']";
     private static final String CURRENT_SECTION_LOCATOR_IN_CATALOG_IOS = "(//XCUIElementTypeButton[contains(@name, 'catalog.lane')])[%d]";
     private static final String SECTION_TITLE_IOS = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String CATALOG_TAB_LOCATOR_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"] | //XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN_IOS = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String LIBRARY_LOGO_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"] | //XCUIElementTypeNavigationBar/XCUIElementTypeStaticText";
-    private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 7;
+    private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR_ANDROID = 7;
+    private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR_IOS = 2;
 
     public CatalogScreen() {
         super(LocatorUtils.getLocator(
@@ -129,7 +131,7 @@ public class CatalogScreen extends Screen {
     public Set<String> getAllCategoriesNames() {
         AqualityServices.getConditionalWait().waitFor(() -> getElements(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(CATEGORY_LOCATOR_ANDROID)),
-                new IosLocator(By.xpath(CATEGORY_LOCATOR_IOS)))).size() > COUNT_OF_CATEGORIES_TO_WAIT_FOR);
+                new IosLocator(By.xpath(CATEGORY_LOCATOR_IOS)))).size() > getRequiredCategoriesCount());
         List<String> currentBooksNames = geListOfCategoriesNames();
         return new HashSet<>(currentBooksNames);
     }
@@ -137,7 +139,7 @@ public class CatalogScreen extends Screen {
     public boolean areCategoryNamesDisplayed() {
         AqualityServices.getConditionalWait().waitFor(() -> getElements(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(CATEGORY_LOCATOR_ANDROID)),
-                new IosLocator(By.xpath(CATEGORY_LOCATOR_IOS)))).size() > COUNT_OF_CATEGORIES_TO_WAIT_FOR);
+                new IosLocator(By.xpath(CATEGORY_LOCATOR_IOS)))).size() > getRequiredCategoriesCount());
         List<String> currentBooksNames = geListOfCategoriesNames();
         return !currentBooksNames.isEmpty();
     }
@@ -234,5 +236,11 @@ public class CatalogScreen extends Screen {
     @FunctionalInterface
     interface GetNameOfBookTypeBtb {
         IButton createBtn(String button);
+    }
+
+    private int getRequiredCategoriesCount() {
+        return AqualityServices.getApplication().getPlatformName().equals(PlatformName.IOS)
+                ? COUNT_OF_CATEGORIES_TO_WAIT_FOR_IOS
+                : COUNT_OF_CATEGORIES_TO_WAIT_FOR_ANDROID;
     }
 }

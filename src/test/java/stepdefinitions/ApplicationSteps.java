@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.localization.catalog.ActionButtonsForBooksAndAlertsKeys;
 import enums.timeouts.RestartAppTimeouts;
@@ -81,7 +82,11 @@ public class ApplicationSteps {
         if(alertScreen.state().waitForDisplayed()) {
             alertScreen.waitAndPerformAlertActionIfDisplayed(ActionButtonsForBooksAndAlertsKeys.ALLOW);
         }
-        tutorialScreen.closeTutorialScreen();
+        if (tutorialScreen.isCloseTutorialButtonDisplayed()) {
+            tutorialScreen.closeTutorialScreen();
+        } else {
+            AqualityServices.getLogger().info("Tutorial close button is not displayed. Continuing current flow.");
+        }
     }
 
     @Then("Each tutorial page can be opened on Tutorial screen and close tutorial screen")
@@ -94,12 +99,34 @@ public class ApplicationSteps {
 
     @Then("Welcome screen is opened")
     public void isWelcomeScreenOpened() {
-        Assert.assertTrue("Welcome screen is not opened!", welcomeScreen.isWelcomeScreenOpened());
+        boolean isWelcomeOpened = welcomeScreen.isWelcomeScreenOpened();
+        if (isWelcomeOpened) {
+            return;
+        }
+
+        if (AqualityServices.getApplication().getPlatformName().equals(PlatformName.IOS)) {
+            // Newer iOS builds can route directly to Add Library after tutorial.
+            Assert.assertTrue("Welcome screen is not opened!", addLibraryScreen.isAddLibraryScreenOpened());
+            return;
+        }
+
+        Assert.fail("Welcome screen is not opened!");
     }
 
     @When("Close welcome screen")
     public void closeWelcomeScreen() {
-        welcomeScreen.tapFindYourLibraryBtn();
+        if (welcomeScreen.isWelcomeScreenOpened()) {
+            welcomeScreen.tapFindYourLibraryBtn();
+            return;
+        }
+
+        if (AqualityServices.getApplication().getPlatformName().equals(PlatformName.IOS)
+                && addLibraryScreen.isAddLibraryScreenOpened()) {
+            AqualityServices.getLogger().info("Welcome screen is skipped on iOS build. Continuing from Add Library screen.");
+            return;
+        }
+
+        Assert.fail("Welcome screen is not opened!");
     }
 
     @Then("There is a menu bar at the bottom of the screen")

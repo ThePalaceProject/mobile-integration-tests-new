@@ -17,9 +17,6 @@ import models.IosLocator;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AudioPlayerScreen extends Screen {
 
@@ -28,43 +25,43 @@ public class AudioPlayerScreen extends Screen {
 
     private final IButton btnPlay = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Play\"]"))), "Play button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.playPauseButton\"] | //XCUIElementTypeButton[@label=\"Play\"] | //XCUIElementTypeButton[@name=\"Play\"]"))), "Play button");
     private final IButton btnBack = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeImage[@name=\"Back\"]"))), "Back button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.closeButton\"] | //XCUIElementTypeButton[@name=\"Back\"] | //XCUIElementTypeButton[@name=\"My Books\"] | //XCUIElementTypeNavigationBar//XCUIElementTypeButton[1]"))), "Back button");
     private final IButton btnPause = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[@content-desc=\"Pause\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Pause\"]"))), "Pause button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.playPauseButton\"] | //XCUIElementTypeButton[@label=\"Pause\"] | //XCUIElementTypeButton[@name=\"Pause\"]"))), "Pause button");
     private final ILabel lblLeftTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_time")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"audiobookPlayer.currentTimeLabel\"] | //XCUIElementTypeStaticText[contains(@value, ':')]"))), "Left time label");
     private final IButton btnToc = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_toc")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.tocButton\"] | //XCUIElementTypeNavigationBar//XCUIElementTypeButton[@label=\"Table of contents\"]"))), "TOC button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.tocButton\"] | //XCUIElementTypeNavigationBar//XCUIElementTypeButton[@label=\"Table of contents\"] | //XCUIElementTypeNavigationBar//XCUIElementTypeButton[contains(@name, \"contents\")]"))), "TOC button");
     private final ILabel lblChapterName = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_spine_element")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"audiobookPlayer.chapterTitle\"] | //XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, 'Chapter')]"))), "Chapter name label");
     private final IButton btnPlaybackSpeed = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_playback_rate_text")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.playbackSpeedButton\"] | //XCUIElementTypeButton[contains(@name, 'speed')]"))), "Playback speed button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.playbackSpeedButton\"] | //XCUIElementTypeButton[contains(@name, 'speed')] | //XCUIElementTypeButton[contains(@name, 'Speed')]"))), "Playback speed button");
     private final ILabel lblRightTime = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_time_maximum")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"audiobookPlayer.remainingTimeLabel\"] | //XCUIElementTypeStaticText[contains(@value, 'remaining')]"))), "Right time label");
     private final IButton btnSkipAhead = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_jump_forwards")),
-            new IosLocator(By.name("skip forward"))), "Skip ahead button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.skipForwardButton\"] | //XCUIElementTypeButton[contains(@name, \"Skip\") and contains(@name, \"forward\")] | //XCUIElementTypeButton[contains(@label, \"Skip\") and contains(@label, \"forward\")]"))), "Skip ahead button");
     private final IButton btnSkipBehind = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_jump_backwards")),
-            new IosLocator(By.name("skip back"))), "Skip behind button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.skipBackButton\"] | //XCUIElementTypeButton[contains(@name, \"Skip\") and contains(@name, \"back\")] | //XCUIElementTypeButton[contains(@label, \"Skip\") and contains(@label, \"back\")]"))), "Skip behind button");
     private final IButton btnSleepTimer = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("player_menu_sleep_image")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Sleep Timer\"]"))), "Sleep timer button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"audiobookPlayer.sleepTimerButton\"] | //XCUIElementTypeButton[@name=\"Sleep Timer\"]"))), "Sleep timer button");
     private final IButton btnSlider = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.SeekBar")),
-            new IosLocator(By.xpath("//XCUIElementTypeOther[@name=\"progress_grip\"]"))), "Slider");
+            new IosLocator(By.xpath("//XCUIElementTypeSlider[@name=\"audiobookPlayer.progressSlider\"] | //XCUIElementTypeOther[@name=\"progress_grip\"] | //XCUIElementTypeSlider"))), "Slider");
     private final ILabel lblPlaybackProgress = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.SeekBar")),
-            new IosLocator(By.xpath("//XCUIElementTypeOther[@name = \"progress_background\"]"))), "Playback progress");
+            new IosLocator(By.xpath("//XCUIElementTypeSlider[@name=\"audiobookPlayer.progressSlider\"] | //XCUIElementTypeOther[@name = \"progress_background\"] | //XCUIElementTypeSlider"))), "Playback progress");
     private final ILabel lblLineRemaining = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"remaining\")]"), "Line remaining");
     private final IButton btnPlaySpeed = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]")),
@@ -74,7 +71,7 @@ public class AudioPlayerScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, 'Bookmark') or contains(@name, 'bookmark')]"))), "Bookmark icon");
     private final ILabel lblBookmarkAdded = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("")),
-            new IosLocator(By.name("Bookmark added"))), "Bookmark added message");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, 'Bookmark added')]"))), "Bookmark added message");
 
     private static final String AUDIOBOOK_NAME_LOCATOR_ANDROID = "//android.widget.TextView[@text=\"%s\"]";
     private static final String SLEEP_TIMER_LOC_ANDROID = "//*[contains(@resource-id, \"player_menu_sleep\") and @content-desc=\"Set Your Sleep Timer. The Sleep Timer Is Currently Set To Sleep At %s\"]";
@@ -84,22 +81,15 @@ public class AudioPlayerScreen extends Screen {
     private static final String TIME_IN_HOURS_LEFT_LOCATOR_IOS = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d hour and %d minutes until playback pauses\"]";
     private static final String TIME_IN_MINUTES_LEFT_LOCATOR_IOS = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d minutes and %d seconds until playback pauses\"]";
     private static final String TIME_IN_SECONDS_LEFT_LOCATOR_IOS = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d seconds until playback pauses\"]";
-    private static final String PLAYBACK_SPEED_LOC_IOS = "//XCUIElementTypeToolbar//XCUIElementTypeButton[contains(@name, \"%s\")]";
+    private static final String PLAYBACK_SPEED_LOC_IOS = "//XCUIElementTypeButton[@name=\"audiobookPlayer.speed.%1$s\"] | //XCUIElementTypeButton[contains(@name, \"%1$s\")] | //XCUIElementTypeButton[contains(@label, \"%1$s\")]";
 
     public AudioPlayerScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]")),
-                new IosLocator(By.xpath("//XCUIElementTypeButton[@label=\"Play\"]"))), "Audio player screen");
+                new IosLocator(By.xpath("//XCUIElementTypeOther[@name=\"audiobookPlayer.view\"] | //XCUIElementTypeButton[@name=\"audiobookPlayer.playPauseButton\"] | //XCUIElementTypeButton[@label=\"Play\"] | //XCUIElementTypeButton[@label=\"Pause\"]"))), "Audio player screen");
         playbackSpeedScreen = new PlaybackSpeedScreen();
         sleepTimerScreen = new SleepTimerScreen();
     }
-
-    private static final Map<String, String> speedNameIos = Stream.of(
-            new String[]{"2.0", "Two times normal speed. Fastest."},
-            new String[]{"0.75", "Three quarters of normal speed. Slower."},
-            new String[]{"1.25", "One and one quarter faster than normal speed."},
-            new String[]{"1.5", "One and a half times faster than normal speed."}
-    ).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
     public boolean isPlayerOpened(String bookName) {
         if(btnPause.state().waitForDisplayed()){
@@ -264,10 +254,8 @@ public class AudioPlayerScreen extends Screen {
     }
 
     public boolean isPlaybackSpeedPresent(String playbackSpeed) {
-        boolean isPresent = ActionProcessorUtils.doForIos(() -> {
-            String speedOptionName = speedNameIos.get(playbackSpeed);
-            return getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED_LOC_IOS, speedOptionName)), speedOptionName).state().waitForDisplayed();
-        });
+        boolean isPresent = ActionProcessorUtils.doForIos(() ->
+                getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED_LOC_IOS, playbackSpeed)), "Playback speed").state().waitForDisplayed());
 
         if(!isPresent) {
             isPresent = ActionProcessorUtils.doForAndroid(() ->

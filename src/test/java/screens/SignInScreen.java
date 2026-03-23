@@ -18,19 +18,31 @@ import org.openqa.selenium.By;
 public class SignInScreen extends Screen {
     private final ITextBox txbLibraryCard = getElementFactory().getTextBox(LocatorUtils.getLocator(
             new AndroidLocator(By.id("authBasicTokenUserField")),
-            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"))), "Library card tex box");
+            new IosLocator(By.xpath(
+                    "//XCUIElementTypeTextField[@name='account.cardTextField' or @name='account.cardField' or @name='Library card']" +
+                            " | //XCUIElementTypeTable//XCUIElementTypeTextField" +
+                            " | //XCUIElementTypeTextField"))), "Library card tex box");
     private final ITextBox txbPassword = getElementFactory().getTextBox(LocatorUtils.getLocator(
             new AndroidLocator(By.id("authBasicTokenPassField")),
-            new IosLocator(By.xpath("//XCUIElementTypeSecureTextField[@value=\"Password\"]"))), "Password text box");
+            new IosLocator(By.xpath(
+                    "//XCUIElementTypeSecureTextField[@name='account.pinTextField' or @name='account.pinField' or @value='Password' or @name='PIN']" +
+                            " | //XCUIElementTypeTable//XCUIElementTypeSecureTextField" +
+                            " | //XCUIElementTypeSecureTextField"))), "Password text box");
     private final IButton btnSignIn = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.Button[@text=\"Sign in\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Sign in\"]"))), "Sign in button");
+            new IosLocator(By.xpath(
+                    "//XCUIElementTypeButton[@name='Sign in' or contains(@name,'Sign in') or contains(@label,'Sign in') or contains(@value,'Sign in')]" +
+                            " | //XCUIElementTypeStaticText[@name='Sign in' or contains(@name,'Sign in') or contains(@label,'Sign in') or contains(@value,'Sign in')]" +
+                            " | //XCUIElementTypeCell[.//XCUIElementTypeStaticText[@name='Sign in' or contains(@name,'Sign in') or contains(@label,'Sign in') or contains(@value,'Sign in')]]"))), "Sign in button");
     private final ILink linkLicAgreement = getElementFactory().getLink(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"User License Agreement\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[contains(@name, \"User License Agreement\")]"))), "License Agreement link");
     private final IButton btnSynBookmarks = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("accountSyncBookmarksCheck")),
-            new IosLocator(By.xpath("//XCUIElementTypeSwitch[@name=\"Sync Bookmarks\"]"))), "Sync bookmarks button");
+            new IosLocator(By.xpath(
+                    "//XCUIElementTypeSwitch[@name='Sync Bookmarks' or @label='Sync Bookmarks' or @value='Sync Bookmarks' or @name='account.syncBookmarksSwitch']" +
+                            " | //XCUIElementTypeCell[.//XCUIElementTypeStaticText[contains(@name,'Sync') or contains(@label,'Sync')]]//XCUIElementTypeSwitch" +
+                            " | //XCUIElementTypeSwitch"))), "Sync bookmarks button");
 
     private final ILabel lblErrorMessageAndroid = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id, \"accountLoginProgressText\")]"), "Error message");
     private final IButton btnDeleteIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");

@@ -15,11 +15,11 @@ public class SearchScreen extends Screen {
 
     private final ITextBox txbSearch = getElementFactory().getTextBox(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.AutoCompleteTextView[contains(@resource-id,\"search_src_text\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeSearchField"))), "Search field");
+            new IosLocator(By.xpath("//XCUIElementTypeSearchField | //XCUIElementTypeTextField[@name=\"Search Catalog\"] | //XCUIElementTypeTextField"))), "Search field");
     private final IButton btnClearSearch = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.ImageView[contains(@resource-id,\"search_close_btn\")]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"search.clearButton\"] | //XCUIElementTypeButton[@name=\"Clear text\"] | //XCUIElementTypeSearchField//XCUIElementTypeButton"))), "Clear search field button");
-    private final IButton btnBackIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button ios");
+    private final IButton btnBackIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"search.cancelButton\"] | //XCUIElementTypeButton[@name=\"Cancel\"] | //XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button ios");
     private final IButton btnDeleteIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
     private final IButton btnSearchIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Search\"]"), "Search button on iOS");
     private final IButton btnK = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"k\"]"), "K button");
@@ -27,7 +27,7 @@ public class SearchScreen extends Screen {
     public SearchScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath("//*[contains(@resource-id,\"search_src_text\")]")),
-                new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Search\"]"))), "Search screen");
+                new IosLocator(By.xpath("//XCUIElementTypeSearchField[@name=\"search.searchField\"] | //XCUIElementTypeSearchField | //XCUIElementTypeTextField[@name=\"Search Catalog\"] | //XCUIElementTypeTextField"))), "Search screen");
     }
 
     public boolean isSearchScreenOpened(){

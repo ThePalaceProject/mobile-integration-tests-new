@@ -13,10 +13,10 @@ public class SleepTimerScreen extends Screen {
 
     private final IButton btnCancel = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Cancel\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeOther[2]//XCUIElementTypeButton"))), "Cancel button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Cancel\"]"))), "Cancel button");
 
     private static final String SLEEP_TIMER_LOC_ANDROID = "//*[contains(@resource-id, \"player_sleep_item_view_name\") and @text=\"%s\"]";
-    private static final String SLEEP_TIMER_LOC_IOS = "//XCUIElementTypeScrollView//XCUIElementTypeOther/XCUIElementTypeButton[@name=\"%s\"]";
+    private static final String SLEEP_TIMER_LOC_IOS = "//XCUIElementTypeButton[@name=\"audiobookPlayer.sleepTimer.endOfChapter\"] | //XCUIElementTypeButton[@name=\"%1$s\"] | //XCUIElementTypeButton[contains(@name,\"%1$s\")]";
 
     public SleepTimerScreen() {
         super(LocatorUtils.getLocator(
@@ -27,8 +27,6 @@ public class SleepTimerScreen extends Screen {
     public void setTimer(TimerKeys timerSetting) {
         ActionProcessorUtils.doForIos(() -> {
             String buttonName = timerSetting.getDefaultLocalizedValue();
-
-            System.out.println("Sleep: " + buttonName);
 
             getElementFactory().getButton(By.xpath(String.format(SLEEP_TIMER_LOC_IOS, buttonName)), buttonName).click();
         });

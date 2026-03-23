@@ -20,7 +20,7 @@ public class AddLibraryScreen extends Screen {
 
     private final ILabel lblAddLibrary = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup/android.widget.TextView[@text=\"Add Library\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"))), "Add library label");
+            new IosLocator(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"Add Library\"] | //XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"))), "Add library label");
     private final IButton btnSearch = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("accountMenuActionSearch")),
             new IosLocator(By.xpath(""))), "Search button");
@@ -29,17 +29,18 @@ public class AddLibraryScreen extends Screen {
             new IosLocator(By.xpath("//XCUIElementTypeSearchField"))), "Search field");
     private final IButton btnClearSearchField = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.id("search_close_btn")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"clear.button.text\"]"))), "Clear search field button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"search.clearButton\"] | //XCUIElementTypeButton[@name=\"clear.button.text\"] | //XCUIElementTypeButton[@name=\"Clear text\"] | //XCUIElementTypeSearchField//XCUIElementTypeButton"))), "Clear search field button");
 
     private static final String CURRENT_LIBRARY_BUTTON_LOCATOR_ANDROID = "//android.widget.TextView[contains(@text, \"%s\")]";
     private static final String LIBRARY_BUTTON_LOCATOR_ANDROID = "//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.widget.TextView[1]";
-    private static final String LIBRARY_BUTTON_LOCATOR_IOS = "//XCUIElementTypeStaticText[contains(@name, \"%s\")]";
+    private static final String CURRENT_LIBRARY_BUTTON_LOCATOR_IOS = "//XCUIElementTypeCell//XCUIElementTypeStaticText[contains(@name, \"%1$s\")] | //XCUIElementTypeCell//XCUIElementTypeButton[contains(@name, \"%1$s\")]";
+    private static final String LIBRARY_BUTTON_LOCATOR_IOS = "//XCUIElementTypeCell//XCUIElementTypeStaticText | //XCUIElementTypeCell//XCUIElementTypeButton";
 
 
     public AddLibraryScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.id("accountRegistryTitle")),
-                new IosLocator(By.xpath("//XCUIElementTypeSheet[@name=\"Add Your Library\"]"))), "Add Library screen");
+                new IosLocator(By.xpath("//XCUIElementTypeSheet[@name=\"Add Your Library\" or @name=\"Add Library\"]"))), "Add Library screen");
     }
 
     public boolean isAddLibraryScreenOpened() {
@@ -109,7 +110,7 @@ public class AddLibraryScreen extends Screen {
     private IButton getLibraryButton(String libraryName) {
         return getElementFactory().getButton(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(CURRENT_LIBRARY_BUTTON_LOCATOR_ANDROID, libraryName))),
-                new IosLocator(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_IOS, libraryName)))), libraryName);
+                new IosLocator(By.xpath(String.format(CURRENT_LIBRARY_BUTTON_LOCATOR_IOS, libraryName)))), libraryName);
     }
 
     private List<String> getLibrariesNames() {

@@ -25,14 +25,19 @@ public class ReturningBooksHooks {
         AqualityServices.getLogger().info("Test finished - returning books");
         Map<String, String> map = context.get(ScenarioContextKey.LIST_OF_CREDENTIALS_KEY);
 
-        if (map.size() == 0) {
-            throw new RuntimeException("There are not barcodes for returning books");
+        if (map == null || map.isEmpty()) {
+            AqualityServices.getLogger().info("No stored credentials for returning books");
+            return;
         }
         for (Map.Entry<String, String> m : map.entrySet()) {
-            credentials.setBarcode(m.getKey());
-            credentials.setPin(m.getValue());
-            APIUtil.returnBooks(credentials);
-            APIUtil.enterBooksAfterReturningBooks(credentials);
+            try {
+                credentials.setBarcode(m.getKey());
+                credentials.setPin(m.getValue());
+                APIUtil.returnBooks(credentials);
+                APIUtil.enterBooksAfterReturningBooks(credentials);
+            } catch (Exception e) {
+                AqualityServices.getLogger().error(String.format("Failed to return books for barcode '%s': %s", m.getKey(), e.getMessage()));
+            }
         }
     }
 }

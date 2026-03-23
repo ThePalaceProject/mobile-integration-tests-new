@@ -33,16 +33,16 @@ public class BookDetailsScreen extends Screen {
 
     private final ILabel lblProgressBar = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"bookDetailStatusInProgress\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeProgressIndicator"))), "Progress bar label");
+            new IosLocator(By.xpath("//XCUIElementTypeProgressIndicator[@name=\"bookDetail.downloadProgress\"] | //XCUIElementTypeProgressIndicator"))), "Progress bar label");
     private final ILabel lblBookFormat = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout//android.widget.TextView[@text=\"Format\"]/following::android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Book format\")]/following::XCUIElementTypeStaticText"))), "Book format label");
     private final ILabel lblDescription = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.id("bookDetailDescriptionTitle")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]"))), "Info in description section");
+            new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"bookDetail.description\"] | //XCUIElementTypeStaticText[@name=\"Description\"]"))), "Info in description section");
     private final IButton btnMoreInDescription = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Description\"]//following::android.widget.TextView[@text=\"More…\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeStaticText//following::XCUIElementTypeButton[@name=\"More...\"]"))), "More btn in Description section");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"bookDetail.moreButton\"] | //XCUIElementTypeButton[contains(@name, \"More\")]"))), "More btn in Description section");
     private final ILabel lblPublisherInfo = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.LinearLayout/android.widget.TextView[@text=\"Publisher\"]/following::android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following::XCUIElementTypeStaticText"))), "Publisher label");
@@ -64,14 +64,14 @@ public class BookDetailsScreen extends Screen {
 
     private static final String BOOK_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_NAME_LOC_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
-    private static final String BOOK_ACTION_BUTTON_LOC_IOS = "//XCUIElementTypeButton[@name=\"%s\"]";
+    private static final String BOOK_ACTION_BUTTON_LOC_IOS = "//XCUIElementTypeButton[@name=\"%1$s\" or @name=\"%2$s\" or @label=\"%2$s\"]";
     private static final String AUTHOR_IN_RELATED_BOOKS_LOC_IOS = "//XCUIElementTypeTable//XCUIElementTypeButton[@name=\"%s\"]";
     private static final String LIST_OF_RELATED_BOOKS_LOC_IOS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
 
     public BookDetailsScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.id("bookDetailCover")),
-                new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=//XCUIElementTypeNavigationBar/@name]"))), "Book details screen");
+                new IosLocator(By.xpath("//XCUIElementTypeNavigationBar[@name=\"bookDetail.navigationBar\"] | //XCUIElementTypeNavigationBar | //XCUIElementTypeStaticText[@name=\"bookDetail.title\"]"))), "Book details screen");
     }
 
     public CatalogBookModel getBookInfo() {
@@ -204,8 +204,37 @@ public class BookDetailsScreen extends Screen {
 
     private IButton getActionButton(ActionButtonsForBooksAndAlertsKeys buttonKey) {
         String key = buttonKey.getDefaultLocalizedValue();
+        String iosAccessibilityId = getIosActionButtonAccessibilityId(buttonKey);
         return getElementFactory().getButton(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC_ANDROID, key))),
-                new IosLocator(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC_IOS, key)))), key);
+                new IosLocator(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC_IOS, iosAccessibilityId, key)))), key);
+    }
+
+    private String getIosActionButtonAccessibilityId(ActionButtonsForBooksAndAlertsKeys buttonKey) {
+        switch (buttonKey) {
+            case GET:
+                return "bookDetail.getButton";
+            case READ:
+                return "bookDetail.readButton";
+            case RESERVE:
+                return "bookDetail.reserveButton";
+            case DELETE:
+            case REMOVE:
+                return "bookDetail.deleteButton";
+            case RETURN:
+                return "bookDetail.returnButton";
+            case CANCEL:
+                return "bookDetail.cancelButton";
+            case DOWNLOAD:
+                return "bookDetail.downloadButton";
+            case LISTEN:
+                return "bookDetail.listenButton";
+            case VIEW_SAMPLE:
+                return "bookDetail.sampleButton";
+            case PLAY_SAMPLE:
+                return "bookDetail.audiobookSampleButton";
+            default:
+                return buttonKey.getDefaultLocalizedValue();
+        }
     }
 }

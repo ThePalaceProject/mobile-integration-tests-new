@@ -12,6 +12,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cucumber.version>5.7.0</cucumber.version>
         <allure.results.directory>target/allure-results</allure.results.directory>
+        <surefire.parallel>methods</surefire.parallel>
+        <surefire.threadCount>3</surefire.threadCount>
     </properties>
 
     <build>
@@ -45,8 +47,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
                 <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>3</threadCount>
+                    <parallel>${surefire.parallel}</parallel>
+                    <threadCount>${surefire.threadCount}</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
                 </configuration>

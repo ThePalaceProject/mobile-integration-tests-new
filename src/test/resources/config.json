@@ -2,12 +2,10 @@
   "credentials": {
     "LyrasisReads": {
       "ios": {
-        "barcode": "01230000000002",
-        "pin": "Lyrtest123"
+        "01230000000237": "Lyrtest123"
       },
       "android": {
-        "barcode": "01230000000003",
-        "pin": "Lyrtest123"
+        "01230000000003": "Lyrtest123"
       }
     }
   },

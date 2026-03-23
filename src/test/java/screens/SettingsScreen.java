@@ -20,27 +20,35 @@ public class SettingsScreen extends Screen {
 
     private final IButton btnLibraries = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"Libraries\")]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"))), "Libraries button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"settings.manageLibrariesButton\"] | //XCUIElementTypeButton[@name=\"Libraries\"]"))), "Libraries button");
+    private final IButton btnLibrariesCell = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"Libraries\")]")),
+            new IosLocator(By.xpath("//XCUIElementTypeCell[.//XCUIElementTypeStaticText[@name=\"Libraries\"]] | //XCUIElementTypeStaticText[@name=\"Libraries\"]/ancestor::XCUIElementTypeCell[1]"))), "Libraries cell");
+    private final IButton btnAddLibraryOnLibrariesScreen = getElementFactory().getButton(LocatorUtils.getLocator(
+            new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Add Library\"]")),
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"))), "Add Library button on Libraries screen");
     private final ILabel lblSettings = getElementFactory().getLabel(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView")),
             new IosLocator(By.xpath("//XCUIElementTypeNavigationBar"))), "Settings label");
     private final IButton btnAboutPalace = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"About Palace\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"))), "About Palace button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"settings.aboutPalaceButton\"] | //XCUIElementTypeButton[@name=\"About App\"] | //XCUIElementTypeButton[@name=\"About Palace\"]"))), "About Palace button");
     private final IButton btnPrivacyPolicy = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Privacy Policy\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"))), "Privacy Policy button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"settings.privacyPolicyButton\"] | //XCUIElementTypeButton[@name=\"Privacy Policy\"]"))), "Privacy Policy button");
     private final IButton btnUserAgreement = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"User Agreement\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"))), "User Agreement button");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"settings.userAgreementButton\"] | //XCUIElementTypeButton[@name=\"User Agreement\"]"))), "User Agreement button");
     private final IButton btnSoftwareLicenses = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Software Licenses\"]")),
-            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Software Licenses\"]"))), "Software Licenses screen");
+            new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"settings.softwareLicensesButton\"] | //XCUIElementTypeButton[@name=\"Software Licenses\"]"))), "Software Licenses screen");
     private final IButton btnTestMode = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Debug options\"]")),
             new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Testing\"]"))), "Test mode button");
     private final IButton btnCommitAndroid = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Commit\"]"), "Commit button Android");
-    private final IButton btnPalaceVersionIos = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Palace version\")]"), "Palace version button");
+    private final IButton btnPalaceVersionIos = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Palace version\") or contains(@name, \"Version\") or contains(@name, \"version\") or contains(@label, \"Version\") or contains(@label, \"version\")] | //XCUIElementTypeButton[contains(@name, \"Version\") or contains(@name, \"version\")]"),
+            "Palace version button");
 
     private static final String LIBRARY_LOCATOR_ANDROID = "//android.widget.LinearLayout//android.widget.TextView[@text=\"%s\"]";
     private static final String LIBRARY_LOCATOR_IOS = "//XCUIElementTypeTable//XCUIElementTypeStaticText[@name=\"%s\"]";
@@ -50,11 +58,24 @@ public class SettingsScreen extends Screen {
     public SettingsScreen() {
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath("//android.widget.TextView[contains(@text, \"App info\")]")),
-                new IosLocator(By.xpath("//XCUIElementTypeNavigationBar[@name=\"Settings\"]"))), "Settings screen");
+                new IosLocator(By.xpath("//XCUIElementTypeNavigationBar[@name=\"settings.navigationBar\"] | //XCUIElementTypeNavigationBar[@name=\"Settings\"]"))), "Settings screen");
     }
 
     public void openLibraries(){
-        btnLibraries.click();
+        ActionProcessorUtils.doForAndroid(() -> btnLibraries.click());
+
+        ActionProcessorUtils.doForIos(() -> {
+            if (btnAddLibraryOnLibrariesScreen.state().isDisplayed()) {
+                return;
+            }
+
+            if (btnLibraries.state().isDisplayed()) {
+                btnLibraries.click();
+                return;
+            }
+
+            btnLibrariesCell.click();
+        });
     }
 
     public boolean isScreenOpened() {

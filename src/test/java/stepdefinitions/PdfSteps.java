@@ -133,6 +133,11 @@ public class PdfSteps {
         context.add(pageNumberKey, readerPdfScreen.getSearchPdfScreen().openFoundText(context.get(textKey)));
     }
 
+    @When("Open random found text and save page number as {string} on search pdf screen")
+    public void openRandomFoundTextAndSavePageNumber(String pageNumberKey) {
+        context.add(pageNumberKey, readerPdfScreen.getSearchPdfScreen().openRandomFoundText());
+    }
+
     @Then("Page number is equal to {string} on pdf reader screen in {string}")
     public void comparePageNumbers(String pageInfoKey, String libraryName) {
         int pageNumber = context.get(pageInfoKey);

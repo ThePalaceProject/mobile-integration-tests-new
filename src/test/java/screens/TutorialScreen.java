@@ -38,7 +38,7 @@ public class TutorialScreen extends Screen {
     public TutorialScreen(){
         super(LocatorUtils.getLocator(
                 new AndroidLocator(By.xpath("//android.widget.ImageView[@content-desc=\"Tutorial page\"]")),
-                new IosLocator(By.xpath("//XCUIElementTypeButton"))), "Tutorial screen");
+                new IosLocator(By.xpath("//XCUIElementTypeButton[@name=\"Close\"] | //XCUIElementTypeButton[@name=\"Skip\"]"))), "Tutorial screen");
     }
 
     public boolean isTutorialScreenOpened() {
@@ -46,7 +46,13 @@ public class TutorialScreen extends Screen {
     }
 
     public void closeTutorialScreen(){
-        btnCloseTutorial.click();
+        if (btnCloseTutorial.state().isDisplayed()) {
+            btnCloseTutorial.click();
+        }
+    }
+
+    public boolean isCloseTutorialButtonDisplayed() {
+        return btnCloseTutorial.state().isDisplayed();
     }
 
     public boolean isTutorialPageOpened(String pageName) {

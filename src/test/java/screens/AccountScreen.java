@@ -21,10 +21,16 @@ public class AccountScreen extends Screen {
 
     private final ITextBox txbCard = getElementFactory().getTextBox(LocatorUtils.getLocator(
             new AndroidLocator(By.id("authBasicTokenUserField")),
-            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"))), "Library card text box");
+            new IosLocator(By.xpath(
+                    "//XCUIElementTypeTextField[@name='account.cardTextField' or @name='account.cardField' or @name='Library card']" +
+                            " | //XCUIElementTypeTable//XCUIElementTypeTextField" +
+                            " | //XCUIElementTypeTextField"))), "Library card text box");
     private final ITextBox txbPassword = getElementFactory().getTextBox(LocatorUtils.getLocator(
             new AndroidLocator(By.id("authBasicTokenPassField")),
-            new IosLocator(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeSecureTextField"))), "Password text box");
+            new IosLocator(By.xpath(
+                    "//XCUIElementTypeSecureTextField[@name='account.pinTextField' or @name='account.pinField' or @name='PIN']" +
+                            " | //XCUIElementTypeTable//XCUIElementTypeSecureTextField" +
+                            " | //XCUIElementTypeSecureTextField"))), "Password text box");
     private final IButton btnSignIn = getElementFactory().getButton(LocatorUtils.getLocator(
             new AndroidLocator(By.xpath(String.format(SIGN_IN_BTN_LOCATOR_ANDROID, AccountScreenSignInStatus.SIGN_IN.getDefaultLocalizedValue()))),
             new IosLocator(By.xpath(String.format(SIGN_IN_BTN_LOCATOR_IOS, AccountScreenSignInStatus.SIGN_IN.getDefaultLocalizedValue())))), "Sign in button");
@@ -69,7 +75,10 @@ public class AccountScreen extends Screen {
     private static final String SIGN_IN_BTN_LOCATOR_ANDROID = "//*[contains(@resource-id,\"" + BTN_SIGN_IN_ID_ANDROID + "\") and @text=\"%1$s\"]";
     private static final String LIBRARY_NAME_LOCATOR_ANDROID = "accountCellTitle";
 
-    private static final String SIGN_IN_BTN_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%1$s\"]\n";
+    private static final String SIGN_IN_BTN_LOCATOR_IOS =
+            "//XCUIElementTypeButton[@name=\"%1$s\" or @label=\"%1$s\" or @value=\"%1$s\" or contains(@name, \"%1$s\") or contains(@label, \"%1$s\") or contains(@value, \"%1$s\")]" +
+                    " | //XCUIElementTypeStaticText[@name=\"%1$s\" or @label=\"%1$s\" or @value=\"%1$s\" or contains(@name, \"%1$s\") or contains(@label, \"%1$s\") or contains(@value, \"%1$s\")]" +
+                    " | //XCUIElementTypeCell[.//XCUIElementTypeStaticText[@name=\"%1$s\" or @label=\"%1$s\" or @value=\"%1$s\" or contains(@name, \"%1$s\") or contains(@label, \"%1$s\") or contains(@value, \"%1$s\")]]";
     private static final String LIBRARY_NAME_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String BUTTON_LOCATOR_IOS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 

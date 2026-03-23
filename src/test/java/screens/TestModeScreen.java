@@ -16,8 +16,8 @@ public class TestModeScreen extends Screen {
 
     public TestModeScreen() {
         super(LocatorUtils.getLocator(
-                new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Debug options\"]\"")),
-                new IosLocator(By.xpath("//XCUIElementTypeStaticText[name=\"Testing\"]"))), "Test mode screen");
+                new AndroidLocator(By.xpath("//android.widget.TextView[@text=\"Debug options\"]")),
+                new IosLocator(By.xpath("//XCUIElementTypeStaticText[@name=\"Testing\"] | //XCUIElementTypeNavigationBar[@name=\"Testing\"]"))), "Test mode screen");
     }
 
     public void enableHiddenLibraries() {

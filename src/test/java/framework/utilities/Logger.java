@@ -28,8 +28,9 @@ public class Logger {
     public void createAppender(String name) {
         PatternLayout layout = new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p - %m%n");
         try {
+            String sanitizedFileName = sanitizeFileName(name);
             scenarioAppender = new RollingFileAppender(
-                    layout, String.format("%s%s.log", "target/log/", name.replace(",", "").replace(" ", "_")), false);
+                    layout, String.format("%s%s.log", "target/log/", sanitizedFileName), false);
             AqualityServices.getLogger().addAppender(scenarioAppender);
         } catch (IOException exception) {
             AqualityServices.getLogger().error("Failed to add appender !! " + exception.getMessage());
@@ -41,7 +42,6 @@ public class Logger {
         try {
             String filePath = scenarioAppender.getFile();
             if(filePath != null) {
-                filePath = filePath.replace(":", "_");
                 data = Files.readAllBytes(Paths.get(filePath));
             } else {
                 AqualityServices.getLogger().error("File path is null");
@@ -56,5 +56,11 @@ public class Logger {
         if (scenarioAppender != null) {
             AqualityServices.getLogger().removeAppender(scenarioAppender);
         }
+    }
+
+    private String sanitizeFileName(String fileName) {
+        return fileName
+                .replaceAll("[^A-Za-z0-9._-]", "_")
+                .replaceAll("_+", "_");
     }
 }

@@ -294,6 +294,11 @@ public class XMLUtil {
             AqualityServices.getLogger().error(e + e.getMessage());
         }
 
+        if (response == null) {
+            AqualityServices.getLogger().error("XMLUtilResponse is null");
+            return null;
+        }
+
         if (response.body() == null) {
             AqualityServices.getLogger().info("XMLUtilResponseCode: " + response.code());
             AqualityServices.getLogger().info("XMLUtilResponseToString: " + response.toString());
